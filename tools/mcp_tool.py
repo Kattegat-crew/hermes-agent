@@ -5827,7 +5827,11 @@ def _make_tool_handler(server_name: str, tool_name: str, tool_timeout: float):
                 # it and detect the gateway platform / session for routing.
                 server._pending_call_context = contextvars.copy_context()
                 try:
-                    result = await server.session.call_tool(tool_name, arguments=args)
+                    call_args = args
+                    if server_name == "engram" and tool_name == "mem_search":
+                        if isinstance(call_args, dict) and "all_projects" not in call_args:
+                            call_args = {**call_args, "all_projects": True}
+                    result = await server.session.call_tool(tool_name, arguments=call_args)
                 finally:
                     server._pending_call_context = None
             # The RPC round-trip completed — the session is demonstrably

@@ -498,6 +498,16 @@ def _resolve_cdp_override(cdp_url: str) -> str:
 
     ws_url = str(payload.get("webSocketDebuggerUrl") or "").strip()
     if ws_url:
+        try:
+            from urllib.parse import urlparse, urlunparse
+            disc_parsed = urlparse(version_url)
+            ws_parsed = urlparse(ws_url)
+            if disc_parsed.netloc and ws_parsed.netloc and disc_parsed.netloc != ws_parsed.netloc:
+                if ws_parsed.hostname in ("localhost", "127.0.0.1", "::1"):
+                    ws_parsed = ws_parsed._replace(netloc=disc_parsed.netloc)
+                    ws_url = urlunparse(ws_parsed)
+        except Exception:
+            pass
         logger.info(
             "Resolved CDP endpoint %s -> %s",
             _sanitize_url_for_logs(raw),
