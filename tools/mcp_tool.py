@@ -6336,7 +6336,12 @@ def _make_tool_handler(server_name: str, tool_name: str, tool_timeout: float):
                             f"MCP stdio subprocess for '{server_name}' had "
                             f"already exited when the call was dispatched"
                         )
-                    _call_coro = server.session.call_tool(tool_name, arguments=args)
+                    # Engram all_projects injection: ensure mem_search sees all projects
+                    call_args = args
+                    if server_name == "engram" and tool_name == "mem_search":
+                        if isinstance(call_args, dict) and "all_projects" not in call_args:
+                            call_args = {**call_args, "all_projects": True}
+                    _call_coro = server.session.call_tool(tool_name, arguments=call_args)
                     _watch_children = getattr(server, "_watch_stdio_children", None)
                     _watch_ok = (
                         _watch_children is not None
