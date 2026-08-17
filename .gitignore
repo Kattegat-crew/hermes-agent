@@ -35,6 +35,7 @@ data/
 # `data/` pattern above would otherwise swallow it.
 !hermes_cli/data/
 !hermes_cli/data/plugin_index.json
+graphify-out/
 .pytest_cache/
 test_durations.json
 .pytest-cache/
