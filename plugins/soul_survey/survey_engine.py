@@ -68,6 +68,13 @@ async def send_question(adapter: Any, chat_id: str, index: int, prev_answer: Opt
     else:
         header += "\n"
 
+    # Q0.1 (nombre del asistente) respondida → sugerir guardar el contacto de WhatsApp
+    if index == 1 and prev_answer:
+        header += (
+            f"🤝 *Perfecto, yo soy {prev_answer}.* Un consejo: guardame en tus contactos "
+            f"de WhatsApp como '{prev_answer}' para encontrarme fácil.\n"
+        )
+
     # Try sending native WhatsApp poll if closed question
     if q.type in (QuestionType.SINGLE_CHOICE, QuestionType.MULTI_CHOICE) and q.options:
         selectable_count = len(q.options) if q.type == QuestionType.MULTI_CHOICE else 1
@@ -104,12 +111,13 @@ async def send_question(adapter: Any, chat_id: str, index: int, prev_answer: Opt
 
 
 def generate_soul_markdown(answers: Dict[str, str], profile: str) -> str:
-    q0_1 = answers.get("Q0.1", "Chucho")
-    q0_2 = answers.get("Q0.2", "Cercano / colombiano y ejecutivo")
-    q0_3 = answers.get("Q0.3", "Tú (cercano)")
-    q0_4 = answers.get("Q0.4", "Directo y al grano")
-    q0_5 = answers.get("Q0.5", "Sí, con moderación")
-    q0_6 = answers.get("Q0.6", "Ninguna")
+    q0_0 = answers.get("Q0.1", "Hermes")
+    q0_1 = answers.get("Q0.2", "Chucho")
+    q0_2 = answers.get("Q0.3", "Cercano / colombiano y ejecutivo")
+    q0_3 = answers.get("Q0.4", "Tú (cercano)")
+    q0_4 = answers.get("Q0.5", "Directo y al grano")
+    q0_5 = answers.get("Q0.6", "Sí, con moderación")
+    q0_6 = answers.get("Q0.7", "Ninguna")
 
     q1 = answers.get("Q1", "PDF, Excel / Sheets")
     q2 = answers.get("Q2", "Google Drive / WhatsApp")
@@ -141,6 +149,7 @@ def generate_soul_markdown(answers: Dict[str, str], profile: str) -> str:
     return f"""# SOUL — Perfil Operativo del Agente ({profile})
 
 ## 1. Identidad y Misión
+- **Nombre del asistente:** {q0_0}
 - **Trato al dueño:** {q0_1}
 - **Tratamiento a clientes:** {q0_3}
 - **Firma / Marca comercial:** {q19}
@@ -215,7 +224,7 @@ async def handle_survey_message(event: Any, gateway: Any) -> Optional[Dict[str, 
         save_state(chat_id, state)
 
         welcome = (
-            "🎉 *Iniciando encuesta de perfilado /soul (28 preguntas · 6 bloques)*\n"
+            "🎉 *Iniciando encuesta de perfilado /soul (29 preguntas · 6 bloques)*\n"
             "Con tus respuestas compilaré tu archivo *SOUL.md* oficial.\n\n"
             "📌 *Instrucciones clave:*\n"
             "1. *Opciones (A-D):* Marca en pantalla o responde con la letra (ej: *A*, *B* o *A y C*).\n"
@@ -255,10 +264,11 @@ async def handle_survey_message(event: Any, gateway: Any) -> Optional[Dict[str, 
 
                 ans = state["answers"]
                 summary = (
-                    "🎉 *¡Encuesta completada con éxito! (28/28)*\n\n"
+                    "🎉 *¡Encuesta completada con éxito! (29/29)*\n\n"
                     "📋 *Resumen de configuración registrado:*\n"
-                    f"• *Trato al dueño:* {ans.get("Q0.1", "-")}\n"
-                    f"• *Tono y ritmo:* {ans.get("Q0.2", "-")} · {ans.get("Q0.4", "-")}\n"
+                    f"• *Nombre del asistente:* {ans.get("Q0.1", "-")}\n"
+                    f"• *Trato al dueño:* {ans.get("Q0.2", "-")}\n"
+                    f"• *Tono y ritmo:* {ans.get("Q0.3", "-")} · {ans.get("Q0.5", "-")}\n"
                     f"• *Documentos:* {ans.get("Q1", "-")} en {ans.get("Q2", "-")}\n"
                     f"• *Integraciones:* {ans.get("Q6", "-")} ➔ {ans.get("Q7", "-")}\n"
                     f"• *Automatizaciones:* {ans.get("Q11", "-")} ({ans.get("Q12", "-")})\n"
