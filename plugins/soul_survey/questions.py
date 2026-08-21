@@ -20,9 +20,17 @@ class Question:
     hint: Optional[str] = None
 
 QUESTIONS: List[Question] = [
-    # BLOQUE 0 · Personalidad y trato (6)
+    # BLOQUE 0 · Personalidad y trato (7)
     Question(
         id="Q0.1",
+        block_id=0,
+        block_name="Personalidad y trato",
+        title="¿Qué nombre le vas a poner a tu asistente?",
+        type=QuestionType.OPEN,
+        hint="Escribe el nombre que quieras (ej: Hermes, Chucho, Asistente, tu marca...)"
+    ),
+    Question(
+        id="Q0.2",
         block_id=0,
         block_name="Personalidad y trato",
         title="¿Cómo quieres que el agente te llame a ti?",
@@ -30,7 +38,7 @@ QUESTIONS: List[Question] = [
         hint="Escribe el nombre o trato (ej: Jefe, Don Jesús, Chucho, Yisus, por tu nombre...)"
     ),
     Question(
-        id="Q0.2",
+        id="Q0.3",
         block_id=0,
         block_name="Personalidad y trato",
         title="¿Qué tono quieres para el agente al hablar contigo?",
@@ -43,7 +51,7 @@ QUESTIONS: List[Question] = [
         ]
     ),
     Question(
-        id="Q0.3",
+        id="Q0.4",
         block_id=0,
         block_name="Personalidad y trato",
         title="¿Tratamiento con tus clientes: de 'tú' o de 'usted'?",
@@ -56,7 +64,7 @@ QUESTIONS: List[Question] = [
         ]
     ),
     Question(
-        id="Q0.4",
+        id="Q0.5",
         block_id=0,
         block_name="Personalidad y trato",
         title="¿Cómo prefieres el ritmo del agente?",
@@ -69,7 +77,7 @@ QUESTIONS: List[Question] = [
         ]
     ),
     Question(
-        id="Q0.5",
+        id="Q0.6",
         block_id=0,
         block_name="Personalidad y trato",
         title="¿Te gusta que el agente use emojis?",
@@ -82,7 +90,7 @@ QUESTIONS: List[Question] = [
         ]
     ),
     Question(
-        id="Q0.6",
+        id="Q0.7",
         block_id=0,
         block_name="Personalidad y trato",
         title="¿Hay frases o palabras que el agente NO debe usar jamás?",
