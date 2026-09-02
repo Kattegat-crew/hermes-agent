@@ -128,6 +128,19 @@ if [ "$ALL_UP" = false ]; then
     log "Deploy completed but health check failed — manual review recommended"
 fi
 
+# --- Step 8b: Restart host services on new code (dashboard 503 guard) ---
+# The host dashboard (systemd hermes-serve) runs from this checkout via
+# editable install. After a rebase, the running process holds stale code
+# and v0.21+ returns 503 "Restart required" on the model picker.
+log "Restarting hermes-serve to load the new code..."
+systemctl restart hermes-serve 2>>"$LOG_FILE" || log "WARN: systemctl restart hermes-serve failed"
+sleep 5
+if curl -sf -m 8 -o /dev/null http://127.0.0.1:9112/api/health; then
+    log "hermes-serve healthy after restart"
+else
+    log "WARN: hermes-serve health check failed after restart"
+fi
+
 # --- Step 9: Push to origin ---
 log "Pushing to origin..."
 if git push origin main --force-with-lease 2>&1 | tee -a "$LOG_FILE"; then
