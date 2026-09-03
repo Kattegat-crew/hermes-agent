@@ -17888,7 +17888,7 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
 
     def _primary_message_handler(self):
         """Return the correctly scoped handler for a primary adapter."""
-        if getattr(self.config, "multiplex_profiles", False):
+        if getattr(self.config, "multiplex_profiles", False) or bool(getattr(self.config, "profile_routes", None)):
             return self._make_default_profile_message_handler()
         return self._handle_message
 
@@ -31205,8 +31205,6 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
         still runs in ``agent:main``, splitting the two out of agreement.
         """
         config = getattr(self, "config", None)
-        if not getattr(config, "multiplex_profiles", False):
-            return None
         routes = getattr(config, "profile_routes", None)
         if not routes:
             return None
@@ -31227,19 +31225,10 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
             )
             return None
         if matched:
-            try:
-                served = {name for name, _home in _multiplex_profile_homes(config)}
-            except Exception as exc:
+            from hermes_cli.profiles import profile_exists
+            if matched.profile != "default" and not profile_exists(matched.profile):
                 logger.warning(
-                    "Rejecting profile route %r because the served-profile set "
-                    "could not be resolved",
-                    matched.name,
-                    exc_info=True,
-                )
-                raise ProfileRouteRejected(matched.name) from exc
-            if matched.profile not in served:
-                logger.warning(
-                    "Rejecting profile route %r: target profile %r is not served",
+                    "Rejecting profile route %r: target profile %r does not exist",
                     matched.name,
                     matched.profile,
                 )
