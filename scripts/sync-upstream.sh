@@ -43,7 +43,7 @@ echo $$ > "$LOCK_FILE"
 log "=== Sync started ==="
 cd "$REPO_DIR"
 log "Fetching upstream..."
-git fetch upstream --quiet 2>&1 || fail "git fetch upstream failed"
+git fetch upstream --quiet --tags 2>&1 || fail "git fetch upstream failed"
 
 # --- Step 2: Check for new commits ---
 BEHIND=$(git rev-list --count HEAD..upstream/main 2>/dev/null || echo "0")
@@ -143,7 +143,7 @@ fi
 
 # --- Step 9: Push to origin ---
 log "Pushing to origin..."
-if git push origin main --force-with-lease 2>&1 | tee -a "$LOG_FILE"; then
+if git push origin main --force-with-lease --tags 2>&1 | tee -a "$LOG_FILE"; then
     log "Push successful"
 else
     log "Push failed — code is deployed locally but not pushed"
