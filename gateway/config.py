@@ -1441,6 +1441,23 @@ def load_gateway_config() -> GatewayConfig:
             sr = yaml_cfg.get("session_reset")
             if "session_reset" not in yaml_cfg and isinstance(gateway_section, dict):
                 sr = gateway_section.get("session_reset")
+            # Profile fallback: if not in profile config, inherit from root config.yaml
+            if not sr:
+                try:
+                    import yaml as _yaml
+                    for _fallback_path in ("/opt/data/config.yaml", Path.home() / ".hermes/config.yaml"):
+                        _fp = Path(_fallback_path)
+                        if _fp.exists() and _fp != _home / "config.yaml":
+                            with open(_fp, "r", encoding="utf-8") as _ff:
+                                _root_yaml = _yaml.safe_load(_ff) or {}
+                                _root_sr = _root_yaml.get("session_reset")
+                                if not _root_sr and isinstance(_root_yaml.get("gateway"), dict):
+                                    _root_sr = _root_yaml.get("gateway", {}).get("session_reset")
+                                if _root_sr and isinstance(_root_sr, dict):
+                                    sr = _root_sr
+                                    break
+                except Exception:
+                    pass
             if sr and isinstance(sr, dict):
                 gw_data["default_reset_policy"] = sr
 
