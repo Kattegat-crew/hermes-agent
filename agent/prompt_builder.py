@@ -1910,6 +1910,7 @@ def build_skills_system_prompt(
         # prompting the agent to discover/load skills in State 3 (Planning).
         try:
             from hermes_cli.config import load_config_readonly
+            from hermes_constants import get_default_hermes_root
             _cfg = load_config_readonly()
             _skills_cfg = _cfg.get("skills") or {}
             _on_demand = False
@@ -1918,6 +1919,22 @@ def build_skills_system_prompt(
                     _skills_cfg.get("on_demand") is True
                     or str(_skills_cfg.get("mode", "")).lower() == "on_demand"
                 )
+            # If not explicitly defined in active profile, inherit from root config.yaml
+            if not _on_demand:
+                import yaml
+                _root_cfg = get_default_hermes_root() / "config.yaml"
+                if _root_cfg.exists():
+                    try:
+                        with open(_root_cfg, "r", encoding="utf-8") as _rf:
+                            _rc = yaml.safe_load(_rf) or {}
+                            _r_skills = _rc.get("skills") or {}
+                            if isinstance(_r_skills, dict):
+                                _on_demand = (
+                                    _r_skills.get("on_demand") is True
+                                    or str(_r_skills.get("mode", "")).lower() == "on_demand"
+                                )
+                    except Exception:
+                        pass
             if os.getenv("HERMES_SKILLS_ON_DEMAND", "").lower() in ("1", "true", "yes"):
                 _on_demand = True
         except Exception:

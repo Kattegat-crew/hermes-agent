@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from dataclasses import dataclass, field
 from typing import Any, Mapping
 
@@ -989,3 +990,161 @@ def _sha256(value: str) -> str:
     # encode raises and takes down the whole conversation loop. The hash only
     # needs deterministic bytes, not valid UTF-8.
     return hashlib.sha256(value.encode("utf-8", "surrogatepass")).hexdigest()
+
+
+# ---------------------------------------------------------------------------
+# Progressive Evaluation & Multi-Level Authorization Guardrails (Req 1, 3, 6, 14)
+# ---------------------------------------------------------------------------
+
+_GREETING_WORDS = frozenset({
+    "hola", "buenos dias", "buenos días", "buenas tardes", "buenas noches",
+    "hey", "hi", "hello", "que tal", "qué tal", "como estas", "cómo estás",
+    "como va", "cómo va", "saludos", "buenas", "que mas", "qué más"
+})
+
+_ACTION_DIRECTIVES = re.compile(
+    r"\b(?:crea|crear|haz|hacer|modifica|modificar|edita|editar|actualiza|actualizar|"
+    r"borra|borrar|elimina|eliminar|ejecuta|ejecutar|instala|instalar|configura|configurar|"
+    r"busca|buscar|encuentra|analiza|analizar|revisa|revisar|lee|leer|escribe|escribir|"
+    r"despliega|deploy|test|prueba|repara|arregla|corrige)\b",
+    re.IGNORECASE
+)
+
+_CONFIRMATION_PATTERNS = re.compile(
+    r"\b(?:si|sí|dale|adelante|procede|proceder|confirmo|confirmado|hazlo|ejecuta|ejecútalo|"
+    r"yes|ok|okay|proceed|go ahead|aplica|aplicalo|aplícalo|de acuerdo|perfecto procede)\b",
+    re.IGNORECASE
+)
+
+_MUTATING_OR_DESTRUCTIVE_COMMANDS = re.compile(
+    r"""(?:^|\s|&&|\|\||;|`)(?:
+        rm\s|rmdir\s|mv\s|cp\s|install\s|sed\s+-i|truncate\s|dd\s|shred\s|
+        git\s+(?:commit|push|reset|clean|checkout|rebase|merge)\s|
+        docker\s+(?:rm|kill|stop|restart|build|run|compose\s+(?:down|up))\s|
+        systemctl\s|service\s|kill\s|pkill\s|shutdown\s|reboot\s|
+        pip\s+install|npm\s+(?:install|run\s+build)|apt-get|apt\s
+    )""",
+    re.VERBOSE | re.IGNORECASE
+)
+
+
+_IMPERATIVE_COMMANDS = re.compile(
+    r"\b(?:crea|escribe|modifica|edita|actualiza|borra|elimina|ejecuta|instala|despliega|agrega|cambia|aplica|haz)\b",
+    re.IGNORECASE
+)
+
+
+def is_conversational_turn(message_text: str) -> bool:
+    """Check if the user message is a pure greeting or casual chit-chat without an actionable task."""
+    if not message_text:
+        return False
+    clean = re.sub(r"[^\w\s]", " ", message_text).lower().strip()
+    words = clean.split()
+    if not words:
+        return False
+    if len(words) <= 8:
+        has_greeting = any(g in clean for g in _GREETING_WORDS)
+        has_action = bool(_ACTION_DIRECTIVES.search(message_text))
+        if has_greeting and not has_action:
+            return True
+    return False
+
+
+def has_user_confirmation(messages: list[Any]) -> bool:
+    """Check if recent user turns contain explicit confirmation or direct imperative command."""
+    if not messages:
+        return False
+    user_turns: list[str] = []
+    for msg in reversed(messages):
+        role = getattr(msg, "role", None) if not isinstance(msg, dict) else msg.get("role")
+        if role == "user":
+            content = getattr(msg, "content", None) if not isinstance(msg, dict) else msg.get("content")
+            if isinstance(content, str):
+                user_turns.append(content)
+            elif isinstance(content, list):
+                text_parts = [c.get("text", "") for c in content if isinstance(c, dict) and c.get("type") == "text"]
+                user_turns.append(" ".join(text_parts))
+            if len(user_turns) >= 3:
+                break
+
+    for turn in user_turns:
+        clean_turn = turn.strip().lower()
+        if _CONFIRMATION_PATTERNS.search(clean_turn):
+            return True
+        # If the turn is an open question or inquiry, it is NOT an authorization
+        is_question = "?" in turn or "¿" in turn or bool(
+            re.match(r"^(?:qué|que|cómo|como|cuál|cual|por qué|será|podríamos|podemos)\b", clean_turn)
+        )
+        if is_question:
+            continue
+        # Check for direct imperative action command
+        if _IMPERATIVE_COMMANDS.search(clean_turn) and len(clean_turn.split()) >= 3:
+            return True
+    return False
+
+
+def check_runtime_execution_guardrails(
+    agent: Any,
+    tool_name: str,
+    tool_args: Mapping[str, Any] | None,
+    messages: list[Any] | None = None,
+) -> tuple[bool, str | None]:
+    """Universal runtime interceptor enforcing 5-State Progressive Evaluation and Multi-Level Authorization.
+
+    Enforces:
+    - State 1: Suppresses tool executions on pure greetings/chit-chat for immediate conversational Fast Ack (<2s).
+    - State 4: Intercepts high-impact mutating actions (file/system edits) until explicit user confirmation is present.
+    """
+    # 1. Bypass guardrails for cronjobs and autonomous subagent execution
+    if getattr(agent, "is_cron", False) or getattr(agent, "_delegate_depth", 0) > 0:
+        return False, None
+
+    tool_args = tool_args or {}
+    messages = messages or getattr(agent, "messages", []) or []
+
+    # Extract the last user message text
+    last_user_text = ""
+    for msg in reversed(messages):
+        role = getattr(msg, "role", None) if not isinstance(msg, dict) else msg.get("role")
+        if role == "user":
+            content = getattr(msg, "content", None) if not isinstance(msg, dict) else msg.get("content")
+            if isinstance(content, str):
+                last_user_text = content
+            elif isinstance(content, list):
+                parts = [c.get("text", "") for c in content if isinstance(c, dict) and c.get("type") == "text"]
+                last_user_text = " ".join(parts)
+            break
+
+    # 2. State 1 Guardrail: Pure Conversation / Casual Greeting
+    if is_conversational_turn(last_user_text):
+        if tool_name in MUTATING_TOOL_NAMES or tool_name in ("memory", "search_files"):
+            reason = (
+                "INTERCEPTED (State 1: Pure Conversation): The user sent a casual greeting or conversational message. "
+                "Do NOT execute tools, modify files, or scan memory. Respond conversationally, warmly, and immediately."
+            )
+            return True, reason
+
+    # 3. State 4 Guardrail: Multi-Level Confirmation for High-Impact Actions
+    is_high_impact = False
+    if tool_name in ("write_file", "patch", "skill_manage", "cronjob_manage"):
+        is_high_impact = True
+    elif tool_name == "process_manage":
+        if str(tool_args.get("action", "")).lower() in ("kill", "terminate", "stop"):
+            is_high_impact = True
+    elif tool_name in ("terminal", "execute_code"):
+        cmd = str(tool_args.get("command") or tool_args.get("code") or "")
+        if _MUTATING_OR_DESTRUCTIVE_COMMANDS.search(cmd):
+            is_high_impact = True
+
+    if is_high_impact:
+        if not has_user_confirmation(messages):
+            reason = (
+                f"INTERCEPTED (State 4: High-Impact Action Requires Confirmation): "
+                f"Tool '{tool_name}' mutates files, code, or systems. "
+                f"You MUST first present your execution plan to the user with the proposed changes, "
+                f"explain the expected outcome, and ask for explicit authorization ('dale' / 'sí' / 'procede') before executing."
+            )
+            return True, reason
+
+    return False, None
+
