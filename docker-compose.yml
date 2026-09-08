@@ -5,7 +5,6 @@ services:
     container_name: hermes-agent
     ports:
       - "3000:3000"
-      - "9119:9119"
     environment:
       - TZ=America/Bogota
       - HOME=/opt/data/home
