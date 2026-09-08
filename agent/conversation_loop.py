@@ -2828,7 +2828,7 @@ def run_conversation(
         # Dynamically decouple tool schemas on conversational turns (greetings, tests, acknowledgements)
         # to drop API payload from ~14k to ~3.5k tokens, eliminating 8-10s of provider latency.
         from agent.tool_guardrails import should_decouple_tools_for_turn
-        if should_decouple_tools_for_turn(messages, tool_turns=tool_turns, agent=agent):
+        if should_decouple_tools_for_turn(messages, tool_turns=api_call_count, agent=agent):
             tools_for_api = []
             logger.info("Turn intent triage: conversational turn detected; tools decoupled (~%d tokens saved)",
                         len(agent.tools or []) * 350)
