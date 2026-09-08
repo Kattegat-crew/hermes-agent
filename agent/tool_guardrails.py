@@ -1128,8 +1128,8 @@ def should_decouple_tools_for_turn(
 
     Decoupling saves ~13,600 tokens and ~8-10 seconds of provider latency on conversational turns.
     """
-    # 1. Mid-turn tool responses MUST keep tools available
-    if tool_turns > 0:
+    # 1. Mid-turn tool responses MUST keep tools available (call count > 1)
+    if tool_turns > 1:
         return False
 
     if not messages:
@@ -1143,7 +1143,9 @@ def should_decouple_tools_for_turn(
     # 3. Check the last message in history
     last_msg = messages[-1]
     last_role = getattr(last_msg, "role", None) if not isinstance(last_msg, dict) else last_msg.get("role")
-    if last_role in ("tool", "assistant"):
+    if last_role in ("tool", "function"):
+        return False
+    if last_role == "assistant":
         # If assistant just called a tool, we cannot decouple
         if isinstance(last_msg, dict) and last_msg.get("tool_calls"):
             return False

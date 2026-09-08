@@ -73,19 +73,22 @@ def test_attachment_or_file_paths_classified_as_action():
 
 
 def test_should_decouple_tools_for_turn_evaluates_conversation_state():
-    # Fresh greeting turn
+    # Fresh greeting turn with tool_turns=0 or tool_turns=1 (1-indexed api_call_count in conversation loop)
     messages = [{"role": "user", "content": "Hola Roshi!"}]
     assert should_decouple_tools_for_turn(messages, tool_turns=0) is True
+    assert should_decouple_tools_for_turn(messages, tool_turns=1) is True
 
-    # Speed test
+    # Speed test with tool_turns=1
     messages = [
         {"role": "user", "content": "Prueba de velocidad de respuesta"}
     ]
     assert should_decouple_tools_for_turn(messages, tool_turns=0) is True
+    assert should_decouple_tools_for_turn(messages, tool_turns=1) is True
 
     # Action task
     messages = [{"role": "user", "content": "Leé el archivo README.md"}]
     assert should_decouple_tools_for_turn(messages, tool_turns=0) is False
+    assert should_decouple_tools_for_turn(messages, tool_turns=1) is False
 
     # Mid-turn tool execution (even if previous user message was conversational)
     messages = [
@@ -94,3 +97,7 @@ def test_should_decouple_tools_for_turn_evaluates_conversation_state():
         {"role": "tool", "tool_call_id": "1", "content": "file contents"},
     ]
     assert should_decouple_tools_for_turn(messages, tool_turns=1) is False
+
+    # Subsequent API call within the same turn (tool_turns > 1)
+    messages = [{"role": "user", "content": "Hola Roshi!"}]
+    assert should_decouple_tools_for_turn(messages, tool_turns=2) is False
