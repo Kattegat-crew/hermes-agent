@@ -1905,6 +1905,40 @@ def build_skills_system_prompt(
         if not skills_dir.exists() and not external_dirs and not project_dirs:
             return ""
 
+        # Check if on-demand catalog mode is enabled (zero-skills base prompt).
+        # Eliminates ~14,000 tokens of static index bloat from every model call,
+        # prompting the agent to discover/load skills in State 3 (Planning).
+        try:
+            from hermes_cli.config import load_config_readonly
+            _cfg = load_config_readonly()
+            _skills_cfg = _cfg.get("skills") or {}
+            _on_demand = False
+            if isinstance(_skills_cfg, dict):
+                _on_demand = (
+                    _skills_cfg.get("on_demand") is True
+                    or str(_skills_cfg.get("mode", "")).lower() == "on_demand"
+                )
+            if os.getenv("HERMES_SKILLS_ON_DEMAND", "").lower() in ("1", "true", "yes"):
+                _on_demand = True
+        except Exception:
+            _on_demand = False
+
+        if _on_demand:
+            return (
+                "## Skills (On-Demand Catalog)\n"
+                "You have access to an extensive library of specialized skills (stored in `/opt/data/skills/` and accessible via `skills_list` and `skill_search`). "
+                "Skills encode specialized domain workflows, API protocols, best practices, and expert procedures.\n\n"
+                "OPERATING PROTOCOL:\n"
+                "1. Pure conversation, casual greetings, brainstorming, and direct Q&A do NOT require skills. Respond immediately without loading skills or calling tools.\n"
+                "2. In State 3 (Planning), when a task requires specialized domain knowledge, workflows, or tool orchestration:\n"
+                "   - Discover relevant skills using `skill_search(query=\"<topic>\")` or `skills_list(query=\"<topic>\")`.\n"
+                "   - Load and read the required skill using `skill_view(name=\"<skill_name>\")`.\n"
+                "   - Incorporate the required skills and their proposed workflows into your execution plan.\n"
+                "3. In State 4 (Confirmation), present the plan (including required skills or subagents) to the user and wait for authorization before execution.\n"
+                "4. Universal file support: You can always read and inspect files of any format (text, code, PDF, DOCX, XLSX, images) directly using standard tools (`read_file`).\n"
+                "- hermes-agent: Core Hermes instructions, architecture, commands, and multi-agent coordination."
+            )
+
         return _build_skills_system_prompt_inner(
             skills_dir,
             external_dirs,

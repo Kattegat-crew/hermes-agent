@@ -815,7 +815,7 @@ def _sort_skills(skills: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return sorted(skills, key=lambda s: (s.get("category") or "", s["name"]))
 
 
-def skills_list(category: str = None, task_id: str = None) -> str:
+def skills_list(category: str = None, query: str = None, task_id: str = None) -> str:
     """
     List all available skills (progressive disclosure tier 1 - minimal metadata).
 
@@ -824,6 +824,7 @@ def skills_list(category: str = None, task_id: str = None) -> str:
 
     Args:
         category: Optional category filter (e.g., "mlops")
+        query: Optional search keyword to filter skills by name, description, or tags (e.g. "docker")
         task_id: Optional task identifier used to probe the active backend
 
     Returns:
@@ -863,7 +864,19 @@ def skills_list(category: str = None, task_id: str = None) -> str:
 
         # Filter by category if specified
         if category:
-            all_skills = [s for s in all_skills if s.get("category") == category]
+            cat_norm = category.lower().strip()
+            all_skills = [s for s in all_skills if (s.get("category") or "").lower() == cat_norm]
+
+        # Filter by query keyword if specified
+        if query:
+            q = query.lower().strip()
+            all_skills = [
+                s for s in all_skills
+                if q in (s.get("name") or "").lower()
+                or q in (s.get("description") or "").lower()
+                or q in (s.get("category") or "").lower()
+                or any(q in str(t).lower() for t in s.get("tags", []))
+            ]
 
         # Sort by category then name
         all_skills = _sort_skills(all_skills)
@@ -1986,16 +1999,39 @@ if __name__ == "__main__":
 
 SKILLS_LIST_SCHEMA = {
     "name": "skills_list",
-    "description": "List available skills (name + description). Use skill_view(name) to load full content.",
+    "description": "List or search available skills (name + description). Use query to search keywords, or category to filter. Use skill_view(name) to load full content.",
     "parameters": {
         "type": "object",
         "properties": {
+            "query": {
+                "type": "string",
+                "description": "Optional search term to filter skills by name, description, or tags (e.g., 'docker', 'diagram', 'seo')",
+            },
             "category": {
                 "type": "string",
                 "description": "Optional category filter to narrow results",
             }
         },
         "required": [],
+    },
+}
+
+SKILL_SEARCH_SCHEMA = {
+    "name": "skill_search",
+    "description": "Search the skills catalog for relevant specialized skills by keyword, domain, or tool name. Returns matching skills with minimal metadata.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "query": {
+                "type": "string",
+                "description": "Search term to match against skill names, descriptions, or tags",
+            },
+            "category": {
+                "type": "string",
+                "description": "Optional category filter to narrow results",
+            },
+        },
+        "required": ["query"],
     },
 }
 
@@ -2023,10 +2059,25 @@ registry.register(
     toolset="skills",
     schema=SKILLS_LIST_SCHEMA,
     handler=lambda args, **kw: skills_list(
-        category=args.get("category"), task_id=kw.get("task_id")
+        category=args.get("category"),
+        query=args.get("query"),
+        task_id=kw.get("task_id"),
     ),
     check_fn=check_skills_requirements,
     emoji="📚",
+)
+
+registry.register(
+    name="skill_search",
+    toolset="skills",
+    schema=SKILL_SEARCH_SCHEMA,
+    handler=lambda args, **kw: skills_list(
+        category=args.get("category"),
+        query=args.get("query"),
+        task_id=kw.get("task_id"),
+    ),
+    check_fn=check_skills_requirements,
+    emoji="🔍",
 )
 # ── skill_view repeat-view dedup ────────────────────────────────────────
 # Per-task cache of (skill name, file_path) -> (skill file mtime+size).

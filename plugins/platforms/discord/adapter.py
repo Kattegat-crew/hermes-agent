@@ -1440,6 +1440,8 @@ class DiscordAdapter(BasePlatformAdapter):
                 command_prefix="!",  # Not really used, we handle raw messages
                 intents=intents,
                 allowed_mentions=_build_allowed_mentions(),
+                status=discord.Status.online,
+                activity=discord.Game(name="NeuralCrew Labs"),
                 **proxy_kwargs_for_bot(proxy_url),
             )
             adapter_self = self  # capture for closure
@@ -1448,6 +1450,13 @@ class DiscordAdapter(BasePlatformAdapter):
             @self._client.event
             async def on_ready():
                 logger.info("[%s] Connected as %s", adapter_self.name, adapter_self._client.user)
+                try:
+                    await adapter_self._client.change_presence(
+                        status=discord.Status.online,
+                        activity=discord.Game(name="NeuralCrew Labs"),
+                    )
+                except Exception as exc:
+                    logger.debug("[%s] Failed to set presence on ready: %s", adapter_self.name, exc)
 
                 # Resolve any usernames in the allowed list to numeric IDs
                 await adapter_self._resolve_allowed_usernames()

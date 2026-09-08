@@ -616,7 +616,7 @@ def build_system_prompt_parts(agent: Any, system_message: Optional[str] = None) 
             from agent.prompt_builder import execution_guidance_text
             stable_parts.append(execution_guidance_text(agent.valid_tool_names))
 
-    has_skills_tools = any(name in agent.valid_tool_names for name in ['skills_list', 'skill_view', 'skill_manage'])
+    has_skills_tools = any(name in agent.valid_tool_names for name in ['skills_list', 'skill_search', 'skill_view', 'skill_manage'])
     if has_skills_tools:
         avail_toolsets = {
             toolset
