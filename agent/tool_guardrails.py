@@ -1002,11 +1002,34 @@ _GREETING_WORDS = frozenset({
     "como va", "cómo va", "saludos", "buenas", "que mas", "qué más"
 })
 
+_ACK_WORDS = frozenset({
+    "gracias", "muchas gracias", "ok", "okay", "vale", "entendido", "perfecto",
+    "buenísimo", "buenisimo", "de acuerdo", "excelente", "dale", "listo"
+})
+
+_SPEED_OR_PING_PATTERN = re.compile(
+    r"\b(?:prueba|test|testear|probar)\s+(?:de\s+)?(?:velocidad|latencia|respuesta|tiempo)|"
+    r"(?:medir|mide)\s+(?:el\s+)?tiempo|\bping\b|\bpong\b",
+    re.IGNORECASE
+)
+
+_FUTURE_INTENTION_PATTERN = re.compile(
+    r"\b(?:mañana|luego|después|despues|más tarde|mas tarde|la próxima semana|proxima semana)\s+"
+    r"(?:quiero|vamos|hacemos|trabajamos|revisamos|veremos|vemos)\b",
+    re.IGNORECASE
+)
+
+_FILE_OR_URL_PATTERN = re.compile(
+    r"https?://|\b[\w\-\./]+\.(?:py|sh|json|yaml|yml|md|txt|csv|pdf|docx|xlsx|png|jpg|jpeg|mp3|mp4|log|ts|js|html|css)\b|"
+    r"(?:^|\s)(?:/[a-zA-Z0-9_\-\.]+)+",
+    re.IGNORECASE
+)
+
 _ACTION_DIRECTIVES = re.compile(
     r"\b(?:crea|crear|haz|hacer|modifica|modificar|edita|editar|actualiza|actualizar|"
     r"borra|borrar|elimina|eliminar|ejecuta|ejecutar|instala|instalar|configura|configurar|"
     r"busca|buscar|encuentra|analiza|analizar|revisa|revisar|lee|leer|escribe|escribir|"
-    r"despliega|deploy|test|prueba|repara|arregla|corrige)\b",
+    r"despliega|deploy|repara|arregla|corrige|reinicia|reiniciar)\b",
     re.IGNORECASE
 )
 
@@ -1027,27 +1050,127 @@ _MUTATING_OR_DESTRUCTIVE_COMMANDS = re.compile(
     re.VERBOSE | re.IGNORECASE
 )
 
-
 _IMPERATIVE_COMMANDS = re.compile(
     r"\b(?:crea|escribe|modifica|edita|actualiza|borra|elimina|ejecuta|instala|despliega|agrega|cambia|aplica|haz)\b",
     re.IGNORECASE
 )
 
 
-def is_conversational_turn(message_text: str) -> bool:
-    """Check if the user message is a pure greeting or casual chit-chat without an actionable task."""
-    if not message_text:
-        return False
-    clean = re.sub(r"[^\w\s]", " ", message_text).lower().strip()
+def classify_turn_intent(message_text: str) -> str:
+    """Classify the user turn intent as 'conversational' or 'action' with zero latency.
+
+    Enforces:
+    - Conversational: Greetings, speed/ping tests, future work planning notes, casual questions, acknowledgements.
+    - Action: File attachments, URLs, file paths, imperative code/system modification verbs.
+    """
+    if not message_text or not isinstance(message_text, str):
+        return "action"
+
+    text = message_text.strip()
+    if not text:
+        return "action"
+
+    # 1. Any file attachment, local path, or URL is an action turn
+    if _FILE_OR_URL_PATTERN.search(text):
+        return "action"
+
+    # 2. Response speed / latency / ping tests are strictly conversational
+    if _SPEED_OR_PING_PATTERN.search(text):
+        return "conversational"
+
+    # 3. Clean string for keyword analysis
+    clean = re.sub(r"[^\w\s]", " ", text).lower().strip()
     words = clean.split()
     if not words:
+        return "action"
+
+    has_action = bool(_ACTION_DIRECTIVES.search(text))
+
+    # 4. If explicit technical action directive is present -> action
+    if has_action:
+        return "action"
+
+    # 5. Statements of future intention without immediate command -> conversational (Plan Req 3)
+    if _FUTURE_INTENTION_PATTERN.search(text):
+        return "conversational"
+
+    # 6. Acknowledgements or greetings without actions -> conversational
+    has_greeting = any(g in clean for g in _GREETING_WORDS)
+    has_ack = any(clean == ack or clean.startswith(ack + " ") or clean.endswith(" " + ack) for ack in _ACK_WORDS)
+
+    if (has_greeting or has_ack) and not has_action:
+        return "conversational"
+
+    # 7. Casual questions without action verbs (e.g. "¿cómo estás?", "¿quién eres?")
+    is_casual_inquiry = bool(re.match(
+        r"^(?:(?:hola|hey|buenas)\b\s*)?(?:¿|\?|quién|quien|cómo|como|qué|que|estas|estás|me escuchas|podes hablar)\b",
+        clean,
+        re.IGNORECASE
+    ))
+    if is_casual_inquiry and not has_action:
+        return "conversational"
+
+    # Default to action if intent is ambiguous or complex
+    return "action"
+
+
+def is_conversational_turn(message_text: str) -> bool:
+    """Check if the user message is a pure greeting or casual chit-chat without an actionable task."""
+    return classify_turn_intent(message_text) == "conversational"
+
+
+def should_decouple_tools_for_turn(
+    messages: list[Any],
+    tool_turns: int = 0,
+    agent: Any = None,
+) -> bool:
+    """Determine whether tool schemas should be decoupled (tools_for_api = []) for this turn.
+
+    Decoupling saves ~13,600 tokens and ~8-10 seconds of provider latency on conversational turns.
+    """
+    # 1. Mid-turn tool responses MUST keep tools available
+    if tool_turns > 0:
         return False
-    if len(words) <= 8:
-        has_greeting = any(g in clean for g in _GREETING_WORDS)
-        has_action = bool(_ACTION_DIRECTIVES.search(message_text))
-        if has_greeting and not has_action:
-            return True
-    return False
+
+    if not messages:
+        return False
+
+    # 2. Never decouple for cronjobs or autonomous subagents
+    if agent is not None:
+        if getattr(agent, "is_cron", False) or getattr(agent, "_delegate_depth", 0) > 0:
+            return False
+
+    # 3. Check the last message in history
+    last_msg = messages[-1]
+    last_role = getattr(last_msg, "role", None) if not isinstance(last_msg, dict) else last_msg.get("role")
+    if last_role in ("tool", "assistant"):
+        # If assistant just called a tool, we cannot decouple
+        if isinstance(last_msg, dict) and last_msg.get("tool_calls"):
+            return False
+        if hasattr(last_msg, "tool_calls") and last_msg.tool_calls:
+            return False
+
+    # 4. Extract last user text
+    last_user_text = ""
+    for msg in reversed(messages):
+        role = getattr(msg, "role", None) if not isinstance(msg, dict) else msg.get("role")
+        if role == "user":
+            content = getattr(msg, "content", None) if not isinstance(msg, dict) else msg.get("content")
+            if isinstance(content, str):
+                last_user_text = content
+            elif isinstance(content, list):
+                # Multipart content (e.g. image, document attachment) -> Keep tools!
+                for part in content:
+                    if isinstance(part, dict):
+                        if part.get("type") != "text":
+                            return False
+                        last_user_text += " " + part.get("text", "")
+            break
+
+    if not last_user_text:
+        return False
+
+    return classify_turn_intent(last_user_text) == "conversational"
 
 
 def has_user_confirmation(messages: list[Any]) -> bool:

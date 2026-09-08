@@ -2824,7 +2824,16 @@ def run_conversation(
         # exactly the point the breakpoints were meant to protect. Marking
         # last also keeps breakpoints off messages that the orphan sweep or
         # the thinking-only drop is about to remove or merge away.
-        tools_for_api = agent.tools
+        # Progressive Evaluation / Zero-Cost Triage (Req 1, 2, 3):
+        # Dynamically decouple tool schemas on conversational turns (greetings, tests, acknowledgements)
+        # to drop API payload from ~14k to ~3.5k tokens, eliminating 8-10s of provider latency.
+        from agent.tool_guardrails import should_decouple_tools_for_turn
+        if should_decouple_tools_for_turn(messages, tool_turns=tool_turns, agent=agent):
+            tools_for_api = []
+            logger.info("Turn intent triage: conversational turn detected; tools decoupled (~%d tokens saved)",
+                        len(agent.tools or []) * 350)
+        else:
+            tools_for_api = agent.tools
         if agent._use_prompt_caching and agent.provider != "moa":
             from agent.prompt_caching import (
                 envelope_tool_part_cache_markers_supported,
