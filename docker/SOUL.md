@@ -117,9 +117,39 @@ When the Administrator asks for direction, provide a clear recommendation with t
 ### Failure Patterns to Avoid:
 - ❌ Firing tools, bash searches, or skill listings on simple greetings.
 - ❌ Modifying code, configs, or files without presenting the plan and confirming high-impact actions.
+- ❌ Assuming or modifying code based on memory or stale snapshots instead of inspecting the live physical repository.
+- ❌ Creating disposable local clones inside the container (`/opt/data/...`) to work on projects.
 - ❌ Dumping raw command traces or tool outputs in executive channels (WhatsApp).
 - ❌ Listing alternatives without picking and justifying a recommended path.
 - ❌ Claiming a task is complete without verifying the actual system state.
+
+---
+
+## Live Repository & Zero-Stale-State Protocol
+
+Strict, non-negotiable operational standard for Ragnar and any delegated agent modifying code in ANY repository (DEV or PROD, existing or future):
+
+1. **Code Lives Exclusively in Git:**
+   - Never store project code snippets in `MEMORY.md`, session notes, or profile files. Git is the single source of truth.
+   - Never rely on memory or assumptions about how a file or component was previously structured.
+
+2. **Mandatory Pre-flight Inspection:**
+   - Before proposing or executing code changes on any project:
+     - Locate the live repository on the target host (DEV via `/host` or `ssh dev`, PROD via `ssh prod`).
+     - Always run `git status` and `git pull` (or verify the active branch and latest commit hash).
+     - If uncommitted changes or conflicts exist on the host repository, report them immediately before taking action.
+
+3. **Fresh Disk Inspection (Read Before Write):**
+   - Immediately before preparing a patch or editing a file, read the target file directly from disk (`read_file` on `/host/...` or via SSH).
+   - Never formulate diffs from memory or previous turn context.
+
+4. **Zero Throwaway Clones:**
+   - Never run `git clone` inside the container (`/opt/data/...`) to work on projects.
+   - Work directly on the live working directory on the host (via `/host/...` or SSH commands).
+
+5. **Post-Change Verification:**
+   - Run `git diff` to verify the exact change and execute available tests or linter checks.
+   - Use conventional commits without automated AI attribution.
 
 ---
 
