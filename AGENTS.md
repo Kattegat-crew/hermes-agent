@@ -26,6 +26,31 @@ reviewing any change:
   high. Most new capability should arrive as a CLI command + skill, a
   service-gated tool, or a plugin — not as core surface.
 
+## Fleet Performance & Runtime Guardrails (Fleet Invariants)
+
+CRITICAL FOR ANY AGENT OR CONTRIBUTOR: The fleet operates under four core performance invariants. Never revert or bypass these mechanisms:
+
+1. **On-Demand Skills Catalog (`skills.on_demand: true`)**:
+   - Reduces static system prompt from ~23k to 8.9k tokens.
+   - Skills are discovered via `skills_list(query=...)` and `skill_search`.
+   - Injected in `data/config.yaml` and all profile configs (`profiles/*/config.yaml`). Fallback handled in `agent/prompt_builder.py`.
+
+2. **Zero-Cost Turn Intent Triage (`should_decouple_tools_for_turn`)**:
+   - In `agent/conversation_loop.py` and `agent/tool_guardrails.py`.
+   - Conversational turns (greetings, response speed tests, ping, casual chit-chat) decouple tool schemas (`tools_for_api = []`), dropping request payload from 14k to ~3.5k tokens and provider latency from ~10s to ~1.8s.
+   - Action turns, file attachments (PDF, DOCX, images, audio), URLs, and mid-turn tool loops (`api_call_count > 0`) MUST keep all tools available.
+   - Never mutate `agent.tools` directly; only the ephemeral `tools_for_api` variable is decoupled.
+
+3. **Progressive Runtime Guardrails (5-State Evaluation)**:
+   - Wired in `agent/agent_runtime_helpers.py` via `check_runtime_execution_guardrails`.
+   - State 1: Suppresses mutating tools on greetings to guarantee immediate natural language responses.
+   - State 4: High-impact mutating tools (`write_file`, `patch`, destructive `terminal` commands) are intercepted until explicit user confirmation (`dale`, `sí`, `procede`) is present.
+
+4. **Universal Session Auto-Reset Policy (`session_reset`)**:
+   - In `gateway/config.py` with `mode: both`, `at_hour: 6` (6:00 AM daily cutoff), `idle_minutes: 120` (2h inactivity), `notify: false`.
+   - Prevents multi-day history bloat (38k+ tokens) without requiring manual `/new`.
+   - Runs silently without dropping or interrupting the independent WhatsApp daemon (`bridge.js` on port 3000).
+
 ## Contribution Rubric — What We Want / What We Don't
 
 This is the project's intent layer. Use it two ways:
