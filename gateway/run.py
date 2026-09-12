@@ -31574,9 +31574,27 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
             _cleanup_delete is None
             or _cleanup_delete is BasePlatformAdapter.delete_message
         ):
-            # Adapter doesn't support deletion — silently disable.
-            _cleanup_progress = False
-            _cleanup_adapter = None
+            if type(_cleanup_adapter).__name__ == "DiscordAdapter" or getattr(_cleanup_adapter, "name", "").lower() == "discord":
+                async def _discord_delete(self, chat_id: str, message_id: str) -> bool:
+                    client = getattr(self, "_client", None)
+                    if not client:
+                        return False
+                    try:
+                        channel = client.get_channel(int(chat_id))
+                        if not channel:
+                            channel = await client.fetch_channel(int(chat_id))
+                        msg = channel.get_partial_message(int(message_id))
+                        await msg.delete()
+                        return True
+                    except Exception as e:
+                        logger.debug("[%s] Failed to delete Discord message %s: %s", getattr(self, "name", "discord"), message_id, e)
+                        return False
+                type(_cleanup_adapter).delete_message = _discord_delete
+                _cleanup_delete = _discord_delete
+            else:
+                # Adapter doesn't support deletion — silently disable.
+                _cleanup_progress = False
+                _cleanup_adapter = None
         _cleanup_msg_ids: List[str] = []
         # First-touch onboarding latch: fires at most once per run, even if
         # several tools exceed the threshold.
