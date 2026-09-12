@@ -5578,7 +5578,10 @@ class TurnRunner:
                     continue
                 else:
                     msg = raw
-                    progress_lines.append(msg)
+                    if getattr(ctx, "progress_grouping", "accumulate") == "replace":
+                        progress_lines = [msg]
+                    else:
+                        progress_lines.append(msg)
 
                 if await _roll_progress_overflow_if_needed():
                     _last_edit_ts = time.monotonic()
@@ -5700,7 +5703,10 @@ class TurnRunner:
                             ctx.last_progress_msg[0] = None
                             ctx.repeat_count[0] = 0
                         else:
-                            progress_lines.append(raw)
+                            if getattr(ctx, "progress_grouping", "accumulate") == "replace":
+                                progress_lines = [raw]
+                            else:
+                                progress_lines.append(raw)
                             await _roll_progress_overflow_if_needed()
                     except Exception:
                         break
@@ -6034,7 +6040,7 @@ class TurnRunner:
         )
         _want_stream_deltas = _streaming_enabled
         _want_interim_messages = ctx.interim_assistant_messages_enabled
-        _want_interim_consumer = _want_interim_messages
+        _want_interim_consumer = _want_interim_messages and ctx.progress_queue is None
         if _want_stream_deltas or _want_interim_consumer:
             try:
                 from gateway.stream_consumer import GatewayStreamConsumer
@@ -6083,13 +6089,19 @@ class TurnRunner:
             if not ctx._run_still_current():
                 return
             display_text = text
-            if _stream_consumer is not None:
-                if already_streamed:
+            if already_streamed:
+                if _stream_consumer is not None:
                     _stream_consumer.on_segment_break()
-                else:
-                    _stream_consumer.on_commentary(display_text)
                 return
-            if already_streamed or not ctx._status_adapter or not str(display_text or "").strip():
+            if not str(display_text or "").strip():
+                return
+            if ctx.progress_queue is not None:
+                ctx.progress_queue.put(display_text.strip())
+                return
+            if _stream_consumer is not None:
+                _stream_consumer.on_commentary(display_text)
+                return
+            if not ctx._status_adapter:
                 return
             safe_schedule_threadsafe(
                 ctx._status_adapter.send(
@@ -31518,7 +31530,10 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
             except Exception:
                 logger.debug("Slack native task-card config check failed", exc_info=True)
         needs_progress_queue = (
-            tool_progress_enabled or _thinking_enabled or _native_slack_task_cards
+            tool_progress_enabled
+            or _thinking_enabled
+            or _native_slack_task_cards
+            or interim_assistant_messages_enabled
         )
 
 
