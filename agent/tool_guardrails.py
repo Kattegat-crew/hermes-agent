@@ -1002,6 +1002,11 @@ _GREETING_WORDS = frozenset({
     "como va", "cómo va", "saludos", "buenas", "que mas", "qué más"
 })
 
+_GREETING_PATTERN = re.compile(
+    r"\b(?:" + "|".join(re.escape(g) for g in sorted(_GREETING_WORDS, key=len, reverse=True)) + r")\b",
+    re.IGNORECASE
+)
+
 _ACK_WORDS = frozenset({
     "gracias", "muchas gracias", "ok", "okay", "vale", "entendido", "perfecto",
     "buenísimo", "buenisimo", "de acuerdo", "excelente", "dale", "listo"
@@ -1029,8 +1034,14 @@ _ACTION_DIRECTIVES = re.compile(
     r"\b(?:crea|crear|haz|hacer|modifica|modificar|edita|editar|actualiza|actualizar|"
     r"borra|borrar|elimina|eliminar|ejecuta|ejecutar|instala|instalar|configura|configurar|"
     r"busca|buscar|encuentra|analiza|analizar|revisa|revisar|lee|leer|escribe|escribir|"
-    r"despliega|deploy|repara|arregla|corrige|reinicia|reiniciar)\b",
+    r"despliega|deploy|repara|arregla|corrige|reinicia|reiniciar|"
+    r"procede|proceder|continua|continúa|continuar|sigue|seguir|adelante)\b",
     re.IGNORECASE
+)
+
+_SYSTEM_METADATA_WRAPPER_PATTERN = re.compile(
+    r"\[System:.*?\]",
+    re.DOTALL | re.IGNORECASE
 )
 
 _CONFIRMATION_PATTERNS = re.compile(
@@ -1055,6 +1066,18 @@ _IMPERATIVE_COMMANDS = re.compile(
     re.IGNORECASE
 )
 
+_CASUAL_INQUIRY_PATTERN = re.compile(
+    r"^(?:(?:hola|hey|buenas|buenos dias|buenas tardes|buenas noches)\b(?:\s+\w+)?\s*)?"
+    r"(?:"
+    r"qui[eé]n\s+(?:eres|sos)|"
+    r"c[oó]mo\s+(?:est[aá]s|andas|va|te\s+va)|"
+    r"qu[eé]\s+(?:haces|tal|cuentas|hac[eé]s)|"
+    r"me\s+(?:escuchas|o[yí]es)|"
+    r"pod[eé]s\s+hablar|puedes\s+hablar"
+    r")\b",
+    re.IGNORECASE
+)
+
 
 def classify_turn_intent(message_text: str) -> str:
     """Classify the user turn intent as 'conversational' or 'action' with zero latency.
@@ -1066,9 +1089,12 @@ def classify_turn_intent(message_text: str) -> str:
     if not message_text or not isinstance(message_text, str):
         return "action"
 
-    text = message_text.strip()
-    if not text:
+    # Strip synthetic system injection wrappers before intent classification
+    stripped = _SYSTEM_METADATA_WRAPPER_PATTERN.sub("", message_text).strip()
+    if not stripped:
         return "action"
+
+    text = stripped
 
     # 1. Any file attachment, local path, or URL is an action turn
     if _FILE_OR_URL_PATTERN.search(text):
@@ -1095,18 +1121,14 @@ def classify_turn_intent(message_text: str) -> str:
         return "conversational"
 
     # 6. Acknowledgements or greetings without actions -> conversational
-    has_greeting = any(g in clean for g in _GREETING_WORDS)
+    has_greeting = bool(_GREETING_PATTERN.search(clean))
     has_ack = any(clean == ack or clean.startswith(ack + " ") or clean.endswith(" " + ack) for ack in _ACK_WORDS)
 
     if (has_greeting or has_ack) and not has_action:
         return "conversational"
 
     # 7. Casual questions without action verbs (e.g. "¿cómo estás?", "¿quién eres?")
-    is_casual_inquiry = bool(re.match(
-        r"^(?:(?:hola|hey|buenas)\b\s*)?(?:¿|\?|quién|quien|cómo|como|qué|que|estas|estás|me escuchas|podes hablar)\b",
-        clean,
-        re.IGNORECASE
-    ))
+    is_casual_inquiry = bool(_CASUAL_INQUIRY_PATTERN.match(clean))
     if is_casual_inquiry and not has_action:
         return "conversational"
 

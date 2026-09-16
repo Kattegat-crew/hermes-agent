@@ -101,3 +101,46 @@ def test_should_decouple_tools_for_turn_evaluates_conversation_state():
     # Subsequent API call within the same turn (tool_turns > 1)
     messages = [{"role": "user", "content": "Hola Roshi!"}]
     assert should_decouple_tools_for_turn(messages, tool_turns=2) is False
+
+
+def test_action_directives_include_continuation_and_confirmation():
+    assert classify_turn_intent("listo procede") == "action"
+    assert classify_turn_intent("dale continúa") == "action"
+    assert classify_turn_intent("continua") == "action"
+    assert classify_turn_intent("procede") == "action"
+    assert classify_turn_intent("sigue adelante") == "action"
+
+
+def test_system_metadata_and_substring_greetings_do_not_decouple_tools():
+    # Words like 'this', 'which', 'history' must NOT trigger 'hi'
+    assert classify_turn_intent("This is an important test") == "action"
+    assert classify_turn_intent("Which directory contains the logs?") == "action"
+    assert classify_turn_intent("History shows earlier errors") == "action"
+
+    # Injected system wrapper + action command
+    sys_msg = (
+        "[System: The active model for this chat has changed to deepseek-v4-flash "
+        "via provider custom:nan-builders. From this point forward, use this runtime metadata "
+        "when answering questions about what model/provider is active.]\n\ncontinua"
+    )
+    assert classify_turn_intent(sys_msg) == "action"
+
+    messages = [{"role": "user", "content": sys_msg}]
+    assert should_decouple_tools_for_turn(messages, tool_turns=0) is False
+
+
+def test_open_ended_technical_questions_do_not_decouple_tools():
+    # Questions starting with cómo / qué that are technical tasks must remain 'action'
+    assert classify_turn_intent("cómo soluciono este bug?") == "action"
+    assert classify_turn_intent("qué falla en el log del servidor?") == "action"
+    assert classify_turn_intent("cómo hago para levantar el contenedor?") == "action"
+    assert classify_turn_intent("cómo podemos encarar esto?") == "action"
+    assert classify_turn_intent("qué opciones tengo?") == "action"
+
+    # Genuine casual inquiries about the bot remain 'conversational'
+    assert classify_turn_intent("Hola Roshi, ¿cómo estás?") == "conversational"
+    assert classify_turn_intent("¿Quién eres?") == "conversational"
+    assert classify_turn_intent("me escuchas?") == "conversational"
+    assert classify_turn_intent("¿cómo andas?") == "conversational"
+
+
