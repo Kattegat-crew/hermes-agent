@@ -456,3 +456,43 @@ gateway:
     session_db_unavailable_prefix: "Base de datos de sesiones no disponible"
     session_not_found:           "Sesión no encontrada en la base de datos."
     warn_passthrough:            "⚠️ {error}"
+
+# Long-running progress heartbeat ("⏳ Working — N min — <action>").
+long_running:
+  working:            "⏳ Trabajando — {minutes} min — {action}"
+  working_plain:      "⏳ Trabajando — {minutes} min"
+  waiting_answer:     "⏳ Esperando tu respuesta — {minutes} min"
+  waiting_approval:   "⏳ Esperando tu aprobación — {minutes} min"
+  action_model:       "esperando al modelo"
+  action_receiving:   "recibiendo la respuesta del modelo"
+  action_shell:       "ejecutando comandos"
+  action_files:       "revisando archivos"
+  action_writing:     "escribiendo cambios"
+  action_web:         "consultando la web"
+  action_vision:      "analizando imágenes"
+  action_code:        "ejecutando código"
+  action_delegation:  "coordinando subtareas"
+  action_tools:       "usando herramientas"
+
+# Compact records left behind when a prompt card (clarify / exec approval /
+# slash confirm) is resolved.
+prompt_resolved:
+prompt_resolved:
+  clarify_answered:   "❓ {question} — ✅ Respondiste: {answer}"
+  clarify_timeout:    "❓ {question} — ⌛ Quedó sin respuesta ({minutes} min)"
+  approval_approved:  "✅ Aprobaste este comando ({scope}): `{command}`"
+  approval_denied:    "🚫 Denegaste este comando: `{command}`"
+  approval_expired:   "⌛ Quedó sin respuesta — el comando no se ejecutó: `{command}`"
+  confirm_accepted:   "✅ Confirmaste: {title}"
+  confirm_cancelled:  "🚫 Cancelaste: {title}"
+  confirm_expired:       "⌛ Quedó sin respuesta — {title}"
+  scope_once:         "una vez"
+  scope_session:      "en esta sesión"
+  scope_always:       "siempre"
+
+# Subagent failure notices (gateway notice rail + CLI spinner echo).
+subagent:
+subagent:
+  failed:        "El subagente falló"
+  timed_out:     "El subagente se quedó sin tiempo"
+  failed_batch:  "⚠️ {count} subagentes fallaron:"

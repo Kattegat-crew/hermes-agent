@@ -20,6 +20,9 @@ services:
       - ./tools/mcp_tool.py:/opt/hermes/tools/mcp_tool.py:ro
       - ./gateway/run.py:/opt/hermes/gateway/run.py:ro
       - ./gateway/display_config.py:/opt/hermes/gateway/display_config.py:ro
+      - ./gateway/activity_labels.py:/opt/hermes/gateway/activity_labels.py:ro
+      - ./locales:/opt/hermes/locales:ro
+      - ./tools/delegate_tool.py:/opt/hermes/tools/delegate_tool.py:ro
       - ./plugins/platforms/discord/adapter.py:/opt/hermes/plugins/platforms/discord/adapter.py:ro
       - /:/host:rw,rslave
       - /var/run/docker.sock:/var/run/docker.sock

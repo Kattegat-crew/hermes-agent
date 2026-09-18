@@ -459,3 +459,43 @@ Future messages in this room will use that transcript until `/reset` or another 
     session_db_unavailable_prefix: "Base de données de sessions indisponible"
     session_not_found:           "Session introuvable dans la base de données."
     warn_passthrough:            "⚠️ {error}"
+
+# Long-running progress heartbeat ("⏳ Working — N min — <action>").
+long_running:
+  working:            "⏳ Working — {minutes} min — {action}"
+  working_plain:      "⏳ Working — {minutes} min"
+  waiting_answer:     "⏳ Waiting for your reply — {minutes} min"
+  waiting_approval:   "⏳ Waiting for your approval — {minutes} min"
+  action_model:       "waiting for the model"
+  action_receiving:   "receiving the model's response"
+  action_shell:       "running commands"
+  action_files:       "reviewing files"
+  action_writing:     "writing changes"
+  action_web:         "checking the web"
+  action_vision:      "analyzing images"
+  action_code:        "running code"
+  action_delegation:  "coordinating subtasks"
+  action_tools:       "using tools"
+
+# Compact records left behind when a prompt card (clarify / exec approval /
+# slash confirm) is resolved.
+prompt_resolved:
+prompt_resolved:
+  clarify_answered:   "❓ {question} — ✅ You answered: {answer}"
+  clarify_timeout:    "❓ {question} — ⌛ No answer ({minutes} min)"
+  approval_approved:  "✅ You approved this command ({scope}): `{command}`"
+  approval_denied:    "🚫 You denied this command: `{command}`"
+  approval_expired:   "⌛ No answer — the command was not run: `{command}`"
+  confirm_accepted:   "✅ You confirmed: {title}"
+  confirm_cancelled:  "🚫 You cancelled: {title}"
+  confirm_expired:       "⌛ No answer — {title}"
+  scope_once:         "once"
+  scope_session:      "this session"
+  scope_always:       "always"
+
+# Subagent failure notices (gateway notice rail + CLI spinner echo).
+subagent:
+subagent:
+  failed:        "Subagent failed"
+  timed_out:     "Subagent timed out"
+  failed_batch:  "⚠️ {count} subagents failed:"

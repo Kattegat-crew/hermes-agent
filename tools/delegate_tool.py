@@ -207,8 +207,13 @@ def format_subagent_failure_line(
     goal_label = (goal or "").strip().replace("\n", " ")
     if len(goal_label) > 60:
         goal_label = goal_label[:57] + "..."
-    verb = "timed out" if status == "timeout" else "failed"
-    line = f"⚠️ Subagent {verb}"
+    try:
+        from agent.i18n import t
+
+        verb = t("subagent.timed_out") if status == "timeout" else t("subagent.failed")
+    except Exception:
+        verb = "Subagent timed out" if status == "timeout" else "Subagent failed"
+    line = f"⚠️ {verb}"
     if goal_label:
         line += f' — "{goal_label}"'
     err = _clean_error_text(error)

@@ -169,3 +169,82 @@ class TestGatewayFailureNotice:
             summary="the real error detail",
         )
         assert "the real error detail" in captured[0]
+
+
+def _make_coalescing_runner(monkeypatch):
+    """TurnRunner whose notices can be edited; captures sends and edits."""
+    from gateway import run as run_mod
+    from gateway.platforms.base import SendResult
+
+    sent: list[str] = []
+    edited: list[tuple] = []
+
+    class _Adapter:
+        async def edit_message(self, chat_id, message_id, content, **kwargs):
+            edited.append((chat_id, message_id, content))
+            return SendResult(success=True, message_id=message_id)
+
+    class _StubGatewayRunner:
+        def _adapter_for_source(self, source):
+            return _Adapter()
+
+        async def _deliver_platform_notice(self, source, content):
+            sent.append(content)
+            return SendResult(success=True, message_id="msg-1")
+
+    def _fake_schedule(coro, loop, logger=None, log_message=None):
+        asyncio.run(coro)
+
+    monkeypatch.setattr(run_mod, "safe_schedule_threadsafe", _fake_schedule)
+
+    ctx = TurnContext(
+        source=MagicMock(),
+        _run_still_current=lambda: True,
+        progress_queue=None,
+        _loop_for_step=None,
+    )
+    return run_mod.TurnRunner(_StubGatewayRunner(), ctx), sent, edited
+
+
+class TestSubagentFailureCoalescing:
+    def test_first_failure_posts_one_notice(self, monkeypatch):
+        runner, sent, edited = _make_coalescing_runner(monkeypatch)
+        runner.progress_callback(
+            "subagent.complete", preview="boom", status="failed", goal="alpha"
+        )
+        assert len(sent) == 1
+        assert edited == []
+
+    def test_later_failures_edit_the_same_message(self, monkeypatch):
+        runner, sent, edited = _make_coalescing_runner(monkeypatch)
+        for goal in ("alpha", "beta", "gamma"):
+            runner.progress_callback(
+                "subagent.complete", preview=f"boom-{goal}", status="failed", goal=goal
+            )
+        assert len(sent) == 1
+        assert len(edited) == 2
+        _chat, message_id, content = edited[-1]
+        assert message_id == "msg-1"
+        for goal in ("alpha", "beta", "gamma"):
+            assert goal in content
+        assert "3" in content  # batch header count
+
+    def test_batch_text_uses_bullets_for_multiple_lines(self, monkeypatch):
+        runner, _sent, _edited = _make_coalescing_runner(monkeypatch)
+        runner._subagent_fail_lines.extend(["line-a", "line-b", "line-c"])
+        text = runner._subagent_failure_text()
+        assert "• line-a" in text
+        assert "• line-c" in text
+        assert "3" in text
+
+    def test_batch_text_single_line_passthrough(self, monkeypatch):
+        runner, _sent, _edited = _make_coalescing_runner(monkeypatch)
+        runner._subagent_fail_lines.append("only line")
+        assert runner._subagent_failure_text() == "only line"
+
+    def test_failure_line_localized(self, monkeypatch):
+        monkeypatch.setenv("HERMES_LANGUAGE", "es")
+        line = format_subagent_failure_line("escanear el repo", "failed")
+        assert "El subagente falló" in line
+        timeout_line = format_subagent_failure_line("escanear", "timeout")
+        assert "se quedó sin tiempo" in timeout_line

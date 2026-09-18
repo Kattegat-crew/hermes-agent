@@ -33,11 +33,24 @@ from agent.async_utils import (
     consume_detached_task_result as _consume_background_task_result,
 )
 from agent.display import ToolPreview
+from agent.i18n import t
 
 logger = logging.getLogger(__name__)
 
 _DISCORD_MARKDOWN_LINK_LABEL_RE = re.compile(r"([\\\[\]])")
 _DISCORD_URL_LABEL_SCHEME_RE = re.compile(r"^https?://", re.IGNORECASE)
+
+# Prompt cards collapse to a single record line once resolved; keep each field
+# short enough that the whole record stays one readable line.
+_PROMPT_RECORD_FIELD_LIMIT = 120
+
+
+def _compact_field(text: Any, limit: int = _PROMPT_RECORD_FIELD_LIMIT) -> str:
+    """Collapse whitespace and truncate a prompt field for a compact record."""
+    flat = " ".join(str(text or "").split())
+    if len(flat) <= limit:
+        return flat
+    return flat[: max(0, limit - 1)].rstrip() + "…"
 
 
 def _format_discord_markdown_link(label: str, url: str) -> str:
@@ -125,6 +138,13 @@ _DISCORD_NONCONVERSATIONAL_HISTORY_MESSAGE_PATTERNS = (
         re.IGNORECASE,
     ),
     re.compile(r"^\s*♻️?\s+Gateway\s+(?:restarted successfully|online\b)[\s\S]*$", re.IGNORECASE),
+    # Prompt cards / notices emitted before their senders registered IDs with
+    # the non-conversational tracker (clarify, exec approval, subagent
+    # failure).  New sends are marked at send time — these regexes only keep
+    # legacy messages from partitioning history after an upgrade.
+    re.compile(r"^\s*❓\s+\*\*Hermes needs your input\*\*[\s\S]*$", re.IGNORECASE),
+    re.compile(r"^\s*⚠️\s+\*\*Command Approval Required\*\*[\s\S]*$", re.IGNORECASE),
+    re.compile(r"^\s*⚠️\s+Subagent failed\b[\s\S]*$", re.IGNORECASE),
 )
 try:
     import discord
@@ -7593,6 +7613,58 @@ class DiscordAdapter(BasePlatformAdapter):
             body = body[: max(0, budget - len(truncated_suffix))] + truncated_suffix
         return f"{prefix}{body}{suffix}"
 
+    async def _mark_prompt_message_nonconversational(self, message: Any) -> None:
+        """Keep an interactive prompt card out of conversational history.
+
+        Prompt cards (clarify, exec approval, slash confirm) are UI, not
+        conversation: their message IDs must not partition the history
+        backfill or leak into the reply-window context.  They are sent through
+        ``channel.send`` directly, which bypasses ``send()``'s
+        ``metadata["non_conversational"]`` handling, so register them with the
+        non-conversational tracker here.
+        """
+        try:
+            await self._nonconversational_messages.mark_many([str(message.id)])
+        except Exception:
+            logger.debug(
+                "[%s] Failed to mark prompt message non-conversational",
+                self.name,
+                exc_info=True,
+            )
+
+    async def edit_prompt_resolution(
+        self,
+        chat_id: str,
+        message_id: str,
+        content: str,
+        *,
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> SendResult:
+        """Collapse a resolved prompt card into a one-line record.
+
+        Clears the embed and the interactive components (discord.py treats
+        ``view=None`` as "remove the view") and replaces the body with the
+        compact resolution line.  Used after a clarify / exec-approval /
+        slash-confirm card resolves by button, text, or timeout.
+        """
+        if not self._client:
+            return SendResult(success=False, error="Not connected")
+        try:
+            target_id = chat_id
+            if metadata and metadata.get("thread_id"):
+                target_id = metadata["thread_id"]
+            channel = self._client.get_channel(int(target_id))
+            if not channel:
+                channel = await self._client.fetch_channel(int(target_id))
+            msg = channel.get_partial_message(int(message_id))
+            await msg.edit(
+                content=self.format_message(content), embed=None, view=None
+            )
+            return SendResult(success=True, message_id=str(message_id))
+        except Exception as e:
+            logger.debug("[%s] edit_prompt_resolution failed: %s", self.name, e)
+            return SendResult(success=False, error=str(e))
+
     def _approval_mention_content(self) -> Optional[str]:
         """Return user mentions for approval prompts when explicitly enabled.
 
@@ -7690,6 +7762,7 @@ class DiscordAdapter(BasePlatformAdapter):
                 allow_permanent=allow_permanent,
                 allow_session=allow_session,
                 smart_denied=smart_denied,
+                command=command,
             )
 
             send_kwargs: Dict[str, Any] = {"content": content, "embed": embed, "view": view}
@@ -7704,6 +7777,7 @@ class DiscordAdapter(BasePlatformAdapter):
                     )
             msg = await channel.send(**send_kwargs)
             view._message = msg  # store for on_timeout expiration editing
+            await self._mark_prompt_message_nonconversational(msg)
             return SendResult(success=True, message_id=str(msg.id))
 
         except Exception as e:
@@ -7745,10 +7819,12 @@ class DiscordAdapter(BasePlatformAdapter):
                 confirm_id=confirm_id,
                 allowed_user_ids=self._allowed_user_ids,
                 allowed_role_ids=self._allowed_role_ids,
+                title=title,
             )
 
             msg = await channel.send(content=content, embed=embed, view=view)
             view._message = msg  # store for on_timeout expiration editing
+            await self._mark_prompt_message_nonconversational(msg)
             return SendResult(success=True, message_id=str(msg.id))
         except Exception as e:
             return SendResult(success=False, error=str(e))
@@ -7875,6 +7951,7 @@ class DiscordAdapter(BasePlatformAdapter):
             msg = await channel.send(content=content, embed=embed, view=view) if view else await channel.send(content=content, embed=embed)
             if view:
                 view._message = msg  # store for on_timeout expiration editing
+            await self._mark_prompt_message_nonconversational(msg)
             return SendResult(success=True, message_id=str(msg.id))
         except Exception as e:
             logger.warning("[%s] send_clarify failed: %s", self.name, e)
@@ -8957,11 +9034,14 @@ def _define_discord_view_classes() -> None:
             allow_permanent: bool = True,
             allow_session: bool = True,
             smart_denied: bool = False,
+            command: str = "",
         ):
             super().__init__(timeout=_read_discord_prompt_timeout())
             self.session_key = session_key
             self.allowed_user_ids = allowed_user_ids
             self.allowed_role_ids = allowed_role_ids or set()
+            # Kept for the compact record left behind when the card resolves.
+            self.command = str(command or "")
             # Opt-in admin gate for exec approval (default off → user-scope,
             # the v0.16-restored behavior). When on, the clicker must be in
             # ``admin_user_ids`` on top of passing the base admission check.
@@ -9011,9 +9091,9 @@ def _define_discord_view_classes() -> None:
 
         async def _resolve(
             self, interaction: discord.Interaction, choice: str,
-            color: discord.Color, label: str,
         ):
-            """Resolve the approval via the gateway approval queue and update the embed."""
+            """Resolve the approval via the gateway approval queue and leave a
+            compact one-line record (question + action) behind."""
             if self.resolved:
                 await interaction.response.send_message(
                     "This approval has already been resolved~", ephemeral=True
@@ -9042,61 +9122,73 @@ def _define_discord_view_classes() -> None:
                 logger.error("Failed to resolve gateway approval from button: %s", exc)
                 count = 0
 
+            # Collapse the card into a compact record: no embed, no buttons.
+            _cmd_field = _compact_field(self.command)
             if not count:
-                color = discord.Color.dark_grey()
-                label = "⌛ Approval expired — command was not run (already timed out or resolved elsewhere)"
+                _record = t("prompt_resolved.approval_expired", command=_cmd_field)
+            elif choice == "deny":
+                _record = t("prompt_resolved.approval_denied", command=_cmd_field)
+            else:
+                _scope_key = {
+                    "once": "prompt_resolved.scope_once",
+                    "session": "prompt_resolved.scope_session",
+                    "always": "prompt_resolved.scope_always",
+                }.get(choice, "prompt_resolved.scope_once")
+                _record = t(
+                    "prompt_resolved.approval_approved",
+                    scope=t(_scope_key),
+                    command=_cmd_field,
+                )
 
-            # Update the embed with the decision
-            embed = interaction.message.embeds[0] if interaction.message.embeds else None
-            if embed:
-                embed.color = color
-                footer = f"{label} by {interaction.user.display_name}" if count else label
-                embed.set_footer(text=footer)
-
-            # Disable all buttons
+            # Disable all buttons (covers clients that ignore the edit).
             for child in self.children:
                 child.disabled = True
 
-            await interaction.response.edit_message(embed=embed, view=self)
+            await interaction.response.edit_message(
+                content=_record, embed=None, view=None
+            )
 
         @discord.ui.button(label="Allow Once", style=discord.ButtonStyle.green)
         async def allow_once(
             self, interaction: discord.Interaction, button: discord.ui.Button
         ):
-            await self._resolve(interaction, "once", discord.Color.green(), "Approved once")
+            await self._resolve(interaction, "once")
 
         @discord.ui.button(label="Allow Session", style=discord.ButtonStyle.grey)
         async def allow_session(
             self, interaction: discord.Interaction, button: discord.ui.Button
         ):
-            await self._resolve(interaction, "session", discord.Color.blue(), "Approved for session")
+            await self._resolve(interaction, "session")
 
         @discord.ui.button(label="Always Allow", style=discord.ButtonStyle.blurple)
         async def allow_always(
             self, interaction: discord.Interaction, button: discord.ui.Button
         ):
-            await self._resolve(interaction, "always", discord.Color.purple(), "Approved permanently")
+            await self._resolve(interaction, "always")
 
         @discord.ui.button(label="Deny", style=discord.ButtonStyle.red)
         async def deny(
             self, interaction: discord.Interaction, button: discord.ui.Button
         ):
-            await self._resolve(interaction, "deny", discord.Color.red(), "Denied")
+            await self._resolve(interaction, "deny")
 
         async def on_timeout(self):
-            """Handle view timeout -- disable buttons and mark as expired."""
+            """Handle view timeout -- leave the compact expired record."""
             self.resolved = True
             for child in self.children:
                 child.disabled = True
-            # Visually update the Discord message so buttons appear disabled.
+            # Collapse the card into the compact record (no embed, no buttons).
             msg = getattr(self, '_message', None)
             if msg:
                 try:
-                    embed = msg.embeds[0] if msg.embeds else None
-                    if embed:
-                        embed.color = discord.Color.greyple()
-                        embed.set_footer(text="⏱ Prompt expired — no action taken")
-                    await msg.edit(embed=embed, view=self)
+                    await msg.edit(
+                        content=t(
+                            "prompt_resolved.approval_expired",
+                            command=_compact_field(self.command),
+                        ),
+                        embed=None,
+                        view=None,
+                    )
                 except Exception:
                     pass  # message deleted or too old to edit
 
@@ -9124,12 +9216,15 @@ def _define_discord_view_classes() -> None:
             confirm_id: str,
             allowed_user_ids: set,
             allowed_role_ids: Optional[set] = None,
+            title: str = "",
         ):
             super().__init__(timeout=_read_discord_prompt_timeout())
             self.session_key = session_key
             self.confirm_id = confirm_id
             self.allowed_user_ids = allowed_user_ids
             self.allowed_role_ids = allowed_role_ids or set()
+            # Kept for the compact record left behind when the card resolves.
+            self.title = str(title or "")
             self.resolved = False
 
         def _check_auth(self, interaction: discord.Interaction) -> bool:
@@ -9139,7 +9234,6 @@ def _define_discord_view_classes() -> None:
 
         async def _resolve(
             self, interaction: discord.Interaction, choice: str,
-            color: discord.Color, label: str,
         ):
             if self.resolved:
                 await interaction.response.send_message(
@@ -9154,15 +9248,19 @@ def _define_discord_view_classes() -> None:
 
             self.resolved = True
 
-            embed = interaction.message.embeds[0] if interaction.message.embeds else None
-            if embed:
-                embed.color = color
-                embed.set_footer(text=f"{label} by {interaction.user.display_name}")
-
             for child in self.children:
                 child.disabled = True
 
-            await interaction.response.edit_message(embed=embed, view=self)
+            # Collapse the card into a compact record: no embed, no buttons.
+            _title_field = _compact_field(self.title)
+            _record = (
+                t("prompt_resolved.confirm_cancelled", title=_title_field)
+                if choice == "cancel"
+                else t("prompt_resolved.confirm_accepted", title=_title_field)
+            )
+            await interaction.response.edit_message(
+                content=_record, embed=None, view=None
+            )
 
             # Resolve via the module-level primitive.  If the handler
             # returns a follow-up message, post it in the same channel.
@@ -9185,33 +9283,36 @@ def _define_discord_view_classes() -> None:
         async def approve_once(
             self, interaction: discord.Interaction, button: discord.ui.Button,
         ):
-            await self._resolve(interaction, "once", discord.Color.green(), "Approved once")
+            await self._resolve(interaction, "once")
 
         @discord.ui.button(label="Always Approve", style=discord.ButtonStyle.blurple)
         async def approve_always(
             self, interaction: discord.Interaction, button: discord.ui.Button,
         ):
-            await self._resolve(interaction, "always", discord.Color.purple(), "Always approved")
+            await self._resolve(interaction, "always")
 
         @discord.ui.button(label="Cancel", style=discord.ButtonStyle.red)
         async def cancel(
             self, interaction: discord.Interaction, button: discord.ui.Button,
         ):
-            await self._resolve(interaction, "cancel", discord.Color.greyple(), "Cancelled")
+            await self._resolve(interaction, "cancel")
 
         async def on_timeout(self):
             self.resolved = True
             for child in self.children:
                 child.disabled = True
-            # Visually update the Discord message so buttons appear disabled.
+            # Collapse the card into the compact record (no embed, no buttons).
             msg = getattr(self, '_message', None)
             if msg:
                 try:
-                    embed = msg.embeds[0] if msg.embeds else None
-                    if embed:
-                        embed.color = discord.Color.greyple()
-                        embed.set_footer(text="⏱ Prompt expired — no action taken")
-                    await msg.edit(embed=embed, view=self)
+                    await msg.edit(
+                        content=t(
+                            "prompt_resolved.confirm_expired",
+                            title=_compact_field(self.title),
+                        ),
+                        embed=None,
+                        view=None,
+                    )
                 except Exception:
                     pass
 

@@ -64,6 +64,8 @@ from agent.conversation_compression import (
 from agent.conversation_loop import INTERRUPT_WAITING_FOR_MODEL_PREFIX
 from agent.compaction_display import project_compaction_message_for_display
 from agent.i18n import t
+from gateway.activity_labels import activity_label as _activity_label
+from gateway.activity_labels import wait_kind as _activity_wait_kind
 from agent.interrupt_compat import request_hard_interrupt
 from agent.turn_context import (
     compression_made_progress,
@@ -728,6 +730,75 @@ def _non_conversational_metadata(
     merged = dict(metadata or {})
     merged["non_conversational"] = True
     return merged
+
+
+_PROMPT_FIELD_LIMIT = 120
+
+
+def _truncate_prompt_field(text: Any, limit: int = _PROMPT_FIELD_LIMIT) -> str:
+    """Collapse whitespace and truncate a prompt field for a compact record."""
+    flat = " ".join(str(text or "").split())
+    if len(flat) <= limit:
+        return flat
+    return flat[: max(0, limit - 1)].rstrip() + "…"
+
+
+def _prompt_card_message_id(send_future: Any) -> Optional[str]:
+    """Return the message id from a completed prompt-send future, if any."""
+    if send_future is None:
+        return None
+    try:
+        result = send_future.result(timeout=0)
+    except Exception:
+        return None
+    return str(getattr(result, "message_id", "") or "") or None
+
+
+async def _compact_prompt_card(
+    adapter: Any,
+    chat_id: Any,
+    message_id: Optional[str],
+    content: str,
+    *,
+    metadata: Optional[Dict[str, Any]] = None,
+) -> None:
+    """Best-effort: collapse a resolved prompt card into a compact record."""
+    if not adapter or not message_id or not content:
+        return
+    if getattr(type(adapter), "edit_prompt_resolution", None) is None:
+        return
+    try:
+        await adapter.edit_prompt_resolution(
+            str(chat_id), str(message_id), content, metadata=metadata
+        )
+    except Exception:
+        logger.debug("Prompt card compaction failed", exc_info=True)
+
+
+def _clarify_resolution_record(
+    question: Any,
+    response: Any,
+    *,
+    timeout_minutes: int,
+) -> str:
+    """Build the compact one-line record for a resolved clarify card.
+
+    Timeout / cancellation sentinels start with '[' (see
+    ``_clarify_send_then_wait``) and render as "no answer"; everything else is
+    the user's answer.
+    """
+    question_field = _truncate_prompt_field(question)
+    if isinstance(response, str) and response.startswith("["):
+        return t(
+            "prompt_resolved.clarify_timeout",
+            question=question_field,
+            minutes=max(1, int(timeout_minutes)),
+        )
+    return t(
+        "prompt_resolved.clarify_answered",
+        question=question_field,
+        answer=_truncate_prompt_field(response),
+    )
 
 
 def _interim_metadata(
@@ -4844,6 +4915,78 @@ class TurnRunner:
     def __init__(self, runner: "GatewayRunner", ctx: TurnContext) -> None:
         self._runner = runner
         self._ctx = ctx
+        # Subagent-failure notices coalesce into ONE message per turn: the
+        # first failure posts it, later ones edit it in place (see
+        # _flush_subagent_failures).  A burst of ten dead subagents must not
+        # leave ten chat messages behind.
+        self._subagent_fail_lines: list = []
+        self._subagent_fail_msg_id: Optional[str] = None
+        self._subagent_fail_flush_active = False
+
+    def _queue_subagent_failure_notice(self, line: str) -> None:
+        """Accumulate a failed-subagent line and flush the coalesced notice."""
+        self._subagent_fail_lines.append(line)
+        safe_schedule_threadsafe(
+            self._flush_subagent_failures(),
+            self._ctx._loop_for_step,
+            logger=logger,
+            log_message="subagent failure notice scheduling error",
+        )
+
+    def _subagent_failure_text(self) -> str:
+        lines = self._subagent_fail_lines
+        if len(lines) == 1:
+            return lines[0]
+        header = t("subagent.failed_batch", count=len(lines))
+        return header + "\n" + "\n".join(f"• {line}" for line in lines)
+
+    async def _edit_subagent_failure_notice(self, text: str) -> bool:
+        _adapter = self._runner._adapter_for_source(self._ctx.source)
+        if _adapter is None:
+            return False
+        try:
+            _result = await _adapter.edit_message(
+                str(self._ctx.source.chat_id),
+                str(self._subagent_fail_msg_id),
+                text,
+            )
+            return bool(getattr(_result, "success", False))
+        except Exception:
+            return False
+
+    async def _flush_subagent_failures(self) -> None:
+        """Post or edit the single coalesced subagent-failure notice."""
+        if self._subagent_fail_flush_active:
+            return
+        self._subagent_fail_flush_active = True
+        try:
+            while self._subagent_fail_lines:
+                _count = len(self._subagent_fail_lines)
+                _text = self._subagent_failure_text()
+                if self._subagent_fail_msg_id:
+                    if not await self._edit_subagent_failure_notice(_text):
+                        break
+                else:
+                    _result = await self._runner._deliver_platform_notice(
+                        self._ctx.source, _text
+                    )
+                    _msg_id = getattr(_result, "message_id", None)
+                    if not _msg_id:
+                        break
+                    self._subagent_fail_msg_id = str(_msg_id)
+                if len(self._subagent_fail_lines) == _count:
+                    break
+        except Exception:
+            logger.debug("subagent failure notice flush failed", exc_info=True)
+        finally:
+            self._subagent_fail_flush_active = False
+            if self._subagent_fail_lines:
+                safe_schedule_threadsafe(
+                    self._flush_subagent_failures(),
+                    self._ctx._loop_for_step,
+                    logger=logger,
+                    log_message="subagent failure notice reschedule error",
+                )
 
     def progress_callback(self, event_type: str, tool_name: str = None, preview: str = None, args: dict = None, **kwargs):
         """Callback invoked by agent on tool lifecycle events."""
@@ -4869,12 +5012,7 @@ class TurnRunner:
                         error=kwargs.get("summary") or preview,
                         duration_seconds=kwargs.get("duration_seconds"),
                     )
-                    safe_schedule_threadsafe(
-                        self._runner._deliver_platform_notice(ctx.source, _line),
-                        ctx._loop_for_step,
-                        logger=logger,
-                        log_message="subagent failure notice scheduling error",
-                    )
+                    self._queue_subagent_failure_notice(_line)
             except Exception:
                 logger.debug("subagent failure notice failed", exc_info=True)
             return
@@ -6694,6 +6832,29 @@ class TurnRunner:
                 session_key=ctx.session_key or "",
                 clarify_mod=_clarify_mod,
             )
+            # Collapse the resolved prompt card into a one-line record so the
+            # survey stops sitting in the chat as a stale, still-actionable
+            # card.  Best effort, off the agent thread: the card id rides the
+            # send future; the timeout/cancellation sentinels start with '['.
+            _card_id = _prompt_card_message_id(fut)
+            if _card_id:
+                _record_line = _clarify_resolution_record(
+                    question,
+                    _clarify_response,
+                    timeout_minutes=int(_clarify_mod.get_clarify_timeout() // 60),
+                )
+                safe_schedule_threadsafe(
+                    _compact_prompt_card(
+                        ctx._status_adapter,
+                        ctx._status_chat_id,
+                        _card_id,
+                        _record_line,
+                        metadata=ctx._status_thread_metadata,
+                    ),
+                    ctx._loop_for_step,
+                    logger=logger,
+                    log_message="Clarify card compaction failed to schedule",
+                )
             # Only re-arm typing when the user actually answered — the
             # undeliverable sentinel and the timeout/cancellation strings
             # start with '[' and must pass through untouched.
@@ -6911,6 +7072,12 @@ class TurnRunner:
                 # Mark as approval prompt so WeCom routes through control lane
                 _approval_metadata = dict(ctx._status_thread_metadata or {})
                 _approval_metadata["is_approval_prompt"] = True
+                # Prompt cards are UI, not conversation: keep them out of the
+                # Discord history backfill / reply-window context.
+                _approval_metadata = _non_conversational_metadata(
+                    _approval_metadata,
+                    platform=getattr(ctx.source, "platform", None),
+                )
 
                 _approval_send_fut = safe_schedule_threadsafe(
                     ctx._status_adapter.send(
@@ -18297,11 +18464,16 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
 
 
 
-    async def _deliver_platform_notice(self, source, content: str) -> None:
-        """Deliver a setup/operational notice using platform-specific privacy rules."""
+    async def _deliver_platform_notice(self, source, content: str) -> Optional[Any]:
+        """Deliver a setup/operational notice using platform-specific privacy rules.
+
+        Returns the adapter's ``SendResult`` when one is available so callers
+        that coalesce notices (e.g. subagent-failure batching) can edit the
+        message they just posted instead of sending another one.
+        """
         adapter = self._adapter_for_source(source)
         if not adapter:
-            return
+            return None
 
         config = getattr(self, "config", None)
         if (
@@ -18329,7 +18501,7 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
                     metadata=metadata,
                 )
                 if getattr(result, "success", False):
-                    return
+                    return result
             except Exception:
                 logger.debug(
                     "[%s] send_private_notice failed, falling back to public",
@@ -18337,7 +18509,13 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
                     exc_info=True,
                 )
 
-        await adapter.send(source.chat_id, content, metadata=metadata)
+        return await adapter.send(
+            source.chat_id,
+            content,
+            metadata=_non_conversational_metadata(
+                metadata, platform=getattr(source, "platform", None)
+            ),
+        )
 
     async def _resolve_async_delegation_session(
         self,
@@ -32139,11 +32317,14 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
                     break
                 _elapsed_mins = int((time.time() - _notify_start) // 60)
                 # Include agent activity context if available. Default
-                # heartbeat is terse: elapsed + current tool. Verbose
-                # iteration counter is gated on busy_ack_detail so users
-                # who want it can opt in per platform.
+                # heartbeat is terse: elapsed + a localized, human-friendly
+                # activity label (never raw tool names / internal strings —
+                # see gateway/activity_labels.py). Verbose iteration counter
+                # is gated on busy_ack_detail so users who want it can opt
+                # in per platform.
                 _agent_ref = agent_holder[0]
                 _status_detail = ""
+                _wait_kind = None
                 _want_iteration_detail = bool(
                     resolve_display_setting(
                         user_config,
@@ -32155,23 +32336,42 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
                 if _agent_ref and hasattr(_agent_ref, "get_activity_summary"):
                     try:
                         _a = _agent_ref.get_activity_summary()
+                        _wait_kind = _activity_wait_kind(_a)
                         _parts = []
                         if _want_iteration_detail:
                             _parts.append(
                                 f"iteration {_a['api_call_count']}/{_a['max_iterations']}"
                             )
-                        _action = _a.get("current_tool") or _a.get("last_activity_desc")
-                        if _action:
-                            _parts.append(str(_action))
+                        _action_label = _activity_label(_a)
+                        if _action_label:
+                            _parts.append(_action_label)
                         if _parts:
-                            _status_detail = " — " + ", ".join(_parts)
+                            _status_detail = ", ".join(_parts)
                     except Exception:
                         pass
-                _heartbeat_text = (
-                    _generic_status_phrase("status")
-                    if _long_running_mode == "generic"
-                    else f"⏳ Working — {_elapsed_mins} min{_status_detail}"
-                )
+                if _long_running_mode == "generic":
+                    _heartbeat_text = _generic_status_phrase("status")
+                elif _wait_kind == "clarify":
+                    _heartbeat_text = t(
+                        "long_running.waiting_answer",
+                        minutes=_elapsed_mins,
+                    )
+                elif _wait_kind == "approval":
+                    _heartbeat_text = t(
+                        "long_running.waiting_approval",
+                        minutes=_elapsed_mins,
+                    )
+                elif _status_detail:
+                    _heartbeat_text = t(
+                        "long_running.working",
+                        minutes=_elapsed_mins,
+                        action=_status_detail,
+                    )
+                else:
+                    _heartbeat_text = t(
+                        "long_running.working_plain",
+                        minutes=_elapsed_mins,
+                    )
                 try:
                     _notify_res = None
                     if _heartbeat_msg_id:
