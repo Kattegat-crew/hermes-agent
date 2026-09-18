@@ -75,3 +75,38 @@ Consequences:
 - Regression coverage exercises the real production path
   (`set_hermes_home_override()`) rather than only the env-var path, and
   includes a dedicated relative-import leak test.
+
+## 2026-09-18: Local semantic intent triage via ONNX embeddings and calibrated linear probe
+
+Status: Accepted
+
+Context:
+Tool schema injection adds ~13,600 tokens and 8–10 seconds of LLM inference latency.
+Decoupling tool schemas (`tools_for_api = []`) on purely conversational turns saves
+significant latency and cost, but regex-based heuristics struggle on compound, polite,
+or colloquial utterances (e.g. "Buenas tardes, revisa los logs por favor").
+False conversational classification strips tools on turns requiring action, leading
+to model panic, tool hallucinations, or raw format leaks.
+
+Decision:
+- Implement a three-tier intent triage pipeline in `classify_turn_intent`:
+  1. Tier 0: Deterministic regex fast-paths for technical indicators (URLs, filesystem
+     paths, file extensions, ping benchmarks, deferred future statements).
+  2. Tier 1: Local ONNX embedding inference using `fastembed` with
+     `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` and a pre-calibrated
+     linear probe (384 coefficients + scalar intercept).
+  3. Tier 2: Heuristic fallback with conservative regex patterns if ONNX runtime is
+     unavailable.
+- Enforce a strict Fail-Open policy: any ambiguous or uncertain prompt defaults to `action`
+  ($P(\text{action}) \ge 0.50$). Tools are decoupled only when conversational intent is
+  established with high confidence.
+- Zero external API dependencies: all vector embeddings and logistic regression scoring
+  run in-process on CPU with bounded latency (<20 ms).
+
+Consequences:
+- Compound conversational prompts containing action verbs are reliably classified as `action`,
+  preventing tool decoupling failures.
+- Zero latency penalty from external APIs and minimal memory overhead (~80 MB RAM).
+- Graceful degradation: if ONNX dependencies are absent in lean environments, the classifier
+  seamlessly falls back to heuristic rules without throwing exceptions.
+

@@ -999,7 +999,7 @@ def _sha256(value: str) -> str:
 _GREETING_WORDS = frozenset({
     "hola", "buenos dias", "buenos días", "buenas tardes", "buenas noches",
     "hey", "hi", "hello", "que tal", "qué tal", "como estas", "cómo estás",
-    "como va", "cómo va", "saludos", "buenas", "que mas", "qué más"
+    "saludos", "buenas", "que mas", "qué más"
 })
 
 _GREETING_PATTERN = re.compile(
@@ -1013,7 +1013,7 @@ _ACK_WORDS = frozenset({
 })
 
 _SPEED_OR_PING_PATTERN = re.compile(
-    r"\b(?:prueba|test|testear|probar)\s+(?:de\s+)?(?:velocidad|latencia|respuesta|tiempo)|"
+    r"\b(?:prueba|test|testear|probar)\s+(?:de\s+|tu\s+|su\s+|la\s+|el\s+)?(?:velocidad|latencia|respuesta|tiempo)|"
     r"(?:medir|mide)\s+(?:el\s+)?tiempo|\bping\b|\bpong\b",
     re.IGNORECASE
 )
@@ -1034,8 +1034,10 @@ _ACTION_DIRECTIVES = re.compile(
     r"\b(?:crea|crear|haz|hacer|modifica|modificar|edita|editar|actualiza|actualizar|"
     r"borra|borrar|elimina|eliminar|ejecuta|ejecutar|instala|instalar|configura|configurar|"
     r"busca|buscar|encuentra|analiza|analizar|revisa|revisar|lee|leer|escribe|escribir|"
+    r"recuerda|recuerdas|acuerda|acuerdas|recuerde|recuerden|"
     r"despliega|deploy|repara|arregla|corrige|reinicia|reiniciar|"
-    r"procede|proceder|continua|continúa|continuar|sigue|seguir|adelante)\b",
+    r"procede|proceder|continua|continúa|continuar|sigue|seguir|adelante|"
+    r"proceso|procesos|tarea|tareas|avance|avances|progreso|estado|status|reporte|reportes|medir|mide|cuéntame|cuenta|novedad|novedades)\b",
     re.IGNORECASE
 )
 
@@ -1070,7 +1072,8 @@ _CASUAL_INQUIRY_PATTERN = re.compile(
     r"^(?:(?:hola|hey|buenas|buenos dias|buenas tardes|buenas noches)\b(?:\s+\w+)?\s*)?"
     r"(?:"
     r"qui[eé]n\s+(?:eres|sos)|"
-    r"c[oó]mo\s+(?:est[aá]s|andas|va|te\s+va)|"
+    r"c[oó]mo\s+(?:est[aá]s|andas|te\s+va)|"
+    r"c[oó]mo\s+va(?:\s+(?:todo|la\s+cosa))?\s*$|"
     r"qu[eé]\s+(?:haces|tal|cuentas|hac[eé]s)|"
     r"me\s+(?:escuchas|o[yí]es)|"
     r"pod[eé]s\s+hablar|puedes\s+hablar"
@@ -1080,11 +1083,11 @@ _CASUAL_INQUIRY_PATTERN = re.compile(
 
 
 def classify_turn_intent(message_text: str) -> str:
-    """Classify the user turn intent as 'conversational' or 'action' with zero latency.
+    """Classify the user turn intent as 'conversational' or 'action'.
 
-    Enforces:
-    - Conversational: Greetings, speed/ping tests, future work planning notes, casual questions, acknowledgements.
-    - Action: File attachments, URLs, file paths, imperative code/system modification verbs.
+    Tier 0 (Fast-path): File attachments, URLs, file paths, ping tests.
+    Tier 1 (Semantic ONNX Triage): Evaluates message embedding on CPU.
+    Tier 2 (Heuristic Fallback): Safe heuristic rules if ONNX runtime is unavailable.
     """
     if not message_text or not isinstance(message_text, str):
         return "action"
@@ -1104,7 +1107,20 @@ def classify_turn_intent(message_text: str) -> str:
     if _SPEED_OR_PING_PATTERN.search(text):
         return "conversational"
 
-    # 3. Clean string for keyword analysis
+    # 3. Statements of future intention without immediate command -> conversational (Plan Req 3)
+    if _FUTURE_INTENTION_PATTERN.search(text):
+        return "conversational"
+
+    # 4. Semantic ONNX Intent Triage (Fast CPU probe)
+    try:
+        from agent.semantic_triage import classify_semantic_intent
+        semantic_res = classify_semantic_intent(text)
+        if semantic_res is not None:
+            return semantic_res
+    except Exception as e:
+        logger.debug("Semantic intent triage unavailable or failed: %s; falling back to heuristics", e)
+
+    # 5. Clean string for keyword analysis fallback
     clean = re.sub(r"[^\w\s]", " ", text).lower().strip()
     words = clean.split()
     if not words:
@@ -1112,22 +1128,18 @@ def classify_turn_intent(message_text: str) -> str:
 
     has_action = bool(_ACTION_DIRECTIVES.search(text))
 
-    # 4. If explicit technical action directive is present -> action
+    # 6. If explicit technical action directive is present -> action
     if has_action:
         return "action"
 
-    # 5. Statements of future intention without immediate command -> conversational (Plan Req 3)
-    if _FUTURE_INTENTION_PATTERN.search(text):
-        return "conversational"
-
-    # 6. Acknowledgements or greetings without actions -> conversational
+    # 7. Acknowledgements or greetings without actions -> conversational
     has_greeting = bool(_GREETING_PATTERN.search(clean))
     has_ack = any(clean == ack or clean.startswith(ack + " ") or clean.endswith(" " + ack) for ack in _ACK_WORDS)
 
     if (has_greeting or has_ack) and not has_action:
         return "conversational"
 
-    # 7. Casual questions without action verbs (e.g. "¿cómo estás?", "¿quién eres?")
+    # 8. Casual questions without action verbs (e.g. "¿cómo estás?", "¿quién eres?")
     is_casual_inquiry = bool(_CASUAL_INQUIRY_PATTERN.match(clean))
     if is_casual_inquiry and not has_action:
         return "conversational"
