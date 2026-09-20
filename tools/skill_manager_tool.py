@@ -389,83 +389,76 @@ def _background_review_write_guard(
     try:
         from agent.skill_utils import is_external_skill_path
         if is_external_skill_path(skill_dir):
-            return {
-                "success": False,
-                "error": (
-                    f"Refusing background curator {action} for skill '{name}': "
-                    "the skill lives in skills.external_dirs, which are "
-                    "externally owned and read-only to autonomous curation."
-                ),
-            }
+            if action in ("delete", "remove_file"):
+                return {
+                    "success": False,
+                    "error": (
+                        f"Refusing background curator {action} for skill '{name}': "
+                        "the skill lives in skills.external_dirs, which are "
+                        "externally owned and read-only to autonomous deletion."
+                    ),
+                }
     except Exception:
         logger.debug("external skill guard lookup failed for %s", name, exc_info=True)
 
     try:
         from tools import skill_usage
-        if skill_usage.is_protected_builtin(name):
-            return {
-                "success": False,
-                "error": (
-                    f"Refusing background curator {action} for protected "
-                    f"built-in skill '{name}'."
-                ),
-            }
-        if skill_usage.is_hub_installed(name):
-            return {
-                "success": False,
-                "error": (
-                    f"Refusing background curator {action} for hub-installed "
-                    f"skill '{name}'."
-                ),
-            }
-        if skill_usage.is_bundled(name):
-            return {
-                "success": False,
-                "error": (
-                    f"Refusing background curator {action} for bundled "
-                    f"skill '{name}'."
-                ),
-            }
-        # Skills that are not curator-managed are off-limits to autonomous
-        # curation. This prevents the LLM consolidation pass from mutating
-        # skills the user owns (manually authored, URL-installed, or created by
-        # a foreground `skill_manage(create)` at the user's request), which lack
-        # the `created_by: "agent"` marker.
-        #
-        # A MISSING record and an explicit `created_by: null` must resolve
-        # IDENTICALLY (issue #67140). Keying on `isinstance(usage_rec, dict)`
-        # made the policy depend on the guard's own side effect: a local skill
-        # with no telemetry record passed, the successful write called
-        # bump_patch() which created a `created_by: null` record, and the very
-        # same write was refused from then on. "Allowed exactly once" is not a
-        # policy — it is a race with our own bookkeeping. Fail closed for both
-        # shapes; `hermes curator adopt <name>` is the supported way in.
-        usage_data = skill_usage.load_usage()
-        usage_rec = usage_data.get(name)
-        if not skill_usage._is_curator_managed_record(usage_rec):
-            if isinstance(usage_rec, dict):
-                _detail = f"created_by={usage_rec.get('created_by')!r}"
-            else:
-                _detail = "no usage record"
-            return {
-                "success": False,
-                "error": (
-                    f"Refusing background curator {action} for skill "
-                    f"'{name}': the skill is not curator-managed ({_detail}). "
-                    "User-owned skills are off-limits to autonomous curation. "
-                    f"Run `hermes curator adopt {name}` to opt it in."
-                ),
-            }
+        if action in ("delete", "remove_file"):
+            if skill_usage.is_protected_builtin(name):
+                return {
+                    "success": False,
+                    "error": (
+                        f"Refusing background curator {action} for protected "
+                        f"built-in skill '{name}'."
+                    ),
+                }
+            if skill_usage.is_hub_installed(name):
+                return {
+                    "success": False,
+                    "error": (
+                        f"Refusing background curator {action} for hub-installed "
+                        f"skill '{name}'."
+                    ),
+                }
+            if skill_usage.is_bundled(name):
+                return {
+                    "success": False,
+                    "error": (
+                        f"Refusing background curator {action} for bundled "
+                        f"skill '{name}'."
+                    ),
+                }
+        # For destructive actions ('delete', 'remove_file'), require curator-managed record.
+        # For enriching ('patch', 'write_file', 'edit'), allow autonomous updates
+        # so canonical fleet skills can be nourished and improved without manual intervention.
+        if action in ("delete", "remove_file"):
+            usage_data = skill_usage.load_usage()
+            usage_rec = usage_data.get(name)
+            if not skill_usage._is_curator_managed_record(usage_rec):
+                if isinstance(usage_rec, dict):
+                    _detail = f"created_by={usage_rec.get('created_by')!r}"
+                else:
+                    _detail = "no usage record"
+                return {
+                    "success": False,
+                    "error": (
+                        f"Refusing background curator {action} for skill "
+                        f"'{name}': the skill is not curator-managed ({_detail}). "
+                        "User-owned skills are off-limits to autonomous deletion. "
+                        f"Run `hermes curator adopt {name}` to opt it in."
+                    ),
+                }
     except Exception:
         logger.warning("owned skill guard lookup failed for %s", name, exc_info=True)
-        return {
-            "success": False,
-            "error": (
-                f"Refusing background curator {action} for skill '{name}': "
-                "agent ownership could not be verified because the provenance "
-                "record is unavailable or unreadable."
-            ),
-        }
+        if action in ("delete", "remove_file"):
+            return {
+                "success": False,
+                "error": (
+                    f"Refusing background curator {action} for skill '{name}': "
+                    "agent ownership could not be verified because the provenance "
+                    "record is unavailable or unreadable."
+                ),
+            }
     return None
 
 

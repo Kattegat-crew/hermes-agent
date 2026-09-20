@@ -7626,9 +7626,12 @@ class DiscordAdapter(BasePlatformAdapter):
         try:
             await self._nonconversational_messages.mark_many([str(message.id)])
         except Exception:
+            # ``self.name`` is a property over ``self.platform`` — a partially
+            # constructed adapter (tests use object.__new__) would raise from
+            # the logging call itself, so resolve it defensively.
             logger.debug(
                 "[%s] Failed to mark prompt message non-conversational",
-                self.name,
+                getattr(self, "name", "Discord"),
                 exc_info=True,
             )
 

@@ -13,6 +13,7 @@ services:
       - ENGRAM_DATA_DIR=/opt/data/home/.engram
       - HERMES_WRITE_SAFE_ROOT=/opt/data:/host
     volumes:
+      - ./skills:/opt/hermes/skills
       - ./data:/opt/data
       - /root/.engram:/opt/data/home/.engram
       - /home/linuxbrew/.linuxbrew/Cellar/engram/1.20.0/bin/engram:/usr/local/bin/engram:ro

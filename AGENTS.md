@@ -51,6 +51,15 @@ CRITICAL FOR ANY AGENT OR CONTRIBUTOR: The fleet operates under four core perfor
    - Prevents multi-day history bloat (38k+ tokens) without requiring manual `/new`.
    - Runs silently without dropping or interrupting the independent WhatsApp daemon (`bridge.js` on port 3000).
 
+5. **Canonical Skills Centralization & Autonomous 4-Way Evaluation**:
+   - **Single Source of Truth (SSOT)**: All fleet skills live inside the Git repository (`skills/` in repo) and mirror to `/opt/hermes/skills/` in the container (`core/` for transversals/umbrellas, `specialists/` for domain specialist skills).
+   - **Native Inheritance & Zero Symlinks**: All 11 fleet profiles inherit via `skills.external_dirs: [/opt/hermes/skills]`. Profile-local symlinks are strictly banned.
+   - **Autonomous 4-Way Evaluation Protocol**: Background review runs autonomously without human signature or quarantine:
+     1. *Novelty Filter*: Routine sessions default to `Nothing to save.`
+     2. *Nutrir Existing*: If technical procedure emerged, enrich existing skill/umbrella via `patch` or `write_file` (in `references/` or `scripts/`). Never duplicate existing domains.
+     3. *Create Novel*: If domain is genuinely new, create class-level skill directly in `skills.create_dir: /opt/hermes/skills/specialists`. Zero quarantine folders.
+     4. *Deletion Guard*: Destructive deletions of canonical skills are blocked from autonomous execution.
+
 ## Contribution Rubric — What We Want / What We Don't
 
 This is the project's intent layer. Use it two ways:
