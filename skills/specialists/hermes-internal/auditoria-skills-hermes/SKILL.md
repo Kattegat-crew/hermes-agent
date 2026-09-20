@@ -167,3 +167,27 @@ Motor: `scripts/sync_skills_sync.py` (toda la lógica; el `.sh` solo parsea flag
 - **Verificación final por contenido** tras desplegar. Códigos de salida: `0` paridad, `2` diferencias detectadas en `--check`, `1` error o gate cerrado.
 - **Cron diario (solo lectura):** `20 5 * * * /root/hermes-agent/scripts/sync_container_skills.sh --check >> /var/log/skills-sync-check.log 2>&1`.
 - **Pitfall esperado:** editar una skill *en el canon* deja `drift` hasta que se firme un `--apply`; el `--check` diario lo reporta. No es un fallo: es el gate haciendo su trabajo.
+
+### Vigilancia diaria y frescura del grafo (2026-09-20)
+
+Dos piezas nuevas, ambas de solo lectura sobre el canon:
+
+- **`scripts/skills_sync_daily.sh`** — corrida diaria (cron `20 5 * * *`): ejecuta `sync_container_skills.sh --check`,
+  persiste el diagnóstico en `data/state/skills_sync_last.json` y, si hay diferencias, deja un aviso
+  **máquina-legible** en `data/state/skills_sync_alert.json` (con `drift`, `drift_hint`, `new_in_container`,
+  `new_hint` y la resolución firmada) más un bloque `🚨 ALERTA` en `/var/log/skills-sync-check.log`.
+  Con paridad deja `OK <timestamp>`. De paso refresca el grafo (ver siguiente punto).
+- **`scripts/sync_graph_consumers.sh`** — el repo reconstruye `graphify-out/graph.json` en cada commit (hook en
+  segundo plano), pero **los consumidores eran copias manuales** y se quedaban viejas (se detectó un grafo de 03:31
+  con consumidores de 02:41). Este script iguala `data/brain/graphify-out/graph.json` y
+  `data/profiles/roshi/graphify-out/graph.json` verificando **sha256** copia por copia (`--check` solo reporta).
+
+**Cambio de contrato en el sync (`--adopt-new`).** El `--apply` adoptaba por defecto cualquier skill que viviera
+solo en el espejo → una **baja del canon** (p. ej. el par `microsoft[-_]clarity-automation` consolidado) volvía al
+catálogo en el siguiente sync. Ahora la adopción es **opt-in** (`--adopt-new`) y el solo-espejo se **archiva y poda**.
+Nota histórica: el mismo defecto lo detectó Toallín por su lado (`54123f1316`, guarda por `mtime` vs último commit)
+y quedó subsumido por el flag explícito; su heurística de `mtime` se conserva como **hint de dirección** en el reporte.
+
+**Higiene de la firma.** El gate vive en `/root/.sync-firma.sha256` (sha256, 600, root). Regla: el token en claro
+lo maneja **solo el dueño**; los agentes no lo crean, no lo leen ni lo guardan. Si un token llega a circular por un
+canal de chat, conviene **rotarlo** (mismo comando de creación con un token nuevo).
