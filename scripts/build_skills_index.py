@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 build_skills_index.py — Generador determinista del catálogo e índice canónico de skills.
-Produce SKILLS_INDEX.md con las 432+ skills agrupadas por categorías.
+Produce SKILLS_INDEX.md con las skills canónicas agrupadas por categorías.
+Excluye los bundles de convenciones (prefijo `_`), que no son skills invocables.
 """
 import os
 import yaml
@@ -14,6 +15,9 @@ SKILLS_DIR = REPO_ROOT / "skills"
 def generate_index():
     skills = []
     for root, dirs, files in os.walk(SKILLS_DIR):
+        # Bundles de convenciones (prefijo "_", p.ej. specialists/hermes-internal/_shared)
+        # NO son skills invocables: fuera del catálogo y del conteo.
+        dirs[:] = [d for d in dirs if not d.startswith("_")]
         if "SKILL.md" in files:
             sm_path = Path(root) / "SKILL.md"
             rel = sm_path.parent.relative_to(SKILLS_DIR)
@@ -47,7 +51,8 @@ def generate_index():
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
     lines = [
         "# Índice Canónico de Skills — Flota Hermes",
-        f"> **Última sincronización**: {now} | **Total de skills**: {len(skills)}",
+        f"> **Última sincronización**: {now} | **Total de skills**: {len(skills)}"
+        " (excluye bundles de convenciones con prefijo `_`)",
         "",
         "Este catálogo representa la **Fuente Única de Verdad (SSOT)** de habilidades operativas para todos los perfiles de la flota Hermes.",
         "Todas las skills se resuelven on-demand desde `/opt/hermes/skills` sin saturar la ventana de contexto.",

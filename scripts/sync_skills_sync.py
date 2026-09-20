@@ -205,10 +205,29 @@ def main() -> int:
     log(f"   nuevas en contenedor : {len(new)}")
     log(f"   drift (modificadas)  : {len(drift)}")
     log(f"   faltan en contenedor : {len(missing)}")
+    # ¿Baja reciente del canon o skill creada por un agente?
+    # Se usa el mtime del último commit del repo como frontera temporal.
+    try:
+        head_ts = float(
+            subprocess.run(
+                ["git", "-C", str(repo), "log", "-1", "--format=%ct"],
+                capture_output=True, text=True, check=True,
+            ).stdout.strip()
+        )
+    except Exception:
+        head_ts = 0.0
+    new_hint = {}
+    for s in new:
+        mt = as_mtime(cont.get(s))
+        if head_ts and mt and mt < head_ts - 60:
+            new_hint[s] = "anterior al último commit → probable baja del canon (se elimina al desplegar)"
+        else:
+            new_hint[s] = "posterior al último commit → probable creación de agente (candidata a adopción)"
+
     if new:
-        log("   ── nuevas:")
+        log("   ── nuevas (solo en el espejo):")
         for s in new:
-            log(f"      ⭐ {s}")
+            log(f"      ⭐ {s}  [{new_hint.get(s, '')}]")
     if drift:
         log("   ── drift (mismo path, contenido distinto):")
         for s in drift:
@@ -224,6 +243,7 @@ def main() -> int:
         "canon_count": len(host),
         "container_count": len(cont),
         "new_in_container": new,
+        "new_hint": new_hint,
         "drift": drift,
         "drift_hint": drift_hint,
         "missing_in_container": missing,

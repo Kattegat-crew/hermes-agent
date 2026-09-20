@@ -7,6 +7,9 @@ Verifica:
 3. 'name' coincide con el directorio (kebab-case).
 4. Sin cascarones vacíos (<600 bytes sin soporte).
 5. 0 symlinks rotos o apuntando fuera del repo.
+6. Permisos rx para el usuario del contenedor (UID 10000).
+
+Los bundles de convenciones (prefijo `_`) se excluyen: no son skills invocables.
 """
 
 import os
@@ -26,7 +29,7 @@ def check_skills():
     scanned = 0
 
     for root, dirs, files in os.walk(REPO_SKILLS):
-        dirs[:] = [d for d in dirs if not d.startswith(".") and d not in ("__pycache__", "references", "scripts", "templates", "assets", "examples")]
+        dirs[:] = [d for d in dirs if not d.startswith(".") and not d.startswith("_") and d not in ("__pycache__", "references", "scripts", "templates", "assets", "examples")]
         
         rel_path = os.path.relpath(root, REPO_SKILLS)
         if rel_path == ".":

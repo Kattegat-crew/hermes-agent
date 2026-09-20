@@ -1,5 +1,5 @@
 # Índice Canónico de Skills — Flota Hermes
-> **Última sincronización**: 2026-09-20 02:35 | **Total de skills**: 718
+> **Última sincronización**: 2026-09-20 03:00 | **Total de skills**: 716 (excluye bundles de convenciones con prefijo `_`)
 
 Este catálogo representa la **Fuente Única de Verdad (SSOT)** de habilidades operativas para todos los perfiles de la flota Hermes.
 Todas las skills se resuelven on-demand desde `/opt/hermes/skills` sin saturar la ventana de contexto.
@@ -205,8 +205,8 @@ Todas las skills se resuelven on-demand desde `/opt/hermes/skills` sin saturar l
 | `productivity` | **`excel-author`** | Build auditable financial workbooks headless via openpyxl. | `productivity/excel-author` |
 | `productivity` | **`fitness-nutrition`** | Workout planning, macros, and body metrics via wger/USDA. | `productivity/fitness-nutrition` |
 | `productivity` | **`flujos-con-gates-humanos`** | Use when disenando flujos con gates humanos y firma. | `productivity/flujos-con-gates-humanos` |
-| `productivity` | **`git-rebase-sync`** | Synchronize local branches with upstream using interactive rebase and clean conflict resolut... | `productivity/git-rebase-sync` |
-| `productivity` | **`git-worktree-tidy`** | Clean up and maintain Git worktrees, pruning stale branches and freeing disk resources. | `productivity/git-worktree-tidy` |
+| `productivity` | **`git-rebase-sync`** | Sincronizar una rama de trabajo con upstream por rebase, resolviendo conflictos y publicando... | `productivity/git-rebase-sync` |
+| `productivity` | **`git-worktree-tidy`** | Listar, limpiar y podar git worktrees sin perder trabajo sin commitear ni dejar metadatos mu... | `productivity/git-worktree-tidy` |
 | `productivity` | **`github-actions-failure-forensics`** | Use when a GitHub Actions/CI workflow run fails or is red. | `productivity/github-actions-failure-forensics` |
 | `productivity` | **`github-push-container`** | Push a GitHub desde el contenedor: token y auditoría. | `productivity/github-push-container` |
 | `productivity` | **`github-ro-mount-workflow`** | Use when repo mounts are read-only; push via token clone. | `productivity/github-ro-mount-workflow` |
@@ -378,7 +378,6 @@ Todas las skills se resuelven on-demand desde `/opt/hermes/skills` sin saturar l
 | `software-development` | **`zig-best-practices`** | Idiomatic Zig programming, explicit memory allocation, comptime metaprogramming, and error h... | `software-development/zig-best-practices` |
 | `specialists` | **`1password`** | Set up op CLI, sign in, and read or inject secrets. | `specialists/monitoring-security/1password` |
 | `specialists` | **`3-statement-model`** | Build integrated IS/BS/CF financial workbooks in Excel. | `specialists/marketing/3-statement-model` |
-| `specialists` | **`_shared`** | Shared SDD references for installed skills. Not invokable. | `specialists/hermes-internal/_shared` |
 | `specialists` | **`a11y-audit`** | Accessibility audit skill for scanning, fixing, and verifying WCAG 2.2 Level A and AA compli... | `specialists/marketing/a11y-audit` |
 | `specialists` | **`ab-testing`** | When the user wants to plan, design, or implement an A/B test or experiment, or build a grow... | `specialists/marketing/ab-testing` |
 | `specialists` | **`accelerate`** | Run PyTorch training across GPUs with minimal changes. | `specialists/ai-ml/accelerate` |
@@ -592,7 +591,6 @@ Todas las skills se resuelven on-demand desde `/opt/hermes/skills` sin saturar l
 | `specialists` | **`meta-ads-operations`** | Run Meta Ads: campaigns, geo, insights, pixel via Composio. | `specialists/marketing-ads/meta-ads-operations` |
 | `specialists` | **`metaads-automation`** | Automate Metaads tasks via Rube MCP (Composio). Always search tools first for current schemas. | `specialists/marketing/metaads-automation` |
 | `specialists` | **`microsoft-clarity-automation`** | Automate user behavior analytics with Microsoft Clarity -- export heatmap data, session metr... | `specialists/marketing/microsoft-clarity-automation` |
-| `specialists` | **`microsoft_clarity-automation`** | Automate Microsoft Clarity tasks via Rube MCP (Composio): session recordings, heatmaps, and ... | `specialists/marketing/microsoft_clarity-automation` |
 | `specialists` | **`modal`** | Serverless GPU cloud for ML jobs and model APIs. | `specialists/ai-ml/modal` |
 | `specialists` | **`monid-seedance-clips`** | Use when generating image2video clips via Monid Seedance. | `specialists/devops-systems/monid-seedance-clips` |
 | `specialists` | **`monthly-campaign-calendar-playbook`** | Use when setting up a monthly content campaign calendar. | `specialists/marketing/monthly-campaign-calendar-playbook` |
