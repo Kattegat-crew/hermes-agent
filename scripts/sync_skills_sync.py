@@ -282,13 +282,17 @@ def main() -> int:
         log(f"   💾 respaldando {rel}")
         copy_from_container(a.container, f"{a.container_skills}/{rel}", archive / rel)
 
-    # 2) adopción de skills nuevas → mismo path relativo en el canon
+    # 2) adopción de skills nuevas (solo las creadas después del último commit)
     for rel in new:
         dst = host_root / rel
         if dst.exists():
             log(f"   ⚠️ {rel} ya existe en el canon con otro contenido; se archiva y se omite.")
             continue
-        log(f"   📥 adoptando nueva: {rel}")
+        mt = as_mtime(cont.get(rel))
+        if head_ts and mt and mt < head_ts - 60:
+            log(f"   🗑️  omitiendo adopción (baja previa del canon en Git): {rel}")
+            continue
+        log(f"   📥 adoptando nueva de agente: {rel}")
         copy_from_container(a.container, f"{a.container_skills}/{rel}", dst)
 
     # 3) drift → política explícita
