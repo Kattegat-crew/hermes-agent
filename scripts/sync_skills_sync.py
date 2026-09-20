@@ -8,6 +8,9 @@ nombres y borraba con `rm -rf` cualquier modificación hecha en el contenedor.
 Contrato (ver scripts/sync_container_skills.sh):
   --mode check              dry-run, no muta nada
   --mode apply --firma T    muta; exige el token del dueño (sha256 vs archivo)
+  --adopt-new               adopta al canon las skills que solo existen en el espejo
+                            (por defecto NO se adoptan: un solo-espejo puede ser una
+                            baja del canon, y se archiva + poda en vez de resucitarse)
   --adopt-drift             promueve al canon el contenido del contenedor de skills
                             ya existentes (respaldando antes el canónico)
   --commit                  git add+commit de adopciones (NO hace push)
@@ -160,6 +163,7 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--container-skills", default="/opt/hermes/skills")
     ap.add_argument("--firma", default="")
     ap.add_argument("--firma-sha-file", default="/root/.sync-firma.sha256")
+    ap.add_argument("--adopt-new", action="store_true")
     ap.add_argument("--adopt-drift", action="store_true")
     ap.add_argument("--commit", action="store_true")
     ap.add_argument("--json-out", default="")
@@ -258,8 +262,9 @@ def main() -> int:
             log("✅ PARIDAD POR CONTENIDO: canon y espejo son idénticos (100%).")
             return 0
         log("⚠️ Diferencias detectadas. Para resolverlas:")
-        log("   ./sync_container_skills.sh --apply --firma <TOKEN>            (adopta nuevas y despliega)")
-        log("   ./sync_container_skills.sh --apply --firma <TOKEN> --adopt-drift  (además promueve drift al canon)")
+        log("   ./sync_container_skills.sh --apply --firma <TOKEN>               (despliega el canon; poda solo-espejo)")
+        log("   ... --adopt-new    (adopta al canon las skills que solo viven en el espejo)")
+        log("   ... --adopt-drift  (promueve al canon el drift detectado en el espejo)")
         return 2
 
     # ── mode == apply ──────────────────────────────────────────────────────
@@ -282,18 +287,18 @@ def main() -> int:
         log(f"   💾 respaldando {rel}")
         copy_from_container(a.container, f"{a.container_skills}/{rel}", archive / rel)
 
-    # 2) adopción de skills nuevas (solo las creadas después del último commit)
-    for rel in new:
-        dst = host_root / rel
-        if dst.exists():
-            log(f"   ⚠️ {rel} ya existe en el canon con otro contenido; se archiva y se omite.")
-            continue
-        mt = as_mtime(cont.get(rel))
-        if head_ts and mt and mt < head_ts - 60:
-            log(f"   🗑️  omitiendo adopción (baja previa del canon en Git): {rel}")
-            continue
-        log(f"   📥 adoptando nueva de agente: {rel}")
-        copy_from_container(a.container, f"{a.container_skills}/{rel}", dst)
+    # 2) adopción de skills nuevas → SOLO con --adopt-new (evita resucitar bajas del canon)
+    if new and a.adopt_new:
+        for rel in new:
+            dst = host_root / rel
+            if dst.exists():
+                log(f"   ⚠️ {rel} ya existe en el canon con otro contenido; se archiva y se omite.")
+                continue
+            log(f"   📥 adoptando nueva: {rel}")
+            copy_from_container(a.container, f"{a.container_skills}/{rel}", dst)
+    elif new:
+        log("   ℹ️  skills solo-espejo NO adoptadas (usa --adopt-new para adoptarlas).")
+        log("       Si son bajas del canon, el despliegue las retira del espejo (ya están respaldadas).")
 
     # 3) drift → política explícita
     if drift:
