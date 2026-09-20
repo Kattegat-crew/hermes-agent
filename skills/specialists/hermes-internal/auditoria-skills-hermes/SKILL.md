@@ -191,3 +191,20 @@ y quedó subsumido por el flag explícito; su heurística de `mtime` se conserva
 **Higiene de la firma.** El gate vive en `/root/.sync-firma.sha256` (sha256, 600, root). Regla: el token en claro
 lo maneja **solo el dueño**; los agentes no lo crean, no lo leen ni lo guardan. Si un token llega a circular por un
 canal de chat, conviene **rotarlo** (mismo comando de creación con un token nuevo).
+
+### Autocuración con sedimento por perfil (Opción C, 2026-09-20)
+
+**Modelo de escritura de la flota:**
+
+| Capa | Ruta | Quién escribe | Quién lee |
+|---|---|---|---|
+| Canon (SSOT) | repo `skills/` → espejo `/opt/hermes/skills` | **solo promoción firmada** (`--apply --firma`) | los 12 perfiles (`external_dirs`) |
+| Sedimento | `<HERMES_HOME>/skills` de cada perfil | el agente y el fork de curación (sin firma) | su perfil (local gana por nombre) |
+
+- Los **11 perfiles** tienen `create_dir: None` → el `create_dir` efectivo es su dir local: **el fork autónomo SÍ puede curar ahí** (no está en `external_dirs`, así que el guardián *"externally owned"* no aplica).
+- El **perfil default** tenía `create_dir: /opt/hermes/skills/specialists` (dentro del espejo): el fork no podía escribir y el primer plano escribía donde el sync pisa. Se eliminó esa línea → ahora cura en `data/skills` como los demás.
+- **Promoción:** `scripts/sync_container_skills.sh --apply --firma <TOKEN> --adopt-sediment` recorre los 12 sedimentos, promueve al canon (`specialists/<nombre>`), respalda en `data/archive/sync_<ts>/sedimento/`, limpia el sedimento y despliega el espejo con verificación por contenido.
+- **Clasificación del sedimento por mtime vs. último commit:** *creada por agente* (posterior → candidata a promoción) vs *re-siembra bundled* (anterior → **no** se promueve: es el sembrador de `tools/skills_sync.py`, que reinyecta skills del paquete en el dir local).
+- **Detector de sombras:** si un sedimento contiene una skill cuyo nombre ya vive en el canon, se reporta como `🚫 SOMBRA` y **no se promueve** (crear así sombrearía la canónica, porque el dir local se escanea antes que `external_dirs`). Se revisa a diario en el JSON de alerta (`data/state/skills_sync_alert.json`, campo `sedimento_sombra`).
+- **Guardarraíl duro pendiente (infra):** bloquear la creación de un nombre canónico desde `skill_manage` requiere parchear `tools/skill_manager_tool.py` y **montarlo** (hoy no está montado: solo lo están `gateway/run.py`, `gateway/display_config.py`, `plugins/platforms/discord/adapter.py`, `tools/mcp_tool.py`). Aplica al recrear el contenedor.
+- **Prueba end-to-end (2026-09-20):** sedimento `prueba-sedimento-roshi` → detectada como *creada por agente* → promovida a `skills/specialists/`, sedimento limpio, paridad 718/718 verificada por sha256; sombra de prueba (`1password`) reportada y **no** promovida; re-siembra detectada y **no** promovida. Artefactos de prueba respaldados en `data/archive/pruebas_C_20260920/`.

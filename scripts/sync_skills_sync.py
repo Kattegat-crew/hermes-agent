@@ -8,6 +8,9 @@ nombres y borraba con `rm -rf` cualquier modificación hecha en el contenedor.
 Contrato (ver scripts/sync_container_skills.sh):
   --mode check              dry-run, no muta nada
   --mode apply --firma T    muta; exige el token del dueño (sha256 vs archivo)
+  --adopt-sediment          promueve al canon las skills creadas por los agentes en los
+                            sedimentos locales de los perfiles (dir local de cada perfil) y
+                            limpia el sedimento tras respaldarlo
   --adopt-new               adopta al canon las skills que solo existen en el espejo
                             (por defecto NO se adoptan: un solo-espejo puede ser una
                             baja del canon, y se archiva + poda en vez de resucitarse)
@@ -124,6 +127,53 @@ def container_inventory(name: str, root: str) -> dict:
     return json.loads(out.stdout.strip().splitlines()[-1])
 
 
+SEDIMENT_DIRS = [
+    "data/skills",                      # perfil default (HERMES_HOME=/opt/data)
+    "data/profiles/roshi/skills",
+    "data/profiles/bragi/skills",
+    "data/profiles/brokkr/skills",
+    "data/profiles/comms/skills",
+    "data/profiles/freyja/skills",
+    "data/profiles/heimdall/skills",
+    "data/profiles/hermodr/skills",
+    "data/profiles/sindri/skills",
+    "data/profiles/ullr/skills",
+    "data/profiles/vigia/skills",
+    "data/profiles/vili/skills",
+]
+
+
+def sediment_inventory(repo: Path, canon_names: set, head_ts: float = 0.0) -> dict:
+    """Skills creadas por los agentes en el dir local (sedimento) de cada perfil.
+
+    Devuelve {'nuevas': [...], 'sombra': [...]} con paths repo-relativos.
+    'sombra' = el nombre ya existe en el canon: crear así sombrearía la canónica.
+    """
+    nuevas, resiembra, sombra = [], [], []
+    for rel_root in SEDIMENT_DIRS:
+        root = repo / rel_root
+        if not root.is_dir():
+            continue
+        for dirpath, dirnames, filenames in os.walk(root):
+            dirnames[:] = [d for d in dirnames if not d.startswith(".")]
+            if "SKILL.md" not in filenames:
+                continue
+            d = Path(dirpath)
+            name = d.name
+            if name.startswith("_") or name in TAR_EXCLUDES:
+                continue
+            rel = str(d.relative_to(repo))
+            mt = os.path.getmtime(d / "SKILL.md")
+            if name in canon_names:
+                sombra.append(rel)
+            elif head_ts and mt < head_ts - 60:
+                # más vieja que el último commit: re-siembra bundled o algo ya resuelto
+                resiembra.append(rel)
+            else:
+                nuevas.append(rel)
+    return {"nuevas": sorted(nuevas), "resiembra": sorted(resiembra), "sombra": sorted(sombra)}
+
+
 def container_running(name: str) -> bool:
     out = subprocess.run(["docker", "ps", "--format", "{{.Names}}"], capture_output=True, text=True)
     return name in out.stdout.split()
@@ -163,6 +213,7 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--container-skills", default="/opt/hermes/skills")
     ap.add_argument("--firma", default="")
     ap.add_argument("--firma-sha-file", default="/root/.sync-firma.sha256")
+    ap.add_argument("--adopt-sediment", action="store_true")
     ap.add_argument("--adopt-new", action="store_true")
     ap.add_argument("--adopt-drift", action="store_true")
     ap.add_argument("--commit", action="store_true")
@@ -189,6 +240,18 @@ def main() -> int:
     cont = container_inventory(a.container, a.container_skills)
     log(f"   canon: {len(host)} skills · espejo: {len(cont)} skills")
 
+    # Frontera temporal: último commit del canon. Sirve para distinguir una skill
+    # creada por un agente (posterior) de una re-siembra bundled o baja previa (anterior).
+    try:
+        head_ts = float(subprocess.run(
+            ["git", "-C", str(repo), "log", "-1", "--format=%ct"],
+            capture_output=True, text=True, check=True).stdout.strip())
+    except Exception:
+        head_ts = 0.0
+
+    canon_names = {os.path.basename(k) for k in host}
+    sedimento = sediment_inventory(repo, canon_names, head_ts)
+
     new = sorted(set(cont) - set(host))
     missing = sorted(set(host) - set(cont))
     drift = sorted(
@@ -205,21 +268,23 @@ def main() -> int:
             drift_hint[rel] = "misma fecha → revisar a mano antes de decidir" 
 
     log("")
+    log("🌱 SEDIMENTO (skills creadas por agentes en los dirs locales de los perfiles)")
+    log(f"   creadas por agentes    : {len(sedimento['nuevas'])}")
+    log(f"   re-siembras bundled    : {len(sedimento.get('resiembra', []))}  (anteriores al último commit)")
+    log(f"   sombras del canon      : {len(sedimento['sombra'])}")
+    for s in sedimento["nuevas"]:
+        log(f"      🌱 {s}")
+    for s in sedimento.get("resiembra", []):
+        log(f"      ♻️  {s}  [re-siembra: NO se promueve automáticamente]")
+    for s in sedimento["sombra"]:
+        log(f"      🚫 SOMBRA (nombre ya canónico): {s}")
+
+    log("")
     log("📊 DIAGNÓSTICO (por contenido, no por conteo)")
     log(f"   nuevas en contenedor : {len(new)}")
     log(f"   drift (modificadas)  : {len(drift)}")
     log(f"   faltan en contenedor : {len(missing)}")
-    # ¿Baja reciente del canon o skill creada por un agente?
-    # Se usa el mtime del último commit del repo como frontera temporal.
-    try:
-        head_ts = float(
-            subprocess.run(
-                ["git", "-C", str(repo), "log", "-1", "--format=%ct"],
-                capture_output=True, text=True, check=True,
-            ).stdout.strip()
-        )
-    except Exception:
-        head_ts = 0.0
+    # Hints de dirección para el solo-espejo (usa la frontera head_ts de arriba)
     new_hint = {}
     for s in new:
         mt = as_mtime(cont.get(s))
@@ -251,6 +316,9 @@ def main() -> int:
         "drift": drift,
         "drift_hint": drift_hint,
         "missing_in_container": missing,
+        "sedimento_nuevas": sedimento["nuevas"],
+        "sedimento_resiembra": sedimento.get("resiembra", []),
+        "sedimento_sombra": sedimento["sombra"],
         "parity": not (new or drift or missing),
     }
     if a.json_out:
@@ -258,6 +326,11 @@ def main() -> int:
 
     if a.mode == "check":
         log("")
+        if report["parity"] and not sedimento["nuevas"] and not sedimento["sombra"] and not sedimento.get("resiembra"):
+            log("✅ PARIDAD POR CONTENIDO + sedimentos limpios (100%).")
+            return 0
+        if sedimento["nuevas"] or sedimento["sombra"] or sedimento.get("resiembra"):
+            log("🌱 Sedimento con hallazgos (promoción con: --apply --firma <TOKEN> --adopt-sediment)")
         if report["parity"]:
             log("✅ PARIDAD POR CONTENIDO: canon y espejo son idénticos (100%).")
             return 0
@@ -271,14 +344,38 @@ def main() -> int:
     if not check_firma(a.firma, Path(a.firma_sha_file)):
         return 1
 
-    if report["parity"]:
+    if (report["parity"] and not sedimento["nuevas"]
+            and not sedimento["sombra"] and not sedimento.get("resiembra")):
         log("")
-        log("✅ Nada que sincronizar: paridad por contenido ya es 100%.")
+        log("✅ Nada que sincronizar: paridad por contenido ya es 100% y sedimentos limpios.")
         return 0
 
     stamp = time.strftime("%Y%m%d-%H%M%S")
     archive = repo / "data" / "archive" / f"sync_{stamp}"
     archive.mkdir(parents=True, exist_ok=True)
+
+    # 0) promoción de sedimentos (skills creadas por agentes en dirs locales)
+    if sedimento["nuevas"] or sedimento["sombra"]:
+        if a.adopt_sediment:
+            for rel in sedimento["nuevas"]:
+                src = repo / rel
+                name = src.name
+                dst = host_root / "specialists" / name
+                if dst.exists():
+                    log(f"   ⚠️ {name} ya existe en el canon; se omite y queda en el sedimento.")
+                    continue
+                log(f"   🌱 promoviendo al canon: {name}  ({rel})")
+                shutil.copytree(src, archive / "sedimento" / rel, dirs_exist_ok=True)
+                dst.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copytree(src, dst, dirs_exist_ok=True)
+                shutil.rmtree(src)
+                log(f"      ✅ adoptada en skills/specialists/{name} y sedimento limpio (respaldo en el archivo)")
+            for rel in sedimento.get("resiembra", []):
+                log(f"   ♻️  re-siembra NO promovida (anterior al último commit; revisar a mano): {rel}")
+            for rel in sedimento["sombra"]:
+                log(f"   🚫 sombra NO promovida (el nombre ya vive en el canon): {rel}")
+        else:
+            log("   ℹ️  hay sedimento sin promover (usa --adopt-sediment para promocionarlo).")
     log("")
     log(f"🗄️  Respaldo previo (nada se pierde): {archive}")
 
