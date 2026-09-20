@@ -153,3 +153,17 @@ Cierre: `workspace/reports/r2bis-lista-enlaces-20260919.md` (lista bot por bot) 
 ## Entregable
 
 Informe MD + PDF en `workspace/reports/`, evidencia cruda en `workspace/reports/evidence/`, y resumen ejecutivo en el chat con: acervo total y distinto, embudo de accesibilidad del perfil auditado, y divergencias lógica vs realidad priorizadas P0/P1/P2. No mutar nada durante una auditoría: sólo medir y recomendar.
+
+## Sincronización canon ⇄ espejo con gate de firma (2026-09-20)
+
+Contrato: `scripts/sync_container_skills.sh [--check | --apply --firma TOKEN [--adopt-drift] [--commit]] [--json /ruta.json]`
+Motor: `scripts/sync_skills_sync.py` (toda la lógica; el `.sh` solo parsea flags, documenta y ejecuta).
+
+- **Paridad por CONTENIDO, nunca por conteo.** El sync anterior comparaba *nombres* y hacía `rm -rf` del espejo: una skill **modificada** dentro del contenedor (mismo nombre, contenido nuevo) pasaba como "paridad 100%" y se perdía sin aviso. Ahora el inventario es `sha256` de **todos** los archivos de cada skill (no solo `SKILL.md`) más el `mtime` máximo del conjunto.
+- **Tres clases de diferencia:** `nuevas` (viven en el espejo y no en el canon → candidatas a adopción), `drift` (mismo path, contenido distinto), `faltantes` (en el canon y no en el espejo → pendientes de despliegue).
+- **Dirección del drift por mtime:** "espejo más nuevo" = edición de agente dentro del contenedor (candidata a `--adopt-drift`); "canon más nuevo" = pendiente de despliegue (lo resuelve `--apply` sin tocar el canon).
+- **Gate de firma (bloqueo duro en código):** `--apply` exige `--firma TOKEN`, validado contra el `sha256` guardado en `/root/.sync-firma.sha256` (chmod 600). Ese archivo lo crea **solo el dueño** (`printf '%s' 'TOKEN' | sha256sum | awk '{print $1}' > /root/.sync-firma.sha256`). Sin archivo o con token inválido → **exit 1** y nada se toca. Un agente nunca crea, lee ni guarda ese token.
+- **Nada se destruye sin respaldo:** toda skill nueva o con drift se archiva en `data/archive/sync_<ts>/` **antes** del despliegue. Con `--adopt-drift`, el contenido del contenedor se promueve al canon y el canónico previo queda en `.../canon_previo/`.
+- **Verificación final por contenido** tras desplegar. Códigos de salida: `0` paridad, `2` diferencias detectadas en `--check`, `1` error o gate cerrado.
+- **Cron diario (solo lectura):** `20 5 * * * /root/hermes-agent/scripts/sync_container_skills.sh --check >> /var/log/skills-sync-check.log 2>&1`.
+- **Pitfall esperado:** editar una skill *en el canon* deja `drift` hasta que se firme un `--apply`; el `--check` diario lo reporta. No es un fallo: es el gate haciendo su trabajo.

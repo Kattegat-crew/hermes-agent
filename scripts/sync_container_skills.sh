@@ -1,192 +1,66 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# sync_container_skills.sh — Sincronización robusta y bidireccional Host <-> Contenedor
-# 
-# Modos de ejecución:
-#   ./sync_container_skills.sh [--check]  -> Modo dry-run por defecto. Audita paridad y detecta skills nuevas.
-#   ./sync_container_skills.sh --apply    -> Adopta skills nuevas del contenedor al repo y sincroniza el canon.
+# sync_container_skills.sh — Sincronizador canónico bidireccional Host <-> Contenedor
+#
+#   ./sync_container_skills.sh                       -> DRY-RUN (por defecto).
+#                                                      Paridad por CONTENIDO (sha256),
+#                                                      detecta nuevas, drift y faltantes.
+#   ./sync_container_skills.sh --check                -> igual que arriba (explícito).
+#   ./sync_container_skills.sh --apply --firma TOKEN  -> adopta nuevas + despliega el canon.
+#                                                      EXIGE el token del dueño.
+#   ... --apply --firma TOKEN --adopt-drift           -> además promueve al canon el
+#                                                      contenido del contenedor para skills
+#                                                      ya existentes (respalda el canónico).
+#   ... --commit                                      -> git add+commit de las adopciones (no push).
+#   ./sync_container_skills.sh --json /ruta.json      -> guarda el diagnóstico en JSON.
+#
+# GATE DE FIRMA (bloqueo duro en código, no en la disciplina del agente):
+#   El dueño crea UNA vez el hash de su token:
+#     printf '%s' 'TU_TOKEN_SECRETO' | sha256sum | awk '{print $1}' > /root/.sync-firma.sha256
+#     chmod 600 /root/.sync-firma.sha256
+#   Sin ese archivo, --apply aborta. Un agente NUNCA debe crear ni leer el token.
+#
+# NADA se destruye sin respaldo: toda skill nueva o con drift se archiva en
+#   <repo>/data/archive/sync_<timestamp>/ ANTES de tocar el espejo del contenedor.
 # ==============================================================================
 set -euo pipefail
 
-HOST_SKILLS="/root/hermes-agent/skills"
-CONTAINER_NAME="hermes-agent"
-CONTAINER_SKILLS="/opt/hermes/skills"
-ADOPT_TARGET="/root/hermes-agent/skills/specialists"
+REPO="/root/hermes-agent"
+ENGINE="$REPO/scripts/sync_skills_sync.py"
 
 MODE="check"
-for arg in "$@"; do
-    case "$arg" in
-        --apply)
-            MODE="apply"
-            ;;
-        --check)
-            MODE="check"
-            ;;
-        -h|--help)
-            echo "Uso: $0 [--check|--apply]"
-            echo "  --check   (Por defecto) Inspecciona paridad, detecta skills huérfanas y candidatas a adopción."
-            echo "  --apply   Ejecuta la adopción al repo host y sincroniza el árbol hacia el contenedor."
-            exit 0
-            ;;
-        *)
-            echo "❌ Opción desconocida: $arg. Usa --check o --apply." >&2
-            exit 1
-            ;;
+FIRMA=""
+ADOPT=0
+COMMIT=0
+JSON_OUT=""
+
+usage() {
+    sed -n '2,26p' "$0" | sed 's/^# \{0,1\}//'
+}
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --check)       MODE="check" ;;
+        --apply)       MODE="apply" ;;
+        --firma)       FIRMA="${2:-}"; shift ;;
+        --adopt-drift) ADOPT=1 ;;
+        --commit)      COMMIT=1 ;;
+        --json)        JSON_OUT="${2:-}"; shift ;;
+        -h|--help)     usage; exit 0 ;;
+        *)             echo "❌ Opción desconocida: $1" >&2; echo; usage; exit 1 ;;
     esac
+    shift
 done
 
-echo "=== SINCRONIZADOR DE SKILLS: MODO ${MODE^^} ==="
-
-# 1. Verificaciones previas
-if [[ ! -d "$HOST_SKILLS" ]]; then
-    echo "❌ Error: Directorio host $HOST_SKILLS no existe." >&2
+if [[ ! -f "$ENGINE" ]]; then
+    echo "❌ Motor no encontrado: $ENGINE" >&2
     exit 1
 fi
 
-if ! docker ps --format '{{.Names}}' | grep -q "^${CONTAINER_NAME}$"; then
-    echo "⚠️ Advertencia: Contenedor $CONTAINER_NAME no está corriendo. Operación omitida."
-    exit 0
-fi
+ARGS=(--mode "$MODE" --repo "$REPO" --host "$REPO/skills")
+[[ -n "$JSON_OUT" ]] && ARGS+=(--json-out "$JSON_OUT")
+[[ "$ADOPT" -eq 1 ]] && ARGS+=(--adopt-drift)
+[[ "$COMMIT" -eq 1 ]] && ARGS+=(--commit)
+[[ -n "$FIRMA" ]] && ARGS+=(--firma "$FIRMA")
 
-# 2. Análisis de paridad y detección de skills creadas en el contenedor
-echo "🔍 Analizando paridad entre Host y Contenedor..."
-
-HOST_LIST=$(python3 -c "
-import os
-skills = set()
-for r, d, f in os.walk('$HOST_SKILLS'):
-    if 'SKILL.md' in f:
-        skills.add(os.path.basename(r))
-print('\n'.join(sorted(skills)))
-")
-
-CONTAINER_LIST=$(docker exec "$CONTAINER_NAME" python3 -c "
-import os
-skills = set()
-for r, d, f in os.walk('$CONTAINER_SKILLS'):
-    if 'SKILL.md' in f:
-        skills.add(os.path.basename(r))
-print('\n'.join(sorted(skills)))
-")
-
-HOST_COUNT=$(echo "$HOST_LIST" | grep -v '^$' | wc -l)
-CONTAINER_COUNT=$(echo "$CONTAINER_LIST" | grep -v '^$' | wc -l)
-
-# Encontrar skills en el contenedor que NO existen en el host (creadas por agentes)
-NEW_IN_CONTAINER=$(python3 -c "
-host = set('''$HOST_LIST'''.splitlines())
-cont = set('''$CONTAINER_LIST'''.splitlines())
-diff = sorted(cont - host)
-for s in diff:
-    if s:
-        print(s)
-")
-
-MISSING_IN_CONTAINER=$(python3 -c "
-host = set('''$HOST_LIST'''.splitlines())
-cont = set('''$CONTAINER_LIST'''.splitlines())
-diff = sorted(host - cont)
-for s in diff:
-    if s:
-        print(s)
-")
-
-echo "📊 Diagnóstico actual:"
-echo "   Host (Git canónico):   $HOST_COUNT skills"
-echo "   Contenedor (/opt):     $CONTAINER_COUNT skills"
-
-if [[ -n "$NEW_IN_CONTAINER" ]]; then
-    echo ""
-    echo "🚨 SKILLS NUEVAS EN CONTENEDOR (Candidatas a Adopción):"
-    while IFS= read -r skill; do
-        [[ -z "$skill" ]] && continue
-        echo "   ⭐ $skill"
-    done <<< "$NEW_IN_CONTAINER"
-fi
-
-if [[ -n "$MISSING_IN_CONTAINER" ]]; then
-    echo ""
-    echo "📦 SKILLS PENDIENTES DE DESPLEGAR AL CONTENEDOR:"
-    PENDING_COUNT=$(echo "$MISSING_IN_CONTAINER" | wc -l)
-    echo "   Total pendientes: $PENDING_COUNT skills"
-fi
-
-if [[ "$MODE" == "check" ]]; then
-    echo ""
-    if [[ -z "$NEW_IN_CONTAINER" && -z "$MISSING_IN_CONTAINER" && "$HOST_COUNT" -eq "$CONTAINER_COUNT" ]]; then
-        echo "✅ PARIDAD PERFECTA (100% sincronizado). No se requieren acciones."
-        exit 0
-    else
-        echo "⚠️ Se detectaron diferencias. Para adoptar y sincronizar, ejecuta:"
-        echo "   $0 --apply"
-        exit 0
-    fi
-fi
-
-# ==============================================================================
-# MODO --apply: ADOPCIÓN Y SINCRONIZACIÓN EFECTIVA
-# ==============================================================================
-echo ""
-echo "🚀 Iniciando proceso de sincronización con salvaguardas..."
-
-# 3. Paso de ADOPCIÓN: Rescatar skills creadas en el contenedor hacia el host
-if [[ -n "$NEW_IN_CONTAINER" ]]; then
-    echo "📥 Rescatando skills nuevas del contenedor hacia $ADOPT_TARGET..."
-    mkdir -p "$ADOPT_TARGET"
-    while IFS= read -r skill; do
-        [[ -z "$skill" ]] && continue
-        echo "   💾 Adoptando: $skill..."
-        
-        # Encontrar la ruta dentro del contenedor
-        CONT_PATH=$(docker exec "$CONTAINER_NAME" python3 -c "
-import os
-for r, d, f in os.walk('$CONTAINER_SKILLS'):
-    if os.path.basename(r) == '$skill' and 'SKILL.md' in f:
-        print(r)
-        break
-")
-        if [[ -n "$CONT_PATH" ]]; then
-            TARGET_DIR="$ADOPT_TARGET/$skill"
-            mkdir -p "$TARGET_DIR"
-            docker exec "$CONTAINER_NAME" tar -C "$CONT_PATH" -czf - . | tar -C "$TARGET_DIR" -xzf -
-            echo "   ✅ $skill guardada en host ($TARGET_DIR)"
-        fi
-    done <<< "$NEW_IN_CONTAINER"
-    
-    # Regenerar índice si hubo adopciones
-    if [[ -f "/root/hermes-agent/scripts/build_skills_index.py" ]]; then
-        python3 /root/hermes-agent/scripts/build_skills_index.py
-    fi
-fi
-
-# 4. Normalizar permisos en el Host
-echo "🔒 Normalizando permisos en Host (775 dirs / 664 files)..."
-find "$HOST_SKILLS" -type d -exec chmod 775 {} +
-find "$HOST_SKILLS" -type f -exec chmod 664 {} +
-
-# 5. Sincronizar hacia el contenedor
-echo "📦 Desplegando árbol canónico al contenedor..."
-docker exec "$CONTAINER_NAME" rm -rf "${CONTAINER_SKILLS:?}"/*
-tar -C "$HOST_SKILLS" -czf - . | docker exec -i "$CONTAINER_NAME" tar -C "$CONTAINER_SKILLS" -xzf -
-
-# 6. Fijar ownership y permisos en el contenedor
-echo "👤 Fijando ownership hermes:hermes (10000:10000) y permisos en contenedor..."
-docker exec "$CONTAINER_NAME" chown -R 10000:10000 "$CONTAINER_SKILLS"
-docker exec "$CONTAINER_NAME" chmod -R 775 "$CONTAINER_SKILLS"
-
-# 7. Verificación final de paridad
-FINAL_HOST_COUNT=$(find "$HOST_SKILLS" -name "SKILL.md" | wc -l)
-FINAL_CONTAINER_COUNT=$(docker exec "$CONTAINER_NAME" python3 -c "import os; print(sum(1 for r, d, f in os.walk('$CONTAINER_SKILLS') if 'SKILL.md' in f))")
-
-echo ""
-echo "📊 Verificación Final de Paridad:"
-echo "   Host:       $FINAL_HOST_COUNT skills"
-echo "   Contenedor: $FINAL_CONTAINER_COUNT skills"
-
-if [[ "$FINAL_HOST_COUNT" -eq "$FINAL_CONTAINER_COUNT" ]]; then
-    echo "🎉 SINCRONIZACIÓN EXITOSA: Paridad 100% confirmada entre Git y el contenedor."
-    exit 0
-else
-    echo "❌ Error: Discrepancia detectada tras sincronizar ($FINAL_HOST_COUNT vs $FINAL_CONTAINER_COUNT)." >&2
-    exit 1
-fi
+exec python3 "$ENGINE" "${ARGS[@]}"
