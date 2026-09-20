@@ -1,5 +1,5 @@
 # Índice Canónico de Skills — Flota Hermes
-> **Última sincronización**: 2026-09-20 02:32 | **Total de skills**: 719
+> **Última sincronización**: 2026-09-20 02:35 | **Total de skills**: 718
 
 Este catálogo representa la **Fuente Única de Verdad (SSOT)** de habilidades operativas para todos los perfiles de la flota Hermes.
 Todas las skills se resuelven on-demand desde `/opt/hermes/skills` sin saturar la ventana de contexto.
@@ -258,7 +258,6 @@ Todas las skills se resuelven on-demand desde `/opt/hermes/skills` sin saturar l
 | `productivity` | **`siyuan`** | Query and edit a SiYuan knowledge base via its API. | `productivity/siyuan` |
 | `productivity` | **`slack-gif-creator`** | Toolkit for creating animated GIFs optimized for Slack, with validators for size constraints... | `productivity/slack-gif-creator` |
 | `productivity` | **`slackbot-automation`** | Automate Slackbot tasks via Rube MCP (Composio). Always search tools first for current schemas. | `productivity/slackbot-automation` |
-| `productivity` | **`spanish-deliverable-proofreading`** | Check Spanish doc typos before delivering as PDF or DOCX. | `productivity/spanish-deliverable-proofreading` |
 | `productivity` | **`specification-handoff`** | Prepara SPEC/PROMPT para editor de código externo (AGY). | `productivity/specification-handoff` |
 | `productivity` | **`static-portal-generator`** | Build multi-client static portals from file inventories. | `productivity/static-portal-generator` |
 | `productivity` | **`stripe-integration-expert`** | Production-grade Stripe integrations: subscriptions with trials and proration, one-time paym... | `productivity/stripe-integration-expert` |
