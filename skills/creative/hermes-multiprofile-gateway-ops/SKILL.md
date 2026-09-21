@@ -65,6 +65,39 @@ del turno; el Desktop lista cada perfil vía `web_server.py::_open_session_db_fo
 (abre `<home>/state.db`). Clave de sesión Discord: `platform:chat_id` → hilo persistente
 por canal (retomar conversación = misma clave).
 
+## Ley 5 — Perfil con celular propio NO va en el multiplex: standalone con `--force` + backstop
+
+Verificado en PROD el **2026-09-21** (`golden-game` :3001 y `lucky-club` :3002). Un perfil al que
+el cliente le dio **su propio número de WhatsApp** no puede servirse desde el gateway multiplexado:
+
+1. `gateway/run_adapters.py:983` — bajo multiplex **no se arrancan adaptadores WhatsApp de perfiles
+   secundarios** ("a secondary would retry-loop"). El celular del cliente nunca conecta.
+2. Sin `--force`, la unidad s6 de un perfil servido por el multiplexer sale con **exit 78** y s6
+   **deja de reintentar**: el celular queda sordo **en silencio** (así estuvo `lucky-club` ~27 h).
+3. `hermes_cli/container_boot.py:114` (`should_start = not multiplex_profiles and ...`) deja **todo**
+   slot de perfil en `down` y **re-renderiza el `run` sin `--force`** en cada boot del contenedor:
+   el arreglo manual se pierde solo ⇒ el backstop tiene que vivir **fuera** del contenedor.
+4. El slot debe quedar **propiedad de `hermes`** (`run`, `finish`, `log/`, `supervise/control`) y con
+   `API_SERVER_PORT` propio (8643/8644) para no chocar con el listener compartido 8642.
+
+Backstop (cron del host cada 5 min, `exit 0` siempre, **silencioso si está sano**):
+`/etc/cron.d/hermes-casino-gateways` → `/usr/local/bin/hermes-casino-gateways.sh` →
+`docker exec … python3 /opt/data/scripts/casino_gateways_watchdog.py` (re-registra slot, re-añade
+`--force`, quita `down`, `s6-svc -u`, verifica el bridge) → notificador Discord.
+
+El aviso a Discord va en **capa aparte** (`hermes-casino-gateways-notify.py` + `.env` 0600 root +
+`state.json` con dedup y repetición máx. cada 6 h): 🟠 auto-sanado · 🔴 SIN REPARAR (menciona al
+Admin) · 🟢 recuperado. Runbook completo, contrato del notificador y prueba E2E sin downtime:
+`references/2026-09-21-casino-standalone-gateways.md`.
+
+**Probar reparaciones sin downtime:** editar `/run/service/gateway-<perfil>/run` (quitar `--force`)
+**no reinicia el servicio** — se puede ejercitar la ruta de reparación en producción sin corte.
+
+Pitfalls añadidos: no crear cron jobs **dentro** de esos dos perfiles (el ticker del multiplexer y el
+suyo los duplicarían); el multiplexer los sigue listando en `served_profiles` y en v0.21.3 no existe
+lista de exclusión (`multiplex_profile_allowlist` retirado) — sacarlos de `profiles/` rompería
+`hermes -p <perfil>` y su cron.
+
 ## Diagnóstico rápido: "bot no responde / no recuerda / Desktop vacío"
 
 1. `grep -c <channel_id> /opt/data/logs/agent.log` → **0 = el mensaje nunca se procesó**
