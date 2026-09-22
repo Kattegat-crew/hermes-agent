@@ -112,6 +112,24 @@ Do NOT just increase timeouts - find the real issue.
 Return: Summary of what you found and what you fixed.
 ```
 
+### Output Style Rules (destilado i-have-adhd, adoptado 22-sep-2026)
+
+Toda tarea delegada y todo reporte de subagente debe cumplir estas reglas de formato:
+
+1. **La próxima acción va primero** — antes de cualquier explicación.
+2. **Pasos numerados** para cualquier procedimiento de 2+ pasos.
+3. **Cerrar con UN paso concreto** — la siguiente acción ejecutable, no un resumen.
+4. **Cero tangentes** — si un dato no cambia la decisión, fuera.
+5. **Restatear el estado en cada turno** — qué está hecho, qué falta.
+6. **Estimaciones en tiempo real** (minutos), no en "complejidad".
+7. **Logros visibles** — decir qué se completó, con evidencia.
+8. **Errores sin drama** — qué falló, por qué, cuál es el plan B.
+9. **Listas máx. 5 ítems** — dividir en grupos si hay más.
+10. **Cero preamble/recap/despedida** — nada de "gran pregunta", "hope this helps".
+
+Bueno: "Edita `src/auth.ts:42`, corre `npm test`, pégame la primera línea que falle."
+Malo: "Gran pregunta, tu auth flow tiene varias piezas que explorar... Hope this helps!"
+
 ## Common Mistakes
 
 **❌ Too broad:** "Fix all the tests" - agent gets lost
