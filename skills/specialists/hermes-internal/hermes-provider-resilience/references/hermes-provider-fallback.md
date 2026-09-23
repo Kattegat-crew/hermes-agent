@@ -1,3 +1,7 @@
+<!-- Caso absorbido por F6 lote 4 el 2026-09-23 desde `specialists/hermes-internal/hermes-provider-fallback`.
+     Contenido íntegro; original en
+     `data/archive/F6_lote4_20260923-161107/absorbidas/`. -->
+
 ---
 name: hermes-provider-fallback
 description: Cascada de fallback multi-proveedor para bots Hermes.

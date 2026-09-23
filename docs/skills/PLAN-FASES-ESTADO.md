@@ -26,7 +26,7 @@ consta qué fases cerraron, qué deuda residual dejaron y dónde cae cada acció
 | **F4** · Curador con dueño, alcance y ciclo | ✅ cerrada | `curator pause` + driver semanal en seco; adopción del catálogo; pines. Revisión limpia **1/2** (`data/state/f4_curador_last.json`) |
 | **F5** · Cerrar lo que vivía fuera del repositorio | ✅ cerrada **con incidente** | 3 árboles retirados; 2 crons de Meta Ads repuntados; **incidente del punto de montaje** (`data/skills`) |
 | **F5.2** · Deuda residual del cierre de F5 | ✅ **cerrada** (23-sep, 13:05) | Árbol legado del host archivado y retirado; 0 referencias vivas (ver §3.0) |
-| **F6** · Consolidación supervisada | 🔄 **en ejecución por lotes** | Candado satisfecho: **2/2** revisiones limpias + firma del dueño. **Lote 0 ejecutado** (3 pares absorbidos, métrica a la baja); `pinecone-research` diferido con evidencia (ver §3.3) |
+| **F6** · Consolidación supervisada | ✅ **consolidación mecánica cerrada** | Candado satisfecho: **2/2** revisiones limpias + firma del dueño. **Lote 0 ejecutado** (3 pares absorbidos, métrica a la baja); `pinecone-research` diferido con evidencia (ver §3.3) |
 | **F7** · Higiene de flota | ✅ **cerrada** (23-sep, 13:30) | 7 ítems: 2 chequeos nuevos (V1b/V10), slots, `AGENTS.md` de vigia, cadenas, alias y symlinks (ver §3.1) |
 | **F8** · PROD y verificación final | ⏳ pendiente | Se le añade una comprobación (ver §3, N9) |
 
@@ -278,6 +278,18 @@ descripción vacía), `pinecone-research` → `pinecone` (hub + scripts), `micro
 
 **Falsos positivos declarados** en `data/state/f6_falsos_positivos.json`: familia `sdd-*` (10) y
 `pytorch-fsdp` ⇄ `unsloth`.
+
+### 3.6 F6 · Cierre de la consolidación (5 lotes, 23-sep-2026)
+
+- **Lotes 0-4 ejecutados** con candado en código (2/2 revisiones limpias + firma, probado en negativo).
+- **Series:** pares 85 → **56** · grupos 45 → **29** · implicadas 115 → **71** (**16,0 % → 10,04 %**)
+  · catálogo 722 → **707** (−15 entradas, **0 contenido perdido**).
+- **Diferidos con plan propio:** par bíblico (bundles + updater), pinecone (hub + scripts),
+  amazon-sp-api (scripts), clarity (otra clase), meta-ads (papeles distintos), writing-plans/plan
+  (colisión del comando `/plan`).
+- **Falsos positivos declarados** (no se fusionan): familia `sdd-*`, `pytorch-fsdp` ⇄ `unsloth`,
+  `aws-*` ⇄ `gcp-*`, `3-statement-model` ⇄ `lbo-model`, `form-cro` ⇄ `signup`.
+- **Triage completo** de los grupos restantes: `docs/skills/F6-REGISTRO-GRUPOS.md`.
 
 ## 4. Orden de ejecución recomendado
 

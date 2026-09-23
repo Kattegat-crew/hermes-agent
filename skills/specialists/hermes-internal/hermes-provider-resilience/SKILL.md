@@ -100,3 +100,7 @@ matices reales de B.AI.
 
 - `references/opencode-go-provider.md` — catálogo completo verificado (24 modelos
   cost=0), endpoint, bloque YAML, patrón de merge atómico multi-modelo.
+
+## Referencias absorbidas
+
+- `references/hermes-provider-fallback.md` — absorbida desde `specialists/hermes-internal/hermes-provider-fallback` el 2026-09-23 (F6 lote 4, R15: condensar sin borrar).

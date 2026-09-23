@@ -1,3 +1,7 @@
+<!-- Caso absorbido por F6 lote 4 el 2026-09-23 desde `specialists/hermes-internal/hermes-desktop-remote-setup`.
+     Contenido íntegro; original en
+     `data/archive/F6_lote4_20260923-161107/absorbidas/`. -->
+
 ---
 name: hermes-desktop-remote-setup
 description: Use when setting up Hermes Desktop remote on a new PC.

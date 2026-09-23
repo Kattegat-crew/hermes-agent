@@ -85,3 +85,7 @@ verify `npm --version`, then LAUNCH the Hermes Desktop/installer from that same 
 ## Related
 - Remote-gateway connect (Desktop "Connect to existing Hermes"): see `references/remote-gateway-vps.md`.
 - Windows runtime quirks (keybinds, BOM, WinError 10106): bundled `hermes-agent` skill reference `references/windows-quirks.md`.
+
+## Referencias absorbidas
+
+- `references/hermes-desktop-windows-troubleshooting.md` — absorbida desde `specialists/hermes-internal/hermes-desktop-windows-troubleshooting` el 2026-09-23 (F6 lote 4, R15: condensar sin borrar).

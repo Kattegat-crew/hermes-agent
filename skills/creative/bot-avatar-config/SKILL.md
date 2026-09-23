@@ -44,3 +44,7 @@ EOF
 ## Relacionados
 - `quality-check-visual` — QA de retratos generados (contar manos, objetos fusionados al cuerpo, verificar etiqueta↔imagen en contact sheets). Su sección "Prompts endurecidos" aplica antes de instalar.
 - `inspecting-hermes-desktop-dom` — si el Desktop corre en la misma máquina (CDP en `127.0.0.1:9222`), se puede inspeccionar el DOM en vivo; en deploys remotos el Desktop no es visible desde el servidor.
+
+## Referencias absorbidas
+
+- `references/neuralcrew-bot-avatars.md` — absorbida desde `creative/neuralcrew-bot-avatars` el 2026-09-23 (F6 lote 4, R15: condensar sin borrar).

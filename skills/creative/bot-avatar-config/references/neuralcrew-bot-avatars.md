@@ -1,3 +1,7 @@
+<!-- Caso absorbido por F6 lote 4 el 2026-09-23 desde `creative/neuralcrew-bot-avatars`.
+     Contenido íntegro; original en
+     `data/archive/F6_lote4_20260923-161107/absorbidas/`. -->
+
 ---
 name: neuralcrew-bot-avatars
 description: "Use when: instalar/actualizar avatar de un bot NeuralCrew."

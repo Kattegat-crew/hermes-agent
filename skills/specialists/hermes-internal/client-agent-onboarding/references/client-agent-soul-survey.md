@@ -1,3 +1,7 @@
+<!-- Caso absorbido por F6 lote 4 el 2026-09-23 desde `specialists/hermes-internal/client-agent-soul-survey`.
+     Contenido íntegro; original en
+     `data/archive/F6_lote4_20260923-161107/absorbidas/`. -->
+
 ---
 name: client-agent-soul-survey
 description: "Encuesta /soul para perfilar clientes y armar su SOUL.md."

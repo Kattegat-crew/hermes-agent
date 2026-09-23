@@ -87,3 +87,7 @@ curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:9112/api/sessions  # 401
 
 - `references/remote-vps-session-2026-08-20.md` — diario de la sesión: comandos,
   resultados y firma de log exacta.
+
+## Referencias absorbidas
+
+- `references/hermes-desktop-remote-setup.md` — absorbida desde `specialists/hermes-internal/hermes-desktop-remote-setup` el 2026-09-23 (F6 lote 4, R15: condensar sin borrar).
