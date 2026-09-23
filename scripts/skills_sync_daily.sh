@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# DEPRECADO 23-sep-2026 (F3): medía la paridad canon ⇄ copia, que ya NO
+# existe (la raíz de escritura de los 12 perfiles es el canon montado).
+# Reemplazado por scripts/f3_higiene_diaria.py (cron 05:20). Se conserva
+# como referencia histórica; ya no está programado.
 # =============================================================================
 # skills_sync_daily.sh — Corrida diaria de vigilancia (SOLO LECTURA)
 #

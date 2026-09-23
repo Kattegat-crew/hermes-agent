@@ -1,0 +1,388 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+F3 · Vigilancia e higiene diaria del árbol único de skills (23-sep-2026)
+========================================================================
+
+Reemplaza a `skills_sync_daily.sh`, que medía la paridad canon ⇄ copia. Desde
+F3 esa copia NO EXISTE: la raíz de escritura de los 12 perfiles ES el canon
+versionado. Medir una copia ausente no protege nada; lo que hay que vigilar es
+otra cosa:
+
+  V1  un solo árbol     mismo inodo en el canon y en las 12 raíces de escritura
+  V2  cero copias       `skills.external_dirs` ausente en los 12 configs
+  V3  configs sanos     los 12 parsean (un YAML roto degrada el perfil entero
+                        al config por defecto — incidente del 23-sep-2026)
+  V4  catálogo íntegro  SKILL.md alcanzables == SKILL.md versionados en git
+  V5  árbol limpio      ediciones de agente sin commitear
+  V6  aduana            verify_skills.py
+  V7  curador           estado y ledger (fuente de verdad de sus movimientos)
+  V8  gate              ledger del hook: cuántas creaciones bloqueó/encauzó
+  V9  recreaciones      ventanas de recreación del contenedor
+
+HIGIENE (R4: toda edición de agente queda versionada)
+  Si el árbol está sucio: atribuye cada ruta a perfil + sesión consultando los
+  `state.db` de la flota, corre la aduana, commitea y empuja. La atribución es
+  explícita sobre su confianza: si hay 0 candidatos o varios sesiones distintas
+  en la misma ventana, la marca es «no concluyente» — nunca se inventa autoría.
+
+USO
+  python3 scripts/f3_higiene_diaria.py --dry-run     # solo reporta
+  python3 scripts/f3_higiene_diaria.py               # reporta, commitea y empuja
+  python3 scripts/f3_higiene_diaria.py --sin-push
+"""
+import argparse
+import json
+import re
+import sqlite3
+import subprocess
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+REPO = Path('/root/hermes-agent')
+DATA = REPO / 'data'
+CANON = REPO / 'skills'
+CONT = 'hermes-agent'
+PERFILES = ['bragi', 'brokkr', 'comms', 'freyja', 'heimdall', 'hermodr',
+            'roshi', 'sindri', 'ullr', 'vigia', 'vili']
+CONFIGS = [DATA / 'config.yaml'] + [DATA / 'profiles' / p / 'config.yaml' for p in PERFILES]
+RAICES_CONT = ['/opt/data/skills'] + ['/opt/data/profiles/%s/skills' % p for p in PERFILES]
+RUTAS_ESCRITURA = ('skill_manage', 'write_file', 'patch', 'edit',
+                   'terminal', 'execute_code', 'apply_patch', 'str_replace_editor')
+AHORA = time.time()
+
+
+def log(msg=''):
+    print(msg, flush=True)
+
+
+def sh(cmd, cwd=None, timeout=180):
+    try:
+        return subprocess.run(cmd, shell=True, cwd=cwd, capture_output=True,
+                              text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        class R:
+            returncode, stdout, stderr = 124, '', 'timeout'
+        return R()
+
+
+def dtexec(script, timeout=180):
+    return sh('docker exec %s bash -lc %s' % (CONT, json.dumps(script)), timeout=timeout)
+
+
+# ── V1 · un solo árbol ──────────────────────────────────────────────────────
+def v1_inodo(informe):
+    try:
+        ino_host = '%d:%d' % (CANON.stat().st_dev, CANON.stat().st_ino)
+    except Exception as e:
+        informe['V1_inodo'] = {'ok': False, 'error': str(e)}
+        return
+    cmds = ' ; '.join('stat -c "%%d:%%i" %s 2>/dev/null' % p for p in RAICES_CONT)
+    out = dtexec(cmds).stdout.split()
+    distintos = [p for p, i in zip(RAICES_CONT, out) if i != ino_host]
+    ok = (not distintos) and len(out) == len(RAICES_CONT)
+    informe['V1_inodo'] = {'ok': ok, 'canon': ino_host, 'rutas': len(out),
+                           'distintos': distintos}
+
+
+# ── V2/V3 · configs ─────────────────────────────────────────────────────────
+def v2_v3_configs(informe):
+    try:
+        import yaml
+    except Exception:
+        yaml = None
+    con_ext, roto, sanos = [], [], 0
+    for p in CONFIGS:
+        if not p.is_file():
+            roto.append(str(p))
+            continue
+        txt = p.read_text(encoding='utf-8')
+        if 'external_dirs' in txt:
+            con_ext.append(str(p))
+        if yaml is not None:
+            try:
+                yaml.safe_load(txt)
+                sanos += 1
+            except Exception:
+                roto.append(str(p))
+        else:
+            sanos += 1
+    informe['V2_external_dirs'] = {'ok': not con_ext, 'configs': con_ext}
+    informe['V3_configs'] = {'ok': not roto, 'sanos': sanos,
+                             'total': len(CONFIGS), 'rotos': roto}
+
+
+# ── V4 · catálogo íntegro ───────────────────────────────────────────────────
+def v4_catalogo(informe):
+    en_git = sh('git ls-files "skills/**/SKILL.md"', cwd=REPO).stdout.split()
+    cont = dtexec('find /opt/data/skills -name SKILL.md').stdout.split()
+    nombres_git = sorted(x.replace('/SKILL.md', '') for x in en_git)
+    nombres_cont = sorted(x.replace('/opt/data/', '').replace('/SKILL.md', '')
+                          for x in cont)
+    ok = nombres_git == nombres_cont
+    faltan = sorted(set(nombres_git) - set(nombres_cont))
+    sobran = sorted(set(nombres_cont) - set(nombres_git))
+    informe['V4_catalogo'] = {'ok': ok, 'en_git': len(nombres_git),
+                              'alcanzables': len(nombres_cont),
+                              'faltan': faltan[:10], 'sin_versionar': sobran[:10]}
+
+
+# ── V5 · árbol limpio ───────────────────────────────────────────────────────
+def v5_arbol(informe):
+    out = sh('git status --porcelain skills/', cwd=REPO).stdout
+    lineas = [l for l in out.splitlines() if l.strip()]
+    informe['V5_arbol'] = {'sucio': bool(lineas), 'n': len(lineas),
+                           'rutas': [l[3:].strip() for l in lineas][:30]}
+
+
+# ── V6 · aduana ─────────────────────────────────────────────────────────────
+def v6_aduana(informe):
+    out = sh('python3 scripts/verify_skills.py', cwd=REPO, timeout=300).stdout
+    err = re.search(r'Errores cr[ií]ticos:\s*(\d+)', out)
+    adv = re.search(r'Advertencias menores:\s*(\d+)', out)
+    ok = 'ADUANA SUPERADA' in out
+    informe['V6_aduana'] = {'ok': ok,
+                            'errores': int(err.group(1)) if err else None,
+                            'advertencias': int(adv.group(1)) if adv else None}
+
+
+# ── V7 · curador ────────────────────────────────────────────────────────────
+def v7_curador(informe):
+    est, led = CANON / '.curator_state', CANON / '.curator_ledger.jsonl'
+    d = {}
+    if est.is_file():
+        try:
+            d = json.loads(est.read_text(encoding='utf-8'))
+        except Exception:
+            d = {}
+    n, ult = 0, None
+    if led.is_file():
+        lineas = [l for l in led.read_text(encoding='utf-8').splitlines() if l.strip()]
+        n = len(lineas)
+        if lineas:
+            try:
+                ult = json.loads(lineas[-1]).get('ts') or json.loads(lineas[-1]).get('timestamp')
+            except Exception:
+                ult = None
+    informe['V7_curador'] = {'run_count': d.get('run_count'),
+                             'last_run_at': d.get('last_run_at'),
+                             'paused': d.get('paused'),
+                             'ledger_entradas': n, 'ultimo_movimiento': ult}
+
+
+# ── V8 · gate ───────────────────────────────────────────────────────────────
+def v8_gate(informe):
+    f = DATA / 'state' / 'autoskill_gate.jsonl'
+    conteo = {'OMITIR': 0, 'EDITAR': 0, 'CREAR': 0}
+    total24 = 0
+    ultimo = None
+    if f.is_file():
+        for l in f.read_text(encoding='utf-8').splitlines():
+            if not l.strip():
+                continue
+            try:
+                r = json.loads(l)
+            except Exception:
+                continue
+            v = r.get('veredicto')
+            if v in conteo:
+                conteo[v] += 1
+            ts = r.get('ts', '')
+            ultimo = ts or ultimo
+            try:
+                t = datetime.strptime(ts[:19], '%Y-%m-%dT%H:%M:%S').replace(
+                    tzinfo=timezone.utc).timestamp()
+                if AHORA - t > 86400:
+                    pass
+                else:
+                    total24 += 1
+            except Exception:
+                pass
+    informe['V8_gate'] = {'total': dict(conteo), 'ultimas_24h': total24, 'ultimo': ultimo}
+
+
+# ── V9 · recreaciones ───────────────────────────────────────────────────────
+def v9_recreaciones(informe):
+    inicio = sh('docker inspect %s --format "{{.State.StartedAt}}"' % CONT).stdout.strip()
+    ventanas_hoy = sorted(p.name for p in (DATA / 'state').glob('f3_ventana_*.json')
+                          if time.strftime('%Y%m%d', time.localtime(p.stat().st_mtime)) ==
+                          time.strftime('%Y%m%d'))
+    informe['V9_recreaciones'] = {'contenedor_arrancado': inicio,
+                                  'ventanas_hoy': ventanas_hoy}
+
+
+# ── HIGIENE · atribución ────────────────────────────────────────────────────
+def sesiones_que_tocaron(rel, nombre, errores=None):
+    """Busca en los state.db de la flota qué sesiones escribieron esa ruta.
+
+    Dos niveles: primero el camino relativo (preciso), luego el nombre de la
+    skill (laxo). Devuelve (lista de candidatos, nivel). Los errores de consulta
+    se acumulan en `errores` en vez de tragarse: un `except: continue` mudo fue
+    justo lo que ocultó un bug de construcción de SQL el 23-sep-2026.
+    """
+    dbs = [DATA / 'state.db'] + sorted(DATA.glob('profiles/*/state.db'))
+    ph = ','.join('?' for _ in RUTAS_ESCRITURA)
+    sql = ("select session_id, tool_name, timestamp from messages "
+           "where timestamp > ? and tool_name in (%s) "
+           "and (ifnull(content,'') like ? or ifnull(tool_calls,'') like ?) "
+           "order by timestamp desc limit 5") % ph
+    for nivel, patron in (('ruta', rel), ('nombre', nombre)):
+        cands = []
+        for db in dbs:
+            if not db.is_file():
+                continue
+            perfil = db.parent.name if db.parent.name != 'data' else 'default'
+            try:
+                c = sqlite3.connect('file:%s?mode=ro' % db, uri=True, timeout=8)
+                params = [AHORA - 7 * 86400] + list(RUTAS_ESCRITURA) + \
+                         ['%' + patron + '%', '%' + patron + '%']
+                filas = c.execute(sql, params).fetchall()
+                c.close()
+            except Exception as e:
+                # una db sin tabla `messages` no es un error: es una db vacía
+                if errores is not None and 'no such table' not in str(e):
+                    errores.append('%s: %s' % (db, e))
+                continue
+            for sid, tool, ts in filas:
+                cands.append({'perfil': perfil, 'session_id': sid, 'tool': tool,
+                              'ts': ts,
+                              'hace_min': round((AHORA - (ts or 0)) / 60, 1)})
+        if cands:
+            cands.sort(key=lambda x: x['ts'] or 0, reverse=True)
+            return cands, nivel
+    return [], 'sin rastro'
+
+
+def atribuir(rutas, errores=None):
+    res = {}
+    for rel in rutas:
+        partes = Path(rel).parts
+        nombre = partes[1] if len(partes) > 2 else Path(rel).stem
+        cands, nivel = sesiones_que_tocaron(rel.replace('skills/', ''), nombre, errores)
+        if not cands:
+            res[rel] = {'origen': 'sin rastro en los state.db', 'confianza': 'ninguna'}
+            continue
+        top = cands[0]
+        sesiones = {c['session_id'] for c in cands}
+        confianza = 'alta' if (len(sesiones) == 1 and nivel == 'ruta') else \
+                    'media' if len(sesiones) == 1 else 'baja'
+        res[rel] = {'origen': '%s / %s' % (top['perfil'], top['session_id']),
+                    'tool': top['tool'], 'hace_min': top['hace_min'],
+                    'nivel': nivel, 'confianza': confianza,
+                    'otras_sesiones': len(sesiones) - 1}
+    return res
+
+
+def higiene(informe, aplicar=True, push=True):
+    rutas = informe.get('V5_arbol', {}).get('rutas') or []
+    if not rutas:
+        informe['higiene'] = {'accion': 'nada que versionar'}
+        return
+    atrib, err_atrib = {}, []
+    atrib = atribuir(rutas, err_atrib)
+    informe['atribucion'] = atrib
+    if err_atrib:
+        informe['atribucion_errores'] = err_atrib
+    if not aplicar:
+        informe['higiene'] = {'accion': 'dry-run: se habría commiteado',
+                              'rutas': len(rutas)}
+        return
+    sh('git add -A skills/', cwd=REPO)
+    aduana = informe.get('V6_aduana', {})
+    marca = ''
+    if aduana.get('ok') is False:
+        marca = ' [ADUANA: %s errores / %s advertencias]' % (
+            aduana.get('errores'), aduana.get('advertencias'))
+    cuerpo = ['higiene diaria del árbol único — %s' % time.strftime('%Y-%m-%d %H:%M'),
+              '', 'Rutas versionadas: %d%s' % (len(rutas), marca), '']
+    for rel in rutas:
+        a = atrib.get(rel, {})
+        cuerpo.append('  · %s' % rel)
+        cuerpo.append('      origen: %s (confianza %s%s)' % (
+            a.get('origen', '?'), a.get('confianza', '?'),
+            '' if a.get('confianza') == 'alta' else
+            ', nivel %s%s' % (a.get('nivel', '?'),
+                              '' if not a.get('otras_sesiones') else
+                              ', %d sesiones más en la ventana' % a['otras_sesiones'])))
+    msg = 'chore(skills): ' + '\n'.join(cuerpo)
+    r = sh('git commit -F - <<"MSG"\n%s\nMSG' % msg, cwd=REPO)
+    if r.returncode != 0:
+        informe['higiene'] = {'accion': 'commit falló', 'salida': r.stdout[-300:] + r.stderr[-300:]}
+        return
+    head = sh('git rev-parse HEAD', cwd=REPO).stdout.strip()
+    estado = {'accion': 'commiteado', 'commit': head[:12], 'rutas': len(rutas)}
+    if push:
+        sh('git push origin HEAD:main', cwd=REPO)
+        remoto = sh('git ls-remote origin refs/heads/main', cwd=REPO).stdout.split()
+        ok = bool(remoto) and remoto[0] == head
+        estado['push'] = ok
+        if not ok:
+            estado['alerta_push'] = 'HEAD != origin/main tras el push'
+    informe['higiene'] = estado
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--sin-push', action='store_true')
+    a = ap.parse_args()
+
+    informe = {'ts': time.strftime('%Y-%m-%dT%H:%M:%S%z'), 'host': sh('hostname').stdout.strip()}
+    log('═══ VIGILANCIA E HIGIENE DEL ÁRBOL ÚNICO · %s ═══' % informe['ts'])
+    planes = ((v1_inodo, 'V1_inodo'), (v2_v3_configs, 'V2_external_dirs'),
+              (v4_catalogo, 'V4_catalogo'), (v5_arbol, 'V5_arbol'),
+              (v6_aduana, 'V6_aduana'), (v7_curador, 'V7_curador'),
+              (v8_gate, 'V8_gate'), (v9_recreaciones, 'V9_recreaciones'))
+    for fn, clave in planes:
+        try:
+            fn(informe)
+        except Exception as e:
+            informe.setdefault('errores_vigilancia', []).append('%s: %s' % (clave, e))
+        if clave == 'V2_external_dirs':
+            log('  %-18s %s | configs %s' % ('V2/V3 configs',
+                json.dumps(informe.get('V2_external_dirs', {}), ensure_ascii=False)[:110],
+                json.dumps(informe.get('V3_configs', {}), ensure_ascii=False)[:150]))
+        else:
+            log('  %-18s %s' % (clave, json.dumps(informe.get(clave, {}),
+                                                  ensure_ascii=False)[:230]))
+
+    higiene(informe, aplicar=not a.dry_run, push=not a.sin_push)
+
+    atencion = []
+    if not informe.get('V1_inodo', {}).get('ok'):
+        atencion.append('inodo único roto: %s' % informe.get('V1_inodo'))
+    if informe.get('V2_external_dirs', {}).get('configs'):
+        atencion.append('external_dirs reapareció: %s' % informe['V2_external_dirs']['configs'])
+    if not informe.get('V3_configs', {}).get('ok'):
+        atencion.append('configs con YAML roto: %s' % informe['V3_configs'].get('rotos'))
+    if not informe.get('V4_catalogo', {}).get('ok'):
+        atencion.append('catálogo divergente de git: faltan=%s sin_versionar=%s' % (
+            informe['V4_catalogo'].get('faltan'), informe['V4_catalogo'].get('sin_versionar')))
+    if informe.get('V6_aduana', {}).get('ok') is False:
+        atencion.append('aduana en rojo')
+    inf = informe.get('higiene', {})
+    if inf.get('push') is False or inf.get('accion') in ('commit falló',):
+        atencion.append('higiene: %s' % inf)
+    informe['requiere_atencion'] = bool(atencion)
+    informe['motivos'] = atencion
+
+    destino = DATA / 'state' / 'skills_higiene_last.json'
+    destino.write_text(json.dumps(informe, indent=1, ensure_ascii=False), encoding='utf-8')
+    # continuidad del contrato anterior (lo que ya consumía el vigilante viejo)
+    (DATA / 'state' / 'skills_sync_alert.json').write_text(json.dumps(
+        {'ts': informe['ts'], 'requiere_atencion': informe['requiere_atencion'],
+         'parity': informe.get('V4_catalogo', {}).get('ok'),
+         'motivos': atencion, 'detalle': str(destino)}, indent=1, ensure_ascii=False),
+        encoding='utf-8')
+
+    log('')
+    log('  higiene   : %s' % json.dumps(inf, ensure_ascii=False)[:300])
+    log('  atención  : %s' % (atencion or 'nada — todo en guion'))
+    log('  informe   : %s' % destino)
+    return 0 if not atencion else 3
+
+
+if __name__ == '__main__':
+    sys.exit(main())
