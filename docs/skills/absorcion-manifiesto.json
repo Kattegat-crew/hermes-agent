@@ -1,0 +1,78 @@
+{
+  "documento": "docs/skills/absorcion-manifiesto.json",
+  "fase": "F3 · absorcion de la re-acumulacion de autoskills",
+  "generado": "2026-09-23",
+  "autoridad": "Jesus Diaz (CTO) — orden: 'lee las 19 skills y valida correctamente si las 12 nuevas no entran en la categoria de robustecimiento de las existentes'",
+  "regla": "R15 de docs/skills/POLITICA-ARBOL-CANONICO.md: las autoskills se integran a los paraguas de core/; nunca se borra nada (se archiva con respaldo).",
+  "metodo": "Validacion por CONTENIDO (23-sep-2026): se leyeron los 19 SKILL.md con sus ~200 references y el texto integro de las 12 candidatas. Tamano de las candidatas: 35-73 lineas; tamano de los references existentes: 26-138 lineas. Mismo orden de magnitud: son references, no skills de clase.",
+  "absorciones": [
+    {
+      "modo": "reference",
+      "origen": "data/skills/video-post-content-analysis",
+      "paraguas": "video-reel-pipeline",
+      "caso": "analisis-video-post-externo",
+      "disparador": "analizar un reel o post social externo que llega como link: descarga del medio, transcripcion por vision, metricas con regla de honestidad y persistencia en la ingesta"
+    },
+    {
+      "modo": "reference",
+      "origen": "data/skills/specialists/docx-generacion-verificacion",
+      "paraguas": "informes-cliente-pipeline",
+      "caso": "docx-generacion-verificacion",
+      "disparador": "generar y auto-verificar un DOCX entregable: extraer tambien las celdas de tabla, asserts de negocio embebidos y re-verificacion en frio contra el archivo en disco"
+    },
+    {
+      "modo": "reference",
+      "origen": "data/skills/ads-destination-compliance",
+      "paraguas": "meta-ads-ops",
+      "caso": "destination-compliance-verticales",
+      "disparador": "anuncios rechazados por el DESTINO en verticales restringidas (casino, apuestas): triage de rechazos y patron venue-first"
+    },
+    {
+      "modo": "reference",
+      "origen": "data/skills/specialists/reel-preproduccion",
+      "paraguas": "video-reel-pipeline",
+      "caso": "reel-preproduccion",
+      "disparador": "etapa pre-gasto del reel a coste cero: lint de guiones, brief de prompts y render draft three.js"
+    },
+    {
+      "modo": "reference",
+      "origen": "data/skills/specialists/reel-stills-production",
+      "paraguas": "video-reel-pipeline",
+      "caso": "reel-stills-production",
+      "disparador": "stills pagados de un reel via fal con dry-run, gate de gasto firmado por humano y verificacion visual"
+    },
+    {
+      "modo": "reference",
+      "origen": "data/skills/devops/paid-media-generation",
+      "paraguas": "video-reel-pipeline",
+      "caso": "gate-de-gasto-media",
+      "disparador": "protocolo obligatorio antes de lanzar CUALQUIER generacion que consuma saldo (fal, monid, elevenlabs): autorizacion, gate y verificacion del artefacto"
+    },
+    {
+      "modo": "reference",
+      "origen": "data/skills/marketing/meta-capi-tracking",
+      "paraguas": "meta-ads-ops",
+      "caso": "meta-capi-tracking",
+      "disparador": "diagnosticar pixels y datasets de Meta en Events Manager y deduplicar el pixel con la Conversions API en pipelines de leads"
+    },
+    {
+      "modo": "reference",
+      "origen": "data/skills/activepieces-bre-b-ops",
+      "paraguas": "google-workspace-ops",
+      "caso": "activepieces-flows-ops",
+      "disparador": "operar y reparar flows de ActivePieces: MCP, quitar o pausar pasos, reinyectar filas al Sheet y auditar la integridad"
+    },
+    {
+      "modo": "merge",
+      "origen": "data/skills/creative/hermes-multiprofile-gateway-ops",
+      "paraguas": "hermes-fleet-operations",
+      "caso": "hermes-multiprofile-gateway-ops",
+      "nota": "el paraguas YA tiene este reference; la copia sin version diverge con 33 lineas de mas. Se integra el delta y se archiva el origen."
+    }
+  ],
+  "fuera_de_alcance": [
+    {"origen": "data/skills/caveman", "motivo": "instalacion de hub (skills.sh), no autoskill: se decide aparte si se promueve al arbol o se desinstala"},
+    {"origen": "data/skills/diagram-design", "motivo": "instalacion por URL, no autoskill"},
+    {"origen": "data/skills/ponytail", "motivo": "instalacion de hub (skills.sh), no autoskill"}
+  ]
+}
