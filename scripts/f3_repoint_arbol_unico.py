@@ -43,6 +43,7 @@ USO
    reutiliza el patrón probado de la ventana F2 con rollback automático)
 """
 import argparse
+import copy
 import hashlib
 import json
 import os
@@ -52,6 +53,8 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+
+import yaml
 
 REPO = Path('/root/hermes-agent')
 DATA = REPO / 'data'
@@ -124,29 +127,59 @@ def rutas_raices():
 
 
 def bloque_external_dirs(txt):
-    """Devuelve (inicio, fin) del bloque `external_dirs:` dentro de skills:, o None."""
+    """Devuelve (inicio, fin) del bloque `external_dirs:` bajo skills:, o None.
+
+    El ítem de lista puede venir indentado con 2 espacios (al mismo nivel que la
+    clave) o con 4: el layout ha variado entre perfiles. Se consumen todos los
+    ítems consecutivos con indentación >= la de la clave, y se corta en la
+    primera línea que no sea ítem.
+    """
     lineas = txt.splitlines(keepends=True)
     for i, l in enumerate(lineas):
-        if re.match(r'^\s{2}external_dirs:\s*$', l) or re.match(r'^\s{2}external_dirs:\s*\[', l):
-            j = i
-            if not re.match(r'^\s{2}external_dirs:\s*\[', l):
-                k = i + 1
-                while k < len(lineas) and re.match(r'^\s{4}-\s', lineas[k]):
-                    k += 1
-                j = k
-            else:
-                j = i + 1
+        if re.match(r'^\s*external_dirs:\s*(\[\s*\]\s*)?$', l):
+            indent = len(l) - len(l.lstrip())
+            j = i + 1
+            while j < len(lineas):
+                s = lineas[j]
+                if s.strip() == '':
+                    break
+                lind = len(s) - len(s.lstrip())
+                if s.lstrip().startswith('- ') and lind >= indent:
+                    j += 1
+                    continue
+                break
             return i, j
     return None
 
 
 def quitar_external_dirs(texto):
+    """Quita `skills.external_dirs` con validación estructural obligatoria.
+
+    Devuelve (texto_nuevo, quitado, error). El texto nuevo solo se acepta si
+    parsea y si el documento resultante es idéntico al original salvo por esa
+    clave. Sin esta comprobación, una eliminación mal recortada deja el YAML
+    inválido y el runtime cae al config por defecto ignorando todos los
+    overrides del perfil (incidente del 23-sep-2026).
+    """
     r = bloque_external_dirs(texto)
     if not r:
-        return texto, False
+        return texto, False, None
     i, j = r
     lineas = texto.splitlines(keepends=True)
-    return ''.join(lineas[:i] + lineas[j:]), True
+    nuevo = ''.join(lineas[:i] + lineas[j:])
+    try:
+        antes = yaml.safe_load(texto) or {}
+        despues = yaml.safe_load(nuevo) or {}
+    except Exception as e:
+        return texto, False, 'YAML inválido tras la edición: %s' % e
+    if not isinstance(despues, dict) or (despues.get('skills') or {}).get('external_dirs'):
+        return texto, False, 'external_dirs sigue presente en el resultado'
+    esperado = copy.deepcopy(antes)
+    if isinstance(esperado, dict) and isinstance(esperado.get('skills'), dict):
+        esperado['skills'].pop('external_dirs', None)
+    if esperado != despues:
+        return texto, False, 'la edición cambió el documento más allá de external_dirs'
+    return nuevo, True, None
 
 
 def montajes_faltantes(compose_txt):
@@ -198,8 +231,12 @@ def main():
     # ── 2. estado runtime de las raíces locales → archivo ────────────────────
     log('\n2) estado runtime de las raíces locales → %s (se MUEVE, no se borra)' % arch)
     movidos, hub_instalados = [], []
+    ino_canon = CANON.stat().st_ino
     for etiqueta, ruta, _cont in rutas_raices():
         if not ruta.is_dir():
+            continue
+        if ruta.stat().st_ino == ino_canon:
+            log('   · %-8s (ya ES el canon; no se mueve nada)' % etiqueta)
             continue
         entradas = sorted(p.name for p in ruta.iterdir())
         estado = [n for n in entradas if n in ESTADO_RUNTIME]
@@ -246,21 +283,30 @@ def main():
 
     # ── 4. quitar skills.external_dirs de los 12 configs ─────────────────────
     log('\n4) quitar `skills.external_dirs` de los configs')
-    tocados = []
+    tocados, errores = [], []
     for p in CONFIGS:
         if not p.is_file():
             log('   · (no existe) %s' % p)
             continue
         txt = p.read_text(encoding='utf-8')
-        nuevo, hizo = quitar_external_dirs(txt)
-        if not hizo:
-            log('   · ya sin external_dirs: %s' % p.name if p.parent != DATA else '   · ya sin external_dirs: config.yaml (root)')
+        nuevo, hizo, err = quitar_external_dirs(txt)
+        etiqueta = p.parent.name if p.parent != DATA else 'root'
+        if err:
+            log('   ❌ %s: %s' % (etiqueta, err))
+            errores.append('%s: %s' % (etiqueta, err))
             continue
-        log('   · %s → quitado' % (str(p).replace(str(DATA) + '/', '')))
+        if not hizo:
+            log('   · %-8s ya sin external_dirs' % etiqueta)
+            continue
+        log('   · %-8s → quitado (validado estructuralmente)' % etiqueta)
         tocados.append(str(p))
         if a.apply:
             p.write_text(nuevo, encoding='utf-8')
     informe['configs_editados'] = tocados
+    informe['configs_con_error'] = errores
+    if errores:
+        log('\n🛑 ABORTADO: hay configs que no se pudieron editar sin riesgo (%d).' % len(errores))
+        return 1
 
     # ── 5. montar el canon en las 12 rutas de escritura ──────────────────────
     log('\n5) montajes del canon en las rutas de ESCRITURA')
