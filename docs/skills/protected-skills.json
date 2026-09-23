@@ -1,0 +1,58 @@
+{
+  "documento": "docs/skills/protected-skills.json",
+  "generado": "2026-09-23",
+  "autoridad": "Jesus Diaz (CTO)",
+  "proposito": "Lista declarativa de skills que NINGUNA operacion de poda, archivo o consolidacion puede tocar. Sustituye a `hermes curator pin` mientras el canon sea skills.external_dirs (ese comando las rechaza: verificado 23-sep-2026).",
+  "fuente_regla": "R9 y R7 de docs/skills/POLITICA-ARBOL-CANONICO.md",
+  "listas": {
+    "paraguas_clase": {
+      "motivo": "Son el destino de toda absorcion de fragmentos y la capa de decision del pipeline. Poda o fusion de un paraguas = perdida de la clase entera.",
+      "skills": [
+        "agent-roster-ops",
+        "brain-knowledge-ops",
+        "campaign-ops",
+        "colombia-legal-ops",
+        "copy-quality-es",
+        "github-workflow",
+        "google-workspace-ops",
+        "hermes-cron-ops",
+        "hermes-desktop-ops",
+        "hermes-fleet-operations",
+        "hermes-provider-ops",
+        "hermes-runtime-ops",
+        "informes-cliente-pipeline",
+        "meta-ads-ops",
+        "multi-agent-collaboration",
+        "oauth-connection-ops",
+        "skill-library-ops",
+        "video-reel-pipeline",
+        "vps-deployment-ops"
+      ]
+    },
+    "puntos_de_entrada_ux": {
+      "motivo": "Backstop de UX: romper un punto de entrada visible al usuario es un fallo perceptible. La regla 3b del curador ya protege los built-ins; esta lista la hace explicita para el canon.",
+      "skills": [
+        "plan"
+      ]
+    },
+    "cron_dependientes": {
+      "motivo": "Jobs con dependencia viva. El curador no debe podar lo que un cron necesita.",
+      "skills": [
+        {
+          "skill": "engram-memory-system",
+          "cron": "guardar-diario-memoria, brain-graph-update-noche (data/cron/jobs.json)"
+        },
+        {
+          "skill": "hermes-scheduled-jobs",
+          "cron": "infraestructura de jobs programados de la flota"
+        },
+        {
+          "skill": "meta-ads-discord-reporter",
+          "cron": "2 crons root de Meta Ads, 16:00 y 16:02 (ruta a repuntar en F5)"
+        }
+      ]
+    }
+  },
+  "nota_de_proteccion": "El chequeo diario (scripts/skills_sync_daily.sh) y el job de higiene deben alertar si alguna skill de esta lista cambia de nombre, se archiva o desaparece del arbol versionado.",
+  "transicion_A2": "Tras la fase F3 (canon como raiz de skills de los perfiles), la misma lista se aplica con `hermes curator pin` sobre las skills hoy inalcanzables para ese comando."
+}
