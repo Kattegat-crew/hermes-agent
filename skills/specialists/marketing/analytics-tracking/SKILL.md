@@ -379,3 +379,7 @@ All output follows the structured communication standard:
 - **analytics-tracking** (this skill): covers setup only. For dashboards and reporting, use campaign-analytics.
 - **seo-audit**: Use for technical SEO. NOT for analytics tracking (though both use GA4 data).
 - **gdpr-dsgvo-expert**: Use for GDPR compliance posture. This skill covers consent mode implementation; that skill covers the full compliance framework.
+
+## Referencias absorbidas
+
+- `references/analytics.md` — absorbida desde `specialists/marketing/analytics` el 2026-09-23 (F6 lote 0, R15: condensar sin borrar).

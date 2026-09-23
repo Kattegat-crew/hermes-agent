@@ -1,3 +1,7 @@
+<!-- Absorbido por F6 lote 0 el 2026-09-23 desde `specialists/hermes-internal/brain-graph-ops`.
+     Contenido íntegro de la skill absorbida; el original queda en
+     `data/archive/F6_lote0_20260923-150318/absorbidas/`. -->
+
 ---
 name: brain-graph-ops
 description: "Use when operando el grafo del brain."

@@ -44,3 +44,7 @@ Usually caused by:
 - **One-Click Onboarding:** For clients, use an embedded OAuth button (Iframe/SDK) so they never see the internal dashboard.
 - **Minimal Scopes:** Only request the necessary scopes (e.g., `gmail.modify` + `calendar.events` + `drive.file`) in a single consent screen to reduce friction.
 - **Silent Refresh:** Rely on AP's ability to handle refresh tokens to keep connections "evergreen" without user intervention.
+
+## Referencias absorbidas
+
+- `references/oauth-multi-tenant-integration.md` — absorbida desde `productivity/oauth-multi-tenant-integration` el 2026-09-23 (F6 lote 0, R15: condensar sin borrar).

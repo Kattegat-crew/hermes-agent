@@ -87,3 +87,7 @@ Contar por lectura del JSON, **nunca** por el tamaño del archivo. Y comparar an
 Este skill cubre el GRAFO. El ruteo de qué nota va en qué carpeta del brain y las reglas de escritura están en `brain/AGENTS.md` + `brain/folder-maps/brain.md` (carpetas nuevas autorizadas desde 2026-09-11 si son descriptivas, kebab-case y **registradas**). El mapa de capas de memoria (memoria nativa / Engram / brain / git) vive en la skill `memory-architecture`.
 
 Detalle del caso completo (los cuatro bugs, mediciones e incidentes): `references/brain-graph-maintenance.md`.
+
+## Referencias absorbidas
+
+- `references/brain-graph-ops.md` — absorbida desde `specialists/hermes-internal/brain-graph-ops` el 2026-09-23 (F6 lote 0, R15: condensar sin borrar).
