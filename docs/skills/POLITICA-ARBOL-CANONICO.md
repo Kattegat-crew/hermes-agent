@@ -224,3 +224,50 @@ respaldo y firma del CTO. El job lleva el contador en
 de que nadie se acuerde.
 
 Primera revisión: **1/2**, con 594 candidatas y 0 transiciones propuestas.
+
+## F5 · Cerrar todo lo que vivía fuera del repositorio (23-sep-2026)
+
+### Árboles retirados
+
+| Origen | Qué era | Destino |
+|---|---|---|
+| `/root/.agents/skills` | 189 SKILL.md, el mayor árbol externo; alimentaba los 2 crons de Meta Ads | `data/archive/F5_*/agents_skills.original` + tar 473 MB |
+| `/opt/data/skills` (host) | 5 SKILL.md: las 4 huérfanas + `web-performance-core-vitals` + un `graphify-out` del 26-ago | `data/archive/F5_*/host_opt_data_skills.original` + tar |
+| `data/skills` | residuo **y punto de montaje** de `/opt/data/skills` | restaurado (ver aviso abajo) |
+
+Las **4 skills huérfanas** se incorporaron al canon antes de archivar:
+`meta-ads-discord-reporter` → `specialists/marketing-ads/`,
+`mobile-landing-optimization` → `specialists/marketing/`,
+`google-sheets-crm-sync` y `twenty-crm-lead-ops` → `productivity/`.
+(`web-performance-core-vitals` ya vivía en `specialists/devops-infra/`.)
+
+### Los 2 crons de Meta Ads
+
+Repuntados de `/root/.agents/skills/...` al canon
+(`skills/specialists/marketing-ads/meta-ads-discord-reporter/scripts/report.py`),
+con respaldo previo de la crontab y **prueba de entrega real ANTES de archivar**:
+corrida desde la ruta nueva, como root en el host, contra un webhook **temporal** en
+`#sistema-servers` — `Successfully sent report to Discord!`, rc=0 — para no publicar
+nada en el canal del cliente. El webhook temporal se borró después (verificado: ya no
+acepta mensajes).
+
+### El aviso del punto de montaje (incidente del 23-sep-2026)
+
+`data/skills` parecía residuo de la purga; en realidad es el **punto de montaje** de
+`/opt/data/skills` en el namespace del contenedor. Al moverlo en el host, el montaje
+quedó huérfano, `/opt/data/skills` dejó de existir y el perfil default perdió su raíz
+de skills. Se restauró moviendo el directorio de vuelta (el montaje sigue pegado al
+inodo). Regla que queda: **los puntos de montaje no se mueven en caliente**; su retiro
+exige recrear el contenedor. El job de higiene lo detectó en la misma corrida y ahora
+V1 informa la **ruta ausente**, no solo un conteo.
+
+### Catálogos ajenos
+
+`/neuralcrew_agent` (182 SKILL.md, PRD/TRD y `core/`) es el **catálogo del producto
+nca-api**: contenedores `nca-*`. Queda FUERA del inventario de Hermes por definición
+(R10): no se mezcla, no se consolida y no entra en el censo del canon.
+
+### Cierre de D2
+
+El inventario por grupo, con rutas, tamaños, entradas y sha256, queda publicado en
+`docs/skills/INVENTARIO-ARCHIVO.md`, generado desde el disco.

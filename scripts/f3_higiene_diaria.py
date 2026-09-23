@@ -91,12 +91,21 @@ def v1_inodo(informe):
     except Exception as e:
         informe['V1_inodo'] = {'ok': False, 'error': str(e)}
         return
-    cmds = ' ; '.join('stat -c "%%d:%%i" %s 2>/dev/null' % p for p in RAICES_CONT)
-    out = dtexec(cmds).stdout.split()
-    distintos = [p for p, i in zip(RAICES_CONT, out) if i != ino_host]
-    ok = (not distintos) and len(out) == len(RAICES_CONT)
-    informe['V1_inodo'] = {'ok': ok, 'canon': ino_host, 'rutas': len(out),
-                           'distintos': distintos}
+    # Se miden las 12 rutas UNA POR UNA: si una desaparece (p. ej. su punto de
+    # montaje se movió en el host), hay que decir CUÁL, no solo un conteo corto.
+    # Lección del 23-sep: `mv data/skills` en el host arrancó el punto de montaje
+    # de /opt/data/skills y el perfil default se quedó sin raíz de skills.
+    medidas, distintas, ausentes = {}, [], []
+    for p in RAICES_CONT:
+        out = dtexec('stat -c "%%d:%%i" %s 2>/dev/null || echo AUSENTE' % p).stdout.strip()
+        medidas[p] = out
+        if out == 'AUSENTE' or not out:
+            ausentes.append(p)
+        elif out != ino_host:
+            distintas.append('%s=%s' % (p, out))
+    ok = not distintas and not ausentes and len(medidas) == len(RAICES_CONT)
+    informe['V1_inodo'] = {'ok': ok, 'canon': ino_host, 'rutas': len(medidas),
+                           'ausentes': ausentes, 'distintos': distintas}
 
 
 # ── V2/V3 · configs ─────────────────────────────────────────────────────────
