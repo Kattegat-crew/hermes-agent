@@ -54,5 +54,14 @@
     }
   },
   "nota_de_proteccion": "El chequeo diario (scripts/skills_sync_daily.sh) y el job de higiene deben alertar si alguna skill de esta lista cambia de nombre, se archiva o desaparece del arbol versionado.",
-  "transicion_A2": "Tras la fase F3 (canon como raiz de skills de los perfiles), la misma lista se aplica con `hermes curator pin` sobre las skills hoy inalcanzables para ese comando."
+  "transicion_A2": "EJECUTADA 23-sep-2026 (F4): `hermes curator pin` aplicado sobre 22 de las 23 skills de esta lista — el canon dejó de ser `external_dirs` y el comando ya las acepta. `meta-ads-discord-reporter` no vive aún en el canon (F5): pinearla cuando se incorpore.",
+  "estado_pin_20260923": {
+    "pineadas": 22,
+    "pendientes": [
+      "meta-ads-discord-reporter (no está en el canon; entra en F5)"
+    ],
+    "comando": "hermes curator pin <skill>  (perfil raíz, HERMES_HOME=/opt/data)",
+    "nota": "El pin sobre skills no gestionadas se registra igual y las excluye de toda transición automática del curador."
+  },
+  "verificado_en": "2026-09-23T07:56:34-0500"
 }
