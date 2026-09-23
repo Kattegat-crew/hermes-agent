@@ -1,3 +1,7 @@
+<!-- Caso absorbido por F6 lote 3 el 2026-09-23 desde `devops/open-design-selfhost-ops`.
+     Contenido íntegro; original en
+     `data/archive/F6_lote3_20260923-155847/absorbidas/`. -->
+
 ---
 name: open-design-selfhost-ops
 description: "Deploy/run self-hosted OpenDesign (Docker+NPM+BYOK)."

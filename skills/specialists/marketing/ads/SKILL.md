@@ -497,3 +497,7 @@ For tracking setup, see [references/conversion-tracking.md](references/conversio
 - **analytics / attribution**: Conversion tracking setup and the blended-CAC inputs behind [payback-period.md](references/payback-period.md); **pricing** sets the ARPU + plan structure that drive its Payback math (why blended LTV:CAC hides $9-vs-$999 variance)
 - **ab-testing**: For landing page testing to improve ROAS
 - **cro**: For optimizing post-click conversion rates
+
+## Referencias absorbidas
+
+- `references/paid-ads.md` — absorbida desde `specialists/marketing/paid-ads` el 2026-09-23 (F6 lote 3, R15: condensar sin borrar).

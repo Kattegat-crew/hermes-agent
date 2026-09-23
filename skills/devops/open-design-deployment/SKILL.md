@@ -123,3 +123,7 @@ Optional phase 2: `od mcp install hermes` wires OD's MCP into Hermes so OD passe
 - `nginx-proxy-manager-api` — the NPM REST API and cert flow.
 - `reel-gallery-deploy`, `static-portal-generator` — related VPS/portal deployment.
 - `vps-web-deployment` — general static deploy + NPM.
+
+## Referencias absorbidas
+
+- `references/open-design-selfhost-ops.md` — absorbida desde `devops/open-design-selfhost-ops` el 2026-09-23 (F6 lote 3, R15: condensar sin borrar).

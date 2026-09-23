@@ -1,3 +1,7 @@
+<!-- Caso absorbido por F6 lote 3 el 2026-09-23 desde `specialists/marketing/paid-ads`.
+     Contenido íntegro; original en
+     `data/archive/F6_lote3_20260923-155847/absorbidas/`. -->
+
 ---
 name: "paid-ads"
 description: "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' 'ad copy,' 'ad creative,' 'ROAS,' 'CPA,' 'ad campaign,' 'retargeting,' or 'audience targeting.' This skill covers campaign strategy, ad creation, audience targeting, and optimization."

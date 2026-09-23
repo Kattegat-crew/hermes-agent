@@ -258,6 +258,27 @@ onesignal, metaads) con su contenido íntegro en `references/`; diferido
 
 Acta: `docs/skills/F6-LOTE1-EJECUCION.md`.
 
+### 3.5 F6 · Lotes 0-3 ejecutados (23-sep-2026)
+
+Cuatro lotes con el candado en código (2/2 revisiones limpias + firma del dueño, probado en
+negativo). Serie de la métrica frente a la referencia del 22-sep:
+
+| Métrica | 22-sep | Hoy |
+|---|---|---|
+| Pares de solape | 85 | **61** |
+| Grupos | 45 | **33** |
+| Skills implicadas | 115 (16,0 %) | **80 (11,24 %)** |
+| Catálogo | — | 722 → **712** |
+
+**Diferidos con evidencia (no descartados):** `hermes-bible-study` → `hermes-bible` (bundles de
+3,2 MB + updater acoplado), `amazon-sp-api` → `amazon-spapi-integration` (scripts en ambos
+lados), `colombia-juegos-promocionales` ⇄ `colombia-promociones-legales` (complementarias,
+descripción vacía), `pinecone-research` → `pinecone` (hub + scripts), `microsoft-clarity-automation`
+(otra clase).
+
+**Falsos positivos declarados** en `data/state/f6_falsos_positivos.json`: familia `sdd-*` (10) y
+`pytorch-fsdp` ⇄ `unsloth`.
+
 ## 4. Orden de ejecución recomendado
 
 ```
