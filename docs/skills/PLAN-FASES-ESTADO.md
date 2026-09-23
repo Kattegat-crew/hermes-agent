@@ -25,7 +25,7 @@ consta qué fases cerraron, qué deuda residual dejaron y dónde cae cada acció
 | **F3** · Edición de agentes sobre el árbol único | ✅ cerrada | Raíz de escritura repuntada en los 12; gate `guard_autoskill_create.py` activo (`rc=2`); job de higiene diario |
 | **F4** · Curador con dueño, alcance y ciclo | ✅ cerrada | `curator pause` + driver semanal en seco; adopción del catálogo; pines. Revisión limpia **1/2** (`data/state/f4_curador_last.json`) |
 | **F5** · Cerrar lo que vivía fuera del repositorio | ✅ cerrada **con incidente** | 3 árboles retirados; 2 crons de Meta Ads repuntados; **incidente del punto de montaje** (`data/skills`) |
-| **F5.2** · Deuda residual del cierre de F5 | ⏳ **nueva** | Árbol legado `/opt/data` del host (ver §2.2 y §3) |
+| **F5.2** · Deuda residual del cierre de F5 | ✅ **cerrada** (23-sep, 13:05) | Árbol legado del host archivado y retirado; 0 referencias vivas (ver §3.0) |
 | **F6** · Consolidación supervisada | ⏸️ **bloqueada** | Exige 2 revisiones limpias del curador; hoy **1/2**. No arranca: la autorización vive en el código |
 | **F7** · Higiene de flota | ⏳ pendiente | 3 ítems originales + **4 nuevos** (ver §3) |
 | **F8** · PROD y verificación final | ⏳ pendiente | Se le añade una comprobación (ver §3, N9) |
@@ -108,10 +108,10 @@ ejecuta sin cerrar la anterior dentro de su fase.
 
 | # | Acción | Riesgo | Firma | Criterio de aceptación |
 |---|---|---|---|---|
-| **N3** | Declarar en la política la **capa de alias del host**: contrato explícito de sus 6 symlinks + payload legado rotulado como tal | Nulo | No | Nota commiteada en `POLITICA-ARBOL-CANONICO.md` con la tabla de symlinks y su uso |
-| **N4** | **Quitar la dependencia viva**: repuntar los 3 jobs de la crontab de root a `<repo>/data/scripts/…` | Medio | Sí (CTO) | Respaldo previo de crontab + corrida real de los 3 jobs desde la ruta nueva con `rc=0` y entrega verificada |
-| **N5** | **Inventariar y archivar** el payload legado (tar verificado entrada por entrada). **No** se toca la capa de alias | Medio | Sí (CTO) | `INVENTARIO-ARCHIVO.md` actualizado con grupo, rutas, tamaño y sha256; 0 `SKILL.md` perdidos; `.original` restaurable |
-| **N7** | Documentar la **asimetría del default** (su raíz de skills *es* el punto de montaje del árbol de datos, y `data/skills` en el host se llama igual que un residuo) | Nulo | No | Regla escrita: los puntos de montaje no se mueven en caliente; retirarlos exige recrear el contenedor |
+| **N3** | ✅ Declarar en la política el retiro del árbol legado y la convención de una sola ruta (`R16`) | Nulo | No | **Hecho**: `POLITICA-ARBOL-CANONICO.md` § F5.2 |
+| **N4** | ✅ Quitar la dependencia viva: repuntar los 3 jobs de la crontab y las constantes `/opt/data` de los 2 scripts | Medio | Sí (CTO) | **Hecho**: `rc=0` en ambos jobs desde la ruta nueva; cron de las 13:00 corrió ya repuntado |
+| **N5** | ✅ Inventariar y archivar el árbol legado (82.923 ficheros) + el espejo `/opt/hermes/skills` | Medio | Sí (CTO) | **Hecho**: tar 266 MB (`7b5acc40a70024f8`) restaurado y cotejado 1:1 (10/10 hashes) |
+| **N7** | ✅ Documentar la asimetría del default | Nulo | No | **Hecho**: regla `R17` en la política |
 
 **Orden obligatorio: N4 antes de N5.** Igual que en F5 con los crons de Meta Ads:
 primero se corta la dependencia, después se archiva.
@@ -143,6 +143,30 @@ primero se corta la dependencia, después se archiva.
 | **N9** | Verificar que **PROD no arrastre la misma trampa**: árbol legado, punto de montaje con nombre ambiguo, crons apuntando a árboles ajenos | Barrido documentado en PROD con comando y salida; hallazgos tratados como F5.2 |
 
 ---
+
+### 3.0 F5.2 ejecutada (23-sep-2026, 13:00-13:05) — evidencia
+
+| Paso | Resultado medido |
+|---|---|
+| Migrar carga viva | `vps-monitor.env`, `backup-keys/`, `home/.config/rclone/` copiados; `backups/` mergeado en `<repo>/data` |
+| Repuntar | `vps_health_watchdog.py` 2 reemplazos · `vps_master_backup.py` 10 · crontab 3 líneas. Respaldos `.bak-f52-20260923-125926` |
+| Archivar | `opt_data_legado.tar.gz` 266 MB `7b5acc40a70024f8` · `hermes_skills_host.tar.gz` 8 MB `61fde256eb690b6e` |
+| Verificar archive | Restauración completa: **82.923 ficheros / 12.069 dirs / 505 symlinks** idénticos al original · 10/10 hashes OK · 17 `SKILL.md` en ambos lados |
+| Retiro | `/opt/data` y `/opt/hermes/skills` **ya no existen**; `update_soul.py` (muerto) al archivo |
+| Referencias vivas | crontab **0** · systemd **0** · scripts de `/root` **0** · `/etc/cron.d` 1 (**ruta de contenedor, correcta**) |
+| Servicio | cron de las **13:00 ya corrió repuntado** (`/var/log/vps-watchdog.log` mtime 13:00:04); ambos jobs `rc=0` |
+| Contenedor | **intacto**: 12 rutas con inodo `541814` y 722 `SKILL.md` |
+| Reversión | `tar xzf data/archive/F52_20260923-130039/opt_data_legado.tar.gz -C /` + restaurar `.bak-f52-*` + `crontab data/backups/F52_20260923-125926/crontab_root.txt` |
+
+**Hallazgos escalados al CTO (no cerrados por F5.2):**
+
+| # | Hallazgo | Evidencia |
+|---|---|---|
+| A1 | El backup maestro apunta a `/opt/hermes/data/…` (18 referencias) que **no existe**: solo respalda lo que sí existe | `manifest_*.json` → `total_files: 0` |
+| A2 | OneDrive devolvió `invalid_grant` en la corrida de las 03:30 → `ESTADO: FAILED` | `/var/log/vps-master-backup.log` |
+| A3 | Los scripts de producción del host viven en `data/scripts/`, **gitignoreado**: 0 versionado | `git ls-files data/scripts` → 0 |
+| A4 | 4 slots de gateway sin perfil (`coder`, `ragnarcho`, `rochi`, `shared`) | 16 slots vs 12 perfiles |
+| A5 | Una corrida en `--dry-run` del backup reporta `ESTADO: SUCCESS` y **notifica a Discord** | salida de la verificación de F5.2 |
 
 ## 4. Orden de ejecución recomendado
 

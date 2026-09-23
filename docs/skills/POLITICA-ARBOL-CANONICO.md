@@ -271,3 +271,56 @@ nca-api**: contenedores `nca-*`. Queda FUERA del inventario de Hermes por defini
 
 El inventario por grupo, con rutas, tamaños, entradas y sha256, queda publicado en
 `docs/skills/INVENTARIO-ARCHIVO.md`, generado desde el disco.
+
+
+## F5.2 · Retiro del árbol legado del host (23-sep-2026)
+
+### Qué era `/opt/data` en el host
+
+Un directorio físico **distinto** del árbol de datos del contenedor (inodos `305848` vs
+`543357`; el contenedor ve `/root/hermes-agent/data` montado en su `/opt/data`). Era
+híbrido, y esa mezcla es la que lo volvía peligroso:
+
+| Parte | Contenido | Rol |
+|---|---|---|
+| Capa de alias | 6 symlinks al repo: `scripts`, `secrets`, `bin`, `.ssh`, `.env`, `connections-map.json` | Viva: la crontab de root la usaba |
+| Carga viva | `vps-monitor.env`, `backup-keys/master-backup.key`, `home/.config/rclone/rclone.conf`, `backups/manifests` | Viva: la leen/escriben los 2 jobs de cron |
+| Residuo | `venvs/`, `home/`, `profiles/` (con un perfil `rochi`), `state/`, `cron/`, `brain/`, `memories/`, `plans/`, `workspace/`, `strix-scans/`, `logs/` | Muerto: 0 referencias vivas |
+
+82.923 ficheros / 95.496 entradas. **Sin skills propias** (0 `SKILL.md`).
+
+### Qué se hizo
+
+1. **Migrar la carga viva al repositorio** (`<repo>/data/…`): `vps-monitor.env`,
+   `backup-keys/`, `home/.config/rclone/`, y merge de `backups/`.
+2. **Repuntar la dependencia**: las 3 líneas de la crontab de root y las constantes
+   `/opt/data` de `vps_health_watchdog.py` (2) y `vps_master_backup.py` (10) pasan a
+   rutas del repositorio. Respaldos `.bak-f52-<ts>` de cada fichero tocado.
+3. **Archivar y retirar**: tar verificado (entradas + prueba de extracto por hash) a
+   `data/archive/F52_<ts>/`, y el directorio movido al archivo como `.original`.
+4. **Espejo obsoleto**: `/opt/hermes/skills` del host (409 `SKILL.md`, sin ningún
+   consumidor y desactualizado frente al canon) va al mismo archivo.
+5. **Script muerto**: `/root/update_soul.py` (escribía en un perfil `golden-game` que no
+   existe) queda declarado y archivado; no se parchea.
+
+### Las dos reglas que quedan
+
+- **R16 · Una sola ruta para los datos de Hermes.** En el host, todo script y job apunta
+  a `<repo>/data/…`; en el contenedor, a `/opt/data/…` (que es el mismo árbol por bind).
+  No se crean alias, symlinks de raíz ni segundas rutas de datos.
+- **R17 · Los puntos de montaje no se mueven en caliente.** Un directorio que sea punto
+  de montaje (o que comparta nombre con el árbol de datos, como `data/skills` con
+  `/opt/data/skills`) no se mueve, no se renombra y no se archiva con el contenedor
+  corriendo: su retiro exige recrearlo. El caso del perfil `default` es el ejemplar — su
+  raíz de skills **es** el punto de montaje del árbol de datos, y por eso el incidente de
+  F5 lo golpeó solo a él.
+
+### Hallazgos abiertos que este retiro NO cierra
+
+| # | Hallazgo | Evidencia | Estado |
+|---|---|---|---|
+| A1 | El backup maestro tiene **fuentes inexistentes** (`/opt/hermes/data/…`, 18 líneas) y solo respalda lo que sí existe | `manifest_*.json` → `total_files: 0`; `ls /opt/hermes/data` → no existe | **escalado al CTO** |
+| A2 | El token de OneDrive dio `invalid_grant` en la corrida de las 03:30 (`ESTADO: FAILED`) | `/var/log/vps-master-backup.log` | **escalado al CTO** |
+| A3 | Los scripts de producción del host viven en `data/scripts/`, que está **gitignoreado**: 0 versionado | `git ls-files data/scripts` → 0 | pendiente (F7) |
+| A4 | 4 slots de gateway sin perfil (`coder`, `ragnarcho`, `rochi`, `shared`): logs detenidos desde el 1-sep | `ls data/logs/gateways/` (16) vs `data/profiles/` (12) | pendiente (F7 / N6) |
+| A5 | `/etc/cron.d/hermes-gateway-fleet` usa `/opt/data/scripts/…` **dentro** del contenedor vía `docker exec`: es ruta de contenedor, no del host | `/etc/cron.d/hermes-gateway-fleet` | **correcto, no se toca** |
