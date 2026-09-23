@@ -296,10 +296,10 @@ def main():
             return 1
         log('   compose OK')
         # YAML válido en los configs editados
-        for p in tocados:
-            t = p.read_text(encoding='utf-8')
+        for ps in tocados:
+            t = Path(ps).read_text(encoding='utf-8')
             if 'external_dirs' in t and 'skills:' in t:
-                log('   ⚠ %s aún menciona external_dirs' % p)
+                log('   ⚠ %s aún menciona external_dirs' % ps)
         log('   configs editados re-escritos y con sintaxis preservada')
     else:
         log('   (dry-run: no se valida compose)')

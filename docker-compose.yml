@@ -14,6 +14,18 @@ services:
       - HERMES_WRITE_SAFE_ROOT=/opt/data:/host
     volumes:
       - ./skills:/opt/hermes/skills
+      - ./skills:/opt/data/skills
+      - ./skills:/opt/data/profiles/bragi/skills
+      - ./skills:/opt/data/profiles/brokkr/skills
+      - ./skills:/opt/data/profiles/comms/skills
+      - ./skills:/opt/data/profiles/freyja/skills
+      - ./skills:/opt/data/profiles/heimdall/skills
+      - ./skills:/opt/data/profiles/hermodr/skills
+      - ./skills:/opt/data/profiles/roshi/skills
+      - ./skills:/opt/data/profiles/sindri/skills
+      - ./skills:/opt/data/profiles/ullr/skills
+      - ./skills:/opt/data/profiles/vigia/skills
+      - ./skills:/opt/data/profiles/vili/skills
       - ./data:/opt/data
       - /root/.engram:/opt/data/home/.engram
       - /home/linuxbrew/.linuxbrew/Cellar/engram/1.20.0/bin/engram:/usr/local/bin/engram:ro

@@ -228,3 +228,13 @@ scripts/.last_notified_tag
 
 # F2: compose de rollback del montaje (artefacto transitorio de la ventana)
 docker-compose.nobind.yml
+
+# --- canon montado: estado runtime del catálogo (no es catálogo) ---
+skills/.usage.json
+skills/.usage.json.lock
+skills/.curator_ledger.jsonl
+skills/.curator_state
+skills/.curator_backups/
+skills/.bundled_manifest
+skills/.skills_prompt_snapshot.json
+docker-compose.prerepoint.yml   # compose de rollback de la ventana F3
