@@ -31,6 +31,7 @@ services:
       - /home/linuxbrew/.linuxbrew/Cellar/engram/1.20.0/bin/engram:/usr/local/bin/engram:ro
       - /home/linuxbrew/.linuxbrew/Cellar/gentle-ai/2.3.0/bin/gentle-ai:/usr/local/bin/gentle-ai:ro
       - ./tools/mcp_tool.py:/opt/hermes/tools/mcp_tool.py:ro
+      - ./plugins/observability/langfuse/__init__.py:/opt/hermes/plugins/observability/langfuse/__init__.py:ro
       - ./tools/skills_tool.py:/opt/hermes/tools/skills_tool.py:ro
       - ./gateway/run.py:/opt/hermes/gateway/run.py:ro
       - ./gateway/display_config.py:/opt/hermes/gateway/display_config.py:ro

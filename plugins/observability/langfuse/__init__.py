@@ -647,6 +647,24 @@ class V2TraceWrapper:
         pass
 
 
+def _resolve_profile_name() -> str:
+    explicit = _secret("HERMES_PROFILE_NAME") or _secret("HERMES_PROFILE")
+    if explicit:
+        return explicit.strip()
+    try:
+        from hermes_constants import get_hermes_home_override
+        home = get_hermes_home_override()
+        if home:
+            base = os.path.basename(str(home).rstrip("/\\"))
+            if base and base not in {"data", ".hermes", "home"}:
+                return base
+    except Exception:
+        pass
+    if os.path.exists("/root/hermes-agent/data"):
+        return "ragnar"
+    return "default"
+
+
 def _start_root_trace(task_key: str, *, task_id: str, session_id: str, platform: str, provider: str, model: str,
                       api_mode: str, messages: Any, client: Langfuse,
                       turn_id: str = "", api_request_id: str = "") -> Optional[TraceState]:
@@ -659,28 +677,37 @@ def _start_root_trace(task_key: str, *, task_id: str, session_id: str, platform:
             import uuid
             trace_id = uuid.uuid5(uuid.NAMESPACE_DNS, seed).hex
 
+        profile = _resolve_profile_name()
+        env_name = _env("HERMES_LANGFUSE_ENV") or "production"
+        tags = ["hermes", "langfuse", f"bot:{profile}", f"env:{env_name}"]
         last_user = next((m for m in reversed(messages) if isinstance(m, dict) and m.get("role") == "user"), None) \
             if isinstance(messages, list) else None
         trace_input = None if last_user is None else {"role": "user", "content": _capture_content(last_user.get("content"))}
         metadata = {
-            "source": "hermes", "task_id": task_id, "turn_id": turn_id, "api_request_id": api_request_id,
+            "source": "hermes", "profile": profile, "environment": env_name,
+            "task_id": task_id, "turn_id": turn_id, "api_request_id": api_request_id,
             "platform": platform, "provider": provider, "model": model, "api_mode": api_mode,
             "capture_mode": _capture_mode(),
         }
 
+        trace_title = f"Hermes turn [{profile}]"
         if hasattr(client, "start_as_current_observation"):
-            trace_ctx: Dict[str, Any] = {"trace_id": trace_id, **({"session_id": session_id} if session_id else {})}
+            trace_ctx: Dict[str, Any] = {
+                "trace_id": trace_id,
+                "user_id": profile,
+                **({"session_id": session_id} if session_id else {})
+            }
 
             def open_root():
-                ctx = client.start_as_current_observation(trace_context=trace_ctx, name="Hermes turn", as_type="chain",
+                ctx = client.start_as_current_observation(trace_context=trace_ctx, name=trace_title, as_type="chain",
                                                           input=trace_input, metadata=metadata, end_on_exit=False)
                 return ctx, ctx.__enter__()
 
             root_ctx = root_span = None
             if propagate_attributes is not None:
                 try:
-                    with propagate_attributes(session_id=session_id or task_key, trace_name="Hermes turn",
-                                              tags=["hermes", "langfuse"]):
+                    with propagate_attributes(session_id=session_id or task_key, trace_name=trace_title,
+                                              tags=tags):
                         root_ctx, root_span = open_root()
                 except Exception:
                     root_ctx = None
@@ -691,24 +718,37 @@ def _start_root_trace(task_key: str, *, task_id: str, session_id: str, platform:
                 if root_span is not None:
                     root_span.update_trace(input=trace_input)
         else:
-            tags = ["hermes", "langfuse"]
             try:
                 raw_trace = client.trace(
                     id=trace_id,
-                    name="Hermes turn",
+                    name=trace_title,
+                    user_id=profile,
                     session_id=session_id or None,
                     input=trace_input,
                     metadata=metadata,
                     tags=tags,
+                    release=_env("HERMES_LANGFUSE_RELEASE") or None,
+                    version=model or None,
                 )
             except TypeError:
-                raw_trace = client.trace(
-                    id=trace_id,
-                    name="Hermes turn",
-                    session_id=session_id or None,
-                    input=trace_input,
-                    metadata=metadata,
-                )
+                try:
+                    raw_trace = client.trace(
+                        id=trace_id,
+                        name=trace_title,
+                        user_id=profile,
+                        session_id=session_id or None,
+                        input=trace_input,
+                        metadata=metadata,
+                        tags=tags,
+                    )
+                except TypeError:
+                    raw_trace = client.trace(
+                        id=trace_id,
+                        name=trace_title,
+                        session_id=session_id or None,
+                        input=trace_input,
+                        metadata=metadata,
+                    )
             root_ctx = None
             root_span = V2TraceWrapper(raw_trace)
 
