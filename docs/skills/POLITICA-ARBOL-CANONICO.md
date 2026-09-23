@@ -324,3 +324,50 @@ híbrido, y esa mezcla es la que lo volvía peligroso:
 | A3 | Los scripts de producción del host viven en `data/scripts/`, que está **gitignoreado**: 0 versionado | `git ls-files data/scripts` → 0 | pendiente (F7) |
 | A4 | 4 slots de gateway sin perfil (`coder`, `ragnarcho`, `rochi`, `shared`): logs detenidos desde el 1-sep | `ls data/logs/gateways/` (16) vs `data/profiles/` (12) | pendiente (F7 / N6) |
 | A5 | `/etc/cron.d/hermes-gateway-fleet` usa `/opt/data/scripts/…` **dentro** del contenedor vía `docker exec`: es ruta de contenedor, no del host | `/etc/cron.d/hermes-gateway-fleet` | **correcto, no se toca** |
+
+## F7 · Higiene de flota (23-sep-2026)
+
+### Reglas nuevas
+
+- **R18 · El censo manda sobre la lista.** Todo perfil que exista en disco debe
+  tener su raíz de skills montada, y todo destino de skills que declare el
+  compose debe estar en la lista que el job mide. Una lista escrita a mano no es
+  una garantía: es un recordatorio. Se verifica con **V1b**.
+- **R19 · Los catálogos ajenos se declaran en un fichero.**
+  `docs/skills/catalogos-ajenos.json` es la fuente única: cualquier árbol de
+  `SKILL.md` fuera del repositorio que no esté declarado ahí **bloquea** la
+  vigilancia. Se verifica con **V10**.
+
+### Chequeos nuevos en el job diario
+
+| Chequeo | Qué hace | Prueba realizada |
+|---|---|---|
+| **V1b** (N1) | Compara el **censo real** de `data/profiles/` con `PERFILES` y los destinos del compose con `RAICES_CONT` | Perfil fantasma → falla con su nombre; retirado → vuelve a verde |
+| **V10** (N2) | Lista negra de rutas retiradas + árboles de `SKILL.md` fuera del repo que no estén en `catalogos-ajenos.json` | Árbol fantasma → falla; retirado → verde |
+| **V3 ampliado** | Además del YAML roto, detecta **claves repetidas en el mismo nivel** con un cargador estricto | 12/12 configs limpios |
+
+### Lo que encontró la primera corrida (y se cerró)
+
+| # | Hallazgo | Acción |
+|---|---|---|
+| 1 | 4 slots de gateway sin perfil (`coder`, `ragnarcho`, `rochi`, `shared`): cascarones vacíos de ago 18-20 | Retirados al archivo; `logs/gateways/` queda con los **12 vivos**. `rochi` y `ragnarcho` constan como retirados (`.deleted/` y el archivo del 22-ago) |
+| 2 | `/root/archivo-optdata-20260822`: respaldo manual del árbol legado con un perfil dentro | Archivado y retirado (tar `d412f85ac3b77373`) |
+| 3 | 7 árboles de skills fuera del repo **sin declarar** (ai-platform, akari, gemini/antigravity ×3, opencode ×2, landing de cliente, orca) | Declarados en `catalogos-ajenos.json` (12 entradas). Verificado: la librería de `opencode` tiene **intersección 0** con el canon — no es copia |
+| 4 | `vigia` sin `AGENTS.md` (10 de 11 perfiles) | Escrito: **11/11** con `config`, `AGENTS.md`, `SOUL.md` y `memories/` |
+| 5 | Cadenas de respaldo asimétricas: `default`, `roshi` y `vigia` con **0** fallbacks frente a **3** de los 9 especialistas | Alineados los 3 a `NaN-Builders → B.AI → OpenCode-Go`, con respaldo por perfil y validación estructural. Resolubilidad comprobada: los 3 nombres existen en el catálogo de cada perfil |
+| 6 | «Claves duplicadas de vigía» | **Re-lectura correcta:** no eran claves YAML repetidas sino **alias de proveedor en minúscula** (`nan-builders`, `b.ai`). Retirados los 42 renglones duplicados. La hipótesis inicial («no reproducible») queda corregida |
+| 7 | Symlinks rotos fuera de caché: 9 medidos desde el host | **Criterio afinado: se miden desde el contenedor**, que es quien los usa. Resultado: 3 resuelven (usaban rutas `/opt/data/...`), 1 estaba realmente roto (`lsp/bin/yaml-language-server` → perfil `rochi` borrado: repuntado) y el resto son artefactos de runtime (locks de Chrome — Chrome está corriendo — y socket de pulse) |
+
+### Reversión de F7
+
+| Qué | Cómo |
+|---|---|
+| Configs (cadenas + alias) | `data/backups/config/F7_20260923-132411/{default,roshi,vigia}.config.yaml` (sha256 verificado contra el estado previo) |
+| Slots huérfanos y residuo del 22-ago | `data/archive/F7_20260923-132223/` |
+| Job de vigilancia | `scripts/f3_higiene_diaria.py.bak-f7-20260923-131431` y `.bak-f7b-20260923-131854` |
+| `AGENTS.md` de vigia | Es un fichero nuevo: se retira y listo |
+
+**Nota de vigencia:** los cambios de config toman efecto en el próximo arranque
+del gateway de cada perfil (el proceso tiene la config en memoria). No se
+reiniciaron: el plan no lo pedía para F7 y reiniciar el gateway propio cortaría
+la sesión del operador a mitad de trabajo.
