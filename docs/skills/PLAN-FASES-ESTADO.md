@@ -26,7 +26,7 @@ consta qué fases cerraron, qué deuda residual dejaron y dónde cae cada acció
 | **F4** · Curador con dueño, alcance y ciclo | ✅ cerrada | `curator pause` + driver semanal en seco; adopción del catálogo; pines. Revisión limpia **1/2** (`data/state/f4_curador_last.json`) |
 | **F5** · Cerrar lo que vivía fuera del repositorio | ✅ cerrada **con incidente** | 3 árboles retirados; 2 crons de Meta Ads repuntados; **incidente del punto de montaje** (`data/skills`) |
 | **F5.2** · Deuda residual del cierre de F5 | ✅ **cerrada** (23-sep, 13:05) | Árbol legado del host archivado y retirado; 0 referencias vivas (ver §3.0) |
-| **F6** · Consolidación supervisada | ⏸️ **bloqueada** | Exige 2 revisiones limpias del curador; hoy **1/2**. No arranca: la autorización vive en el código |
+| **F6** · Consolidación supervisada | ⏸️ **bloqueada, pero lista** | Candado: **1/2** revisiones limpias del curador (`consolidacion_autorizada: false`). Los 3 requisitos previos ya están hechos: métrica publicada, lote 0 expedientado y censo reconciliado (ver §3.2) |
 | **F7** · Higiene de flota | ✅ **cerrada** (23-sep, 13:30) | 7 ítems: 2 chequeos nuevos (V1b/V10), slots, `AGENTS.md` de vigia, cadenas, alias y symlinks (ver §3.1) |
 | **F8** · PROD y verificación final | ⏳ pendiente | Se le añade una comprobación (ver §3, N9) |
 
@@ -183,6 +183,47 @@ primero se corta la dependencia, después se archiva.
 
 **Pendiente declarado:** los cambios de config entran en vigor al próximo arranque
 del gateway de cada perfil; no se reiniciaron para no cortar la sesión del operador.
+
+### 3.2 F6 preparada (23-sep-2026, 13:40-14:00) — todo lo que NO muta el catálogo
+
+F6 es la única fase que fusiona contenido, y su candado (R8) es duro: **dos
+revisiones limpias del curador + firma del CTO lote por lote**. Hoy va **1/2**.
+Lo que sí se puede hacer sin tocar el catálogo está hecho:
+
+| Requisito de arranque | Estado | Evidencia |
+|---|---|---|
+| **Métrica oficial publicada** (comando, ruta, fecha) | ✅ | `docs/skills/METRICA-CONSOLIDACION.md` + `data/state/f6_metrica.json`; `scripts/f6_metrica_oficial.py` |
+| **Lote 0 expedientado** (propuesta firmable, sin aplicar) | ✅ | `docs/skills/F6-LOTE0-PROPUESTA.md` + `data/state/f6_lote0.json` |
+| **Hueco del censo (D1) cerrado** | ✅ | `docs/skills/F6-CENSO-RECONCILIACION.md` + `data/state/f6_censo.json` |
+
+**Medición de hoy (TF-IDF 0,45 sobre 722 `SKILL.md`):**
+
+| Métrica | Hoy | Referencia 22-sep |
+|---|---|---|
+| Pares sobre el umbral | **79** | 85 |
+| Grupos | **41** | 45 |
+| Skills implicadas | **100 (13,85 %)** | 115 (16,0 %) |
+
+**El «hueco de 62» queda explicado y cerrado:** no faltaba ningún veredicto. Son
+**62 entradas repetidas** sobre 56 skills auditadas en más de un lote
+(395 entradas = 333 únicas + 62 repeticiones; 51 en dos lotes · 4 en tres · 1 en cuatro).
+La consolidación del censo está **completa: 333/333**.
+
+**Lote 0 medido (pares duplicados por nombre), listo para firmar:**
+
+| A | B | Similitud | Idénticos | Líneas solo en A | Líneas solo en B |
+|---|---|---|---|---|---|
+| `oauth-multi-tenant-integration` | `oauth-multi-tenant-integrations` | 0,4774 | no | 27 | 36 |
+| `brain-graph-operations` | `brain-graph-ops` | 0,5661 | no | 68 | 40 |
+| `analytics` | `analytics-tracking` | 0,4451 | no | 286 | 357 |
+| `pinecone` | `pinecone-research` | 0,4265 | no | 339 | 66 |
+
+Ninguno es idéntico por hash: **todos requieren integración de contenido**, no
+borrado. El procedimiento con respaldo, ledger de hash antes/después y revisor
+independiente está en `docs/skills/F6-LOTE0-PROPUESTA.md`.
+
+**Lo que falta para ejecutar F6:** la segunda revisión limpia del curador (ciclo
+semanal, lunes 07:00) y tu firma lote por lote.
 
 ## 4. Orden de ejecución recomendado
 
