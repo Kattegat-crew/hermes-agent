@@ -100,3 +100,17 @@ printf '\n<!-- prueba -->\n' >> /opt/data/skills/core/skill-library-ops/SKILL.md
 git status --porcelain skills/    # -> M skills/core/skill-library-ops/SKILL.md
 git checkout -- skills/core/skill-library-ops/SKILL.md   # reversión
 ```
+
+## Job de higiene diaria
+
+`scripts/f3_higiene_diaria.py` reemplaza al vigilante canon ⇄ copia: vigila el
+inodo único, la ausencia de `external_dirs`, la validez de los 12 configs, la
+integridad del catálogo contra git, el árbol sucio, la aduana, el curador, el
+ledger del gate y las recreaciones. Si hay ediciones sin versionar, atribuye
+cada ruta a perfil + sesión consultando los `state.db` y commitea y empuja.
+
+La atribución declara su propia confianza y **no inventa autoría**: si hay cero
+candidatos, o varias sesiones distintas en la ventana, la marca baja a `baja` o
+`sin rastro`. Un `except: continue` mudo sobre la consulta SQL ocultó un bug de
+construcción de parámetros durante la primera corrida: los errores de consulta
+se acumulan y se publican en el informe, nunca se descartan en silencio.
