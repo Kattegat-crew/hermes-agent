@@ -110,6 +110,7 @@ def mide(canon, umbral):
         'skills_implicadas': len(implicadas),
         'porcentaje_implicado': round(100.0 * len(implicadas) / max(1, len(metas)), 2),
         'top_pares': pares[:25],
+        'pares_todos': pares,
         'detalle_grupos': {('grupo_%02d' % (n + 1)): g
                            for n, (k, g) in enumerate(sorted(grupos.items(),
                                                              key=lambda x: -len(x[1])))},

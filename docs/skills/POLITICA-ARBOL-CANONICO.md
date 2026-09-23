@@ -364,7 +364,7 @@ híbrido, y esa mezcla es la que lo volvía peligroso:
 |---|---|
 | Configs (cadenas + alias) | `data/backups/config/F7_20260923-132411/{default,roshi,vigia}.config.yaml` (sha256 verificado contra el estado previo) |
 | Slots huérfanos y residuo del 22-ago | `data/archive/F7_20260923-132223/` |
-| Job de vigilancia | `scripts/f3_higiene_diaria.py.bak-f7-20260923-131431` y `.bak-f7b-20260923-131854` |
+| Job de vigilancia | `data/archive/F7_20260923-132223/bak_scripts/` (respaldos del job) |
 | `AGENTS.md` de vigia | Es un fichero nuevo: se retira y listo |
 
 **Nota de vigencia:** los cambios de config toman efecto en el próximo arranque

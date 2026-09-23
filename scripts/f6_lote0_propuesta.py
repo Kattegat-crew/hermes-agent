@@ -46,22 +46,49 @@ PARES = [
 LOTE4 = ['creative/hermes-multiprofile-gateway-ops']
 
 
+def frontmatter(txt):
+    """Igual que la métrica oficial: nombre + descripción + cuerpo."""
+    nombre, desc = '', ''
+    m = re.match(r'^---\s*\n(.*?)\n---\s*\n', txt, re.S)
+    if m:
+        for linea in m.group(1).splitlines():
+            mm = re.match(r'^\s*(name|title)\s*:\s*(.+)$', linea)
+            if mm and not nombre:
+                nombre = mm.group(2).strip().strip('\'"')
+            md = re.match(r'^\s*description\s*:\s*(.+)$', linea)
+            if md and not desc:
+                desc = md.group(1).strip().strip('\'"')
+    return nombre, desc
+
+
 def lee(rel):
     p = CANON / rel / 'SKILL.md'
     if not p.is_file():
         return None
     txt = p.read_text(encoding='utf-8', errors='ignore')
+    nombre, desc = frontmatter(txt)
     return {'ruta': rel, 'ruta_abs': str(p), 'bytes': len(txt),
             'lineas': len(txt.splitlines()),
             'sha256_16': hashlib.sha256(txt.encode()).hexdigest()[:16],
             'txt': txt,
-            'cuerpo_norm': re.sub(r'\s+', ' ', txt).strip()}
+            'doc': '%s %s %s' % (nombre or rel.split('/')[-1], desc, txt)}
 
 
-def sim(a, b):
-    v = TfidfVectorizer(sublinear_tf=True, min_df=1)
-    X = v.fit_transform([a, b])
-    return round(float(cosine_similarity(X)[0, 1]), 4)
+def metrica_oficial():
+    """Índice par->similitud de la métrica oficial (fuente única, R11).
+
+    Recalcularla aquí con un vectorizador de dos documentos daría OTRA cifra: el
+    TF-IDF depende del corpus. El lote 0 lee la medición publicada.
+    """
+    f = REPO / 'data' / 'state' / 'f6_metrica.json'
+    if not f.is_file():
+        return {}
+    try:
+        m = json.loads(f.read_text(encoding='utf-8'))
+    except Exception:
+        return {}
+    return {tuple(sorted([p['a'], p['b']])): p['similitud']
+            for p in (m.get('pares_todos') or [])}
 
 
 def diff_resumen(a, b):
@@ -83,6 +110,8 @@ def main():
     ap.add_argument('--listar', action='store_true')
     a = ap.parse_args()
 
+    global OFICIAL
+    OFICIAL = metrica_oficial()
     informe = {'ts': time.strftime('%Y-%m-%dT%H:%M:%S%z'),
                'fase': 'F6', 'lote': 0,
                'muta': False,
@@ -96,13 +125,15 @@ def main():
             item['estado'] = 'falta una de las dos: %s' % ('A' if not A else 'B')
             informe['pares'].append(item)
             continue
-        s = sim(A['cuerpo_norm'], B['cuerpo_norm'])
+        s = OFICIAL.get(tuple(sorted([relA, relB])))
         d = diff_resumen(A['txt'], B['txt'])
         identico = A['sha256_16'] == B['sha256_16']
         # dirección propuesta: absorbe el que aporta contenido al que ya es clase
         mas_largo = 'a' if A['bytes'] > B['bytes'] else 'b'
         item.update({
             'similitud_oficial': s,
+            'pasa_umbral_oficial': bool(s is not None and s >= 0.45),
+            'metodo_similitud': 'TF-IDF coseno sobre nombre + descripcion + cuerpo (metodo de la metrica oficial)',
             'identicos_por_hash': identico,
             'a_meta': {k: A[k] for k in ('bytes', 'lineas', 'sha256_16')},
             'b_meta': {k: B[k] for k in ('bytes', 'lineas', 'sha256_16')},
@@ -117,9 +148,10 @@ def main():
             'riesgo': 'nulo' if identico else 'bajo',
         })
         informe['pares'].append(item)
-        print('%-62s sim=%.4f  identicos=%s  soloA=%d soloB=%d'
-              % (relA.split('/')[-1] + ' <-> ' + relB.split('/')[-1], s, identico,
-                 d['lineas_solo_en_a'], d['lineas_solo_en_b']))
+        print('%-62s sim=%s  identicos=%s  soloA=%d soloB=%d'
+              % (relA.split('/')[-1] + ' <-> ' + relB.split('/')[-1],
+                 ('%.4f' % s) if s is not None else 'bajo umbral',
+                 identico, d['lineas_solo_en_a'], d['lineas_solo_en_b']))
 
     for rel in LOTE4:
         A = lee(rel)
@@ -138,7 +170,7 @@ def main():
              '| Motivo | F6 del plan Rev. 6: la fusión trivial de arranque |',
              '| Fecha | %s |' % informe['ts'],
              '| Métrica | `docs/skills/METRICA-CONSOLIDACION.md` (TF-IDF 0,45) |',
-             '| **Estado** | **PROPUESTA — no ejecutada** |',
+             '| **Estado** | %s |' % ('**EJECUTADA** — ver `docs/skills/F6-LOTE0-EJECUCION.md`' if (REPO / 'data' / 'state' / 'f6_lote0_ledger.jsonl').is_file() else '**PROPUESTA — no ejecutada**'),
              '| Candado | %s |' % informe['candado'], '',
              '**Nada de este documento se ha aplicado.** La fusión exige el candado de',
              'F6 (dos revisiones limpias del curador) y firma del CTO lote por lote.',
@@ -150,8 +182,9 @@ def main():
                 L.append('| `%s` | `%s` | — | — | — | — | %s |'
                          % (it['a'], it['b'], it.get('estado')))
                 continue
-            L.append('| `%s` | `%s` | %.4f | %s | %d | %d | %s |'
-                     % (it['a'], it['b'], it['similitud_oficial'],
+            L.append('| `%s` | `%s` | %s | %s | %d | %d | %s |'
+                     % (it['a'], it['b'],
+                        ('%.4f' % it['similitud_oficial']) if it['similitud_oficial'] is not None else 'bajo umbral',
                         it['identicos_por_hash'], it['diff']['lineas_solo_en_a'],
                         it['diff']['lineas_solo_en_b'], it['riesgo']))
         L += ['', '## Propuesta por par', '']
@@ -159,7 +192,10 @@ def main():
             if 'propuesta' not in it:
                 continue
             L += ['### `%s`  ⇄  `%s`' % (it['a'], it['b']), '',
-                  '- **Similitud oficial:** %.4f' % it['similitud_oficial'],
+                  '- **Similitud oficial:** %s' % (
+                      ('%.4f' % it['similitud_oficial'])
+                      if it['similitud_oficial'] is not None
+                      else 'por debajo del umbral (no está en la lista oficial)'),
                   '- **Tamaños:** A %d bytes / %d líneas · B %d bytes / %d líneas'
                   % (it['a_meta']['bytes'], it['a_meta']['lineas'],
                      it['b_meta']['bytes'], it['b_meta']['lineas']),

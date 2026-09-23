@@ -26,7 +26,7 @@ consta qué fases cerraron, qué deuda residual dejaron y dónde cae cada acció
 | **F4** · Curador con dueño, alcance y ciclo | ✅ cerrada | `curator pause` + driver semanal en seco; adopción del catálogo; pines. Revisión limpia **1/2** (`data/state/f4_curador_last.json`) |
 | **F5** · Cerrar lo que vivía fuera del repositorio | ✅ cerrada **con incidente** | 3 árboles retirados; 2 crons de Meta Ads repuntados; **incidente del punto de montaje** (`data/skills`) |
 | **F5.2** · Deuda residual del cierre de F5 | ✅ **cerrada** (23-sep, 13:05) | Árbol legado del host archivado y retirado; 0 referencias vivas (ver §3.0) |
-| **F6** · Consolidación supervisada | ⏸️ **bloqueada, pero lista** | Candado: **1/2** revisiones limpias del curador (`consolidacion_autorizada: false`). Los 3 requisitos previos ya están hechos: métrica publicada, lote 0 expedientado y censo reconciliado (ver §3.2) |
+| **F6** · Consolidación supervisada | 🔄 **en ejecución por lotes** | Candado satisfecho: **2/2** revisiones limpias + firma del dueño. **Lote 0 ejecutado** (3 pares absorbidos, métrica a la baja); `pinecone-research` diferido con evidencia (ver §3.3) |
 | **F7** · Higiene de flota | ✅ **cerrada** (23-sep, 13:30) | 7 ítems: 2 chequeos nuevos (V1b/V10), slots, `AGENTS.md` de vigia, cadenas, alias y symlinks (ver §3.1) |
 | **F8** · PROD y verificación final | ⏳ pendiente | Se le añade una comprobación (ver §3, N9) |
 
@@ -224,6 +224,24 @@ independiente está en `docs/skills/F6-LOTE0-PROPUESTA.md`.
 
 **Lo que falta para ejecutar F6:** la segunda revisión limpia del curador (ciclo
 semanal, lunes 07:00) y tu firma lote por lote.
+
+### 3.3 F6 · Lote 0 ejecutado (23-sep-2026, 15:03)
+
+| Campo | Valor |
+|---|---|
+| Candado | **2/2** revisiones limpias + **firma del dueño** verificada |
+| Motor | `scripts/f6_lote0_ejecutar.py` — aborta sin escribir nada si falta el candado |
+| Método | Absorción **sin pérdida**: el contenido íntegro pasa a `references/` |
+| Resultado | 3 pares absorbidos (`oauth-…integration(s)`, `brain-graph-ops`, `analytics`) |
+| Aduana | SUPERADA · 0 errores críticos |
+| Métrica | 722 → **719** skills · 79 → **76** pares · 41 → **38** grupos · 13,85 % → **13,07 %** |
+| Commit | `f3a3a1df9a` |
+| Reversión | `data/archive/F6_lote0_20260923-150318/absorbidas/` + `git revert` |
+
+**Diferido con evidencia (no descartado):** `pinecone-research` → `pinecone`, por
+estar registrada en `.hub/lock.json` y cargar `scripts/`.
+
+Detalle completo: `docs/skills/F6-LOTE0-EJECUCION.md`.
 
 ## 4. Orden de ejecución recomendado
 
