@@ -94,3 +94,10 @@ session_id: "your_session_id"
 *Paraguas de clase creado por F6 lote 1 el 2026-09-23 a partir de 4 skills de una sola
 técnica (R15: condensar sin borrar). Las originales, íntegras, en
 `data/archive/F6_lote1_20260923-151210/absorbidas/`.*
+
+
+## Referencias absorbidas
+- `references/slackbot.md` — absorbida desde `productivity/slackbot-automation` el 2026-09-23 (F6 lote 1, R15: condensar sin borrar).
+- `references/zoho.md` — absorbida desde `productivity/zoho-automation` el 2026-09-23 (F6 lote 1, R15: condensar sin borrar).
+- `references/onesignal_rest_api.md` — absorbida desde `software-development/onesignal_rest_api-automation` el 2026-09-23 (F6 lote 1, R15: condensar sin borrar).
+- `references/metaads.md` — absorbida desde `specialists/marketing/metaads-automation` el 2026-09-23 (F6 lote 1, R15: condensar sin borrar).
