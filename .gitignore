@@ -225,3 +225,6 @@ native/fts5_cjk/*.so
 # Upstream sync state and logs
 scripts/sync-upstream.log
 scripts/.last_notified_tag
+
+# F2: compose de rollback del montaje (artefacto transitorio de la ventana)
+docker-compose.nobind.yml
