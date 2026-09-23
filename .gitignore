@@ -240,3 +240,9 @@ skills/.skills_prompt_snapshot.json
 # composes de rollback de las ventanas (se conservan, no se versionan)
 docker-compose.prerepoint.yml
 docker-compose.nobind.yml
+
+# Excepcion deliberada (F6, revision R8): el material de REVERSION de la
+# consolidacion de skills debe viajar a GitHub con cada push. Es un tar.gz de
+# 46 KB, auditado y con sha256; la regla generica *.tar.gz sigue valiendo para
+# el resto del arbol.
+!docs/skills/archive/*.tar.gz
