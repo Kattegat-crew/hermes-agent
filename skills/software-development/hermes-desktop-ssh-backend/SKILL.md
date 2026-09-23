@@ -173,3 +173,7 @@ backend nuevo con la config corregida.
 - `references/caso-2026-08-20.md` — caso real completo con salidas y pasos exactos.
 - Skills relacionadas: `hermes-desktop-remote-connection`, `hermes-desktop-remote-backend`,
   `nan-builders-api`, `hermes-provider-configuration`, `vps-host-access`.
+
+## Referencias absorbidas
+
+- `references/hermes-desktop-ssh-diagnostico.md` — absorbida desde `software-development/hermes-desktop-ssh-diagnostico` el 2026-09-23 (F6 lote 2, R15: condensar sin borrar). El diagnóstico era el caso concreto del backend.

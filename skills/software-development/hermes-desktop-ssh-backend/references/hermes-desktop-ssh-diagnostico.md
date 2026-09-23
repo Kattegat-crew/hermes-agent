@@ -1,3 +1,7 @@
+<!-- Caso absorbido por F6 lote 2 el 2026-09-23 desde `software-development/hermes-desktop-ssh-diagnostico`.
+     Contenido íntegro; original en
+     `data/archive/F6_lote2_20260923-154924/absorbidas/`. -->
+
 ---
 name: hermes-desktop-ssh-diagnostico
 description: >-

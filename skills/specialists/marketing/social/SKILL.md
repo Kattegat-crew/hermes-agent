@@ -411,3 +411,7 @@ Tools: CapCut (free), Descript, Captions.ai, Premiere Pro
 - **launch**: For coordinating social with launches
 - **emails**: For nurturing social audience via email
 - **marketing-psychology**: For understanding what drives engagement
+
+## Referencias absorbidas
+
+- `references/social-content.md` — absorbida desde `creative/social-content` el 2026-09-23 (F6 lote 2, R15: condensar sin borrar). Descripción idéntica; el caso absorbido tenía 323 líneas frente a 413.
