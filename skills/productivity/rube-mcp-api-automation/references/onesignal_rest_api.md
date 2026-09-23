@@ -1,3 +1,7 @@
+<!-- Caso absorbido por F6 lote 1 el 2026-09-23 desde `software-development/onesignal_rest_api-automation`.
+     Contenido íntegro; el original está en
+     `data/archive/F6_lote1_20260923-151210/absorbidas/`. -->
+
 ---
 name: onesignal_rest_api-automation
 description: "Automate OneSignal tasks via Rube MCP (Composio): push notifications, segments, templates, and messaging. Always search tools first for current schemas."

@@ -1,20 +1,24 @@
+<!-- Caso absorbido por F6 lote 1 el 2026-09-23 desde `productivity/zoho-automation`.
+     Contenido íntegro; el original está en
+     `data/archive/F6_lote1_20260923-151210/absorbidas/`. -->
+
 ---
-name: metaads-automation
-description: "Automate Metaads tasks via Rube MCP (Composio). Always search tools first for current schemas."
+name: zoho-automation
+description: "Automate Zoho tasks via Rube MCP (Composio). Always search tools first for current schemas."
 requires:
   mcp: [rube]
 ---
 
-# Metaads Automation via Rube MCP
+# Zoho Automation via Rube MCP
 
-Automate Metaads operations through Composio's Metaads toolkit via Rube MCP.
+Automate Zoho operations through Composio's Zoho toolkit via Rube MCP.
 
-**Toolkit docs**: [composio.dev/toolkits/metaads](https://composio.dev/toolkits/metaads)
+**Toolkit docs**: [composio.dev/toolkits/zoho](https://composio.dev/toolkits/zoho)
 
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
-- Active Metaads connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `metaads`
+- Active Zoho connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `zoho`
 - Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas
 
 ## Setup
@@ -22,7 +26,7 @@ Automate Metaads operations through Composio's Metaads toolkit via Rube MCP.
 **Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
-2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `metaads`
+2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `zoho`
 3. If connection is not ACTIVE, follow the returned auth link to complete setup
 4. Confirm connection status shows ACTIVE before running any workflows
 
@@ -32,7 +36,7 @@ Always discover available tools before executing workflows:
 
 ```
 RUBE_SEARCH_TOOLS
-queries: [{use_case: "Metaads operations", known_fields: ""}]
+queries: [{use_case: "Zoho operations", known_fields: ""}]
 session: {generate_id: true}
 ```
 
@@ -44,7 +48,7 @@ This returns available tool slugs, input schemas, recommended execution plans, a
 
 ```
 RUBE_SEARCH_TOOLS
-queries: [{use_case: "your specific Metaads task"}]
+queries: [{use_case: "your specific Zoho task"}]
 session: {id: "existing_session_id"}
 ```
 
@@ -52,7 +56,7 @@ session: {id: "existing_session_id"}
 
 ```
 RUBE_MANAGE_CONNECTIONS
-toolkits: ["metaads"]
+toolkits: ["zoho"]
 session_id: "your_session_id"
 ```
 
@@ -81,8 +85,8 @@ session_id: "your_session_id"
 
 | Operation | Approach |
 |-----------|----------|
-| Find tools | `RUBE_SEARCH_TOOLS` with Metaads-specific use case |
-| Connect | `RUBE_MANAGE_CONNECTIONS` with toolkit `metaads` |
+| Find tools | `RUBE_SEARCH_TOOLS` with Zoho-specific use case |
+| Connect | `RUBE_MANAGE_CONNECTIONS` with toolkit `zoho` |
 | Execute | `RUBE_MULTI_EXECUTE_TOOL` with discovered tool slugs |
 | Bulk ops | `RUBE_REMOTE_WORKBENCH` with `run_composio_tool()` |
 | Full schema | `RUBE_GET_TOOL_SCHEMAS` for tools with `schemaRef` |

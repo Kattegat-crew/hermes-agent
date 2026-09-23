@@ -243,6 +243,21 @@ estar registrada en `.hub/lock.json` y cargar `scripts/`.
 
 Detalle completo: `docs/skills/F6-LOTE0-EJECUCION.md`.
 
+### 3.4 F6 · Lote 1 ejecutado (23-sep-2026, 15:12)
+
+Paraguas de clase **`productivity/rube-mcp-api-automation`** a partir de la familia
+del grupo_02 (5 skills de una sola plantilla). Absorbidos 4 casos (slackbot, zoho,
+onesignal, metaads) con su contenido íntegro en `references/`; diferido
+`microsoft-clarity-automation` por ser otra clase.
+
+| Comprobación | Resultado |
+|---|---|
+| Aduana | SUPERADA · 0 errores críticos |
+| Métrica | 719 → **716** skills · 76 → **66** pares · 38 → **37** grupos · 13,07 % → **12,43 %** |
+| Dueño (I5) | corregido a `hermes:hermes` y probado con write-probe |
+
+Acta: `docs/skills/F6-LOTE1-EJECUCION.md`.
+
 ## 4. Orden de ejecución recomendado
 
 ```

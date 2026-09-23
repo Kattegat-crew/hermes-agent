@@ -1,3 +1,7 @@
+<!-- Caso absorbido por F6 lote 1 el 2026-09-23 desde `productivity/slackbot-automation`.
+     Contenido íntegro; el original está en
+     `data/archive/F6_lote1_20260923-151210/absorbidas/`. -->
+
 ---
 name: slackbot-automation
 description: "Automate Slackbot tasks via Rube MCP (Composio). Always search tools first for current schemas."
