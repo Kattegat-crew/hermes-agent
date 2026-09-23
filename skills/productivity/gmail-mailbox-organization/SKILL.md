@@ -40,6 +40,16 @@ Accounts are accessed with per-owner OAuth credentials in `/opt/data/secrets/{ow
 - **New senders between inventory and run**: match by domain rule, not only exact address, or mail gets missed on the second pass.
 - A scope the token lacks is a user click away, never guessable — no workaround exists for `settings/filters` without `gmail.settings.basic`.
 
+## Read-Only Inbox Audit (cross-client, verified 22-sep-2026)
+
+Auditing another client's inbox without touching anything. Key fact: the MCP `ncl_google` tools are wired to ONE fixed connection (the default tenant) — for other clients (lucky, golden, helmer, etc.) go directly to their secrets in `/opt/data/secrets/{owner}-gmail.json` (same `scopes`-may-be-string quirk applies).
+
+1. **No SDK in sandbox**: the Hermes interpreter lacks `google.oauth2` (`ModuleNotFoundError`). Refresh the token with pure `requests`: POST `https://oauth2.googleapis.com/token` with `client_id`, `client_secret`, `refresh_token`, `grant_type=refresh_token` → use the returned `access_token` as Bearer against `gmail.googleapis.com/gmail/v1/users/me/...`. Works inside `execute_code` (stdlib + requests only).
+2. **Cheap listing**: `messages.list?q=...&maxResults=N`, then per message `format=metadata&metadataHeaders=['From','Subject','Date']` — no body download needed for an audit.
+3. **NEVER trust `resultSizeEstimate`**: it caps at 201 and is an estimate — every broad query (from:dian.gov.co, from:bbva, or-grouped sender lists) returns exactly "201". Real counts require paginating `messages.list` and counting IDs; for audits, sample the latest 5-10 per sender instead of counting.
+4. **Regulatory audit query set (Colombia gaming clients)**: `facturacionelectronica@dian.gov.co` (e-invoice notifications) vs other `@dian.gov.co` (mixes newsletters with CRITICAL citaciones/OPP/requerimientos — always sample the non-facturación stream), `coljuegos.gov.co` (daily "Notificación de Validación"), `ccb.org.co`, `achcolombia.com.co` (PSE, includes rejected payments), `credibanco.com`, `siigo.net` (provider invoices). Banking (BBVA Net Cash/Bre-B) dominates inbox volume; physical security via `alarm.com` (G4S door-left-open alerts).
+5. Deliverable discipline: read-only scan → findings + prioritized automation proposal (cron digest / AP flow) → wait for approval before building. Cross-client mail leaks (e.g. Lucky invoices arriving in Golden's box) are findings worth reporting.
+
 ## Verification
 
 - [ ] Label membership confirmed by two independent queries that agree.

@@ -43,6 +43,7 @@ El bot PUEDE iniciar conversación aunque el contacto nunca haya escrito:
 - `POST /send` en `127.0.0.1:3000` con `{"chatId": "<JID|LID|número>", "message": "...", "replyTo?": ...}` → el mensaje sale directo al celular. También `/send-media`, `/send-poll`, `/send-location`, `/typing`, `/read`.
 - Anti-echo: el bridge registra los envíos propios en `recentlySentIds` para no rebotar el propio mensaje como entrante (no dispara al agente).
 - **Regla dura: no enviar nunca sin orden explícita del usuario** (riesgo de spam / mala primera impresión con el cliente).
+- **PITFALL verificación de envíos (22/09/2026):** `GET /messages` NO sirve para verificar un envío — hace `splice()` de `messageQueue` y CONSUME los mensajes entrantes que el bot aún no procesó (el agente los perdería). Además `messageStore` es solo en memoria: no hay log persistente de lo enviado (ni en bridge.log, ni en los state.db de los perfiles de PROD — verificado). Verificación correcta de un `POST /send`: (1) HTTP 200 con `{"success":true}`; (2) `messageId` con prefijo `3EB0...` devuelto = ID emitido tras ACK del servidor WhatsApp → confirma entrega AL SERVIDOR, no lectura ✓✓ (eso solo lo ve el destinatario); (3) `GET /health` → `connected` y `queueLength:0` tras el envío. No intentar confirmaciones de lectura vía API: Baileys no las expone.
 
 ## Grupos de WhatsApp — política por defecto RECHAZA todo
 

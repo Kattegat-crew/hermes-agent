@@ -67,3 +67,11 @@ El comando se auto-registra con una **skill cuyo `name:` coincida** (no es
 - [[ ]] Resumen mostrado y confirmado por el dueño.
 - [[ ]] SOUL.md escrito SOLO tras confirmación.
 - [[ ]] Skills recomendadas listadas y opción de habilitación ofrecida.
+
+## Comunicaciones posteriores al onboarding (22/09/2026)
+
+Para redactar notificaciones EN NOMBRE del agente de un cliente (ej. "el sistema X quedó habilitado"):
+1. **Capturar el tono real ANTES de redactar**: leer conversaciones vivas del perfil en `/opt/data/profiles/<cliente>/state.db` (tabla `messages`) — el SOUL.md no basta; el tono efectivo se ve en lo que el agente ya escribió (apodos, emojis, estructura, trato de tú/usted).
+2. Redactar UNA variante por destinatario (cada cliente/grupo tiene contexto propio: a quién le habla, qué le importa).
+3. Enviar por el bridge WhatsApp de uno en uno con verificación de entrega (receta y pitfall de `GET /messages` en `whatsapp-bridge-operations`).
+- Evidencia: notificaciones de habilitación del radar DIAN/Coljuegos (proyecto F1) a los grupos de Helmer y Yulieth, 2026-09-22; plan en PROD `/opt/vault/PLAN-F1-RADAR-DIAN-COLJUEGOS.md`.

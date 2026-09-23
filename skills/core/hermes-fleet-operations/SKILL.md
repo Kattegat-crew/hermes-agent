@@ -39,3 +39,4 @@ Esta skill opera como despacho unificado. El detalle procedural y gotchas espec√
 - **hermes-profile-routing**: Ver [references/hermes-profile-routing.md](file:///root/hermes-agent/skills/core/hermes-fleet-operations/references/hermes-profile-routing.md)
 - **hermes-roster-implementation**: Ver [references/hermes-roster-implementation.md](file:///root/hermes-agent/skills/core/hermes-fleet-operations/references/hermes-roster-implementation.md)
 - **hermes-specialist-agents-deploy**: Ver [references/hermes-specialist-agents-deploy.md](file:///root/hermes-agent/skills/core/hermes-fleet-operations/references/hermes-specialist-agents-deploy.md)
+- **ncl-google-connections**: Ver [references/ncl-google-connections.md](file:///root/hermes-agent/skills/core/hermes-fleet-operations/references/ncl-google-connections.md)

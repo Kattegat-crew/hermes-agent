@@ -98,3 +98,4 @@ access_token + data[].event_name/event_time/event_id/action_source/user_data/cus
 ## Referencias
 
 - `references/session-2026-09-07-meta-ads-golden.md` — diagnóstico de campañas Golden/Paradise (inversión, ad sets, geo faltante), conexiones expiradas y re-vinculación, plan del pixel Golden.
+- `references/meta-rmg-authorization.md` — solicitud de autorización RMG (juegos de suerte y azar): documentos exigidos, plantilla de "Comentarios adicionales" y pitfall de coherencia web↔claim (Golden/Lucky, sep-2026).
