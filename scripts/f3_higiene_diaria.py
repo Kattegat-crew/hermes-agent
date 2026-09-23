@@ -396,6 +396,8 @@ def main():
     ap.add_argument('--sin-notificar', action='store_true')
     ap.add_argument('--prueba-notificacion', action='store_true',
                     help='envía un mensaje de prueba al canal de alertas')
+    ap.add_argument('--sin-adopt', action='store_true',
+                    help='no adoptar skills nuevas (salta la coherencia del modelo F4)')
     a = ap.parse_args()
 
     informe = {'ts': time.strftime('%Y-%m-%dT%H:%M:%S%z'), 'host': sh('hostname').stdout.strip()}
@@ -418,6 +420,18 @@ def main():
                                                   ensure_ascii=False)[:230]))
 
     higiene(informe, aplicar=not a.dry_run, push=not a.sin_push)
+
+    # Coherencia del modelo F4: el canon es curator-managed por declaración del
+    # dueño. Si el job versiona skills nuevas y no las adopta, quedan fuera del
+    # universo del curador sin que nadie lo note (deriva silenciosa).
+    if (not a.dry_run and informe.get('higiene', {}).get('accion') == 'commiteado'
+            and not a.sin_adopt):
+        r = sh('docker exec -u 10000 -e HERMES_HOME=%s -e HOME=%s %s %s curator '
+               'adopt --all-unmanaged --yes' % (HERMES_HOME_ROOT, HERMES_HOME_ROOT,
+                                                CONT, HERMES_BIN), timeout=900)
+        sal = [l for l in (r.stdout or r.stderr or '').strip().splitlines() if l.strip()]
+        informe['higiene']['adopt'] = {'rc': r.returncode, 'salida': sal[-2:]}
+        log('  adopt no gestionadas: rc=%s %s' % (r.returncode, sal[-1:] or ''))
 
     atencion = []
     if not informe.get('V1_inodo', {}).get('ok'):
