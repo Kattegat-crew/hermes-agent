@@ -29,6 +29,11 @@ Directorio raíz del archivo: `data/archive/`
 | `sync_20260923-051733` | 72K | 15 | 2 |
 | `video-gen` | 520M | 329 | 0 |
 
+| `F52_20260923-125846` | — | crontab de root respaldada | 0 |
+| `F52_20260923-125926` | — | crontab de root respaldada (aplicada) | 0 |
+| `F52_20260923-130039` | 266 MB + 8 MB | arbol legado del host + espejo `/opt/hermes/skills` | 17 |
+| `F7_20260923-132223` | 4 KB | 4 slots de gateway huerfanos + residuo del 22-ago | 1 |
+
 ## Paquetes (tarballs)
 
 | Paquete | Tamaño | Entradas | sha256 (16) |

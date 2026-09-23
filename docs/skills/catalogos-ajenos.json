@@ -1,0 +1,95 @@
+{
+ "documento": "docs/skills/catalogos-ajenos.json",
+ "motivo": "R10: los catalogos de otros productos se declaran y se excluyen; nunca se mezclan con el canon de la flota Hermes. Este fichero es la fuente unica que usa el chequeo V10 del job de higiene.",
+ "fecha": "2026-09-23",
+ "comando_inventario": "find <raiz> -name SKILL.md | grep -v node_modules | wc -l",
+ "ambito_del_barrido": [
+  "/opt",
+  "/root",
+  "/srv",
+  "/home"
+ ],
+ "no_escaneado": {
+  "/tmp/superpowers-repo": "clon temporal externo (14 SKILL.md); /tmp no se barre por volatil"
+ },
+ "catalogos": {
+  "/neuralcrew_agent": {
+   "tipo": "producto",
+   "dueno": "root",
+   "skills": 182,
+   "nota": "producto nca-api (contenedores nca-*). Declarado ya en F5."
+  },
+  "/opt/ai-platform": {
+   "tipo": "producto",
+   "dueno": "hermes",
+   "skills": 11,
+   "nota": "monorepo ai-platform (github Jemadiar1/ai-platform), con sus propios .agents/skills. No es catalogo de la flota."
+  },
+  "/root/.akari": {
+   "tipo": "producto",
+   "dueno": "root",
+   "skills": 44,
+   "nota": "app akari con skills propias en app/skills y .agents/skills."
+  },
+  "/root/golden-game-landing": {
+   "tipo": "producto-cliente",
+   "dueno": "hermes",
+   "skills": 3,
+   "nota": "landing de cliente con .agents/skills."
+  },
+  "/home/orca/.agents": {
+   "tipo": "tercero",
+   "dueno": "orca",
+   "skills": 2,
+   "nota": "skills del usuario/servicio orca, ajenas a la flota."
+  },
+  "/root/marketing-campaign-generator": {
+   "tipo": "producto-propio",
+   "dueno": "hermes",
+   "skills": 2,
+   "nota": "repo de guiones; sus skills viven en opencode/, no en el canon."
+  },
+  "/root/.config/opencode": {
+   "tipo": "tercero",
+   "dueno": "root",
+   "skills": 321,
+   "nota": "libreria de skills del CLI opencode. Verificado el 23-sep-2026: interseccion de nombres con el canon = 0, no es copia del catalogo."
+  },
+  "/root/.config/opencode.bak": {
+   "tipo": "tercero-respaldo",
+   "dueno": "root",
+   "skills": 1,
+   "nota": "respaldo de la configuracion de opencode."
+  },
+  "/root/.gemini": {
+   "tipo": "tercero",
+   "dueno": "root",
+   "skills": 32,
+   "nota": "libreria de skills del CLI Google Gemini/Antigravity (skills/ + antigravity-cli/skills + builtin)."
+  },
+  "/root/.gemini-cuenta2": {
+   "tipo": "tercero",
+   "dueno": "root",
+   "skills": 1,
+   "nota": "config del CLI Gemini para una cuenta alterna."
+  },
+  "/home/jon/.gemini": {
+   "tipo": "tercero",
+   "dueno": "root",
+   "skills": 3,
+   "nota": "config del CLI Gemini en el home del usuario jon."
+  },
+  "/home/cuenta2/.gemini": {
+   "tipo": "tercero",
+   "dueno": "root",
+   "skills": 3,
+   "nota": "config del CLI Gemini en el home de cuenta2."
+  }
+ },
+ "exclusiones_de_paquete": [
+  "node_modules",
+  "site-packages",
+  "/.cache/",
+  ".venv"
+ ]
+}

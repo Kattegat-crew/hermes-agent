@@ -10,6 +10,8 @@ versionado. Medir una copia ausente no protege nada; lo que hay que vigilar es
 otra cosa:
 
   V1  un solo árbol     mismo inodo en el canon y en las 12 raíces de escritura
+  V1b censo vs montaje  todo perfil de disco tiene su raíz montada, y todo
+                        destino del compose está en la lista que se mide
   V2  cero copias       `skills.external_dirs` ausente en los 12 configs
   V3  configs sanos     los 12 parsean (un YAML roto degrada el perfil entero
                         al config por defecto — incidente del 23-sep-2026)
@@ -19,6 +21,8 @@ otra cosa:
   V7  curador           estado y ledger (fuente de verdad de sus movimientos)
   V8  gate              ledger del hook: cuántas creaciones bloqueó/encauzó
   V9  recreaciones      ventanas de recreación del contenedor
+  V10 fuera del repo    ninguna ruta de skills/perfiles/estado fuera del repo
+                        (R16): lista negra de rutas retiradas + barrido acotado
 
 HIGIENE (R4: toda edición de agente queda versionada)
   Si el árbol está sucio: atribuye cada ruta a perfil + sesión consultando los
@@ -33,6 +37,7 @@ USO
 """
 import argparse
 import json
+import os
 import re
 import sqlite3
 import subprocess
@@ -52,6 +57,37 @@ RAICES_CONT = ['/opt/data/skills'] + ['/opt/data/profiles/%s/skills' % p for p i
 RUTAS_ESCRITURA = ('skill_manage', 'write_file', 'patch', 'edit',
                    'terminal', 'execute_code', 'apply_patch', 'str_replace_editor')
 AHORA = time.time()
+
+# ── Cargador YAML estricto (R7 ampliado a los configs) ──────────────────────
+# Un config que dice dos veces la misma clave en el mismo nivel no rompe el
+# parseo —y por eso pasa desapercibido—, pero describe dos intenciones a la vez.
+try:
+    import yaml
+except Exception:                                   # pragma: no cover
+    yaml = None
+
+if yaml is not None:
+    class _ClaveDuplicada(Exception):
+        pass
+
+    def _mapa_estricto(loader, node, deep=False):
+        vistos = set()
+        for k, _ in node.value:
+            kk = loader.construct_object(k, deep=deep)
+            if kk in vistos:
+                raise _ClaveDuplicada('clave repetida en el mismo nivel: %r' % (kk,))
+            vistos.add(kk)
+        return yaml.SafeLoader.construct_mapping(loader, node, deep=deep)
+
+    class _LoaderEstricto(yaml.SafeLoader):
+        pass
+
+    _LoaderEstricto.add_constructor(
+        yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, _mapa_estricto)
+else:                                               # pragma: no cover
+    _ClaveDuplicada = Exception
+    _LoaderEstricto = None
+
 
 # ── Notificación ────────────────────────────────────────────────────────────
 # Destino: #sistema-servers del guild NeuralCrew Labs (canal de operaciones).
@@ -114,7 +150,7 @@ def v2_v3_configs(informe):
         import yaml
     except Exception:
         yaml = None
-    con_ext, roto, sanos = [], [], 0
+    con_ext, roto, sanos, dups = [], [], 0, []
     for p in CONFIGS:
         if not p.is_file():
             roto.append(str(p))
@@ -124,7 +160,15 @@ def v2_v3_configs(informe):
             con_ext.append(str(p))
         if yaml is not None:
             try:
-                yaml.safe_load(txt)
+                if _LoaderEstricto is not None:
+                    yaml.load(txt, Loader=_LoaderEstricto)
+                else:
+                    yaml.safe_load(txt)
+                sanos += 1
+            except _ClaveDuplicada as e:
+                # parsea, pero dice dos cosas: se reporta aparte del YAML roto
+                dups.append('%s: %s' % (p.name if p.parent.name == 'profiles'
+                                        else 'root', e))
                 sanos += 1
             except Exception:
                 roto.append(str(p))
@@ -132,7 +176,8 @@ def v2_v3_configs(informe):
             sanos += 1
     informe['V2_external_dirs'] = {'ok': not con_ext, 'configs': con_ext}
     informe['V3_configs'] = {'ok': not roto, 'sanos': sanos,
-                             'total': len(CONFIGS), 'rotos': roto}
+                             'total': len(CONFIGS), 'rotos': roto,
+                             'claves_duplicadas': dups}
 
 
 # ── V4 · catálogo íntegro ───────────────────────────────────────────────────
@@ -156,6 +201,76 @@ def v5_arbol(informe):
     lineas = [l for l in out.splitlines() if l.strip()]
     informe['V5_arbol'] = {'sucio': bool(lineas), 'n': len(lineas),
                            'rutas': [l[3:].strip() for l in lineas][:30]}
+
+
+# ── V1b · censo de perfiles vs montajes ─────────────────────────────────────
+def v1b_censo_montaje(informe):
+    """V1 recorre RAICES_CONT: una lista ESCRITA A MANO. Un perfil 13 que nazca
+    sin raíz montada no lo vería nadie, y escribiría en su carpeta local —una
+    copia real—. Aquí se compara el censo de disco con la lista y con los
+    destinos que declara el compose."""
+    # los dot-dirs (.deleted y compañia) son servicio, no perfiles: se listan
+    # aparte para que un perfil borrado no se confunda con un perfil sin montaje
+    entries = [p for p in (DATA / 'profiles').iterdir() if p.is_dir()]
+    censo = sorted(p.name for p in entries
+                   if p.name != 'default' and not p.name.startswith('.'))
+    servicio = sorted(p.name for p in entries if p.name.startswith('.'))
+    sin_montaje = sorted(set(censo) - set(PERFILES))
+    declarados_sin_perfil = sorted(set(PERFILES) - set(censo))
+    comp = REPO / 'docker-compose.yml'
+    destinos = []
+    if comp.is_file():
+        for l in comp.read_text(encoding='utf-8').splitlines():
+            m = re.match(r'\s*-\s*\./skills:(/\S+)', l)
+            if m:
+                destinos.append(m.group(1))
+    canon_lectura = '/opt/hermes/skills'
+    no_medidos = sorted(set(destinos) - set(RAICES_CONT) - {canon_lectura})
+    sin_destino = sorted(set(RAICES_CONT) - set(destinos))
+    ok = not sin_montaje and not no_medidos and not sin_destino
+    informe['V1b_censo'] = {'ok': ok, 'perfiles_en_disco': len(censo),
+                            'dirs_de_servicio': servicio,
+                            'sin_montaje': sin_montaje,
+                            'declarados_sin_perfil': declarados_sin_perfil,
+                            'destinos_compose': len(destinos),
+                            'destinos_no_medidos': no_medidos,
+                            'sin_destino': sin_destino}
+
+
+# ── V10 · nada fuera del repositorio ────────────────────────────────────────
+LEGADO_PROHIBIDO = ['/opt/data', '/opt/hermes/skills', '/root/.agents/skills',
+                    '/opt/hermes/data']
+
+
+CATALOGOS_AJENOS = REPO / 'docs' / 'skills' / 'catalogos-ajenos.json'
+
+
+def v10_fuera_del_repo(informe):
+    """R16: el host no tiene rutas de skills, perfiles o estado fuera del
+    repositorio. Se comprueban dos cosas: la lista negra de rutas retiradas (su
+    reaparición es un incidente) y los árboles de skills que NO estén en el
+    catálogo de ajenos declarado (R10). Así el semáforo es útil —verde hoy— y
+    cualquier árbol NUEVO bloquea."""
+    reaparecidos = [p for p in LEGADO_PROHIBIDO if os.path.exists(p)]
+    declarados = []
+    if CATALOGOS_AJENOS.is_file():
+        try:
+            declarados = sorted(json.loads(
+                CATALOGOS_AJENOS.read_text(encoding='utf-8')).get('catalogos', {}))
+        except Exception as e:
+            informe.setdefault('errores_vigilancia', []).append(
+                'catalogos-ajenos.json ilegible: %s' % e)
+    salida = sh('find /opt /root /srv /home -maxdepth 7 -name SKILL.md 2>/dev/null '
+                '| grep -v "^/root/hermes-agent/" '
+                r'| grep -v "node_modules\|site-packages\|/.cache/\|.venv" '
+                '| head -80').stdout.split()
+    no_declarados = sorted({p for p in salida
+                            if not any(p.startswith(r) for r in declarados)})
+    informe['V10_fuera_repo'] = {'ok': not reaparecidos and not no_declarados,
+                                 'rutas_retiradas_reaparecidas': reaparecidos,
+                                 'catalogos_declarados': len(declarados),
+                                 'no_declarados': no_declarados[:10],
+                                 'n_skills_no_declaradas': len(no_declarados)}
 
 
 # ── V6 · aduana ─────────────────────────────────────────────────────────────
@@ -351,6 +466,8 @@ def mensaje_alerta(informe, motivos):
         L.append('  · %s' % m)
     L += ['', 'Estado del árbol único:',
           '  V1 inodo único ....... %s' % informe.get('V1_inodo', {}).get('ok'),
+          '  V1b censo vs montaje . %s' % informe.get('V1b_censo', {}).get('ok'),
+          '  V10 fuera del repo ... %s' % informe.get('V10_fuera_repo', {}).get('ok'),
           '  V2 external_dirs ..... %s' % (not informe.get('V2_external_dirs', {}).get('configs')),
           '  V3 configs válidos ... %s' % informe.get('V3_configs', {}).get('sanos'),
           '  V4 catálogo == git ... %s (%s)' % (informe.get('V4_catalogo', {}).get('ok'),
@@ -402,10 +519,12 @@ def main():
 
     informe = {'ts': time.strftime('%Y-%m-%dT%H:%M:%S%z'), 'host': sh('hostname').stdout.strip()}
     log('═══ VIGILANCIA E HIGIENE DEL ÁRBOL ÚNICO · %s ═══' % informe['ts'])
-    planes = ((v1_inodo, 'V1_inodo'), (v2_v3_configs, 'V2_external_dirs'),
+    planes = ((v1_inodo, 'V1_inodo'), (v1b_censo_montaje, 'V1b_censo'),
+              (v2_v3_configs, 'V2_external_dirs'),
               (v4_catalogo, 'V4_catalogo'), (v5_arbol, 'V5_arbol'),
               (v6_aduana, 'V6_aduana'), (v7_curador, 'V7_curador'),
-              (v8_gate, 'V8_gate'), (v9_recreaciones, 'V9_recreaciones'))
+              (v8_gate, 'V8_gate'), (v9_recreaciones, 'V9_recreaciones'),
+              (v10_fuera_del_repo, 'V10_fuera_repo'))
     for fn, clave in planes:
         try:
             fn(informe)
@@ -443,6 +562,17 @@ def main():
     if not informe.get('V4_catalogo', {}).get('ok'):
         atencion.append('catálogo divergente de git: faltan=%s sin_versionar=%s' % (
             informe['V4_catalogo'].get('faltan'), informe['V4_catalogo'].get('sin_versionar')))
+    if informe.get('V1b_censo', {}).get('ok') is False:
+        atencion.append('censo vs montaje: perfiles sin raiz=%s · destinos no medidos=%s'
+                        % (informe['V1b_censo'].get('sin_montaje'),
+                           informe['V1b_censo'].get('destinos_no_medidos')))
+    if informe.get('V3_configs', {}).get('claves_duplicadas'):
+        atencion.append('configs con claves duplicadas: %s'
+                        % informe['V3_configs']['claves_duplicadas'])
+    if informe.get('V10_fuera_repo', {}).get('ok') is False:
+        atencion.append('rutas fuera del repositorio: reaparecidas=%s · arboles sin declarar=%s'
+                        % (informe['V10_fuera_repo'].get('rutas_retiradas_reaparecidas'),
+                           informe['V10_fuera_repo'].get('no_declarados')))
     if informe.get('V6_aduana', {}).get('ok') is False:
         atencion.append('aduana en rojo')
     inf = informe.get('higiene', {})

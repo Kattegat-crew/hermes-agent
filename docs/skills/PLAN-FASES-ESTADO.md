@@ -27,7 +27,7 @@ consta qué fases cerraron, qué deuda residual dejaron y dónde cae cada acció
 | **F5** · Cerrar lo que vivía fuera del repositorio | ✅ cerrada **con incidente** | 3 árboles retirados; 2 crons de Meta Ads repuntados; **incidente del punto de montaje** (`data/skills`) |
 | **F5.2** · Deuda residual del cierre de F5 | ✅ **cerrada** (23-sep, 13:05) | Árbol legado del host archivado y retirado; 0 referencias vivas (ver §3.0) |
 | **F6** · Consolidación supervisada | ⏸️ **bloqueada** | Exige 2 revisiones limpias del curador; hoy **1/2**. No arranca: la autorización vive en el código |
-| **F7** · Higiene de flota | ⏳ pendiente | 3 ítems originales + **4 nuevos** (ver §3) |
+| **F7** · Higiene de flota | ✅ **cerrada** (23-sep, 13:30) | 7 ítems: 2 chequeos nuevos (V1b/V10), slots, `AGENTS.md` de vigia, cadenas, alias y symlinks (ver §3.1) |
 | **F8** · PROD y verificación final | ⏳ pendiente | Se le añade una comprobación (ver §3, N9) |
 
 ---
@@ -120,13 +120,13 @@ primero se corta la dependencia, después se archiva.
 
 | # | Acción | Estado | Criterio de aceptación |
 |---|---|---|---|
-| **N1** | **Chequeo censo-vs-montaje (V1b)** en el job diario: comparar `/opt/data/profiles/*` contra `PERFILES` y los destinos del compose contra `RAICES_CONT` | **nuevo** | Falla si existe un perfil sin raíz montada. Probado con un perfil fantasma |
-| **N2** | **Chequeo V10 «nada fuera del repo ni del alias declarado»**: rutas de skills/perfiles/estado | **nuevo** | 0 rutas no declaradas; el legado aparece como violación hasta su cierre |
-| **N6** | **Reconciliar el censo de slots**: declarar vivos o residuo `coder`, `ragnarcho`, `rochi`, `shared`; limpiar sus `logs/gateways/`; corregir el cap. 12.2 del Rev. 6 | **nuevo** | 0 slots sin perfil o sin declaración; cifra del informe corregida |
-| **N8** | Completar el expediente de perfil: `AGENTS.md` de **vigia** (10 de 11) | **nuevo** | 11/11 perfiles con `config`, `AGENTS.md`, `SOUL.md` y `memories/` |
-| **N3-org** | Cadenas de respaldo asimétricas: `default`, `roshi` y `vigia` con **0** fallbacks frente a **3** de los otros 9 *(medido)* | original | Los 12 con cadena alineada y conmutación probada |
-| **N8-org** | Claves duplicadas de vigía → **no reproducible** con detector estricto (0/12). Se integra el detector a la aduana y se cierra con nota | original (re-medido) | Detector en la aduana; semáforo verde |
-| **N9-org** | Symlinks rotos fuera de caché técnica: **9**, todos en `roshi` | original (re-medido) | 0 fuera de `/.cache/` y `/.bak-*` |
+| **N1** | ✅ Chequeo **censo-vs-montaje (V1b)** | **hecho** | Probado: perfil fantasma → falla con su nombre; retirado → verde |
+| **N2** | ✅ Chequeo **V10** contra `catalogos-ajenos.json` | **hecho** | 12 catálogos declarados; 0 sin declarar; falla con un árbol fantasma |
+| **N6** | ✅ **Censo de slots reconciliado** | **hecho** | 4 cascarones vacíos al archivo; `logs/gateways/` = 12 vivos. Rev. 6 cap. 12.2: 16 slots era el radio **declarado**, 12 los **vivos** |
+| **N8** | ✅ `AGENTS.md` de **vigia** escrito | **hecho** | 11/11 perfiles con expediente completo |
+| **N3-org** | ✅ Cadenas de respaldo alineadas | **hecho** | Los 12 con `NaN-Builders → B.AI → OpenCode-Go`; resolubilidad verificada en los 3 editados |
+| **N8-org** | ✅ **Re-lectura corregida**: eran alias de proveedor en minúscula, no claves YAML | **hecho** | 42 renglones duplicados retirados; detector estricto integrado a V3 además |
+| **N9-org** | ✅ **Criterio afinado** (se miden desde el contenedor) | **hecho** | 1 realmente roto (repuntado); 3 resuelven; el resto son artefactos de runtime |
 
 ### F6 · Consolidación (bloqueada — sin cambios de alcance)
 
@@ -167,6 +167,22 @@ primero se corta la dependencia, después se archiva.
 | A3 | Los scripts de producción del host viven en `data/scripts/`, **gitignoreado**: 0 versionado | `git ls-files data/scripts` → 0 |
 | A4 | 4 slots de gateway sin perfil (`coder`, `ragnarcho`, `rochi`, `shared`) | 16 slots vs 12 perfiles |
 | A5 | Una corrida en `--dry-run` del backup reporta `ESTADO: SUCCESS` y **notifica a Discord** | salida de la verificación de F5.2 |
+
+### 3.1 F7 ejecutada (23-sep-2026, 13:14-13:30) — evidencia
+
+| Ítem | Resultado medido |
+|---|---|
+| V1b + V10 en el job | Probados en las dos direcciones (fantasma → falla con nombre; retirado → verde). `motivos: []` |
+| V3 ampliado | 12/12 configs sin claves repetidas (cargador estricto) |
+| Catálogos ajenos | `docs/skills/catalogos-ajenos.json` con **12** entradas; 0 árboles sin declarar |
+| Slots | `logs/gateways/`: 16 → **12** (los vivos). 4 cascarones al archivo |
+| Residuo del 22-ago | `archivo-optdata-20260822` archivado (`d412f85ac3b77373`) |
+| Expediente | 11/11 perfiles con `config` + `AGENTS.md` + `SOUL.md` + `memories/` |
+| Cadenas | 12/12 con `NaN-Builders → B.AI → OpenCode-Go`; respaldos con sha256 verificado |
+| Symlink roto real | `lsp/bin/yaml-language-server`: 1 (repuntado a un destino que resuelve) |
+
+**Pendiente declarado:** los cambios de config entran en vigor al próximo arranque
+del gateway de cada perfil; no se reiniciaron para no cortar la sesión del operador.
 
 ## 4. Orden de ejecución recomendado
 
