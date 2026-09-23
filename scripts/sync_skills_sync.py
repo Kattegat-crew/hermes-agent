@@ -424,8 +424,21 @@ def main() -> int:
             log(f"   ✅ commit: {msg}")
 
     # 6) despliegue del canon al espejo
+    # GUARD DE PUNTO DE MONTAJE (modelo A2, fase F2): si el destino es un montaje,
+    # el espejo ES el canon. Barrerlo destruiría el catálogo y su historial git.
+    _mnt = subprocess.run(
+        f"docker exec {a.container} sh -c \"grep -c ' {a.container_skills} ' /proc/mounts || true\"",
+        shell=True, capture_output=True, text=True).stdout.strip()
+    if _mnt and _mnt != '0':
+        log(f"   🛑 ABORTADO: {a.container_skills} es un PUNTO DE MONTAJE en {a.container}.")
+        log("      Con el modelo A2 el espejo ES el canon: desplegar aquí borraría el catálogo.")
+        log("      Los cambios se hacen en git y el runtime los ve al instante.")
+        return 1
     log("📦 Desplegando canon -> contenedor…")
-    subprocess.run(f'docker exec {a.container} rm -rf "{a.container_skills}"/*', shell=True, check=True)
+    # El glob se expande DENTRO del contenedor: si no, solo se borran las entradas
+    # que también existen en el host y el espejo acumula residuos para siempre.
+    subprocess.run(f'docker exec {a.container} sh -c "rm -rf {a.container_skills}/*"',
+                   shell=True, check=True)
     cmd = f'tar -C "{host_root}" -cf - . | docker exec -i {a.container} tar -C "{a.container_skills}" -xf -'
     subprocess.run(cmd, shell=True, check=True)
     subprocess.run(f'docker exec {a.container} chown -R 10000:10000 "{a.container_skills}"', shell=True, check=True)
