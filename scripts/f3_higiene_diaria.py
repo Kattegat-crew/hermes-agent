@@ -53,6 +53,18 @@ RUTAS_ESCRITURA = ('skill_manage', 'write_file', 'patch', 'edit',
                    'terminal', 'execute_code', 'apply_patch', 'str_replace_editor')
 AHORA = time.time()
 
+# ── Notificación ────────────────────────────────────────────────────────────
+# Destino: #sistema-servers del guild NeuralCrew Labs (canal de operaciones).
+# Se publica con `hermes send`, que usa la API REST del bot de la flota (no abre
+# sesión de gateway: darle el token al perfil vigia NO es opción, porque su
+# gateway abriría una segunda sesión del MISMO bot y desconectaría la primera).
+# El tema de las alertas es de Vigía (salud de infra), así que el mensaje va
+# rotulado como suyo.
+DISCORD_DESTINO = 'discord:1552059363500228618'
+HERMES_BIN = '/opt/hermes/.venv/bin/hermes'
+HERMES_HOME_ROOT = '/opt/data'
+ROTULO = '🛰️ Vigía · salud de infra'
+
 
 def log(msg=''):
     print(msg, flush=True)
@@ -323,10 +335,58 @@ def higiene(informe, aplicar=True, push=True):
     informe['higiene'] = estado
 
 
+def mensaje_alerta(informe, motivos):
+    """Cuerpo del aviso para el canal de operaciones."""
+    L = [ROTULO, '', '⚠️ Requiere atención: %d motivo(s)' % len(motivos), '']
+    for m in motivos:
+        L.append('  · %s' % m)
+    L += ['', 'Estado del árbol único:',
+          '  V1 inodo único ....... %s' % informe.get('V1_inodo', {}).get('ok'),
+          '  V2 external_dirs ..... %s' % (not informe.get('V2_external_dirs', {}).get('configs')),
+          '  V3 configs válidos ... %s' % informe.get('V3_configs', {}).get('sanos'),
+          '  V4 catálogo == git ... %s (%s)' % (informe.get('V4_catalogo', {}).get('ok'),
+                                               informe.get('V4_catalogo', {}).get('alcanzables')),
+          '  V5 árbol sucio ....... %s' % informe.get('V5_arbol', {}).get('n'),
+          '  V6 aduana ............ %s' % informe.get('V6_aduana', {}).get('ok'),
+          '  V8 gate (24h) ........ %s decisiones' % informe.get('V8_gate', {}).get('ultimas_24h'),
+          '  higiene .............. %s' % json.dumps(informe.get('higiene', {}), ensure_ascii=False)[:160],
+          '', 'Informe: %s' % (DATA / 'state' / 'skills_higiene_last.json')]
+    return '\n'.join(L)
+
+
+def notificar(informe, motivos, aplicar=True, prueba=False):
+    """Publica el aviso en Discord SOLO si algo se sale del guion (o si es prueba)."""
+    if not motivos and not prueba:
+        return {'enviado': False, 'motivo': 'sin novedad: no se notifica'}
+    cuerpo = mensaje_alerta(informe, motivos) if not prueba else (
+        ROTULO + '\n\n✅ Prueba del canal de alertas del job de higiene del árbol '
+        'único (F3). Se publica solo ante desviaciones; este es el formato.')
+    tmp = Path('/tmp/higiene_alerta.txt')
+    tmp.write_text(cuerpo, encoding='utf-8')
+    if not aplicar:
+        return {'enviado': False, 'motivo': 'dry-run', 'cuerpo': cuerpo[:200]}
+    # El binario de hermes vive DENTRO del contenedor y este job corre en el
+    # host (cron): se ejecuta por docker exec con el cuerpo por stdin, sin
+    # exponer credenciales fuera del contenedor.
+    cmd = ('docker exec -i -e HERMES_HOME=%s -e HOME=%s %s %s send --to %s '
+           '--subject "higiene diaria del arbol unico" --file - --json < %s'
+           % (HERMES_HOME_ROOT, HERMES_HOME_ROOT, CONT, HERMES_BIN, DISCORD_DESTINO, tmp))
+    r = sh(cmd, timeout=120)
+    ok = r.returncode == 0
+    res = {'enviado': ok, 'destino': DISCORD_DESTINO, 'rotulo': ROTULO,
+           'rc': r.returncode, 'salida': (r.stdout or r.stderr or '').strip()[:300]}
+    if not ok:
+        log('  ⚠️ la notificación a Discord falló (rc=%s): %s' % (r.returncode, res['salida']))
+    return res
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--dry-run', action='store_true')
     ap.add_argument('--sin-push', action='store_true')
+    ap.add_argument('--sin-notificar', action='store_true')
+    ap.add_argument('--prueba-notificacion', action='store_true',
+                    help='envía un mensaje de prueba al canal de alertas')
     a = ap.parse_args()
 
     informe = {'ts': time.strftime('%Y-%m-%dT%H:%M:%S%z'), 'host': sh('hostname').stdout.strip()}
@@ -367,6 +427,11 @@ def main():
         atencion.append('higiene: %s' % inf)
     informe['requiere_atencion'] = bool(atencion)
     informe['motivos'] = atencion
+
+    # Notificación a Discord (Vigía) solo si algo se sale del guion
+    informe['notificacion'] = notificar(informe, atencion,
+                                        aplicar=not a.dry_run and not a.sin_notificar,
+                                        prueba=a.prueba_notificacion)
 
     destino = DATA / 'state' / 'skills_higiene_last.json'
     destino.write_text(json.dumps(informe, indent=1, ensure_ascii=False), encoding='utf-8')
