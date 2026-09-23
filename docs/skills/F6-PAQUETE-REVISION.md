@@ -1,6 +1,6 @@
 # F6 · Paquete de revisión independiente (R8)
 
-**Para:** el revisor independiente de la consolidación (Plon / Ragnar)
+**Para:** **Ragnar** (Discord `Ragnar#4498`, id `1493385610797252758`) — revisor independiente de la consolidación. Alternativa válida: Plon (Admin).
 **De:** Roshi — operativo de Chucho
 **Fecha:** 23-sep-2026
 **Estado:** 5 lotes ejecutados, consolidación mecánica **cerrada**
@@ -84,7 +84,7 @@ Commits: `f3a3a1df9a` (lote 0) · `7c1f8809a6` (acta) · `9595147fd2` (lote 1) �
 
 | Campo | Valor |
 |---|---|
-| Revisor | |
+| Revisor | Ragnar (`1493385610797252758`), solicitado el 23-sep-2026 |
 | Fecha | |
 | Lote 0 / 1 / 2 / 3 / 4 | aprobado · con reservas · revertir |
 | Reservas u objeciones | |
