@@ -75,7 +75,7 @@ log "   aduana: $([[ $AUD -ge 1 ]] && echo VERDE || echo '⚠️ revisar')"
 if [[ $DRY -eq 1 ]]; then
   log ""
   log "🧪 DRY-RUN — nada se ejecutó. Comando que se correría:"
-  log "   docker compose up -d   (aplica 5 montajes: skills, skills_tool.py, delegate_tool.py, activity_labels.py, locales)"
+  log "   docker compose up -d --no-build   (aplica 5 montajes: skills, skills_tool.py, delegate_tool.py, activity_labels.py, locales)"
   exit 0
 fi
 
@@ -127,7 +127,7 @@ log "   ejemplo: $DEFGRP -> $(stat -c '%U:%G %a' "$DEFGRP" 2>/dev/null)"
 # ── RECREACIÓN ──────────────────────────────────────────────────────────────
 log ""
 log "── RECREACIÓN (docker compose up -d) ──"
-( cd "$REPO" && docker compose up -d 2>&1 | tee -a "$LOG" )
+( cd "$REPO" && docker compose up -d --no-build 2>&1 | tee -a "$LOG" )
 
 # ── ESPERA DE LISTO ─────────────────────────────────────────────────────────
 log ""
@@ -177,7 +177,7 @@ if [[ ${#FALLOS[@]} -gt 0 ]]; then
   log ""
   log "   🛑 FALLOS: ${FALLOS[*]}"
   log "   🔄 ROLLBACK AUTOMÁTICO con el compose sin montaje…"
-  ( cd "$REPO" && docker compose -f docker-compose.nobind.yml up -d 2>&1 | tee -a "$LOG" )
+  ( cd "$REPO" && docker compose -f docker-compose.nobind.yml up -d --no-build 2>&1 | tee -a "$LOG" )
   sleep 20
   ST2="$(docker inspect "$CONT" --format '{{.State.Status}}' 2>/dev/null || echo missing)"
   log "   estado tras rollback: $ST2"
