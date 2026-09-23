@@ -23,6 +23,8 @@ Habilidad consolidada de clase que centraliza los flujos de:
 - `pil-ffmpeg-rendering`
 - `pipeline-informes-ventas-multimarca`
 
+- `docx-generacion-verificacion`
+
 ## Arquitectura y Protocolos
 Esta skill opera como despacho unificado. El detalle procedural y gotchas específicos de cada caso se encuentran preservados en:
 `references/`
@@ -41,3 +43,4 @@ Esta skill opera como despacho unificado. El detalle procedural y gotchas espec�
 - **pdf-deliverables**: Ver [references/pdf-deliverables.md](file:///root/hermes-agent/skills/core/informes-cliente-pipeline/references/pdf-deliverables.md)
 - **pil-ffmpeg-rendering**: Ver [references/pil-ffmpeg-rendering.md](file:///root/hermes-agent/skills/core/informes-cliente-pipeline/references/pil-ffmpeg-rendering.md)
 - **pipeline-informes-ventas-multimarca**: Ver [references/pipeline-informes-ventas-multimarca.md](file:///root/hermes-agent/skills/core/informes-cliente-pipeline/references/pipeline-informes-ventas-multimarca.md)
+- **docx-generacion-verificacion**: generar y auto-verificar un DOCX entregable: extraer tambien las celdas de tabla, asserts de negocio embebidos y re-verificacion en frio contra el archivo en disco — ver [references/docx-generacion-verificacion.md](file:///root/hermes-agent/skills/core/informes-cliente-pipeline/references/docx-generacion-verificacion.md)

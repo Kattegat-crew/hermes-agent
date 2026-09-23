@@ -16,6 +16,10 @@ Habilidad consolidada de clase que centraliza los flujos de:
 - `social-post-identification`
 - `social-story-production`
 
+- `destination-compliance-verticales`
+
+- `meta-capi-tracking`
+
 ## Arquitectura y Protocolos
 Esta skill opera como despacho unificado. El detalle procedural y gotchas específicos de cada caso se encuentran preservados en:
 `references/`
@@ -27,3 +31,5 @@ Esta skill opera como despacho unificado. El detalle procedural y gotchas espec�
 - **meta-ads-operations**: Ver [references/meta-ads-operations.md](file:///root/hermes-agent/skills/core/meta-ads-ops/references/meta-ads-operations.md)
 - **social-post-identification**: Ver [references/social-post-identification.md](file:///root/hermes-agent/skills/core/meta-ads-ops/references/social-post-identification.md)
 - **social-story-production**: Ver [references/social-story-production.md](file:///root/hermes-agent/skills/core/meta-ads-ops/references/social-story-production.md)
+- **destination-compliance-verticales**: anuncios rechazados por el DESTINO en verticales restringidas (casino, apuestas): triage de rechazos y patron venue-first — ver [references/destination-compliance-verticales.md](file:///root/hermes-agent/skills/core/meta-ads-ops/references/destination-compliance-verticales.md)
+- **meta-capi-tracking**: diagnosticar pixels y datasets de Meta en Events Manager y deduplicar el pixel con la Conversions API en pipelines de leads — ver [references/meta-capi-tracking.md](file:///root/hermes-agent/skills/core/meta-ads-ops/references/meta-capi-tracking.md)

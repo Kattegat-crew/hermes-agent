@@ -18,6 +18,8 @@ Habilidad consolidada de clase que centraliza los flujos de:
 - `google-drive-sheets-ops`
 - `google-workspace`
 
+- `activepieces-flows-ops`
+
 ## Arquitectura y Protocolos
 Esta skill opera como despacho unificado. El detalle procedural y gotchas específicos de cada caso se encuentran preservados en:
 `references/`
@@ -31,3 +33,4 @@ Esta skill opera como despacho unificado. El detalle procedural y gotchas espec�
 - **google-drive-access**: Ver [references/google-drive-access.md](file:///root/hermes-agent/skills/core/google-workspace-ops/references/google-drive-access.md)
 - **google-drive-sheets-ops**: Ver [references/google-drive-sheets-ops.md](file:///root/hermes-agent/skills/core/google-workspace-ops/references/google-drive-sheets-ops.md)
 - **google-workspace**: Ver [references/google-workspace.md](file:///root/hermes-agent/skills/core/google-workspace-ops/references/google-workspace.md)
+- **activepieces-flows-ops**: operar y reparar flows de ActivePieces: MCP, quitar o pausar pasos, reinyectar filas al Sheet y auditar la integridad — ver [references/activepieces-flows-ops.md](file:///root/hermes-agent/skills/core/google-workspace-ops/references/activepieces-flows-ops.md)

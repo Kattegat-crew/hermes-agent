@@ -32,6 +32,14 @@ Habilidad consolidada de clase que centraliza los flujos de:
 - `video-reel-pipeline`
 - `video-transcript-extraction`
 
+- `analisis-video-post-externo`
+
+- `reel-preproduccion`
+
+- `reel-stills-production`
+
+- `gate-de-gasto-media`
+
 ## Arquitectura y Protocolos
 Esta skill opera como despacho unificado. El detalle procedural y gotchas específicos de cada caso se encuentran preservados en:
 `references/`
@@ -59,3 +67,7 @@ Esta skill opera como despacho unificado. El detalle procedural y gotchas espec�
 - **video-frame-verification**: Ver [references/video-frame-verification.md](file:///root/hermes-agent/skills/core/video-reel-pipeline/references/video-frame-verification.md)
 - **video-reel-pipeline**: Ver [references/video-reel-pipeline.md](file:///root/hermes-agent/skills/core/video-reel-pipeline/references/video-reel-pipeline.md)
 - **video-transcript-extraction**: Ver [references/video-transcript-extraction.md](file:///root/hermes-agent/skills/core/video-reel-pipeline/references/video-transcript-extraction.md)
+- **analisis-video-post-externo**: analizar un reel o post social externo que llega como link: descarga del medio, transcripcion por vision, metricas con regla de honestidad y persistencia en la ingesta — ver [references/analisis-video-post-externo.md](file:///root/hermes-agent/skills/core/video-reel-pipeline/references/analisis-video-post-externo.md)
+- **reel-preproduccion**: etapa pre-gasto del reel a coste cero: lint de guiones, brief de prompts y render draft three.js — ver [references/reel-preproduccion.md](file:///root/hermes-agent/skills/core/video-reel-pipeline/references/reel-preproduccion.md)
+- **reel-stills-production**: stills pagados de un reel via fal con dry-run, gate de gasto firmado por humano y verificacion visual — ver [references/reel-stills-production.md](file:///root/hermes-agent/skills/core/video-reel-pipeline/references/reel-stills-production.md)
+- **gate-de-gasto-media**: protocolo obligatorio antes de lanzar CUALQUIER generacion que consuma saldo (fal, monid, elevenlabs): autorizacion, gate y verificacion del artefacto — ver [references/gate-de-gasto-media.md](file:///root/hermes-agent/skills/core/video-reel-pipeline/references/gate-de-gasto-media.md)
