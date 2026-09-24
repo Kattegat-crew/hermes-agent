@@ -150,11 +150,32 @@ class JevJudge:
         secret_key: Optional[str] = None
     ) -> None:
         """Push evaluation answers to Langfuse trace as native scores."""
-        base_url = (base_url or os.environ.get("HERMES_LANGFUSE_BASE_URL") or "http://localhost:3000").rstrip("/")
-        pk = public_key or os.environ.get("HERMES_LANGFUSE_PUBLIC_KEY", "")
-        sk = secret_key or os.environ.get("HERMES_LANGFUSE_SECRET_KEY", "")
+        base_url = (base_url or os.environ.get("HERMES_LANGFUSE_BASE_URL") or os.environ.get("LANGFUSE_BASE_URL") or "").rstrip("/")
+        pk = public_key or os.environ.get("HERMES_LANGFUSE_PUBLIC_KEY") or os.environ.get("LANGFUSE_PUBLIC_KEY") or ""
+        sk = secret_key or os.environ.get("HERMES_LANGFUSE_SECRET_KEY") or os.environ.get("LANGFUSE_SECRET_KEY") or ""
 
+        if not pk or not sk or not base_url:
+            for env_path in [Path("/opt/hermes/.env"), Path("/root/hermes-agent/.env"), Path(".env")]:
+                if env_path.exists():
+                    try:
+                        with open(env_path, "r", encoding="utf-8") as ef:
+                            for eline in ef:
+                                eline = eline.strip()
+                                if eline and not eline.startswith("#") and "=" in eline:
+                                    ek, ev = eline.split("=", 1)
+                                    ek, ev = ek.strip(), ev.strip()
+                                    if not pk and ek in ("HERMES_LANGFUSE_PUBLIC_KEY", "LANGFUSE_PUBLIC_KEY"):
+                                        pk = ev
+                                    elif not sk and ek in ("HERMES_LANGFUSE_SECRET_KEY", "LANGFUSE_SECRET_KEY"):
+                                        sk = ev
+                                    elif not base_url and ek in ("HERMES_LANGFUSE_BASE_URL", "LANGFUSE_BASE_URL"):
+                                        base_url = ev.rstrip("/")
+                    except Exception:
+                        pass
+
+        base_url = base_url or "http://localhost:3000"
         if not pk or not sk:
+            logger.warning("Missing Langfuse API keys (pk/sk). Skipping score push.")
             return
 
         import base64

@@ -26,14 +26,17 @@ if str(PLUGIN_DIR) not in sys.path:
 from evaluator import JevJudge
 
 # Load environment from .env if available
-ENV_PATH = Path("/root/hermes-agent/.env")
-if ENV_PATH.exists():
-    with open(ENV_PATH) as f:
-        for line in f:
-            line = line.strip()
-            if line and not line.startswith("#") and "=" in line:
-                k, v = line.split("=", 1)
-                os.environ.setdefault(k, v)
+for env_path in [Path("/opt/hermes/.env"), Path("/root/hermes-agent/.env"), Path(".env")]:
+    if env_path.exists():
+        try:
+            with open(env_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith("#") and "=" in line:
+                        k, v = line.split("=", 1)
+                        os.environ.setdefault(k.strip(), v.strip())
+        except Exception:
+            pass
 
 
 def query_unscored_traces(limit: int = 10, db_host: str = "100.73.30.29") -> List[Dict[str, Any]]:
@@ -52,17 +55,31 @@ def query_unscored_traces(limit: int = 10, db_host: str = "100.73.30.29") -> Lis
     LIMIT {limit};
     """
     
-    # Query Postgres directly via docker on prod host
-    cmd = [
-        "ssh", "-o", "StrictHostKeyChecking=no", f"root@{db_host}",
-        f"docker exec infra-postgres psql -U langfuse -d langfuse -t -A -F '|||' -c \"{sql}\""
-    ]
-    
+    raw = None
+    # 1. Try local docker exec first (if running on PROD host)
     try:
-        raw = subprocess.check_output(cmd, timeout=15).decode("utf-8").strip()
-    except Exception as e:
-        logger.error("Failed to query Postgres traces: %s", e)
-        return []
+        res = subprocess.run(
+            ["docker", "exec", "infra-postgres", "psql", "-U", "langfuse", "-d", "langfuse", "-t", "-A", "-F", "|||", "-c", sql],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=15,
+            check=True
+        )
+        raw = res.stdout.decode("utf-8").strip()
+    except Exception:
+        raw = None
+
+    # 2. Fallback to SSH to db_host if local docker exec failed
+    if raw is None:
+        cmd = [
+            "ssh", "-o", "StrictHostKeyChecking=no", f"root@{db_host}",
+            f"docker exec infra-postgres psql -U langfuse -d langfuse -t -A -F '|||' -c \"{sql}\""
+        ]
+        try:
+            raw = subprocess.check_output(cmd, timeout=15).decode("utf-8").strip()
+        except Exception as e:
+            logger.error("Failed to query Postgres traces via Docker/SSH: %s", e)
+            return []
 
     traces = []
     for line in raw.splitlines():
