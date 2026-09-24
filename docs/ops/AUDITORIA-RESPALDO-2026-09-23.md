@@ -61,3 +61,40 @@ reporta `files=19.939 / 2.820 MB / 2 dbs / 20 brains` con estado derivado.
 La cadena **funciona y dice la verdad**. Los residuos 1-3 son el diseño que propuse como capas
 1, 3 y 4; los 4 y 5 son detalles. Nada de esto bloquea: el respaldo **existe, es reciente y
 contiene lo que importa**.
+
+---
+
+# Segunda pasada — 23-sep 20:30 (enmienda de esta misma acta)
+
+## A2 no estaba resuelto: estaba a plazos
+
+- **19:01** el snapshot off-site se escribió correctamente (token de acceso vivo).
+- **20:27** el mismo repositorio: `invalid_grant ... AADSTS70000: The token was issued for a
+  different client id`.
+
+El token de acceso de Graph dura **~1 h**. El refresco automático del script **falla**: el
+`refresh_token` guardado en el `rclone.conf` pertenece a un `client_id` distinto del declarado.
+Mientras el token manual esté vivo *parece* sano; una hora después el destino se cae — y hasta
+hoy nadie se enteraba.
+
+**Corrección de método (mía):** la primera pasada verificó el **estado** (los snapshots existen),
+no la **durabilidad** del mecanismo. Un respaldo verificado una vez no es un respaldo verificado.
+Es la misma lección que Ragnar me cobró en F6, un piso más arriba.
+
+## Residuos: cerrados
+
+| # | Residuo | Cierre | Evidencia |
+|---|---|---|---|
+| 1 | Destino único | `scripts/backup_local_snapshot.py` — capa local (restic a `/root/hermes-backups/restic-local`, retención 7/4/3), cron 03:00 | snapshot `f2a4c520d4` · **19.980 ficheros · 1.954,8 MB · 34 s** |
+| 2 | Nadie probaba restaurar | `scripts/backup_restore_test.py` — restaura muestra real y verifica (YAML parsea, SQLite `integrity_check`), cron lunes 04:15 | **6/6 OK**: 2 bases `ok`, config YAML válido, script maestro restaurado bit a bit (27.257 B) |
+| 3 | Sin alarma de edad | `scripts/backup_audit.py` — edad local y off-site, honestidad del manifiesto y **drift declarado vs real**; cron cada 6 h; silencio cuando todo está bien | en su primera corrida cantó el off-site caído |
+| 4 | Credenciales fuera del respaldo | `docs/ops/backup-sources.yaml` declara `data/secrets`, `data/backup-keys` y el `rclone.conf`; el script local los incluye y **espeja** el `rclone.conf` a `staging/dumps/_creds/` (ruta que sí entra en el off-site de Plon) | "credenciales espejadas: 1" |
+| 5 | Shim `/opt/data` | **No era un fallo**: es portabilidad deliberada host⇄contenedor (en el host no existe → cae a `<repo>/data`; en el contenedor `/opt/data` *es* el mismo árbol). Se retira de la lista de residuos | corrección de esta acta |
+
+## Sigue abierto (necesita al CTO, no al agente)
+
+- **Re-auth de OneDrive** (navegador, 5 min): `rclone config reconnect onedrive:`, o alinear el
+  `client_id`/secreto con el `refresh_token` vigente. Sin eso el off-site vive a plazos.
+- **Copia externa de la llave maestra** de restic: la que viaja dentro del repo no sirve para
+  recuperar el repo. Necesita un segundo sitio (gestor de contraseñas o segundo servidor).
+

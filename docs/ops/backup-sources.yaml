@@ -1,0 +1,94 @@
+# Fuentes del respaldo — declaración v2 (23-sep-2026, 20:30)
+#
+# Por qué existe: hoy la lista vive DENTRO del código (`data/scripts/vps_master_backup.py`,
+# ramas prod/dev de main()). Cuando el árbol se movió, la lista siguió apuntando a rutas
+# muertas y nadie se enteró: el respaldo decía SUCCESS subiendo 2,56 MB.
+#
+# Este fichero es la fuente de verdad DECLARADA. `scripts/backup_local_snapshot.py` la lee,
+# y `scripts/backup_audit.py` compara lo declarado contra lo que el snapshot realmente
+# contiene (drift check): si divergen, avisa.
+#
+# Estado: el respaldo off-site (Plon) usa su propia lista. La declaración de abajo es la
+# suya + lo que faltaba (credenciales). El día que su script lea este fichero, declaración
+# y realidad dejan de poder separarse.
+
+dev:
+  servidor: "147.93.3.250"
+  repo_offsite: "rclone:onedrive:Backups/.250"
+  repo_local: "/root/hermes-backups/restic-local"
+  llave: "/root/hermes-agent/data/backup-keys/master-backup.key"
+
+  # Lo que DEBE entrar (lista de Plon + credenciales que él excluye sin querer)
+  fuentes:
+    - /root/hermes-agent/data/state.db
+    # - /root/hermes-agent/data/shared-state.db   # no existe hoy (23-sep): lo filtra el script
+    - /root/hermes-agent/data/projects.db
+    - /root/hermes-agent/data/kanban.db
+    - /root/hermes-agent/data/response_store.db
+    - /root/hermes-agent/data/runs_idempotency.db
+    - /root/hermes-agent/data/verification_evidence.db
+    - /root/hermes-agent/data/whatsapp
+    - /root/hermes-agent/data/profiles
+    - /root/hermes-agent/data/sessions
+    - /root/hermes-agent/skills
+    - /root/hermes-agent/data/config.yaml
+    - /root/hermes-agent/data/.env
+    - /root/hermes-agent/data/scripts
+    - /root/.engram
+    - /opt/vault
+    - /opt/vps-brain
+    # --- lo que el off-site NO cubre (residuo 4 de la auditoría) ---
+    - /root/hermes-agent/data/secrets
+    - /root/hermes-agent/data/backup-keys
+    - /root/hermes-agent/data/home/.config/rclone/rclone.conf
+
+  # Credenciales que el off-site excluye (data/home/** esta excluido). Se espejan a
+  # `data/backups/staging/dumps/_creds/`, que SI esta en la lista de Plon, para que
+  # lleguen al snapshot de OneDrive cuando su token vuelva a vivir.
+  espejo_credenciales:
+    - origen: /root/hermes-agent/data/home/.config/rclone/rclone.conf
+      destino_nombre: rclone.conf
+
+  exclusiones:
+    - "**/node_modules/**"
+    - "**/.cache/**"
+    - "**/chrome-for-testing/**"
+    - "**/lazy-packages/**"
+    - "**/venvs/**"
+    - "**/audio_cache/**"
+    - "**/image_cache/**"
+    - "**/backups/manifests/**"
+    - "**/backups/*.tar.gz"
+
+  # Fuera del respaldo diario a propósito (documentado, no olvidado)
+  no_respaldado_a_proposito:
+    - ruta: /root/hermes-agent/data/archive
+      mb: 3048
+      razon: "archivos de un solo uso (F52/F7); los de F6 ya están versionados en git"
+    - ruta: /root/hermes-agent/data/checkpoints
+      mb: 430
+      razon: "checkpoints de herramientas, regenerables"
+    - ruta: /root/hermes-agent/data/composio-linux-x64
+      mb: 345
+      razon: "binario reinstalable"
+    - ruta: /root/hermes-agent/data/bin
+      mb: 126
+      razon: "binarios reinstalables"
+    - ruta: /root/hermes-agent/data/state.db.malformed-backup-20260816_192333
+      mb: 197
+      razon: "residuo del incidente de agosto; candidato a borrar"
+
+  # Paradoja conocida (no se resuelve sola): la llave de restic abre el repositorio; si su
+  # única copia viaja DENTRO del repo que cifra, no sirve para recuperarlo. Necesita copia
+  # aparte (gestor de contraseñas del CTO o segundo servidor). Acá se respalda para no
+  # perderla, pero NO sustituye esa copia externa.
+  nota_llave_maestra: true
+
+  # Deuda conocida al 23-sep 20:30 (hallazgo de la auditoría v2):
+  #   El token de OneDrive caduca ~1 h. El refresco automático del script maestro falla con
+  #   AADSTS70000 ("The token was issued for a different client id"): el refresh_token del
+  #   rclone.conf pertenece a otro client_id que el configurado. Sobrevive mientras el token
+  #   de acceso manual siga vivo; después, el destino off-site queda inalcanzable.
+  #   Requiere: re-auth de navegador (rclone config reconnect onedrive:) por el CTO, o
+  #   alinear client_id/secreto con el refresh_token vigente.
+  deuda_token_onedrive: "AADSTS70000 client_id mismatch en el refresco automatico"
