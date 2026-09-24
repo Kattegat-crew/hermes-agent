@@ -164,7 +164,7 @@ cinematic color grading, 4K
 - Forgetting style — "cinematic," "documentary," "commercial"
 - Requesting text in video — AI models struggle with readable text
 
-**For detailed prompting guides**: See [references/ai-video-prompting.md](references/ai-video-prompting.md)
+**For detailed prompting guides**: See [references/ai-video-prompting.md] ⚠️ FALTA: references/ai-video-prompting.md
 
 ### When to Use AI Generation vs. Stock
 
@@ -246,7 +246,7 @@ Distribute: TikTok, Reels, Shorts, LinkedIn
 
 ### Reverse-Engineer a Viral Edit
 
-To replicate the *style* of a video edit you admire — the cut rhythm, caption treatment, punch-ins, on-screen text, sound design — decompose it into a reusable **edit spec** (a beat sheet) and apply it to your own footage. Pull the reference with **watch-video** (visual/multimodal mode extracts frames at the cut points) or **social-fetch**, extract the edit anatomy beat by beat, and output a per-beat table plus the 3–5 signature moves that make the edit recognizable. Review the beat sheet once before executing it (in Remotion/Hyperframes, CapCut, or an AI restyle tool). Copies the editing grammar, never the reference's footage/script/music. Full method: [references/edit-anatomy.md](references/edit-anatomy.md).
+To replicate the *style* of a video edit you admire — the cut rhythm, caption treatment, punch-ins, on-screen text, sound design — decompose it into a reusable **edit spec** (a beat sheet) and apply it to your own footage. Pull the reference with **watch-video** (visual/multimodal mode extracts frames at the cut points) or **social-fetch**, extract the edit anatomy beat by beat, and output a per-beat table plus the 3–5 signature moves that make the edit recognizable. Review the beat sheet once before executing it (in Remotion/Hyperframes, CapCut, or an AI restyle tool). Copies the editing grammar, never the reference's footage/script/music. Full method: [references/edit-anatomy.md] ⚠️ FALTA: references/edit-anatomy.md.
 
 ---
 
@@ -331,8 +331,8 @@ Output: Ready-to-publish video
 
 | Tool | Type | MCP | Guide |
 |------|------|:---:|-------|
-| **HeyGen** | AI avatars | Yes | [heygen.md](../../tools/integrations/heygen.md) |
-| **Hyperframes** | Programmatic video | - | [hyperframes.md](../../tools/integrations/hyperframes.md) |
+| **HeyGen** | AI avatars | Yes | [heygen.md] ⚠️ FALTA: ../../tools/integrations/heygen.md |
+| **Hyperframes** | Programmatic video | - | [hyperframes.md] ⚠️ FALTA: ../../tools/integrations/hyperframes.md |
 | **Remotion** | Programmatic video | - | [remotion.dev](https://www.remotion.dev/docs) |
 | **Runway** | AI generation | - | [runwayml.com/docs](https://docs.dev.runwayml.com) |
 

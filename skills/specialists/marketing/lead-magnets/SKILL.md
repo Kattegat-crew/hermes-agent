@@ -82,7 +82,7 @@ Gather this context (ask if not provided):
 | Resource library | Ongoing value, return visits | High | Ongoing |
 | Free trial/community access | Product experience | Varies | Varies |
 
-**For detailed creation guidance per format**: See [references/format-guide.md](references/format-guide.md)
+**For detailed creation guidance per format**: See [references/format-guide.md] ⚠️ FALTA: references/format-guide.md
 
 ---
 
@@ -234,7 +234,7 @@ Don't waste the thank you page. After they've converted:
 | **Email engagement** | Content relevance | 30-50% open, 2-5% click |
 | **Time to conversion** | Nurture effectiveness | Track by lead magnet source |
 
-**For detailed benchmarks by format and industry**: See [references/benchmarks.md](references/benchmarks.md)
+**For detailed benchmarks by format and industry**: See [references/benchmarks.md] ⚠️ FALTA: references/benchmarks.md
 
 ### A/B Testing Ideas
 

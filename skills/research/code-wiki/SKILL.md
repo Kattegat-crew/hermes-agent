@@ -160,7 +160,7 @@ See [architecture.md](architecture.md).
 
 | Module | Purpose |
 |---|---|
-| [`<module>`](modules/<module>.md) | <one-line purpose> |
+| [`<module>`] ⚠️ FALTA: modules/<module>.md | <one-line purpose> |
 
 ## Getting Started
 
@@ -179,7 +179,7 @@ where it exits, where state lives.>
 
 ## Components
 
-- **<Component>** — <1-2 sentences>. See [`modules/<module>.md`](modules/<module>.md).
+- **<Component>** — <1-2 sentences>. See [`modules/<module>.md`] ⚠️ FALTA: modules/<module>.md.
 
 ## System Diagram
 

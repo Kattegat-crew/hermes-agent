@@ -59,7 +59,7 @@ python3 scripts/humanizer_scorer.py draft.md --json
 
 It emits a 0-100 human-ness score. Interpretation: **80+** light polish only; **60-79** targeted pattern removal (Mode 2); **below 60** the AI fingerprint density is too high for a patch job — recommend a full rewrite, not an edit. Re-run after humanizing; the score must move.
 
-See [references/ai-tells-checklist.md](references/ai-tells-checklist.md) for the comprehensive detection list. Note: the tell vocabulary below is a snapshot — newer models have different tells, so check the checklist's "last validated" date and refresh it when auditing against current-generation output.
+See [references/ai-tells-checklist.md] ⚠️ FALTA: references/ai-tells-checklist.md for the comprehensive detection list. Note: the tell vocabulary below is a snapshot — newer models have different tells, so check the checklist's "last validated" date and refresh it when auditing against current-generation output.
 
 ### The Core AI Tell Categories
 
@@ -187,7 +187,7 @@ If `.claude/product-marketing-context.md` is available: read the brand voice sec
 - Relationship stance (peer-to-peer? expert-to-student? provocateur?)
 - Signature phrases or patterns
 
-See [references/voice-techniques.md](references/voice-techniques.md) for specific techniques for each voice type.
+See [references/voice-techniques.md] ⚠️ FALTA: references/voice-techniques.md for specific techniques for each voice type.
 
 ### Voice Injection Techniques
 

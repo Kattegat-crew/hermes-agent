@@ -78,17 +78,17 @@ something specific from that reading. Then, after acceptance and a pause, ask on
 
 | Script | Role |
 |---|---|
-| [`scripts/comment_target_planner.py`](scripts/comment_target_planner.py) | Weekly roster from scored accounts, inside a time budget, with per-account and per-tier caps. |
-| [`scripts/outreach_message_builder.py`](scripts/outreach_message_builder.py) | Assembles one message; refuses templates, premature asks, and 14 dead phrases. |
-| [`scripts/outreach_volume_guard.py`](scripts/outreach_volume_guard.py) | Caps invitations against the observed weekly limit, pending backlog, acceptance floor, and the hours available. |
+| [`scripts/comment_target_planner.py`] ⚠️ FALTA: scripts/comment_target_planner.py | Weekly roster from scored accounts, inside a time budget, with per-account and per-tier caps. |
+| [`scripts/outreach_message_builder.py`] ⚠️ FALTA: scripts/outreach_message_builder.py | Assembles one message; refuses templates, premature asks, and 14 dead phrases. |
+| [`scripts/outreach_volume_guard.py`] ⚠️ FALTA: scripts/outreach_volume_guard.py | Caps invitations against the observed weekly limit, pending backlog, acceptance floor, and the hours available. |
 
 ## References and assets
 
-- [`references/comment_strategy.md`](references/comment_strategy.md) — tiers, what a comment competes on, pods, replying to your own posts (7 sources)
-- [`references/outreach_ethics_and_benchmarks.md`](references/outreach_ethics_and_benchmarks.md) — the benchmark numbers with their provenance, and the personalisation claim corrected (7 sources)
+- [`references/comment_strategy.md`] ⚠️ FALTA: references/comment_strategy.md — tiers, what a comment competes on, pods, replying to your own posts (7 sources)
+- [`references/outreach_ethics_and_benchmarks.md`] ⚠️ FALTA: references/outreach_ethics_and_benchmarks.md — the benchmark numbers with their provenance, and the personalisation claim corrected (7 sources)
 
-- [`assets/outreach_worksheet.md`](assets/outreach_worksheet.md) — fillable per-person prep sheet
-- [`assets/example_outreach.json`](assets/example_outreach.json) — input shape for the builder
+- [`assets/outreach_worksheet.md`] ⚠️ FALTA: assets/outreach_worksheet.md — fillable per-person prep sheet
+- [`assets/example_outreach.json`] ⚠️ FALTA: assets/example_outreach.json — input shape for the builder
 
 ## Distinct from
 

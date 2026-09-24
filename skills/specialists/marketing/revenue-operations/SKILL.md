@@ -256,9 +256,9 @@ Combine all three tools for a comprehensive QBR analysis.
 
 | Reference | Description |
 |-----------|-------------|
-| [RevOps Metrics Guide](references/revops-metrics-guide.md) | Complete metrics hierarchy, definitions, formulas, and interpretation |
-| [Pipeline Management Framework](references/pipeline-management-framework.md) | Pipeline best practices, stage definitions, conversion benchmarks |
-| [GTM Efficiency Benchmarks](references/gtm-efficiency-benchmarks.md) | SaaS benchmarks by stage, industry standards, improvement strategies |
+| [RevOps Metrics Guide] ⚠️ FALTA: references/revops-metrics-guide.md | Complete metrics hierarchy, definitions, formulas, and interpretation |
+| [Pipeline Management Framework] ⚠️ FALTA: references/pipeline-management-framework.md | Pipeline best practices, stage definitions, conversion benchmarks |
+| [GTM Efficiency Benchmarks] ⚠️ FALTA: references/gtm-efficiency-benchmarks.md | SaaS benchmarks by stage, industry standards, improvement strategies |
 
 ---
 
@@ -266,8 +266,8 @@ Combine all three tools for a comprehensive QBR analysis.
 
 | Template | Use Case |
 |----------|----------|
-| [Pipeline Review Template](assets/pipeline_review_template.md) | Weekly/monthly pipeline inspection documentation |
-| [Forecast Report Template](assets/forecast_report_template.md) | Forecast accuracy reporting and trend analysis |
-| [GTM Dashboard Template](assets/gtm_dashboard_template.md) | GTM efficiency dashboard for leadership review |
-| [Sample Pipeline Data](assets/sample_pipeline_data.json) | Example input for pipeline_analyzer.py |
-| [Expected Output](assets/expected_output.json) | Reference output from pipeline_analyzer.py |
+| [Pipeline Review Template] ⚠️ FALTA: assets/pipeline_review_template.md | Weekly/monthly pipeline inspection documentation |
+| [Forecast Report Template] ⚠️ FALTA: assets/forecast_report_template.md | Forecast accuracy reporting and trend analysis |
+| [GTM Dashboard Template] ⚠️ FALTA: assets/gtm_dashboard_template.md | GTM efficiency dashboard for leadership review |
+| [Sample Pipeline Data] ⚠️ FALTA: assets/sample_pipeline_data.json | Example input for pipeline_analyzer.py |
+| [Expected Output] ⚠️ FALTA: assets/expected_output.json | Reference output from pipeline_analyzer.py |

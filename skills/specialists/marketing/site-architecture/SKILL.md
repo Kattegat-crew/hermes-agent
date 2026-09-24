@@ -52,7 +52,7 @@ Gather this context (ask if not provided):
 | Hybrid SaaS+content | 3-4 levels | Home, Product, Blog, Resources, Docs | `/product/feature`, `/blog/slug` |
 | Small business | 1-2 levels | Home, Services, About, Contact | `/services/name` |
 
-**For full page hierarchy templates**: See [references/site-type-templates.md](references/site-type-templates.md)
+**For full page hierarchy templates**: See [references/site-type-templates.md] ⚠️ FALTA: references/site-type-templates.md
 
 ---
 
@@ -150,7 +150,7 @@ Home > Blog > SEO Category > Post Title
 
 Breadcrumbs should mirror the URL hierarchy. Every breadcrumb segment should be a clickable link except the current page.
 
-**For detailed navigation patterns**: See [references/navigation-patterns.md](references/navigation-patterns.md)
+**For detailed navigation patterns**: See [references/navigation-patterns.md] ⚠️ FALTA: references/navigation-patterns.md
 
 ---
 
@@ -252,7 +252,7 @@ graph TD
     FEAT --> F2[Automation]
 ```
 
-**For more Mermaid templates**: See [references/mermaid-templates.md](references/mermaid-templates.md)
+**For more Mermaid templates**: See [references/mermaid-templates.md] ⚠️ FALTA: references/mermaid-templates.md
 
 ---
 

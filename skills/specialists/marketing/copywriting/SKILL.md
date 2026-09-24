@@ -131,9 +131,9 @@ python3 scripts/headline_scorer.py --file headlines.txt --json   # batch-score a
 
 It rates 0-100 across 6 dimensions (length, specificity, power words, clarity, emotional pull, format). Write 5-10 candidates, score them all, present the top 2-3 with their scores and dimension breakdowns — never present a sub-60 headline as the primary recommendation.
 
-**For comprehensive headline formulas**: See [references/copy-frameworks.md](references/copy-frameworks.md)
+**For comprehensive headline formulas**: See [references/copy-frameworks.md] ⚠️ FALTA: references/copy-frameworks.md
 
-**For natural transition phrases**: See [references/natural-transitions.md](references/natural-transitions.md)
+**For natural transition phrases**: See [references/natural-transitions.md] ⚠️ FALTA: references/natural-transitions.md
 
 **Subheadline**
 - Expands on headline
@@ -155,7 +155,7 @@ It rates 0-100 across 6 dimensions (length, specificity, power words, clarity, e
 | Objection Handling | FAQ, comparisons, guarantees |
 | Final CTA | Recap value, repeat CTA, risk reversal |
 
-**For detailed section types and page templates**: See [references/copy-frameworks.md](references/copy-frameworks.md)
+**For detailed section types and page templates**: See [references/copy-frameworks.md] ⚠️ FALTA: references/copy-frameworks.md
 
 ---
 

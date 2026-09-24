@@ -93,7 +93,7 @@ Application-to-Person 10-digit long codes must be registered through The Campaig
 - Implied consent allowed for existing business relationships within 24 months
 - Penalties up to CAD $10M per violation
 
-**For full compliance details, edge cases, opt-in copy templates, and STOP/HELP response templates**: see [references/compliance.md](references/compliance.md).
+**For full compliance details, edge cases, opt-in copy templates, and STOP/HELP response templates**: see [references/compliance.md] ⚠️ FALTA: references/compliance.md.
 
 ---
 
@@ -175,7 +175,7 @@ Optional Send 2 (24h later): Reminder + best-seller showcase
 - Generally OK without separate marketing consent if directly related to a transaction the user initiated
 - Still subject to A2P 10DLC registration in US
 
-**For full sequence templates with copy and timing**: see [references/sequence-templates.md](references/sequence-templates.md).
+**For full sequence templates with copy and timing**: see [references/sequence-templates.md] ⚠️ FALTA: references/sequence-templates.md.
 
 ---
 
@@ -209,7 +209,7 @@ Optional Send 2 (24h later): Reminder + best-seller showcase
 - Location-based offers (where applicable)
 - Don't fake intimacy ("Hey friend!") — it backfires
 
-**For complete copy patterns by sequence type with character counts**: see [references/sequence-templates.md](references/sequence-templates.md).
+**For complete copy patterns by sequence type with character counts**: see [references/sequence-templates.md] ⚠️ FALTA: references/sequence-templates.md.
 
 ---
 
@@ -231,7 +231,7 @@ Optional Send 2 (24h later): Reminder + best-seller showcase
 - Building custom SMS into a product → **Twilio**
 - B2B SaaS doing transactional/auth → **Twilio** or **Customer.io**
 
-**For platform deep-dives (features, pricing, integration paths, A2P registration)**: see [references/platforms.md](references/platforms.md).
+**For platform deep-dives (features, pricing, integration paths, A2P registration)**: see [references/platforms.md] ⚠️ FALTA: references/platforms.md.
 
 ---
 
@@ -311,18 +311,18 @@ Keep recommendations specific. Don't say "send an SMS at the right time" — say
 
 ## Tool Integrations
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key SMS tools:
+For implementation, see the [tools registry] ⚠️ FALTA: ../../tools/REGISTRY.md. Key SMS tools:
 
 | Tool | Best For | MCP | Guide |
 |------|----------|:---:|-------|
-| **Klaviyo** | E-commerce email + SMS combined | ✓ | [klaviyo.md](../../tools/integrations/klaviyo.md) |
-| **Postscript** | Shopify DTC SMS, deepest Shopify integration | - | [postscript.md](../../tools/integrations/postscript.md) |
-| **Attentive** | Mid-market+ DTC SMS, full-service | - | [attentive.md](../../tools/integrations/attentive.md) |
-| **Twilio** | Raw API for custom builds, transactional, dev-first | - | [twilio.md](../../tools/integrations/twilio.md) |
-| **Plivo** | Twilio alternative, lower per-send cost | - | [plivo.md](../../tools/integrations/plivo.md) |
-| **AudienceTap** | AI-forward DTC, on-pack QR opt-in | - | [audiencetap.md](../../tools/integrations/audiencetap.md) |
-| **Brevo** | EU email + SMS, SMB-friendly | ✓ | [brevo.md](../../tools/integrations/brevo.md) |
-| **Customer.io** | Behavior-based SMS automation | - | [customer-io.md](../../tools/integrations/customer-io.md) |
+| **Klaviyo** | E-commerce email + SMS combined | ✓ | [klaviyo.md] ⚠️ FALTA: ../../tools/integrations/klaviyo.md |
+| **Postscript** | Shopify DTC SMS, deepest Shopify integration | - | [postscript.md] ⚠️ FALTA: ../../tools/integrations/postscript.md |
+| **Attentive** | Mid-market+ DTC SMS, full-service | - | [attentive.md] ⚠️ FALTA: ../../tools/integrations/attentive.md |
+| **Twilio** | Raw API for custom builds, transactional, dev-first | - | [twilio.md] ⚠️ FALTA: ../../tools/integrations/twilio.md |
+| **Plivo** | Twilio alternative, lower per-send cost | - | [plivo.md] ⚠️ FALTA: ../../tools/integrations/plivo.md |
+| **AudienceTap** | AI-forward DTC, on-pack QR opt-in | - | [audiencetap.md] ⚠️ FALTA: ../../tools/integrations/audiencetap.md |
+| **Brevo** | EU email + SMS, SMB-friendly | ✓ | [brevo.md] ⚠️ FALTA: ../../tools/integrations/brevo.md |
+| **Customer.io** | Behavior-based SMS automation | - | [customer-io.md] ⚠️ FALTA: ../../tools/integrations/customer-io.md |
 
 ---
 

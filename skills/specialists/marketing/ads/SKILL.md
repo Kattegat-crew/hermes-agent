@@ -46,17 +46,17 @@ This skill's depth lives in references — load by intent. For **any operational
 
 | User intent | Load | Covers |
 |---|---|---|
-| "Can I afford this channel?", payback math, budgeting per plan, whether LTV:CAC lies | [payback-period.md](references/payback-period.md) | Why LTV:CAC is useless (4 flaws), Payback = CAC/ARPU (3–12mo), Discounted Payback, $9-vs-$999 worked examples, OOH+social, narrative momentum |
-| B2B strategy, funnel stages, budget splits, kill rules, lead quality, breakeven math | [b2b-paid-playbook.md](references/b2b-paid-playbook.md) | Demand lifecycle, leading/lagging signals, kill rules, offline conversion loop, U/B/F lead scoring, scaling quadrant |
-| Meta operations: when to kill/graduate/scale an ad, fatigue, testing structure, partnership/creator ads, declining reach | [meta-decision-system.md](references/meta-decision-system.md) | TCPL-anchored decision tree, ad-count ceiling, 80/20 CBO structure, fatigue bands, lead forms, Advantage+ transition, partnership-ads playbook, rolling-reach signal |
-| LinkedIn operations: bidding, audience sizing, scaling, benchmarks, TLAs, formats | [linkedin-b2b-playbook.md](references/linkedin-b2b-playbook.md) | Bidding progression, penetration scaling, sizing rules, funnel benchmarks, document/conversation ads, audit shortlist |
-| Google Search: what to spend on first, structure, match types, negatives, PMax | [google-search-playbook.md](references/google-search-playbook.md) | Intent ladder, account structure, match-type gates, negatives, bidding by volume, offline conversions, PMax guardrails |
-| Named-account targeting, pipeline acceleration, cross-channel retargeting | [abm-playbook.md](references/abm-playbook.md) | LinkedIn/Meta ABM, list mechanics, acceleration campaigns, UTM cross-channel remarketing, ABM measurement |
-| Generating Google RSAs | [rsa-output-spec.md](references/rsa-output-spec.md) | Mandatory output spec — limits, sidecars, template, self-check |
-| Auditing a live account, grading account health, quoting benchmarks, recommending changes | [audit-guardrails.md](references/audit-guardrails.md) | Pass/fail/unknown scoring, evidence coverage, recommendation safety, hard stops, benchmark discipline |
-| Itemized Google Ads / ecommerce account audit (Search + Shopping + PMax + GMC + Demand Gen) | [google-ads-audit-checklist.md](references/google-ads-audit-checklist.md) | 32 checks across 11 categories — feed/GMC quality, Shopping segmentation, PMax signals/budget, DG format splits, lander funnels; each scored pass/fail/unknown/NA via audit-guardrails |
-| Agentic creative/competitive research: ad-library teardown, review→persona mapping, organic competitor teardown | [creative-research-automation.md](references/creative-research-automation.md) | Ad Library output schema (format split, % partnership, inferred personas, top-10 by impressions), reviews→CSV→personas doc→deck, "who creatives target vs. who buys," connectors + scheduled-to-Slack workflow |
-| Audience setup, tracking setup, launch checklists, copy formulas | [audience-targeting.md](references/audience-targeting.md) · [conversion-tracking.md](references/conversion-tracking.md) · [platform-setup-checklists.md](references/platform-setup-checklists.md) · [ad-copy-templates.md](references/ad-copy-templates.md) | Existing foundations |
+| "Can I afford this channel?", payback math, budgeting per plan, whether LTV:CAC lies | [payback-period.md] ⚠️ FALTA: references/payback-period.md | Why LTV:CAC is useless (4 flaws), Payback = CAC/ARPU (3–12mo), Discounted Payback, $9-vs-$999 worked examples, OOH+social, narrative momentum |
+| B2B strategy, funnel stages, budget splits, kill rules, lead quality, breakeven math | [b2b-paid-playbook.md] ⚠️ FALTA: references/b2b-paid-playbook.md | Demand lifecycle, leading/lagging signals, kill rules, offline conversion loop, U/B/F lead scoring, scaling quadrant |
+| Meta operations: when to kill/graduate/scale an ad, fatigue, testing structure, partnership/creator ads, declining reach | [meta-decision-system.md] ⚠️ FALTA: references/meta-decision-system.md | TCPL-anchored decision tree, ad-count ceiling, 80/20 CBO structure, fatigue bands, lead forms, Advantage+ transition, partnership-ads playbook, rolling-reach signal |
+| LinkedIn operations: bidding, audience sizing, scaling, benchmarks, TLAs, formats | [linkedin-b2b-playbook.md] ⚠️ FALTA: references/linkedin-b2b-playbook.md | Bidding progression, penetration scaling, sizing rules, funnel benchmarks, document/conversation ads, audit shortlist |
+| Google Search: what to spend on first, structure, match types, negatives, PMax | [google-search-playbook.md] ⚠️ FALTA: references/google-search-playbook.md | Intent ladder, account structure, match-type gates, negatives, bidding by volume, offline conversions, PMax guardrails |
+| Named-account targeting, pipeline acceleration, cross-channel retargeting | [abm-playbook.md] ⚠️ FALTA: references/abm-playbook.md | LinkedIn/Meta ABM, list mechanics, acceleration campaigns, UTM cross-channel remarketing, ABM measurement |
+| Generating Google RSAs | [rsa-output-spec.md] ⚠️ FALTA: references/rsa-output-spec.md | Mandatory output spec — limits, sidecars, template, self-check |
+| Auditing a live account, grading account health, quoting benchmarks, recommending changes | [audit-guardrails.md] ⚠️ FALTA: references/audit-guardrails.md | Pass/fail/unknown scoring, evidence coverage, recommendation safety, hard stops, benchmark discipline |
+| Itemized Google Ads / ecommerce account audit (Search + Shopping + PMax + GMC + Demand Gen) | [google-ads-audit-checklist.md] ⚠️ FALTA: references/google-ads-audit-checklist.md | 32 checks across 11 categories — feed/GMC quality, Shopping segmentation, PMax signals/budget, DG format splits, lander funnels; each scored pass/fail/unknown/NA via audit-guardrails |
+| Agentic creative/competitive research: ad-library teardown, review→persona mapping, organic competitor teardown | [creative-research-automation.md] ⚠️ FALTA: references/creative-research-automation.md | Ad Library output schema (format split, % partnership, inferred personas, top-10 by impressions), reviews→CSV→personas doc→deck, "who creatives target vs. who buys," connectors + scheduled-to-Slack workflow |
+| Audience setup, tracking setup, launch checklists, copy formulas | [audience-targeting.md] ⚠️ FALTA: references/audience-targeting.md · [conversion-tracking.md] ⚠️ FALTA: references/conversion-tracking.md · [platform-setup-checklists.md] ⚠️ FALTA: references/platform-setup-checklists.md · [ad-copy-templates.md] ⚠️ FALTA: references/ad-copy-templates.md | Existing foundations |
 
 ---
 
@@ -124,7 +124,7 @@ LI_LeadGen_CMOs-SaaS_Whitepaper_Mar24
 **Social Proof Lead:**
 > [Impressive stat or testimonial] → [What you do] → [CTA]
 
-**For detailed templates and headline formulas**: See [references/ad-copy-templates.md](references/ad-copy-templates.md)
+**For detailed templates and headline formulas**: See [references/ad-copy-templates.md] ⚠️ FALTA: references/ad-copy-templates.md
 
 ---
 
@@ -171,7 +171,7 @@ Once you've gathered audience identifiers, here's how to put each kind into the 
 
 Trying to make up for weak creative with hyper-precise targeting. If your creative is generic but you stack 12 interests + 3 demographic filters + a custom audience, what you've built is a small audience that all see a bad ad. Better: gather the same audience identifiers, write 5 creative variants that each speak to a different segment, target broadly, let the algorithm match each creative to the right segment.
 
-**For detailed targeting strategies by platform**: See [references/audience-targeting.md](references/audience-targeting.md)
+**For detailed targeting strategies by platform**: See [references/audience-targeting.md] ⚠️ FALTA: references/audience-targeting.md
 
 ---
 
@@ -252,7 +252,7 @@ Meta launched the **Andromeda** algorithm in 2025, which fundamentally changed M
 
 ## Campaign Optimization
 
-For hard kill/keep/scale thresholds, use the platform playbooks (see Reference Routing): the kill rules and breakeven CPL/CPC math live in [b2b-paid-playbook.md](references/b2b-paid-playbook.md), and Meta's full decision tree lives in [meta-decision-system.md](references/meta-decision-system.md).
+For hard kill/keep/scale thresholds, use the platform playbooks (see Reference Routing): the kill rules and breakeven CPL/CPC math live in [b2b-paid-playbook.md] ⚠️ FALTA: references/b2b-paid-playbook.md, and Meta's full decision tree lives in [meta-decision-system.md] ⚠️ FALTA: references/meta-decision-system.md.
 
 ### Key Metrics by Objective
 
@@ -408,9 +408,9 @@ The most common scaling failure: a business at a 40 ROAS spending $5k/month, ref
 
 Before launching campaigns, ensure proper tracking and account setup.
 
-**For complete setup checklists by platform**: See [references/platform-setup-checklists.md](references/platform-setup-checklists.md)
+**For complete setup checklists by platform**: See [references/platform-setup-checklists.md] ⚠️ FALTA: references/platform-setup-checklists.md
 
-**For conversion pixel installation and event setup**: See [references/conversion-tracking.md](references/conversion-tracking.md)
+**For conversion pixel installation and event setup**: See [references/conversion-tracking.md] ⚠️ FALTA: references/conversion-tracking.md
 
 ### Universal Pre-Launch Checklist
 - [ ] Conversion tracking tested with real conversion
@@ -424,11 +424,11 @@ Before launching campaigns, ensure proper tracking and account setup.
 
 ## Google RSA Output Spec (mandatory when generating RSAs)
 
-When the user requests Google Ads RSAs, load [references/rsa-output-spec.md](references/rsa-output-spec.md) and follow it exactly — hard character limits, required sidecar artifacts (ad groups, negatives, sitelinks, callouts), output order, template shape, CFM medical compliance, and the pre-send self-check. Do not output any RSA that violates it.
+When the user requests Google Ads RSAs, load [references/rsa-output-spec.md] ⚠️ FALTA: references/rsa-output-spec.md and follow it exactly — hard character limits, required sidecar artifacts (ad groups, negatives, sitelinks, callouts), output order, template shape, CFM medical compliance, and the pre-send self-check. Do not output any RSA that violates it.
 
 ## Audit & Recommendation Guardrails
 
-Before auditing a live account, grading account health, quoting benchmarks, or recommending changes to running campaigns, load [audit-guardrails.md](references/audit-guardrails.md). The non-negotiables:
+Before auditing a live account, grading account health, quoting benchmarks, or recommending changes to running campaigns, load [audit-guardrails.md] ⚠️ FALTA: references/audit-guardrails.md. The non-negotiables:
 
 - **Unknown ≠ failing.** Score only what you verified. "Couldn't check X" and "X is broken" are different findings — and never call an audit complete when a data source failed.
 - **No invented negative keywords.** Without a search-terms report, request it — name zero candidates.
@@ -475,16 +475,16 @@ Before auditing a live account, grading account health, quoting benchmarks, or r
 
 ## Tool Integrations
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key advertising platforms:
+For implementation, see the [tools registry] ⚠️ FALTA: ../../tools/REGISTRY.md. Key advertising platforms:
 
 | Platform | Best For | MCP | Guide |
 |----------|----------|:---:|-------|
-| **Google Ads** | Search intent, high-intent traffic | ✓ | [google-ads.md](../../tools/integrations/google-ads.md) |
-| **Meta Ads** | Demand gen, visual products, B2C | - | [meta-ads.md](../../tools/integrations/meta-ads.md) |
-| **LinkedIn Ads** | B2B, job title targeting | - | [linkedin-ads.md](../../tools/integrations/linkedin-ads.md) |
-| **TikTok Ads** | Younger demographics, video | - | [tiktok-ads.md](../../tools/integrations/tiktok-ads.md) |
+| **Google Ads** | Search intent, high-intent traffic | ✓ | [google-ads.md] ⚠️ FALTA: ../../tools/integrations/google-ads.md |
+| **Meta Ads** | Demand gen, visual products, B2C | - | [meta-ads.md] ⚠️ FALTA: ../../tools/integrations/meta-ads.md |
+| **LinkedIn Ads** | B2B, job title targeting | - | [linkedin-ads.md] ⚠️ FALTA: ../../tools/integrations/linkedin-ads.md |
+| **TikTok Ads** | Younger demographics, video | - | [tiktok-ads.md] ⚠️ FALTA: ../../tools/integrations/tiktok-ads.md |
 
-For tracking setup, see [references/conversion-tracking.md](references/conversion-tracking.md), [ga4.md](../../tools/integrations/ga4.md), [segment.md](../../tools/integrations/segment.md)
+For tracking setup, see [references/conversion-tracking.md] ⚠️ FALTA: references/conversion-tracking.md, [ga4.md] ⚠️ FALTA: ../../tools/integrations/ga4.md, [segment.md] ⚠️ FALTA: ../../tools/integrations/segment.md
 
 ---
 
@@ -492,9 +492,9 @@ For tracking setup, see [references/conversion-tracking.md](references/conversio
 
 - **ad-creative**: For generating and iterating ad headlines, descriptions, and creative at scale
 - **revops**: For the CRM side of ABM — lead scoring, routing, and the offline conversion loop
-- **customer-research / competitor-profiling / positioning**: Voice-of-customer that feeds ad copy and angles; and turning an organic-teardown shortlist + the personas doc from [creative-research-automation.md](references/creative-research-automation.md) into full competitor dossiers and positioning
+- **customer-research / competitor-profiling / positioning**: Voice-of-customer that feeds ad copy and angles; and turning an organic-teardown shortlist + the personas doc from [creative-research-automation.md] ⚠️ FALTA: references/creative-research-automation.md into full competitor dossiers and positioning
 - **copywriting**: For landing page copy that converts ad traffic
-- **analytics / attribution**: Conversion tracking setup and the blended-CAC inputs behind [payback-period.md](references/payback-period.md); **pricing** sets the ARPU + plan structure that drive its Payback math (why blended LTV:CAC hides $9-vs-$999 variance)
+- **analytics / attribution**: Conversion tracking setup and the blended-CAC inputs behind [payback-period.md] ⚠️ FALTA: references/payback-period.md; **pricing** sets the ARPU + plan structure that drive its Payback math (why blended LTV:CAC hides $9-vs-$999 variance)
 - **ab-testing**: For landing page testing to improve ROAS
 - **cro**: For optimizing post-click conversion rates
 

@@ -48,7 +48,7 @@ Place the product on the **Viral Potential Spectrum**:
 
 If the product is on the natural end, consider **product-embedded viral mechanisms** (Powered By badges, exposure loops, social sharing, embeds, watermarks) before or alongside a reward program.
 
-**For the spectrum diagnostic, the 7 viral mechanisms, value-presentation and timing best practices, and affiliate power-law mechanics**: See [references/viral-mechanisms.md](references/viral-mechanisms.md)
+**For the spectrum diagnostic, the 7 viral mechanisms, value-presentation and timing best practices, and affiliate power-law mechanics**: See [references/viral-mechanisms.md] ⚠️ FALTA: references/viral-mechanisms.md
 
 ---
 
@@ -115,9 +115,9 @@ Trigger Moment → Share Action → Convert Referred → Reward → (Loop)
 
 **Present the reward with the bigger-*feeling* number** — "lead with the larger number" (say "$10 off," not "40% off," on a low-priced product). Reward at the **aha moment or milestone**, not signup. Reduce friction: one-click share, pre-written messages.
 
-**For examples and incentive sizing**: See [references/program-examples.md](references/program-examples.md)
+**For examples and incentive sizing**: See [references/program-examples.md] ⚠️ FALTA: references/program-examples.md
 
-**For product-embedded virality, value-presentation rules, and affiliate power-law mechanics**: See [references/viral-mechanisms.md](references/viral-mechanisms.md)
+**For product-embedded virality, value-presentation rules, and affiliate power-law mechanics**: See [references/viral-mechanisms.md] ⚠️ FALTA: references/viral-mechanisms.md
 
 ---
 
@@ -236,9 +236,9 @@ They get [their reward] too.
 
 ## Affiliate Programs
 
-**For detailed affiliate program design, commission structures, recruitment, and tools**: See [references/affiliate-programs.md](references/affiliate-programs.md)
+**For detailed affiliate program design, commission structures, recruitment, and tools**: See [references/affiliate-programs.md] ⚠️ FALTA: references/affiliate-programs.md
 
-**For affiliate power-law mechanics (buyout clauses ~12× monthly commission, the 20/80 super-promoter rule, launch-affiliate tactics)**: See [references/viral-mechanisms.md](references/viral-mechanisms.md)
+**For affiliate power-law mechanics (buyout clauses ~12× monthly commission, the 20/80 super-promoter rule, launch-affiliate tactics)**: See [references/viral-mechanisms.md] ⚠️ FALTA: references/viral-mechanisms.md
 
 ---
 
@@ -255,17 +255,17 @@ They get [their reward] too.
 
 ## Tool Integrations
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key tools for referral programs:
+For implementation, see the [tools registry] ⚠️ FALTA: ../../tools/REGISTRY.md. Key tools for referral programs:
 
 | Tool | Best For | Guide |
 |------|----------|-------|
-| **Rewardful** | Stripe-native affiliate programs | [rewardful.md](../../tools/integrations/rewardful.md) |
-| **Tolt** | SaaS affiliate programs | [tolt.md](../../tools/integrations/tolt.md) |
-| **Mention Me** | Enterprise referral programs | [mention-me.md](../../tools/integrations/mention-me.md) |
-| **Dub.co** | Link tracking and attribution | [dub-co.md](../../tools/integrations/dub-co.md) |
-| **Stripe** | Payment processing (for commission tracking) | [stripe.md](../../tools/integrations/stripe.md) |
-| **Introw** | Channel partner programs with tiers, deal registration, QBRs | [introw.md](../../tools/integrations/introw.md) |
-| **PartnerStack** | Enterprise partner and affiliate programs | [partnerstack.md](../../tools/integrations/partnerstack.md) |
+| **Rewardful** | Stripe-native affiliate programs | [rewardful.md] ⚠️ FALTA: ../../tools/integrations/rewardful.md |
+| **Tolt** | SaaS affiliate programs | [tolt.md] ⚠️ FALTA: ../../tools/integrations/tolt.md |
+| **Mention Me** | Enterprise referral programs | [mention-me.md] ⚠️ FALTA: ../../tools/integrations/mention-me.md |
+| **Dub.co** | Link tracking and attribution | [dub-co.md] ⚠️ FALTA: ../../tools/integrations/dub-co.md |
+| **Stripe** | Payment processing (for commission tracking) | [stripe.md] ⚠️ FALTA: ../../tools/integrations/stripe.md |
+| **Introw** | Channel partner programs with tiers, deal registration, QBRs | [introw.md] ⚠️ FALTA: ../../tools/integrations/introw.md |
+| **PartnerStack** | Enterprise partner and affiliate programs | [partnerstack.md] ⚠️ FALTA: ../../tools/integrations/partnerstack.md |
 
 ---
 

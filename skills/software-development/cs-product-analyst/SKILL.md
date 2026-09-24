@@ -20,8 +20,8 @@ Use this agent instead of cs-product-manager when the work is quantitative: the 
 ## Skill Integration
 
 **Skill Locations:**
-- `../../product-team/skills/product-analytics/` ([SKILL.md](../../product-team/skills/product-analytics/SKILL.md))
-- `../../product-team/skills/experiment-designer/` ([SKILL.md](../../product-team/skills/experiment-designer/SKILL.md))
+- `../../product-team/skills/product-analytics/` ([SKILL.md] ⚠️ FALTA: ../../product-team/skills/product-analytics/SKILL.md)
+- `../../product-team/skills/experiment-designer/` ([SKILL.md] ⚠️ FALTA: ../../product-team/skills/experiment-designer/SKILL.md)
 
 ### Python Tools
 
@@ -78,10 +78,10 @@ Use this agent instead of cs-product-manager when the work is quantitative: the 
 
 ## Related Agents
 
-- [cs-product-manager](cs-product-manager.md) - Prioritization and PRDs; hands measurement questions to this agent
-- [cs-ux-researcher](cs-ux-researcher.md) - Qualitative evidence to explain the "why" behind metric movements
+- [cs-product-manager] ⚠️ FALTA: cs-product-manager.md - Prioritization and PRDs; hands measurement questions to this agent
+- [cs-ux-researcher] ⚠️ FALTA: cs-ux-researcher.md - Qualitative evidence to explain the "why" behind metric movements
 
 ## References
 
-- [Product Analytics Skill](../../product-team/skills/product-analytics/SKILL.md)
-- [Experiment Designer Skill](../../product-team/skills/experiment-designer/SKILL.md)
+- [Product Analytics Skill] ⚠️ FALTA: ../../product-team/skills/product-analytics/SKILL.md
+- [Experiment Designer Skill] ⚠️ FALTA: ../../product-team/skills/experiment-designer/SKILL.md

@@ -422,8 +422,8 @@ Visual or structured representation of how content interconnects.
 
 ## References
 
-- **[Content Distribution Spine](references/content-distribution.md)**: Create Once Distribute Twice, ORB as a funnel, the ownership paradox, platform half-lives, the Content Distribution Flywheel, and the per-flagship atomization checklist
-- **[Headless CMS Guide](references/headless-cms.md)**: CMS selection, content modeling for marketing, editorial workflows, platform comparison (Sanity, Contentful, Strapi)
+- **[Content Distribution Spine] ⚠️ FALTA: references/content-distribution.md**: Create Once Distribute Twice, ORB as a funnel, the ownership paradox, platform half-lives, the Content Distribution Flywheel, and the per-flagship atomization checklist
+- **[Headless CMS Guide] ⚠️ FALTA: references/headless-cms.md**: CMS selection, content modeling for marketing, editorial workflows, platform comparison (Sanity, Contentful, Strapi)
 
 ---
 

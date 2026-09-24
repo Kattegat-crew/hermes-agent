@@ -29,7 +29,7 @@ When this skill needs to render an image, resolve the backend in this order:
 2. **Saved preference** — if `EXTEND.md` sets `preferred_image_backend` to a backend available right now, use it.
 3. **Auto-select** (when the preference is `auto`, unset, or the pinned backend isn't available):
    - **Codex (`imagegen`)** — first, inspect your available-skills / tool inventory. If a skill named `imagegen` is listed, you are running inside Codex and MUST use it: invoke via the `Skill` tool with `skill: "imagegen"`, passing the saved prompt file's content (plus output path and aspect ratio per Codex `imagegen`'s own args). Codex `imagegen` is the official raster backend in that runtime and outranks any non-native skill (e.g., `baoyu-image-gen`) unless the user has explicitly pinned a different `preferred_image_backend`.
-   - **Codex via `codex exec` (`codex-imagegen`)** — if the current runtime exposes no native `imagegen` skill but the `codex` CLI is on `PATH` with an active `codex login`, route through `baoyu-image-gen --provider codex-cli` (preferred), or — if baoyu-image-gen is unavailable — invoke the bundled wrapper directly. Details, parameters, and the runtime-discovery procedure live in [references/codex-imagegen.md](references/codex-imagegen.md) — load that file only when this branch is selected.
+   - **Codex via `codex exec` (`codex-imagegen`)** — if the current runtime exposes no native `imagegen` skill but the `codex` CLI is on `PATH` with an active `codex login`, route through `baoyu-image-gen --provider codex-cli` (preferred), or — if baoyu-image-gen is unavailable — invoke the bundled wrapper directly. Details, parameters, and the runtime-discovery procedure live in [references/codex-imagegen.md] ⚠️ FALTA: references/codex-imagegen.md — load that file only when this branch is selected.
    - **Cursor (`GenerateImage`)** — if the runtime exposes a native `GenerateImage` tool, you are running inside Cursor and it outranks any non-native skill the same way Codex `imagegen` does. Two hard caveats: (a) it has no aspect-ratio parameter — state the target aspect ratio / dimensions explicitly in the prompt text passed as `description`; (b) it does not accept an output directory — it saves to a tool-managed location, so after generation copy/move the file to the skill's expected output path (e.g., `outputs/.../NN-xxx.png`). Reference images go in `reference_image_paths`.
    - **Other runtime-native tools** — if the runtime exposes a different native image tool (e.g., Hermes `image_generate`), use it the same way.
    - Otherwise, if exactly one non-native backend is installed (e.g., `baoyu-image-gen`), use it.
@@ -62,7 +62,7 @@ Default behavior: **confirm before generation**.
 | `--type <name>` | hero, conceptual, typography, metaphor, scene, minimal |
 | `--palette <name>` | warm, elegant, cool, dark, earth, vivid, pastel, mono, retro, duotone, macaron |
 | `--rendering <name>` | flat-vector, hand-drawn, painterly, digital, pixel, chalk, screen-print |
-| `--style <name>` | Preset shorthand (see [Style Presets](references/style-presets.md)) |
+| `--style <name>` | Preset shorthand (see [Style Presets] ⚠️ FALTA: references/style-presets.md) |
 | `--text <level>` | none, title-only, title-subtitle, text-rich |
 | `--mood <level>` | subtle, balanced, bold |
 | `--font <name>` | clean, handwritten, serif, display |
@@ -83,12 +83,12 @@ Default behavior: **confirm before generation**.
 | **Mood** | subtle, balanced, bold | balanced |
 | **Font** | clean, handwritten, serif, display | clean |
 
-Auto-selection rules: [references/auto-selection.md](references/auto-selection.md)
+Auto-selection rules: [references/auto-selection.md] ⚠️ FALTA: references/auto-selection.md
 
 ## Galleries
 
 **Types**: hero, conceptual, typography, metaphor, scene, minimal
-→ Details: [references/types.md](references/types.md)
+→ Details: [references/types.md] ⚠️ FALTA: references/types.md
 
 **Palettes**: warm, elegant, cool, dark, earth, vivid, pastel, mono, retro, duotone, macaron
 → Details: [references/palettes/](references/palettes/)
@@ -97,13 +97,13 @@ Auto-selection rules: [references/auto-selection.md](references/auto-selection.m
 → Details: [references/renderings/](references/renderings/)
 
 **Text Levels**: none (pure visual) | title-only (default) | title-subtitle | text-rich (with tags)
-→ Details: [references/dimensions/text.md](references/dimensions/text.md)
+→ Details: [references/dimensions/text.md] ⚠️ FALTA: references/dimensions/text.md
 
 **Mood Levels**: subtle (low contrast) | balanced (default) | bold (high contrast)
-→ Details: [references/dimensions/mood.md](references/dimensions/mood.md)
+→ Details: [references/dimensions/mood.md] ⚠️ FALTA: references/dimensions/mood.md
 
 **Fonts**: clean (sans-serif) | handwritten | serif | display (bold decorative)
-→ Details: [references/dimensions/font.md](references/dimensions/font.md)
+→ Details: [references/dimensions/font.md] ⚠️ FALTA: references/dimensions/font.md
 
 ## File Structure
 
@@ -162,13 +162,13 @@ Check EXTEND.md in priority order — the first one found wins:
 | Result | Action |
 |--------|--------|
 | Found | Load, display summary → Continue |
-| Not found | ⛔ Run first-time setup ([references/config/first-time-setup.md](references/config/first-time-setup.md)) → Save → Continue |
+| Not found | ⛔ Run first-time setup ([references/config/first-time-setup.md] ⚠️ FALTA: references/config/first-time-setup.md) → Save → Continue |
 
 **CRITICAL**: If not found, complete setup BEFORE any other steps or questions.
 
 ### Step 1: Analyze Content
 
-1. **Save reference images** (if provided) → [references/workflow/reference-images.md](references/workflow/reference-images.md)
+1. **Save reference images** (if provided) → [references/workflow/reference-images.md] ⚠️ FALTA: references/workflow/reference-images.md
 2. **Save source content** (if pasted, save to `source.md`)
 3. **Analyze content**: topic, tone, keywords, visual metaphors
 4. **Deep analyze references** ⚠️: Extract specific, concrete elements (see reference-images.md)
@@ -182,7 +182,7 @@ If reference images contain **people** who should appear in the cover:
 - **Model supports `--ref`** (default): Copy image to `refs/`, pass via `--ref` at generation. No description file needed — the model sees the face directly.
 - **Model does NOT support `--ref`** (Jimeng, Seedream 3.0): Create `refs/ref-NN-{slug}.md` with per-character description (hair, glasses, skin tone, clothing). Embed as MUST/REQUIRED instructions in prompt text.
 
-See [reference-images.md](references/workflow/reference-images.md) for full decision table.
+See [reference-images.md] ⚠️ FALTA: references/workflow/reference-images.md for full decision table.
 
 ### Step 2: Confirm Options ⚠️
 
@@ -190,7 +190,7 @@ See [reference-images.md](references/workflow/reference-images.md) for full deci
 
 **MUST use `AskUserQuestion` tool** to present options as interactive selection — NOT plain text tables. Present up to 4 questions in a single `AskUserQuestion` call (Type, Palette, Rendering, Font + Settings). Each question shows the recommended option first with reason, followed by alternatives.
 
-Full confirmation flow and question format: [references/workflow/confirm-options.md](references/workflow/confirm-options.md)
+Full confirmation flow and question format: [references/workflow/confirm-options.md] ⚠️ FALTA: references/workflow/confirm-options.md
 
 | Condition | Skipped | Still Asked |
 |-----------|---------|-------------|
@@ -199,7 +199,7 @@ Full confirmation flow and question format: [references/workflow/confirm-options
 
 ### Step 3: Create Prompt
 
-Save to `prompts/cover.md`. Template: [references/workflow/prompt-template.md](references/workflow/prompt-template.md)
+Save to `prompts/cover.md`. Template: [references/workflow/prompt-template.md] ⚠️ FALTA: references/workflow/prompt-template.md
 
 **CRITICAL - References in Frontmatter**:
 - Files saved to `refs/` → Add to frontmatter `references` list
@@ -217,7 +217,7 @@ Save to `prompts/cover.md`. Template: [references/workflow/prompt-template.md](r
    - `direct` usage → pass via `--ref` (use ref-capable backend)
    - `style`/`palette` → extract traits, append to prompt
 5. **Generate**: Call the chosen backend with the prompt file, output path, aspect ratio.
-   - **`codex-imagegen`**: see [references/codex-imagegen.md](references/codex-imagegen.md) for the invocation contract (preferred `baoyu-image-gen --provider codex-cli` path, runtime wrapper discovery, parameter notes, stdout schema, batch semantics).
+   - **`codex-imagegen`**: see [references/codex-imagegen.md] ⚠️ FALTA: references/codex-imagegen.md for the invocation contract (preferred `baoyu-image-gen --provider codex-cli` path, runtime wrapper discovery, parameter notes, stdout schema, batch semantics).
    - **Codex `imagegen` (native)** or other runtime-native tools / `baoyu-image-gen` skill: per the rule in `## Image Generation Tools` above.
 6. On failure: auto-retry once
 
@@ -264,7 +264,7 @@ Text correction policy:
 
 EXTEND.md lives at the path noted in **Step 0**. Three ways to change it:
 
-- **Edit directly** — open EXTEND.md and change fields. Full schema: [references/config/preferences-schema.md](references/config/preferences-schema.md).
+- **Edit directly** — open EXTEND.md and change fields. Full schema: [references/config/preferences-schema.md] ⚠️ FALTA: references/config/preferences-schema.md.
 - **Reconfigure interactively** — delete EXTEND.md (or ask "reconfigure baoyu-cover-image preferences" / "重新配置"). The next run re-triggers first-time setup.
 - **Common one-line edits**:
   - `preferred_image_backend: auto` — default; runtime-native tool wins, falls back to the only installed backend, asks only if multiple non-native are present.
@@ -275,13 +275,13 @@ EXTEND.md lives at the path noted in **Step 0**. Three ways to change it:
 
 ## References
 
-**Dimensions**: [text.md](references/dimensions/text.md) | [mood.md](references/dimensions/mood.md) | [font.md](references/dimensions/font.md)
+**Dimensions**: [text.md] ⚠️ FALTA: references/dimensions/text.md | [mood.md] ⚠️ FALTA: references/dimensions/mood.md | [font.md] ⚠️ FALTA: references/dimensions/font.md
 **Palettes**: [references/palettes/](references/palettes/)
 **Renderings**: [references/renderings/](references/renderings/)
-**Types**: [references/types.md](references/types.md)
-**Auto-Selection**: [references/auto-selection.md](references/auto-selection.md)
-**Style Presets**: [references/style-presets.md](references/style-presets.md)
-**Compatibility**: [references/compatibility.md](references/compatibility.md)
-**Visual Elements**: [references/visual-elements.md](references/visual-elements.md)
-**Workflow**: [confirm-options.md](references/workflow/confirm-options.md) | [prompt-template.md](references/workflow/prompt-template.md) | [reference-images.md](references/workflow/reference-images.md)
-**Config**: [preferences-schema.md](references/config/preferences-schema.md) | [first-time-setup.md](references/config/first-time-setup.md) | [watermark-guide.md](references/config/watermark-guide.md)
+**Types**: [references/types.md] ⚠️ FALTA: references/types.md
+**Auto-Selection**: [references/auto-selection.md] ⚠️ FALTA: references/auto-selection.md
+**Style Presets**: [references/style-presets.md] ⚠️ FALTA: references/style-presets.md
+**Compatibility**: [references/compatibility.md] ⚠️ FALTA: references/compatibility.md
+**Visual Elements**: [references/visual-elements.md] ⚠️ FALTA: references/visual-elements.md
+**Workflow**: [confirm-options.md] ⚠️ FALTA: references/workflow/confirm-options.md | [prompt-template.md] ⚠️ FALTA: references/workflow/prompt-template.md | [reference-images.md] ⚠️ FALTA: references/workflow/reference-images.md
+**Config**: [preferences-schema.md] ⚠️ FALTA: references/config/preferences-schema.md | [first-time-setup.md] ⚠️ FALTA: references/config/first-time-setup.md | [watermark-guide.md] ⚠️ FALTA: references/config/watermark-guide.md

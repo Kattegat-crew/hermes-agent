@@ -48,9 +48,9 @@ Gather this context (ask if not provided):
 | TikTok | Brand awareness, younger audiences | 1-4x/day | Short-form video |
 | Facebook | Communities, local businesses | 1-2x/day | Groups, native video |
 
-**For detailed platform strategies**: See [references/platforms.md](references/platforms.md)
+**For detailed platform strategies**: See [references/platforms.md] ⚠️ FALTA: references/platforms.md
 
-**For hashtag limits and character counts**: See [references/platform-limits.md](references/platform-limits.md)
+**For hashtag limits and character counts**: See [references/platform-limits.md] ⚠️ FALTA: references/platform-limits.md
 
 ---
 
@@ -103,9 +103,9 @@ The first line determines whether anyone reads the rest.
 - "[Common advice] is wrong. Here's why:"
 - "I stopped [common practice] and [positive result]."
 
-**For post templates and more hooks**: See [references/post-templates.md](references/post-templates.md)
+**For post templates and more hooks**: See [references/post-templates.md] ⚠️ FALTA: references/post-templates.md
 
-**For carousels** (Instagram carousels, LinkedIn document posts): See [references/carousel-frameworks.md](references/carousel-frameworks.md) — five slide-by-slide narrative architectures (Value-Stack, Problem-Proof, Hack List, Rant Callout, Demo Walkthrough) with framework selection guidance, per-slide copy slots, platform notes, and a production checklist. Pick the framework before writing slides.
+**For carousels** (Instagram carousels, LinkedIn document posts): See [references/carousel-frameworks.md] ⚠️ FALTA: references/carousel-frameworks.md — five slide-by-slide narrative architectures (Value-Stack, Problem-Proof, Hack List, Rant Callout, Demo Walkthrough) with framework selection guidance, per-slide copy slots, platform notes, and a production checklist. Pick the framework before writing slides.
 
 ---
 
@@ -213,7 +213,7 @@ Extract "content atoms" — self-contained moments from any long-form content th
 3. Share/repost with added insight (5 min)
 4. Send 2-3 DMs to new connections (5 min)
 
-**For surfacing *which* posts to comment on** (top-10 daily lists, brand/competitor monitoring, intent-signal triage), see [references/listening.md](references/listening.md). Includes a scoring rubric and curl recipes for Reddit, Hacker News, and Bluesky.
+**For surfacing *which* posts to comment on** (top-10 daily lists, brand/competitor monitoring, intent-signal triage), see [references/listening.md] ⚠️ FALTA: references/listening.md. Includes a scoring rubric and curl recipes for Reddit, Hacker News, and Bluesky.
 
 ### Quality Comments
 
@@ -309,7 +309,7 @@ Instead of guessing, analyze what's working for top creators in your niche:
 5. **Layer your voice** — Apply patterns with authenticity
 6. **Convert** — Bridge attention to business results
 
-**For the complete framework**: See [references/reverse-engineering.md](references/reverse-engineering.md)
+**For the complete framework**: See [references/reverse-engineering.md] ⚠️ FALTA: references/reverse-engineering.md
 
 ---
 
@@ -390,7 +390,7 @@ Tools: CapCut (free), Descript, Captions.ai, Premiere Pro
 5. **No CTA** — tell viewers what to do
 6. **Ignoring comments** — engagement in first hour matters
 
-**For video hook formulas and scripting templates**: See [references/short-form-video.md](references/short-form-video.md)
+**For video hook formulas and scripting templates**: See [references/short-form-video.md] ⚠️ FALTA: references/short-form-video.md
 
 ---
 

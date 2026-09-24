@@ -28,7 +28,7 @@ Esta skill opera como despacho unificado. El detalle procedural y gotchas espec�
 `references/`
 
 ## Casos de Uso Disponibles
-- **github**: Ver [references/github.md](file:///root/hermes-agent/skills/core/github-workflow/references/github.md)
+- **github**: Ver [references/github.md] ⚠️ FALTA: file:///root/hermes-agent/skills/core/github-workflow/references/github.md
 - **github-actions-ci-cd**: Ver [references/github-actions-ci-cd.md](file:///root/hermes-agent/skills/core/github-workflow/references/github-actions-ci-cd.md)
 - **github-auth**: Ver [references/github-auth.md](file:///root/hermes-agent/skills/core/github-workflow/references/github-auth.md)
 - **github-code-review**: Ver [references/github-code-review.md](file:///root/hermes-agent/skills/core/github-workflow/references/github-code-review.md)

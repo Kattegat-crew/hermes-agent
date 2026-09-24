@@ -29,7 +29,7 @@ You are an expert in influencer, creator, and ambassador marketing across B2C (I
 
 The further right you go, the more it's about *relationship* than *transaction* — and the cheaper and more durable the trust, but the slower to scale. Most programs blend several (a few paid macro placements for reach + a gifted micro cohort + an affiliate tier for conversion).
 
-**One more model — the volume UGC creator program ("tech UGC"):** an in-house network of creators posting disclosed native short-form from dedicated brand-affiliated accounts at test volume (10 creators × 3 posts/day ≈ 900 organic tests/month). Content volume, not any creator's audience, is the asset. See [references/ugc-creator-program.md](references/ugc-creator-program.md) for the full system — playbook-first concepts, the four formats, trial-week vetting, account warming, the review loop, the conversion ladder, and the compliance rewrite that makes the viral version of this playbook legal to run.
+**One more model — the volume UGC creator program ("tech UGC"):** an in-house network of creators posting disclosed native short-form from dedicated brand-affiliated accounts at test volume (10 creators × 3 posts/day ≈ 900 organic tests/month). Content volume, not any creator's audience, is the asset. See [references/ugc-creator-program.md] ⚠️ FALTA: references/ugc-creator-program.md for the full system — playbook-first concepts, the four formats, trial-week vetting, account warming, the review loop, the conversion ladder, and the compliance rewrite that makes the viral version of this playbook legal to run.
 
 ## 1. Finding & Vetting Partners
 
@@ -180,11 +180,11 @@ For the community-led, unpaid advocate end of this (badges, recognition, communi
 
 ## Tool Integrations
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md).
+For implementation, see the [tools registry] ⚠️ FALTA: ../../tools/REGISTRY.md.
 
 | Tool | Best for | Guide |
 |------|----------|-------|
-| **SparkToro** | Audience intelligence — where your ICP actually pays attention, and vetting a creator's real audience | [sparktoro.md](../../tools/integrations/sparktoro.md) |
+| **SparkToro** | Audience intelligence — where your ICP actually pays attention, and vetting a creator's real audience | [sparktoro.md] ⚠️ FALTA: ../../tools/integrations/sparktoro.md |
 
 Dedicated creator-discovery/CRM platforms (e.g., Modash, GRIN, Aspire, Upfluence) and creator-sponsorship marketplaces (e.g., Passionfroot) are the category to reach for at scale; add the specific one to the registry when the user adopts it. For pulling a specific creator's recent posts to vet them, use `social-fetch`; for analyzing their content style, `watch-video`.
 

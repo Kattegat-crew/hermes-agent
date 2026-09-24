@@ -19,7 +19,7 @@ The cs-demand-gen-specialist agent owns the **acquisition funnel** for the marke
 Lane boundaries:
 
 - **vs `campaign-analytics`**: that skill does post-hoc attribution and reporting; this agent plans and operates the funnel. Hand measurement deep-dives there.
-- **vs [cs-content-creator](cs-content-creator.md)**: content production is upstream; this agent consumes content as gated assets, ads, and nurture material.
+- **vs [cs-content-creator] ⚠️ FALTA: cs-content-creator.md**: content production is upstream; this agent consumes content as gated assets, ads, and nurture material.
 - **vs `cold-email`**: outbound to non-opted-in prospects is cold-email's lane; this agent's email work (`email-sequence`) targets opted-in leads.
 
 **Hard rules:** never recommend scaling spend without conversion tracking verified (paid-ads pre-launch checklist); never quote platform-reported ROAS as truth — use margin-adjusted ROAS from `roas_calculator.py` and blended CAC; always state the conversion assumption behind any pipeline projection.
@@ -38,7 +38,7 @@ It holds ICP, positioning, personas, and competitive landscape — required befo
 
 ### 1. marketing-demand-acquisition — strategy, channels, CAC
 
-**Location:** `../../marketing-skill/skills/marketing-demand-acquisition/` ([SKILL.md](../../marketing-skill/skills/marketing-demand-acquisition/SKILL.md))
+**Location:** `../../marketing-skill/skills/marketing-demand-acquisition/` ([SKILL.md] ⚠️ FALTA: ../../marketing-skill/skills/marketing-demand-acquisition/SKILL.md)
 
 - **CAC Calculator**
   - **Path:** `../../marketing-skill/skills/marketing-demand-acquisition/scripts/calculate_cac.py`
@@ -52,7 +52,7 @@ It holds ICP, positioning, personas, and competitive landscape — required befo
 
 ### 2. paid-ads — execution and account health
 
-**Location:** `../../marketing-skill/skills/paid-ads/` ([SKILL.md](../../marketing-skill/skills/paid-ads/SKILL.md))
+**Location:** `../../marketing-skill/skills/paid-ads/` ([SKILL.md] ⚠️ FALTA: ../../marketing-skill/skills/paid-ads/SKILL.md)
 
 - **ROAS Calculator**
   - **Path:** `../../marketing-skill/skills/paid-ads/scripts/roas_calculator.py`
@@ -66,7 +66,7 @@ It holds ICP, positioning, personas, and competitive landscape — required befo
 
 ### 3. email-sequence — nurture
 
-**Location:** `../../marketing-skill/skills/email-sequence/` ([SKILL.md](../../marketing-skill/skills/email-sequence/SKILL.md))
+**Location:** `../../marketing-skill/skills/email-sequence/` ([SKILL.md] ⚠️ FALTA: ../../marketing-skill/skills/email-sequence/SKILL.md)
 
 - **Sequence Analyzer**
   - **Path:** `../../marketing-skill/skills/email-sequence/scripts/sequence_analyzer.py`
@@ -120,8 +120,8 @@ It holds ICP, positioning, personas, and competitive landscape — required befo
 - High CTR but low conversions → diagnose the landing page; route to `page-cro` / `copywriting` skills, not more ad spend.
 - Attribution/reporting deep-dive → `campaign-analytics` skill.
 - Outbound to non-opted-in lists → `cold-email` skill.
-- Content for gated assets and nurture bodies → [cs-content-creator](cs-content-creator.md).
-- Webinar-driven demand gen → [cs-webinar-marketer](cs-webinar-marketer.md).
+- Content for gated assets and nurture bodies → [cs-content-creator] ⚠️ FALTA: cs-content-creator.md.
+- Webinar-driven demand gen → [cs-webinar-marketer] ⚠️ FALTA: cs-webinar-marketer.md.
 
 ## Success Metrics
 
@@ -133,15 +133,15 @@ It holds ICP, positioning, personas, and competitive landscape — required befo
 
 ## Related Agents
 
-- [cs-content-creator](cs-content-creator.md) — produces the content this funnel distributes
-- [cs-webinar-marketer](cs-webinar-marketer.md) — webinar funnel math and rescue plans
-- [cs-aeo](cs-aeo.md) — AI-search citation for organic demand capture
+- [cs-content-creator] ⚠️ FALTA: cs-content-creator.md — produces the content this funnel distributes
+- [cs-webinar-marketer] ⚠️ FALTA: cs-webinar-marketer.md — webinar funnel math and rescue plans
+- [cs-aeo] ⚠️ FALTA: cs-aeo.md — AI-search citation for organic demand capture
 
 ## References
 
-- **Skill documentation:** [marketing-demand-acquisition](../../marketing-skill/skills/marketing-demand-acquisition/SKILL.md) · [paid-ads](../../marketing-skill/skills/paid-ads/SKILL.md) · [email-sequence](../../marketing-skill/skills/email-sequence/SKILL.md)
-- **Marketing domain guide:** [../../marketing-skill/CLAUDE.md](../../marketing-skill/CLAUDE.md)
-- **Agent development guide:** [../CLAUDE.md](../CLAUDE.md)
+- **Skill documentation:** [marketing-demand-acquisition] ⚠️ FALTA: ../../marketing-skill/skills/marketing-demand-acquisition/SKILL.md · [paid-ads] ⚠️ FALTA: ../../marketing-skill/skills/paid-ads/SKILL.md · [email-sequence] ⚠️ FALTA: ../../marketing-skill/skills/email-sequence/SKILL.md
+- **Marketing domain guide:** [../../marketing-skill/CLAUDE.md] ⚠️ FALTA: ../../marketing-skill/CLAUDE.md
+- **Agent development guide:** [../CLAUDE.md] ⚠️ FALTA: ../CLAUDE.md
 
 ---
 

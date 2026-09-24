@@ -84,7 +84,7 @@ Every claim connects to revenue, efficiency, or risk reduction. Features mean no
 | Economic buyer | ROI, payback period, total cost, risk | Technical details, implementation specifics |
 | Champion | Internal selling points, quick wins, peer proof | Deep technical or financial detail |
 
-**For full slide-by-slide guidance**: See [references/deck-frameworks.md](references/deck-frameworks.md)
+**For full slide-by-slide guidance**: See [references/deck-frameworks.md] ⚠️ FALTA: references/deck-frameworks.md
 
 ---
 
@@ -111,7 +111,7 @@ Every claim connects to revenue, efficiency, or risk reduction. Features mean no
 - Include your logo, website, and a specific contact (not info@).
 - Match your brand but keep it clean — this is a sales tool, not a brand piece.
 
-**For templates by use case**: See [references/one-pager-templates.md](references/one-pager-templates.md)
+**For templates by use case**: See [references/one-pager-templates.md] ⚠️ FALTA: references/one-pager-templates.md
 
 ---
 
@@ -143,7 +143,7 @@ For each objection, document:
 - **Quick-reference table** for live calls — objection, one-line response, proof point. Fits on one screen.
 - **Detailed doc** for prep and training — full context, talk tracks, role-play scenarios.
 
-**For the full objection library**: See [references/objection-library.md](references/objection-library.md)
+**For the full objection library**: See [references/objection-library.md] ⚠️ FALTA: references/objection-library.md
 
 ---
 
@@ -209,7 +209,7 @@ For each objection, document:
 - **Customize to their use case.** Use their terminology, their data (if possible), their workflow.
 - **Leave time for questions.** A demo where the prospect doesn't talk is a demo that doesn't close.
 
-**For full script templates**: See [references/demo-scripts.md](references/demo-scripts.md)
+**For full script templates**: See [references/demo-scripts.md] ⚠️ FALTA: references/demo-scripts.md
 
 ---
 
@@ -341,11 +341,11 @@ If context is missing, ask:
 
 ## Tool Integrations
 
-For partner sales enablement, see the [tools registry](../../tools/REGISTRY.md):
+For partner sales enablement, see the [tools registry] ⚠️ FALTA: ../../tools/REGISTRY.md:
 
 | Tool | What It Does | Guide |
 |------|-------------|-------|
-| **Introw** | Partner engagement tracking, deal registration, mutual action plans | [introw.md](../../tools/integrations/introw.md) |
+| **Introw** | Partner engagement tracking, deal registration, mutual action plans | [introw.md] ⚠️ FALTA: ../../tools/integrations/introw.md |
 
 ---
 

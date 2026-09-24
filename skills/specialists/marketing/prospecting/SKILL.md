@@ -28,10 +28,10 @@ Prospecting motions differ enough that the workflow forks at intake. Pick **one*
 If the user describes a hybrid motion (e.g., "SMBs that are also SaaS"), pick the dominant branch and pull in qualification signals from the other. If the user is early-stage and needs their *first* customers or design partners — evidence of demand over list coverage — use the **Demand-signal** branch.
 
 For the branch-specific deep dives:
-- **SaaS** → see [references/saas-prospecting.md](references/saas-prospecting.md)
-- **B2B** → see [references/b2b-prospecting.md](references/b2b-prospecting.md)
-- **Local SMB** → see [references/local-prospecting.md](references/local-prospecting.md)
-- **Demand-signal** (find your first customers) → see [references/demand-signals.md](references/demand-signals.md)
+- **SaaS** → see [references/saas-prospecting.md] ⚠️ FALTA: references/saas-prospecting.md
+- **B2B** → see [references/b2b-prospecting.md] ⚠️ FALTA: references/b2b-prospecting.md
+- **Local SMB** → see [references/local-prospecting.md] ⚠️ FALTA: references/local-prospecting.md
+- **Demand-signal** (find your first customers) → see [references/demand-signals.md] ⚠️ FALTA: references/demand-signals.md
 
 ---
 
@@ -69,11 +69,11 @@ Score every candidate against the ICP checklist. Add **evidence** (a source URL 
 - **Medium**: one credible source plus consistent search evidence
 - **Low**: incomplete or ambiguous evidence — flag what remains uncertain
 
-For email contacts (B2B / SaaS branches), **always verify deliverability before adding to the final list** — see Truelist integration in [references/data-sources.md](references/data-sources.md). Don't ship leads with invalid or risky emails.
+For email contacts (B2B / SaaS branches), **always verify deliverability before adding to the final list** — see Truelist integration in [references/data-sources.md] ⚠️ FALTA: references/data-sources.md. Don't ship leads with invalid or risky emails.
 
 ### Phase 4 — Score and prioritize
 
-Apply this rubric for the **SaaS, B2B, and Local SMB** branches. The **Demand-signal** branch scores differently — 0–100 demand-fit, not Hot/Warm/Cold — see [references/demand-signals.md](references/demand-signals.md).
+Apply this rubric for the **SaaS, B2B, and Local SMB** branches. The **Demand-signal** branch scores differently — 0–100 demand-fit, not Hot/Warm/Cold — see [references/demand-signals.md] ⚠️ FALTA: references/demand-signals.md.
 
 | Score | Definition |
 |-------|------------|
@@ -86,7 +86,7 @@ Branch-specific signals refine the scoring — see each reference file. Default 
 
 ### Phase 5 — Output the lead sheet
 
-(SaaS / B2B / Local SMB. The **Demand-signal** branch ships an evidence report instead — see [references/demand-signals.md](references/demand-signals.md).)
+(SaaS / B2B / Local SMB. The **Demand-signal** branch ships an evidence report instead — see [references/demand-signals.md] ⚠️ FALTA: references/demand-signals.md.)
 
 Default to a markdown table in chat. Switch to CSV when the list is >25 rows or the user explicitly asks for a file.
 
@@ -110,7 +110,7 @@ These apply to every branch. **Read first, every engagement.**
 7. **No breached, leaked, or unprovenanced data.** Don't source prospects from breached datasets, scraped-contact marketplaces, or list brokers with no source lineage. Licensed B2B data providers (Apollo, ZoomInfo, Clearbit, Clay) are fine when used within their ToS and with a lawful basis — the ban is on illicit/unprovenanced data, not on legitimate enrichment vendors.
 8. **Never target or infer sensitive traits.** Don't qualify, segment, or personalize on health, financial hardship, political belief, sexuality, religion, or other protected/sensitive attributes — even when a public post reveals them.
 
-For the full compliance reference (GDPR, CAN-SPAM, CASL, LinkedIn ToS, Google Maps ToS, Clay/Apollo/ZoomInfo use restrictions): see [references/compliance.md](references/compliance.md).
+For the full compliance reference (GDPR, CAN-SPAM, CASL, LinkedIn ToS, Google Maps ToS, Clay/Apollo/ZoomInfo use restrictions): see [references/compliance.md] ⚠️ FALTA: references/compliance.md.
 
 ---
 
@@ -130,7 +130,7 @@ If missing, ask once, then infer reasonable defaults and continue:
 
 ## Tool Selection Quick Picks
 
-Full breakdown in [references/data-sources.md](references/data-sources.md). Quick picks:
+Full breakdown in [references/data-sources.md] ⚠️ FALTA: references/data-sources.md. Quick picks:
 
 | If the user has access to... | Use it for |
 |------------------------------|------------|
@@ -232,22 +232,22 @@ score,business,category,area,distance_km,website_status,website_url,social_urls,
 
 ## Tool Integrations
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key prospecting tools:
+For implementation, see the [tools registry] ⚠️ FALTA: ../../tools/REGISTRY.md. Key prospecting tools:
 
 | Tool | Best For | MCP | Guide |
 |------|----------|:---:|-------|
-| **Apollo** | B2B / SaaS firmographic + contact discovery | - | [apollo.md](../../tools/integrations/apollo.md) |
-| **Clay** | Multi-source enrichment + waterfall | ✓ | [clay.md](../../tools/integrations/clay.md) |
-| **Clearbit** | Email-to-company enrichment | - | [clearbit.md](../../tools/integrations/clearbit.md) |
-| **ZoomInfo** | Enterprise B2B contact + intent | ✓ | [zoominfo.md](../../tools/integrations/zoominfo.md) |
-| **Hunter** | Email pattern + verification | - | [hunter.md](../../tools/integrations/hunter.md) |
-| **Snov** | Email finder + verifier | - | [snov.md](../../tools/integrations/snov.md) |
-| **Truelist** | Email deliverability validation | - | [truelist.md](../../tools/integrations/truelist.md) |
-| **Outreach** | Sales engagement (post-list) | ✓ | [outreach.md](../../tools/integrations/outreach.md) |
-| **RB2B** | Visitor identification (warm intent) | - | [rb2b.md](../../tools/integrations/rb2b.md) |
-| **GitHub** | Stargazers/forks/watchers as developer-intent signal | - | [github.md](../../tools/integrations/github.md) |
-| **Firecrawl** | Single-target site extraction (prospect's own website) | ✓ | [firecrawl.md](../../tools/integrations/firecrawl.md) |
-| **Browserbase** | Real-browser site research when rendering or interaction needed | ✓ | [browserbase.md](../../tools/integrations/browserbase.md) |
+| **Apollo** | B2B / SaaS firmographic + contact discovery | - | [apollo.md] ⚠️ FALTA: ../../tools/integrations/apollo.md |
+| **Clay** | Multi-source enrichment + waterfall | ✓ | [clay.md] ⚠️ FALTA: ../../tools/integrations/clay.md |
+| **Clearbit** | Email-to-company enrichment | - | [clearbit.md] ⚠️ FALTA: ../../tools/integrations/clearbit.md |
+| **ZoomInfo** | Enterprise B2B contact + intent | ✓ | [zoominfo.md] ⚠️ FALTA: ../../tools/integrations/zoominfo.md |
+| **Hunter** | Email pattern + verification | - | [hunter.md] ⚠️ FALTA: ../../tools/integrations/hunter.md |
+| **Snov** | Email finder + verifier | - | [snov.md] ⚠️ FALTA: ../../tools/integrations/snov.md |
+| **Truelist** | Email deliverability validation | - | [truelist.md] ⚠️ FALTA: ../../tools/integrations/truelist.md |
+| **Outreach** | Sales engagement (post-list) | ✓ | [outreach.md] ⚠️ FALTA: ../../tools/integrations/outreach.md |
+| **RB2B** | Visitor identification (warm intent) | - | [rb2b.md] ⚠️ FALTA: ../../tools/integrations/rb2b.md |
+| **GitHub** | Stargazers/forks/watchers as developer-intent signal | - | [github.md] ⚠️ FALTA: ../../tools/integrations/github.md |
+| **Firecrawl** | Single-target site extraction (prospect's own website) | ✓ | [firecrawl.md] ⚠️ FALTA: ../../tools/integrations/firecrawl.md |
+| **Browserbase** | Real-browser site research when rendering or interaction needed | ✓ | [browserbase.md] ⚠️ FALTA: ../../tools/integrations/browserbase.md |
 
 ---
 

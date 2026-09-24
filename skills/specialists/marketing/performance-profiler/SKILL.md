@@ -69,6 +69,6 @@ python3 scripts/performance_profiler.py /path/to/project --large-file-threshold-
 
 ## References
 
-- [references/profiling-recipes.md](references/profiling-recipes.md) — Node.js/Python/Go profiling commands, flamegraph generation, heap snapshots
-- [references/optimization-playbook.md](references/optimization-playbook.md) — before/after measurement template, quick-win optimization checklist (DB/Node/bundle/API), common pitfalls, best practices
+- [references/profiling-recipes.md] ⚠️ FALTA: references/profiling-recipes.md — Node.js/Python/Go profiling commands, flamegraph generation, heap snapshots
+- [references/optimization-playbook.md] ⚠️ FALTA: references/optimization-playbook.md — before/after measurement template, quick-win optimization checklist (DB/Node/bundle/API), common pitfalls, best practices
 

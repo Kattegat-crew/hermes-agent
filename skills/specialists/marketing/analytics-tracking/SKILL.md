@@ -125,7 +125,7 @@ chat_opened
 help_article_viewed     (param: article_name)
 ```
 
-See [references/event-taxonomy-guide.md](references/event-taxonomy-guide.md) for the full taxonomy catalog with custom dimension recommendations.
+See [references/event-taxonomy-guide.md] ⚠️ FALTA: references/event-taxonomy-guide.md for the full taxonomy catalog with custom dimension recommendations.
 
 ---
 
@@ -245,7 +245,7 @@ GTM Tag: GA4 Event
     page_location: {{Page URL}}
 ```
 
-See [references/gtm-patterns.md](references/gtm-patterns.md) for full configuration templates.
+See [references/gtm-patterns.md] ⚠️ FALTA: references/gtm-patterns.md for full configuration templates.
 
 ---
 

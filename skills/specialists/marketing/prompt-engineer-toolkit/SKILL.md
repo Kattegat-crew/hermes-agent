@@ -106,10 +106,10 @@ python3 scripts/prompt_versioner.py changelog --name support_classifier
 
 ## References
 
-- [references/prompt-templates.md](references/prompt-templates.md) — 6 production marketing templates (ad copy, email sequence, social repurposing, landing sections, SEO meta, brand-voice rewrite) plus generic building blocks; each written to be graded by `prompt_tester.py`
-- [references/technique-guide.md](references/technique-guide.md) — technique-selection table for marketing tasks + the LLM-governance stack for marketing teams (claim discipline, disclosure rules, data boundaries, human-review gates)
-- [references/evaluation-rubric.md](references/evaluation-rubric.md) — mechanical scoring weights, acceptance gates, marketing quality dimensions, test-suite design, and eval anti-patterns
-- [README.md](README.md)
+- [references/prompt-templates.md] ⚠️ FALTA: references/prompt-templates.md — 6 production marketing templates (ad copy, email sequence, social repurposing, landing sections, SEO meta, brand-voice rewrite) plus generic building blocks; each written to be graded by `prompt_tester.py`
+- [references/technique-guide.md] ⚠️ FALTA: references/technique-guide.md — technique-selection table for marketing tasks + the LLM-governance stack for marketing teams (claim discipline, disclosure rules, data boundaries, human-review gates)
+- [references/evaluation-rubric.md] ⚠️ FALTA: references/evaluation-rubric.md — mechanical scoring weights, acceptance gates, marketing quality dimensions, test-suite design, and eval anti-patterns
+- [README.md] ⚠️ FALTA: README.md
 
 ## Evaluation Design
 

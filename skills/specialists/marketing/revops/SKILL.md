@@ -74,7 +74,7 @@ Define response times and document them:
 - Rep qualifies or rejects within **48 hours**
 - Rejected MQLs go to recycling nurture with reason code
 
-**For complete lifecycle stage templates and SLA examples**: See [references/lifecycle-definitions.md](references/lifecycle-definitions.md)
+**For complete lifecycle stage templates and SLA examples**: See [references/lifecycle-definitions.md] ⚠️ FALTA: references/lifecycle-definitions.md
 
 ---
 
@@ -115,7 +115,7 @@ Define response times and document them:
 - Setting and forgetting (buyer behavior changes; recalibrate quarterly)
 - Scoring all page visits equally (pricing page ≠ blog post)
 
-**For detailed scoring templates and example models**: See [references/scoring-models.md](references/scoring-models.md)
+**For detailed scoring templates and example models**: See [references/scoring-models.md] ⚠️ FALTA: references/scoring-models.md
 
 ---
 
@@ -146,7 +146,7 @@ Response time is the single biggest factor in lead conversion:
 
 Build routing rules that prioritize speed. Alert reps immediately. Escalate if SLA is missed.
 
-**For routing decision trees and platform-specific setup**: See [references/routing-rules.md](references/routing-rules.md)
+**For routing decision trees and platform-specific setup**: See [references/routing-rules.md] ⚠️ FALTA: references/routing-rules.md
 
 ---
 
@@ -206,7 +206,7 @@ Build routing rules that prioritize speed. Alert reps immediately. Escalate if S
 - **Pre-meeting enrichment** — Auto-populate CRM record before the call
 - **No-show workflows** — Auto-follow-up if prospect misses meeting
 
-**For platform-specific workflow recipes**: See [references/automation-playbooks.md](references/automation-playbooks.md)
+**For platform-specific workflow recipes**: See [references/automation-playbooks.md] ⚠️ FALTA: references/automation-playbooks.md
 
 ---
 
@@ -318,20 +318,20 @@ Format each as a standalone document the user can implement directly. Include pl
 
 ## Tool Integrations
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key RevOps tools:
+For implementation, see the [tools registry] ⚠️ FALTA: ../../tools/REGISTRY.md. Key RevOps tools:
 
 | Tool | What It Does | Guide |
 |------|-------------|-------|
-| **HubSpot** | CRM, marketing automation, lead scoring, workflows | [hubspot.md](../../tools/integrations/hubspot.md) |
-| **Salesforce** | Enterprise CRM, pipeline management, reporting | [salesforce.md](../../tools/integrations/salesforce.md) |
-| **Calendly** | Meeting scheduling, round-robin routing | [calendly.md](../../tools/integrations/calendly.md) |
-| **SavvyCal** | Scheduling with priority-based availability | [savvycal.md](../../tools/integrations/savvycal.md) |
-| **Clearbit** | Real-time lead enrichment and scoring | [clearbit.md](../../tools/integrations/clearbit.md) |
-| **Apollo** | Contact data, enrichment, and outbound sequences | [apollo.md](../../tools/integrations/apollo.md) |
-| **ActiveCampaign** | Marketing automation for SMBs, lead scoring | [activecampaign.md](../../tools/integrations/activecampaign.md) |
-| **Zapier** | Cross-tool automation and workflow glue | [zapier.md](../../tools/integrations/zapier.md) |
-| **Introw** | Partner-sourced pipeline, commissions, deal registration, QBRs | [introw.md](../../tools/integrations/introw.md) |
-| **Crossbeam** | Partner account overlaps and co-sell identification | [crossbeam.md](../../tools/integrations/crossbeam.md) |
+| **HubSpot** | CRM, marketing automation, lead scoring, workflows | [hubspot.md] ⚠️ FALTA: ../../tools/integrations/hubspot.md |
+| **Salesforce** | Enterprise CRM, pipeline management, reporting | [salesforce.md] ⚠️ FALTA: ../../tools/integrations/salesforce.md |
+| **Calendly** | Meeting scheduling, round-robin routing | [calendly.md] ⚠️ FALTA: ../../tools/integrations/calendly.md |
+| **SavvyCal** | Scheduling with priority-based availability | [savvycal.md] ⚠️ FALTA: ../../tools/integrations/savvycal.md |
+| **Clearbit** | Real-time lead enrichment and scoring | [clearbit.md] ⚠️ FALTA: ../../tools/integrations/clearbit.md |
+| **Apollo** | Contact data, enrichment, and outbound sequences | [apollo.md] ⚠️ FALTA: ../../tools/integrations/apollo.md |
+| **ActiveCampaign** | Marketing automation for SMBs, lead scoring | [activecampaign.md] ⚠️ FALTA: ../../tools/integrations/activecampaign.md |
+| **Zapier** | Cross-tool automation and workflow glue | [zapier.md] ⚠️ FALTA: ../../tools/integrations/zapier.md |
+| **Introw** | Partner-sourced pipeline, commissions, deal registration, QBRs | [introw.md] ⚠️ FALTA: ../../tools/integrations/introw.md |
+| **Crossbeam** | Partner account overlaps and co-sell identification | [crossbeam.md] ⚠️ FALTA: ../../tools/integrations/crossbeam.md |
 
 ---
 

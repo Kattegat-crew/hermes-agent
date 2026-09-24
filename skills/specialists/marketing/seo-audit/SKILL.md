@@ -159,7 +159,7 @@ Reporting "no schema found" based solely on `web_fetch` or `curl` leads to false
 
 ## International SEO & Localization
 
-Check when the site serves multiple languages or regions. Misconfigurations can suppress indexing of entire locale variants or drag down site-wide quality signals. See [International SEO reference](references/international-seo.md) for evidence and source URLs.
+Check when the site serves multiple languages or regions. Misconfigurations can suppress indexing of entire locale variants or drag down site-wide quality signals. See [International SEO reference] ⚠️ FALTA: references/international-seo.md for evidence and source URLs.
 
 ### Hreflang
 
@@ -453,8 +453,8 @@ Same format as above
 
 ## References
 
-- [AI Writing Detection](references/ai-writing-detection.md): Common AI writing patterns to avoid (em dashes, overused phrases, filler words)
-- [International SEO](references/international-seo.md): Evidence and sources for hreflang, canonical + i18n, sitemaps, URL structure, and content quality across locales
+- [AI Writing Detection] ⚠️ FALTA: references/ai-writing-detection.md: Common AI writing patterns to avoid (em dashes, overused phrases, filler words)
+- [International SEO] ⚠️ FALTA: references/international-seo.md: Evidence and sources for hreflang, canonical + i18n, sitemaps, URL structure, and content quality across locales
 - For AI search optimization (AEO, GEO, LLMO, AI Overviews), see the **ai-seo** skill
 
 ---

@@ -163,7 +163,7 @@ Key emails:
 6. Advanced tip (day 10-12)
 7. Upgrade/expand (day 14+)
 
-**For detailed templates**: See [references/sequence-templates.md](references/sequence-templates.md)
+**For detailed templates**: See [references/sequence-templates.md] ⚠️ FALTA: references/sequence-templates.md
 
 ---
 
@@ -206,7 +206,7 @@ Key emails:
 - Industry news roundup
 - Pricing updates
 
-**For detailed email type reference**: See [references/email-types.md](references/email-types.md)
+**For detailed email type reference**: See [references/email-types.md] ⚠️ FALTA: references/email-types.md
 
 ---
 
@@ -243,7 +243,7 @@ Key emails:
 - One clear primary CTA per email
 - Button text: Action + outcome
 
-**For detailed copy, personalization, and testing guidelines**: See [references/copy-guidelines.md](references/copy-guidelines.md)
+**For detailed copy, personalization, and testing guidelines**: See [references/copy-guidelines.md] ⚠️ FALTA: references/copy-guidelines.md
 
 ---
 
@@ -287,16 +287,16 @@ What to measure and benchmarks
 
 ## Tool Integrations
 
-For implementation, see the [tools registry](../../tools/REGISTRY.md). Key email tools:
+For implementation, see the [tools registry] ⚠️ FALTA: ../../tools/REGISTRY.md. Key email tools:
 
 | Tool | Best For | MCP | Guide |
 |------|----------|:---:|-------|
-| **Customer.io** | Behavior-based automation | - | [customer-io.md](../../tools/integrations/customer-io.md) |
-| **Mailchimp** | SMB email marketing | ✓ | [mailchimp.md](../../tools/integrations/mailchimp.md) |
-| **Nitrosend** | AI-native email (sequences via prompts) | ✓ | [nitrosend.md](../../tools/integrations/nitrosend.md) |
-| **Resend** | Developer-friendly transactional | ✓ | [resend.md](../../tools/integrations/resend.md) |
-| **SendGrid** | Transactional email at scale | - | [sendgrid.md](../../tools/integrations/sendgrid.md) |
-| **Kit** | Creator/newsletter focused | - | [kit.md](../../tools/integrations/kit.md) |
+| **Customer.io** | Behavior-based automation | - | [customer-io.md] ⚠️ FALTA: ../../tools/integrations/customer-io.md |
+| **Mailchimp** | SMB email marketing | ✓ | [mailchimp.md] ⚠️ FALTA: ../../tools/integrations/mailchimp.md |
+| **Nitrosend** | AI-native email (sequences via prompts) | ✓ | [nitrosend.md] ⚠️ FALTA: ../../tools/integrations/nitrosend.md |
+| **Resend** | Developer-friendly transactional | ✓ | [resend.md] ⚠️ FALTA: ../../tools/integrations/resend.md |
+| **SendGrid** | Transactional email at scale | - | [sendgrid.md] ⚠️ FALTA: ../../tools/integrations/sendgrid.md |
+| **Kit** | Creator/newsletter focused | - | [kit.md] ⚠️ FALTA: ../../tools/integrations/kit.md |
 
 ---
 

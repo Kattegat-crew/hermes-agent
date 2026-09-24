@@ -56,13 +56,13 @@ Check EXTEND.md in priority order — the first one found wins:
 
 **EXTEND.md supports**: default target language, default mode, target audience, custom glossaries (inline or file path), translation style, chunk settings.
 
-Schema: [references/config/extend-schema.md](references/config/extend-schema.md).
+Schema: [references/config/extend-schema.md] ⚠️ FALTA: references/config/extend-schema.md.
 
 ### First-Time Setup (BLOCKING)
 
 **CRITICAL**: When EXTEND.md is not found, you **MUST** run the first-time setup before ANY translation. This is a **BLOCKING** operation.
 
-Full reference: [references/config/first-time-setup.md](references/config/first-time-setup.md)
+Full reference: [references/config/first-time-setup.md] ⚠️ FALTA: references/config/first-time-setup.md
 
 Use `AskUserQuestion` with all questions (target language, mode, audience, style, save location) in ONE call. After user answers, create EXTEND.md at the chosen location, confirm "Preferences saved to [path]", then continue.
 
@@ -133,7 +133,7 @@ Custom audience descriptions are also accepted, e.g., `--audience "AI感兴趣�
 1.1 Check EXTEND.md (see Preferences section above)
 
 1.2 Load built-in glossary for the language pair if available:
-- EN→ZH: [references/glossary-en-zh.md](references/glossary-en-zh.md)
+- EN→ZH: [references/glossary-en-zh.md] ⚠️ FALTA: references/glossary-en-zh.md
 
 1.3 Merge glossaries: EXTEND.md `glossary` (inline) + EXTEND.md `glossary_files` (external files, paths relative to EXTEND.md location) + built-in glossary + `--glossary` file (CLI overrides all)
 
@@ -141,7 +141,7 @@ Custom audience descriptions are also accepted, e.g., `--audience "AI感兴趣�
 
 Materialize source (file as-is, inline text/URL → save to `translate/{slug}.md`), then create output directory: `{source-dir}/{source-basename}-{target-lang}/`. Detect source language if `--from` not specified.
 
-Full details: [references/workflow-mechanics.md](references/workflow-mechanics.md)
+Full details: [references/workflow-mechanics.md] ⚠️ FALTA: references/workflow-mechanics.md
 
 **Output directory contents** (all intermediate and final files go here):
 
@@ -177,7 +177,7 @@ Before translating chunks:
    - Splits at markdown block boundaries to preserve structure
    - If a single block exceeds the threshold, falls back to line splitting, then word splitting
 4. **Assemble translation prompt**:
-   - Main agent reads `01-analysis.md` (if exists) and assembles shared context using Part 1 of [references/subagent-prompt-template.md](references/subagent-prompt-template.md) — inlining: target style, content background, merged glossary, and translation challenges
+   - Main agent reads `01-analysis.md` (if exists) and assembles shared context using Part 1 of [references/subagent-prompt-template.md] ⚠️ FALTA: references/subagent-prompt-template.md — inlining: target style, content background, merged glossary, and translation challenges
    - Save as `02-prompt.md` in the output directory (shared context only, no task instructions)
 5. **Draft translation via subagents** (if Agent tool available):
    - Spawn one subagent **per chunk**, all in parallel (Part 2 of the template)
@@ -218,7 +218,7 @@ If user continues, proceed with critical review → revision → polish (same as
 
 #### Refined Mode
 
-Full workflow for publication quality. See [references/refined-workflow.md](references/refined-workflow.md) for detailed guidelines per step.
+Full workflow for publication quality. See [references/refined-workflow.md] ⚠️ FALTA: references/refined-workflow.md for detailed guidelines per step.
 
 The subagent (if used in Step 3.1) only handles the initial draft. All subsequent steps (critical review, revision, polish) are handled by the main agent, which may delegate to subagents at its discretion.
 

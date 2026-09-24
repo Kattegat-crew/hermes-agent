@@ -159,7 +159,7 @@ When recommending experiments, consider tests for:
 - Form optimization
 - Navigation and UX
 
-**For comprehensive experiment ideas by page type**: See [references/experiments.md](references/experiments.md)
+**For comprehensive experiment ideas by page type**: See [references/experiments.md] ⚠️ FALTA: references/experiments.md
 
 ---
 
@@ -184,4 +184,4 @@ When recommending experiments, consider tests for:
 
 ## Form Optimization
 
-For detailed form CRO guidance — including field optimization, multi-step forms, error handling, and form-specific experiments — see [references/form.md](references/form.md).
+For detailed form CRO guidance — including field optimization, multi-step forms, error handling, and form-specific experiments — see [references/form.md] ⚠️ FALTA: references/form.md.

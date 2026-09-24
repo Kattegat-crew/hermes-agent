@@ -80,7 +80,7 @@ Collect 3-5 credible, citable sources before drafting. Prioritize:
 
 ### Step 3 — Produce the Content Brief
 
-Fill in the [Content Brief Template](templates/content-brief-template.md). The brief defines:
+Fill in the [Content Brief Template] ⚠️ FALTA: templates/content-brief-template.md. The brief defines:
 - Target keyword + secondary keywords
 - Reader profile and their job-to-be-done
 - Angle and unique point of view
@@ -89,7 +89,7 @@ Fill in the [Content Brief Template](templates/content-brief-template.md). The b
 - Internal links to include
 - Competitive pieces to beat
 
-See [references/content-brief-guide.md](references/content-brief-guide.md) for how to write a brief that actually produces better drafts.
+See [references/content-brief-guide.md] ⚠️ FALTA: references/content-brief-guide.md for how to write a brief that actually produces better drafts.
 
 ---
 
@@ -211,7 +211,7 @@ Run the gate checker — it enforces the non-negotiables mechanically:
 python3 scripts/content_quality_gates.py draft.md --json
 ```
 
-A failing gate blocks publish; fix and re-run until clean. See [references/optimization-checklist.md](references/optimization-checklist.md) for the full pre-publish checklist.
+A failing gate blocks publish; fix and re-run until clean. See [references/optimization-checklist.md] ⚠️ FALTA: references/optimization-checklist.md for the full pre-publish checklist.
 
 Core gates:
 - [ ] Primary keyword appears naturally 3-5x (not stuffed)

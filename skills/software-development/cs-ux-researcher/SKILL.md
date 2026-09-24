@@ -508,21 +508,21 @@ echo "See: ../../product-team/skills/ui-design-system/references/developer-hando
 
 ## Related Agents
 
-- [cs-product-manager](cs-product-manager.md) - Product management lifecycle, interview analysis, PRD development
-- [cs-agile-product-owner](cs-agile-product-owner.md) - Translating research findings into user stories
-- [cs-product-strategist](cs-product-strategist.md) - Strategic research to validate product vision and positioning
+- [cs-product-manager] ⚠️ FALTA: cs-product-manager.md - Product management lifecycle, interview analysis, PRD development
+- [cs-agile-product-owner] ⚠️ FALTA: cs-agile-product-owner.md - Translating research findings into user stories
+- [cs-product-strategist] ⚠️ FALTA: cs-product-strategist.md - Strategic research to validate product vision and positioning
 - UI Design System - Design handoff and component recommendations (see `../../product-team/skills/ui-design-system/`)
 
 ## References
 
-- **Primary Skill:** [../../product-team/skills/ux-researcher-designer/SKILL.md](../../product-team/skills/ux-researcher-designer/SKILL.md)
-- **Interview Analyzer:** [../../product-team/skills/product-manager-toolkit/SKILL.md](../../product-team/skills/product-manager-toolkit/SKILL.md)
-- **Persona Methodology:** [../../product-team/skills/ux-researcher-designer/references/persona-methodology.md](../../product-team/skills/ux-researcher-designer/references/persona-methodology.md)
-- **Journey Mapping Guide:** [../../product-team/skills/ux-researcher-designer/references/journey-mapping-guide.md](../../product-team/skills/ux-researcher-designer/references/journey-mapping-guide.md)
-- **Usability Testing:** [../../product-team/skills/ux-researcher-designer/references/usability-testing-frameworks.md](../../product-team/skills/ux-researcher-designer/references/usability-testing-frameworks.md)
-- **Design System:** [../../product-team/skills/ui-design-system/SKILL.md](../../product-team/skills/ui-design-system/SKILL.md)
-- **Product Domain Guide:** [../../product-team/CLAUDE.md](../../product-team/CLAUDE.md)
-- **Agent Development Guide:** [../CLAUDE.md](../CLAUDE.md)
+- **Primary Skill:** [../../product-team/skills/ux-researcher-designer/SKILL.md] ⚠️ FALTA: ../../product-team/skills/ux-researcher-designer/SKILL.md
+- **Interview Analyzer:** [../../product-team/skills/product-manager-toolkit/SKILL.md] ⚠️ FALTA: ../../product-team/skills/product-manager-toolkit/SKILL.md
+- **Persona Methodology:** [../../product-team/skills/ux-researcher-designer/references/persona-methodology.md] ⚠️ FALTA: ../../product-team/skills/ux-researcher-designer/references/persona-methodology.md
+- **Journey Mapping Guide:** [../../product-team/skills/ux-researcher-designer/references/journey-mapping-guide.md] ⚠️ FALTA: ../../product-team/skills/ux-researcher-designer/references/journey-mapping-guide.md
+- **Usability Testing:** [../../product-team/skills/ux-researcher-designer/references/usability-testing-frameworks.md] ⚠️ FALTA: ../../product-team/skills/ux-researcher-designer/references/usability-testing-frameworks.md
+- **Design System:** [../../product-team/skills/ui-design-system/SKILL.md] ⚠️ FALTA: ../../product-team/skills/ui-design-system/SKILL.md
+- **Product Domain Guide:** [../../product-team/CLAUDE.md] ⚠️ FALTA: ../../product-team/CLAUDE.md
+- **Agent Development Guide:** [../CLAUDE.md] ⚠️ FALTA: ../CLAUDE.md
 
 ---
 

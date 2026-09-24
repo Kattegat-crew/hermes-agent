@@ -72,19 +72,19 @@ python3 scripts/repurpose_splitter.py --input talk.md --ledger .linkedin-ledger.
 
 | Script | Role |
 |---|---|
-| [`scripts/post_linter.py`](scripts/post_linter.py) | 0-100 across mechanics / hook / integrity / accessibility; blocking findings for the cap, bait, and pseudo-bold. |
-| [`scripts/format_picker.py`](scripts/format_picker.py) | Ranks nine native formats against goal, material, and minutes; refuses camera-less video and decision-less polls. |
-| [`scripts/repurpose_splitter.py`](scripts/repurpose_splitter.py) | Splits a source into standalone units, scores them, and skips anything already in the reuse ledger. |
+| [`scripts/post_linter.py`] ⚠️ FALTA: scripts/post_linter.py | 0-100 across mechanics / hook / integrity / accessibility; blocking findings for the cap, bait, and pseudo-bold. |
+| [`scripts/format_picker.py`] ⚠️ FALTA: scripts/format_picker.py | Ranks nine native formats against goal, material, and minutes; refuses camera-less video and decision-less polls. |
+| [`scripts/repurpose_splitter.py`] ⚠️ FALTA: scripts/repurpose_splitter.py | Splits a source into standalone units, scores them, and skips anything already in the reuse ledger. |
 
 ## References and assets
 
-- [`references/hook_and_fold_mechanics.md`](references/hook_and_fold_mechanics.md) — the first 140 characters, and the openers to delete on sight (7 sources)
-- [`references/post_formats_canon.md`](references/post_formats_canon.md) — what each native format is good at, and the carousel trap (7 sources)
-- [`references/repurposing_discipline.md`](references/repurposing_discipline.md) — standalone units, the reuse ledger, source types and their risks (7 sources)
-- [`references/accessibility_and_inclusion.md`](references/accessibility_and_inclusion.md) — pseudo-bold, alt text, captions, and why they are blocking (7 sources)
+- [`references/hook_and_fold_mechanics.md`] ⚠️ FALTA: references/hook_and_fold_mechanics.md — the first 140 characters, and the openers to delete on sight (7 sources)
+- [`references/post_formats_canon.md`] ⚠️ FALTA: references/post_formats_canon.md — what each native format is good at, and the carousel trap (7 sources)
+- [`references/repurposing_discipline.md`] ⚠️ FALTA: references/repurposing_discipline.md — standalone units, the reuse ledger, source types and their risks (7 sources)
+- [`references/accessibility_and_inclusion.md`] ⚠️ FALTA: references/accessibility_and_inclusion.md — pseudo-bold, alt text, captions, and why they are blocking (7 sources)
 
-- [`assets/post_templates.md`](assets/post_templates.md) — five worked post shapes with the hook already doing its job
-- [`assets/example_post.md`](assets/example_post.md) — a post that passes the linter, annotated
+- [`assets/post_templates.md`] ⚠️ FALTA: assets/post_templates.md — five worked post shapes with the hook already doing its job
+- [`assets/example_post.md`] ⚠️ FALTA: assets/example_post.md — a post that passes the linter, annotated
 
 ## Distinct from
 
