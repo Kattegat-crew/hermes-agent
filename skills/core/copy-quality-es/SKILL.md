@@ -1,8 +1,10 @@
 ---
 name: copy-quality-es
-description: "Paraguas consolidado para copy-quality-es. 8 reglas anti-slop/copy -> 1 guia de calidad editorial ES"
+description: "Use when editing copy to remove AI writing tells"
 version: 2.0.0
 author: NeuralCrew
+tags: [copy, anti-slop, edicion, writing, humanizar, editorial, espanol, marketing]
+
 ---
 
 # Copy Quality Es

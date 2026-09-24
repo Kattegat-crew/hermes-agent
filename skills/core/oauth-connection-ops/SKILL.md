@@ -1,8 +1,10 @@
 ---
 name: oauth-connection-ops
-description: "Paraguas consolidado para oauth-connection-ops. verificado: agent-connection-governance ~ oauth-connection-verification"
+description: "Use when verifying or fixing OAuth connections and tokens"
 version: 2.0.0
 author: NeuralCrew
+tags: [oauth, conexiones, tokens, activepieces, google, verificacion, credenciales, reauth]
+
 ---
 
 # Oauth Connection Ops

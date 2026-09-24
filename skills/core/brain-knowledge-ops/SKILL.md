@@ -1,8 +1,10 @@
 ---
 name: brain-knowledge-ops
-description: "Paraguas consolidado para brain-knowledge-ops. verificado: brain-graph-operations ~ brain-graph-ops (duplicado casi lite"
+description: "Use when working with the brain graph, memory or wiki"
 version: 2.0.0
 author: NeuralCrew
+tags: [brain, memoria, knowledge, engram, graph, wiki, obsidian, vault]
+
 ---
 
 # Brain Knowledge Ops

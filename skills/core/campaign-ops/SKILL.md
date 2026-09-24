@@ -1,8 +1,10 @@
 ---
 name: campaign-ops
-description: "Paraguas consolidado para campaign-ops. operacion de campanas end-to-end"
+description: "Use when planning and publishing monthly social campaigns"
 version: 2.0.0
 author: NeuralCrew
+tags: [campaign, marketing, calendario, publicacion, social, contenido, pipeline, metricas]
+
 ---
 
 # Campaign Ops

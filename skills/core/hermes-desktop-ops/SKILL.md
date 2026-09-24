@@ -1,8 +1,10 @@
 ---
 name: hermes-desktop-ops
-description: "Paraguas consolidado para hermes-desktop-ops. 2 pares con Jaccard>=0.30 ya detectados"
+description: "Use when troubleshooting Hermes Desktop remote or SSH"
 version: 2.0.0
 author: NeuralCrew
+tags: [hermes-desktop, ssh, remoto, remote, troubleshooting, diagnostico, vps, gateway]
+
 ---
 
 # Hermes Desktop Ops

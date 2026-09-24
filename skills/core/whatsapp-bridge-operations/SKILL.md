@@ -1,6 +1,8 @@
 ---
 name: whatsapp-bridge-operations
 description: "Operar el bridge WhatsApp: allowlist, grupos, voz y debug."
+tags: [whatsapp, bridge, baileys, allowlist, gateway, stt, voz, debug]
+
 ---
 
 # WhatsApp Bridge Operations

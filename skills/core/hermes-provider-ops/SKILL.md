@@ -1,8 +1,10 @@
 ---
 name: hermes-provider-ops
-description: "Paraguas consolidado para hermes-provider-ops. curado: fallback y resilience son el mismo problema (Jaccard 0.30+)"
+description: "Use when configuring Hermes provider fallback or models"
 version: 2.0.0
 author: NeuralCrew
+tags: [hermes, providers, fallback, modelos, rotacion, config, resiliencia, cascada]
+
 ---
 
 # Hermes Provider Ops

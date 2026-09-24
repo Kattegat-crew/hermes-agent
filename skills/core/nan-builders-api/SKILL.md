@@ -1,6 +1,8 @@
 ---
 name: nan-builders-api
 description: "NaN Builders API: base URL, auth, Cloudflare UA, images."
+tags: [nan-builders, api, llm, imagen, cloudflare, glm, flux, provider]
+
 ---
 
 # NaN Builders API

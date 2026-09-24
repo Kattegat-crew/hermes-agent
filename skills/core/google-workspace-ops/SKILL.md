@@ -1,8 +1,10 @@
 ---
 name: google-workspace-ops
-description: "Paraguas consolidado para google-workspace-ops. verificado: 4 de ellas en un mismo cluster Jaccard>=0.30"
+description: "Use when reading or writing Google Drive, Gmail or Sheets"
 version: 2.0.0
 author: NeuralCrew
+tags: [google, gmail, drive, sheets, docs, oauth, workspace, api]
+
 ---
 
 # Google Workspace Ops

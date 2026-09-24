@@ -1,8 +1,10 @@
 ---
 name: informes-cliente-pipeline
-description: "Paraguas consolidado para informes-cliente-pipeline. generacion/entrega de informes y render de documentos"
+description: "Use when generating and delivering client reports"
 version: 2.0.0
 author: NeuralCrew
+tags: [informes, reports, clientes, pdf, docx, email, render, entregables]
+
 ---
 
 # Informes Cliente Pipeline

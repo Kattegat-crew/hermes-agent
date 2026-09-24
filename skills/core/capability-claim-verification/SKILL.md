@@ -10,6 +10,8 @@ triggers:
   - "tienen la key de Y"
   - "verificar si algo esta configurado"
   - "acceso a secretos desde el contenedor"
+tags: [verificacion, read-only, claim, gate, auditoria, config, evidencia, audit]
+
 ---
 
 # Capability Claim Verification — verificar «ya está configurado» (read-only, sin costo)

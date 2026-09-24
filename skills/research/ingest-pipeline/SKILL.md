@@ -56,7 +56,7 @@ tags: hermes agent, plugins, agentes, automación
 ---
 ```
 
-Directory structure: `brain/ingestas/tuits/`, `brain/ingestas/repos/`, `brain/ingestas/tiktoks/`, plus `brain/ingestas/index.md` (auto-regenerated accumulator table).
+Directory structure: `brain/ingestas/tuits/`, `brain/ingestas/repos/`, `brain/ingestas/tiktoks/`, `brain/ingestas/posts/` (general web/docs links: official docs, blogs, news — no script, manual flow), plus `brain/ingestas/index.md` (auto-regenerated accumulator table).
 
 ## Central Script
 
@@ -77,11 +77,23 @@ python3 scripts/ingesta_externa.py \
 
 Writes to: wiki table (row insert) + brain/ingestas/ (frontmatter .md) + index.md (regenerated).
 
+## Workflow: General Web/Docs Link (no script)
+
+For links that are NOT x/tiktok/repo (docs pages, blogs, news) `ingesta_externa.py` does not apply (its `--tipo` only accepts x|tiktok|repo). Manual flow (verified 2026-09-23 with Hermes user-stories docs page):
+
+1. `web_extract(url, char_limit=15000)` — if head+tail truncated, page the full saved file with `read_file` (path + offset come in the extract footer); do not summarize from the truncated window alone.
+2. Write `brain/ingestas/posts/YYYY-MM-DD-<slug>.md` with the standard frontmatter (fecha/fuente/url/autor/relevancia/tema).
+3. Add a row to `brain/ingestas/index.md` (accumulator table).
+4. Insert a Notion row in the canonical Links DB — recipe in `references/notion-links-db.md` (dedup by URL query BEFORE insert).
+5. Report in chat using the canonical template in `references/reporte-ingesta-plantilla.md`.
+
 ## Techniques
 
 See `references/fxtwitter-api.md` for X/Twitter extraction.
 See `references/graphify-brain-update.md` for the graph update pattern.
 See `references/outline-ua-pitfall.md` for the Cloudflare UA requirement.
+See `references/notion-links-db.md` for the Notion Links DB insert recipe (key recovery, dedup, payload).
+See `references/reporte-ingesta-plantilla.md` for the canonical chat report template the Admin expects.
 
 ## Pitfalls
 

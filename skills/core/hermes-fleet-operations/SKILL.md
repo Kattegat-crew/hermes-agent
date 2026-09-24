@@ -1,8 +1,10 @@
 ---
 name: hermes-fleet-operations
-description: "Paraguas consolidado para hermes-fleet-operations. 12 skills de flota/multiperfil -> 1 paraguas + references/ por caso"
+description: "Use when deploying or configuring Hermes fleet profiles"
 version: 2.0.0
 author: NeuralCrew
+tags: [hermes, flota, perfiles, multiprofile, deploy, gateway, cron, roster]
+
 ---
 
 # Hermes Fleet Operations

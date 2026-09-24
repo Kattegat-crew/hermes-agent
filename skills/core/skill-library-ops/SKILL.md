@@ -1,8 +1,10 @@
 ---
 name: skill-library-ops
-description: "Paraguas consolidado para skill-library-ops. gobierno del catalogo de skills (incluye la skill de la auditoria de ayer)"
+description: "Use when curating, auditing or writing Hermes skills"
 version: 2.0.0
 author: NeuralCrew
+tags: [skills, curator, audit, authoring, hermes, catalogo, writing-skills, registry]
+
 ---
 
 # Skill Library Ops

@@ -1,8 +1,10 @@
 ---
 name: multi-agent-collaboration
-description: "Paraguas consolidado para multi-agent-collaboration. colaboracion/handoff entre agentes"
+description: "Use when coordinating multiple agents or handoffs"
 version: 2.0.0
 author: NeuralCrew
+tags: [agentes, multiagent, handoff, subagent, orquestacion, collaboration, dispatch, worktree]
+
 ---
 
 # Multi Agent Collaboration

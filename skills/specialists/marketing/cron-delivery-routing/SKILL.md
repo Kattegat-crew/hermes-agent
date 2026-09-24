@@ -1,6 +1,6 @@
 ---
 name: cron-delivery-routing
-description: "Use when routing or debugging where cron output lands."
+description: "Use when routing, silencing or debugging where cron output lands."
 version: 1.0.0
 author: Ragnar
 metadata:
@@ -66,6 +66,25 @@ Cuando el destino es un **webhook** (identidad propia, sin bot), `deliver: webho
 4. La URL vive en el `.env` del perfil (`VIGIA_DISCORD_WEBHOOK=...`), no incrustada en el prompt ni en el script.
 
 Ventaja: cero LLM en watchdogs de alta frecuencia (cada 10 min) y el canal queda limpio (silencio = sano).
+
+## Silencio en jobs agent-mode: el token [SILENT]
+
+Un watch en modo agente (vigilancia de bandeja, radar de aprobaciones) que debe hablar SOLO con novedad real depende del supresor del scheduler: `/opt/hermes/cron/scheduler.py:738-769` (`SILENT_MARKER = "[SILENT]"`, verificado 23-sep-2026).
+
+- Tokens que suprimen la entrega: `[SILENT]`, `SILENT`, `NO_REPLY`, `NO REPLY` — como respuesta completa, primera línea o última línea, case-insensitive y trimmed. Un token a mitad de frase se considera contenido real y SÍ entrega (anti-falsa-supresión). Comparte matcher con el lane de webhook (`gateway.response_filters.is_autonomous_silence_response`): las dos vías autónomas no divergen.
+- **"SILENCIO" en español NO suprime la entrega** — el prompt del job debe pedir el token literal `[SILENT]`.
+- La corrida suprimida igual se guarda en `cron/output/<id>/` (auditable: qué vio y por qué calló).
+
+Plantilla de prompt para watch crons (4 bloques):
+
+1. Qué buscar + tool concreta (ej. `mcp__ncl_google__gmail_list`) + por qué existe el watch (qué solicitud está pendiente).
+2. REGLA DE SILENCIO con exclusiones EXPLÍCITAS: qué NO cuenta como novedad (p. ej. rechazos de anuncios individuales, notificaciones de rendimiento, encuestas, actualizaciones genéricas de la plataforma). Sin esa lista el agente reporta cualquier correo tangencial y el ruido vuelve por la ventana.
+3. Camino sin novedad: "responde ÚNICAMENTE con el token [SILENT] y nada más (sin texto antes ni después)".
+4. Camino con novedad: campos exactos del reporte + enlace/acción que SIEMPRE debe incluir, y cierre anti-alucinación: "no inventes correos; si la tool falla, responde [SILENT]". Trade-off a decidir por watch: silencio total ante fallo de tool vs fallar ruidoso (si el watch es crítico, mejor failure-deliver).
+
+Edición: `hermes cron edit <job_id> --prompt "..."` (escapar `"`, `$` y backticks para shell). El OK del CLI ("Updated job") NO muestra el prompt resultante: verificar releyendo `jobs.json` del perfil antes de dar el cambio por bueno.
+
+Caso real 23-sep-2026: job `57d1df6d1ab4` "Meta gambling approval — inbox watch" (perfil default, cada 120m, deliver telegram) reportaba cada 2 h cualquier correo de Meta (incluidos rechazos de anuncios individuales) como novedad de la autorización de anuncios de juegos; reescrito con la plantilla de arriba: clasifica en silencio y solo habla si hay respuesta a ESA autorización (aprobación, rechazo o pedido de información).
 
 ## Pitfalls
 

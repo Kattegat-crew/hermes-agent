@@ -9,6 +9,8 @@ triggers:
   - escribir: antes de guardar un documento / crear archivo / subir a Drive / colocar informe
   - cliente: deploy agente para cliente / autoconfiguración / onboarding de agente / drive del cliente
   - orden: consistencia / carpetas genéricas / desorganizado / archivo perdido
+tags: [carpetas, folder-map, drive, ruteo, vps, documentos, organizacion, convenciones]
+
 ---
 
 # Mapa de Carpetas — escanear, mapear, rutear, verificar

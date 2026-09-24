@@ -1,8 +1,10 @@
 ---
 name: agent-roster-ops
-description: "Paraguas consolidado para agent-roster-ops. verificado: roster-blueprint ~ roster-design ~ hermes-roster-implementation"
+description: "Use when designing or deploying a Hermes agent roster"
 version: 2.0.0
 author: NeuralCrew
+tags: [roster, agentes, agents, hermes, orquestacion, deploy, equipo, team]
+
 ---
 
 # Agent Roster Ops

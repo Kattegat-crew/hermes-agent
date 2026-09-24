@@ -1,8 +1,10 @@
 ---
 name: meta-ads-ops
-description: "Paraguas consolidado para meta-ads-ops. verificado: meta-ads-campaigns ~ meta-ads-operations"
+description: "Use when running Meta Ads campaigns via Composio"
 version: 2.0.0
 author: NeuralCrew
+tags: [meta-ads, composio, pixel, capi, campanas, anuncios, facebook, instagram]
+
 ---
 
 # Meta Ads Ops

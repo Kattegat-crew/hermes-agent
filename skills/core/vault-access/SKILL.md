@@ -14,6 +14,8 @@ triggers:
   - donde esta el
   - busque el
   - access key
+tags: [vaultwarden, secretos, credenciales, api-key, tokens, env, seguridad, vault]
+
 ---
 
 # Vault Access — Guía para Agentes

@@ -1,8 +1,10 @@
 ---
 name: hermes-runtime-ops
-description: "Paraguas consolidado para hermes-runtime-ops. infra/observabilidad del runtime Hermes"
+description: "Use when operating or debugging the Hermes gateway"
 version: 2.0.0
 author: NeuralCrew
+tags: [hermes, runtime, gateway, s6, docker, infra, diagnostico, fleet]
+
 ---
 
 # Hermes Runtime Ops

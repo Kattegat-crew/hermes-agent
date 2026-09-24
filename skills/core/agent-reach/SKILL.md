@@ -38,6 +38,8 @@ triggers:
 metadata:
   openclaw:
     homepage: https://github.com/Panniantong/Agent-Reach
+tags: [research, investigacion, social, scrape, twitter, reddit, youtube, search]
+
 ---
 
 # Agent Reach — 互联网能力路由器

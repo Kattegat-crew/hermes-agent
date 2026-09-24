@@ -1,8 +1,10 @@
 ---
 name: video-reel-pipeline
-description: "Paraguas consolidado para video-reel-pipeline. 22 skills de produccion de video -> 1 paraguas de pipeline + references p"
+description: "Use when producing an AI video reel end to end"
 version: 2.0.0
 author: NeuralCrew
+tags: [reel, video, ia, pipeline, voz, lipsync, fal, produccion]
+
 ---
 
 # Video Reel Pipeline

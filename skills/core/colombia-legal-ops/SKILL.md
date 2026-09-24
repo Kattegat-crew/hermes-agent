@@ -1,8 +1,10 @@
 ---
 name: colombia-legal-ops
-description: "Paraguas consolidado para colombia-legal-ops. documentos legales/compliance Colombia"
+description: "Use when drafting Colombia promo/legal T&C docs"
 version: 2.0.0
 author: NeuralCrew
+tags: [legal, colombia, compliance, promociones, docx, contratos, coljuegos]
+
 ---
 
 # Colombia Legal Ops

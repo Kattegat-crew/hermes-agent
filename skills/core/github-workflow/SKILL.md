@@ -1,8 +1,10 @@
 ---
 name: github-workflow
-description: "Paraguas consolidado para github-workflow. 12 github-* -> 1 workflow + 1 forensics"
+description: "Use when doing GitHub PRs, issues, auth or CI work"
 version: 2.0.0
 author: NeuralCrew
+tags: [github, git, pull-request, issues, ci, auth, repo, workflow]
+
 ---
 
 # Github Workflow

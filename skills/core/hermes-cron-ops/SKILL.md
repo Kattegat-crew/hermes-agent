@@ -1,8 +1,10 @@
 ---
 name: hermes-cron-ops
-description: "Paraguas consolidado para hermes-cron-ops. 3 de ellas ya daban Jaccard>=0.30 (duplicados semanticos)"
+description: "Use when creating or debugging Hermes cron jobs"
 version: 2.0.0
 author: NeuralCrew
+tags: [cron, hermes, devops, scheduled-jobs, delivery, whatsapp, discord, watchdog]
+
 ---
 
 # Hermes Cron Ops

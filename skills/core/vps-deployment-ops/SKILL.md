@@ -1,8 +1,10 @@
 ---
 name: vps-deployment-ops
-description: "Paraguas consolidado para vps-deployment-ops. despliegue en VPS"
+description: "Use when deploying web apps or agents to a VPS"
 version: 2.0.0
 author: NeuralCrew
+tags: [vps, deploy, despliegue, ssh, nginx, web, systemd, infra]
+
 ---
 
 # Vps Deployment Ops
