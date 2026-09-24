@@ -47,6 +47,7 @@ def query_unscored_traces(limit: int = 10, db_host: str = "100.73.30.29") -> Lis
     WHERE t.user_id IS NOT NULL 
       AND t.input IS NOT NULL 
       AND t.output IS NOT NULL
+      AND t.output::text NOT LIKE '%[SILENT]%'
       AND NOT EXISTS (
           SELECT 1 FROM scores s 
           WHERE s.trace_id = t.id AND s.name LIKE 'jev_%'
