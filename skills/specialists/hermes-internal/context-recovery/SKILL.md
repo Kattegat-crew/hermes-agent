@@ -59,6 +59,17 @@ Cuando el provider (qwen3.6, etc.) tira un error de JSON corrupto o 400 y se pie
 - El Brain Wiki es la fuente de verdad — si está actualizado, el contexto se recupera en 30 segundos
 - Después de recuperar, **siempre confirmar** al usuario qué estado encontraste
 
+## Turno cortado: intención declarada sin tool call (2026-09-25)
+
+Síntoma: la respuesta anterior anuncia una acción ("Voy a revisar X") pero murió ANTES de ejecutar cualquier tool call — no hay outputs de tools en el historial. El usuario lo percibe como cuelgue y reclama («¿por qué te cuelgas???»). Es un corte del provider silencioso, no un error visible.
+
+Protocolo inmediato:
+1. NO re-anunciar la acción ni disculparse a lo largo — una sola línea ("Tuve un corte; lo hago ahora").
+2. Disparar la tool call anunciada EN LA MISMA respuesta, sin re-planificar.
+3. Continuar la tarea original como si el turno no se hubiera cortado.
+
+Pitfall: repetir el anuncio sin tool call duplica la frustración (cuelgue × 2). La recuperación se mide en tool calls emitidos, no en explicaciones.
+
 ## Verificación
 
 - Confirmar que los archivos locales están actualizados

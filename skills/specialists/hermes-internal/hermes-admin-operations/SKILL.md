@@ -52,6 +52,7 @@ Patrón del "agente administrador de Hermes" (inspirado en el rol Havoc / Bot Mo
 - **Gateway y serve son procesos separados**: `hermes gateway status` "running" NO implica que la API HTTP escuche. Verificar con `ss -tlnp` sobre el puerto real.
 - **Reinicio bajo systemd**: `systemctl restart hermes-serve` tarda ~20s y desconecta el Desktop — anunciarlo antes al operador.
 - **`hermes gateway status --verbose` NO existe** — no inventar flags; usar `hermes gateway status`.
+- **Ruta del config:** `/opt/data/config.yaml` (no `/opt/data/data/...`; ese intento falla con FileNotFoundError). Inventario y topología MCP (snapshot 2026-09-25 + patrón estable + quirk canva/pg_ro): `references/mcp-inventory.md`.
 
 ## Vigilancia automatizada (cron de mantenimiento)
 
