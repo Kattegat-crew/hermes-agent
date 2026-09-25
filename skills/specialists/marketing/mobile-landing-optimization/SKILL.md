@@ -77,3 +77,18 @@ Instructs mobile browsers to skip layout and painting for off-screen sections un
 - [ ] No layout shift (CLS < 0.05) when images load (explicit dimensions).
 - [ ] Mascot / Chat floats in smoothly 1.5s after hero.
 - [ ] Meta Pixel & Conversion API (CAPI) events fire with matching `event_id`.
+
+
+<!-- absorbido de specialists/devops-infra/web-performance-core-vitals (censo 2026-09-24) -->
+## Target Metrics
+
+- **LCP (Largest Contentful Paint)**: < 2.5s
+- **INP (Interaction to Next Paint)**: < 200ms
+- **CLS (Cumulative Layout Shift)**: < 0.1
+
+## Optimization Checklist
+
+1. **Image Optimization**: Use WebP/AVIF, explicit `width`/`height` to avoid layout shifts, and responsive `srcset`.
+2. **Font Loading**: Use `font-display: swap` and preload critical self-hosted fonts.
+3. **Code Splitting**: Dynamic imports for heavy dialogs, rich text editors, and charting libraries.
+4. **Server-Side Caching**: CDN edge caching, stale-while-revalidate headers, and asset compression (Brotli/Gzip).

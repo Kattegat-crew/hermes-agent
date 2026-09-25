@@ -68,3 +68,22 @@ Delimitado entre `## INICIO DEL PROMPT` / `## FIN DEL PROMPT` con:
 
 ## Referencias
 - `references/golden-game-consent-checkboxes.md` — ejemplo completo: 4 casillas de consentimiento (no premarcadas), mapa archivo/línea, payload, SQL, checklist y estructura de SPEC/PROMPT entregados a AGY.
+
+<!-- absorbido de software-development/service-agent-code-handoff (censo 2026-09-24) -->
+# Service-Agent Code Handoff (SPEC + PROMPT → AGY/OpenCode)
+
+
+Patrón para externalizar a un editor de código (AGY, OpenCode, Claude Code) la implementación de features
+en repos de clientes *sin* que el orchestrator escriba en el repo. Verificado en Golden Game (ruleta) y
+The Grand Paradise Club (tragamoneda) — ambos con casillas de consentimiento legal y páginas legales nuevas.
+
+## Resultado (siempre dos entregables)
+
+1. **`SPEC-<ASUNTO>-<CLIENTE>-<FECHA>.md`** — PERMANENTE, queda en `docs/` del repo como auditoría:
+   mapa de archivos/estado, textos exactos, payload/API, SQL, checklist de aceptación ✓/✗.
+2. **`PROMPT-<ASUNTO>-<FECHA>.md`** — TEMPORAL y autocontenido para pegar entero al editor. El PROMPT exige
+   entregar un INFORME FINAL y **borrarse a sí mismo al terminar** (el SPEC se conserva).
+
+## Plantillas
+
+`templates/prompt-handoff.md` — ejemplo de PROMPT autocontenido (4 casillas de consentimiento) para copiar/modificar.

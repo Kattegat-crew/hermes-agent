@@ -177,3 +177,46 @@ backend nuevo con la config corregida.
 ## Referencias absorbidas
 
 - `references/hermes-desktop-ssh-diagnostico.md` — absorbida desde `software-development/hermes-desktop-ssh-diagnostico` el 2026-09-23 (F6 lote 2, R15: condensar sin borrar). El diagnóstico era el caso concreto del backend.
+
+
+<!-- absorbido de specialists/marketing/hermes-vps-home-bind (censo 2026-09-24) -->
+## Problema
+
+
+Hermes Desktop en modo SSH lanza su backend con:
+```bash
+HERMES_HOME="${HERMES_HOME:-$HOME/.hermes}"
+```
+Si `HERMES_HOME` no se exporta en la sesión SSH, usa `~/.hermes`, que puede ser un
+home **distinto y vacío** respecto a donde viven las sesiones, bots y perfiles reales
+(p. ej. `/root/hermes-agent/data`). Resultado: Desktop conecta bien pero no muestra
+nada.
+
+Diagnóstico del home efectivo (comparar state.db/profiles):
+```bash
+ssh root@<host> 'echo "HERMES_HOME=${HERMES_HOME:-$HOME/.hermes}"'
+ssh root@<host> 'ls -la ~/.hermes/state.db /root/hermes-agent/data/state.db 2>/dev/null'
+ssh root@<host> 'ls ~/.hermes/profiles /root/hermes-agent/data/profiles 2>/dev/null'
+```
+El home que tenga el `state.db` grande y los perfiles (ragnarcho, shared) es el correcto.
+
+## Verificar
+
+
+```bash
+ssh root@<host> 'echo $HERMES_HOME'                      # → /root/hermes-agent/data
+env HERMES_HOME=/root/hermes-agent/data hermes profile list   # perfiles correctos
+```
+
+Después: en Desktop, **Sign out → Sign in** (o cerrar y reabrir) para que el backend
+SSH se lance con el home correcto.
+
+## Notas
+
+
+- `/root/.ssh/environment` requiere `PermitUserEnvironment yes` (default no).
+- No requiere cambiar nada en `connection.json` del Desktop; el home lo resuelve el
+  entorno SSH, no la app.
+- Si hay varias homes (p. ej. `~/.hermes` vs `/root/hermes-agent/data`), decide cuál es
+  el canónico (donde vive el gateway y los perfiles) antes de bindear.
+

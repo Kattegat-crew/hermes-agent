@@ -1,0 +1,712 @@
+[
+ {
+  "ts": "2026-09-24T21:54:27.936986",
+  "operaciones": [
+   {
+    "origen": "devops/activepieces-db-surgery",
+    "receptor": "devops/activepieces-flow-editing",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Topología del caso NeuralCrew (ACTUALIZADA 29/08 tras migrar AP a prod .222)",
+     "Reglas del esquema (verificar con information_schema antes de fiarse — AP cambia entre versiones)",
+     "Cómo pasar el SQL sin morir en el quoting",
+     "Verificación obligatoria después de escribir",
+     "Modelo de trigger canónico (reel pipeline, 28/08)"
+    ],
+    "origen_movido_a": "_retirados/devops__activepieces-db-surgery"
+   },
+   {
+    "origen": "specialists/hermes-internal/agent-roster-design",
+    "receptor": "specialists/hermes-internal/agent-roster-blueprint",
+    "archivos_nuevos": [
+     "scripts/md2docx.py",
+     "references/neuralcrew-8-especialistas-2026-08.md"
+    ],
+    "secciones_absorbidas": [
+     "Agent Roster Design — identidad, skills y entrega de planes de equipos de bots",
+     "1. Identidad por arquetipo (dioses antiguos)",
+     "2. Catálogos de skills por especialista",
+     "3. Entrega de documentos finales (estilo)",
+     "Referencias",
+     "Relación con otras skills"
+    ],
+    "origen_movido_a": "_retirados/specialists__hermes-internal__agent-roster-design"
+   },
+   {
+    "origen": "specialists/devops-systems/ai-video-pricing-research",
+    "receptor": "specialists/devops-systems/ai-video-model-costing",
+    "archivos_nuevos": [
+     "references/fal-replicate-pricing-2026-08.md"
+    ],
+    "secciones_absorbidas": [
+     "Regla de oro: sacar el precio del sitio, no de memoria",
+     "Método fal.ai (curl, sin token)",
+     "Método Replicate (verificado, sin token)",
+     "Cómo calcular clip 6s",
+     "Datos de precios verificados (19/08/2026)",
+     "Entrega"
+    ],
+    "origen_movido_a": "_retirados/specialists__devops-systems__ai-video-pricing-research"
+   },
+   {
+    "origen": "software-development/amazon-sp-api",
+    "receptor": "software-development/amazon-spapi-integration",
+    "archivos_nuevos": [
+     "scripts/test_region_tokens.py",
+     "references/production-app-activation.md",
+     "references/digital-expressions-onboarding.md"
+    ],
+    "secciones_absorbidas": [
+     "Flujo vigente (2026) — simplificado, SIN AWS IAM",
+     "Access token (válido 1 hora)",
+     "Smoke test: sellers/v1",
+     "Roles (mínimo inicial, unrestricted)",
+     "Consultar documentación oficial (técnica que funciona)",
+     "Soporte existente",
+     "Pitfall CRÍTICO: campo orgID / Open Banking (trampa del formulario)",
+     "Sandbox vs Producción (límites reales)",
+     "Listings por API (campo por campo)",
+     "App de Producción: activación y diagnóstico (verificado 18/08/2026)",
+     "Atestación de seguridad (Security Controls del formulario)"
+    ],
+    "origen_movido_a": "_retirados/software-development__amazon-sp-api"
+   },
+   {
+    "origen": "research/blogwatcher",
+    "receptor": "research/watchers",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Blogwatcher",
+     "Installation",
+     "Docker with persistent storage",
+     "Named volume (simplest)",
+     "Host bind mount",
+     "Migrating from the original blogwatcher",
+     "Managing blogs",
+     "Scanning and reading",
+     "Environment Variables",
+     "Example Output",
+     "Notes"
+    ],
+    "origen_movido_a": "_retirados/research__blogwatcher"
+   },
+   {
+    "origen": "creative/bot-avatar-pipeline",
+    "receptor": "creative/bot-avatar-config",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Bot Avatar Pipeline (NeuralCrew)",
+     "Cuándo usar",
+     "Pasos",
+     "Pitfalls",
+     "Referencias"
+    ],
+    "origen_movido_a": "_retirados/creative__bot-avatar-pipeline"
+   },
+   {
+    "origen": "specialists/marketing/campaign-content-intelligence",
+    "receptor": "specialists/marketing/campaign-content-intelligence",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [],
+    "origen_movido_a": "_retirados/specialists__marketing__campaign-content-intelligence"
+   },
+   {
+    "origen": "software-development/clean-architecture-patterns",
+    "receptor": "software-development/domain-driven-design",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Layers & Dependency Inversion"
+    ],
+    "origen_movido_a": "_retirados/software-development__clean-architecture-patterns"
+   },
+   {
+    "origen": "software-development/cs-product-analyst",
+    "receptor": "specialists/marketing/product-analytics",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Purpose",
+     "Skill Integration",
+     "Python Tools",
+     "Workflow 1: Metric Framework and KPI Definition",
+     "Workflow 2: Retention / Cohort / Funnel Analysis",
+     "Workflow 3: Experiment Design and Result Interpretation",
+     "Usage Notes",
+     "Related Agents",
+     "References"
+    ],
+    "origen_movido_a": "_retirados/software-development__cs-product-analyst"
+   },
+   {
+    "origen": "software-development/debugging-and-error-recovery",
+    "receptor": "core/systematic-debugging",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "The Stop-the-Line Rule",
+     "Step 1: Reproduce",
+     "Step 2: Localize",
+     "Find which commit introduced the bug",
+     "Step 3: Reduce",
+     "Step 4: Fix the Root Cause",
+     "Step 5: Guard Against Recurrence",
+     "Test Failure Triage",
+     "Build Failure Triage",
+     "Runtime Error Triage",
+     "Safe Fallback Patterns",
+     "Instrumentation Guidelines",
+     "Treating Error Output as Untrusted Data",
+     "Red Flags",
+     "Verification"
+    ],
+    "origen_movido_a": "_retirados/software-development__debugging-and-error-recovery"
+   },
+   {
+    "origen": "software-development/e2e",
+    "receptor": "software-development/testing-best-practices",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Principles"
+    ],
+    "origen_movido_a": "_retirados/software-development__e2e"
+   },
+   {
+    "origen": "autonomous-ai-agents/executing-plans",
+    "receptor": "autonomous-ai-agents/subagent-driven-development",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Overview",
+     "Step 1: Load and Review Plan",
+     "Step 2: Execute Tasks",
+     "Step 3: Complete Development",
+     "When to Stop and Ask for Help",
+     "When to Revisit Earlier Steps",
+     "Remember"
+    ],
+    "origen_movido_a": "_retirados/autonomous-ai-agents__executing-plans"
+   },
+   {
+    "origen": "specialists/marketing/finance-lead",
+    "receptor": "specialists/marketing/cfo-advisor",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Finance Lead",
+     "How You Think",
+     "What You Never Do",
+     "/finance:model",
+     "/finance:fundraise",
+     "/finance:pricing",
+     "/finance:burn",
+     "/finance:unit-economics",
+     "/finance:board",
+     "When to Use Me",
+     "What Good Looks Like"
+    ],
+    "origen_movido_a": "_retirados/specialists__marketing__finance-lead"
+   },
+   {
+    "origen": "software-development/github-auth",
+    "receptor": "software-development/github",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "GitHub Authentication Setup",
+     "Check if already authenticated",
+     "Option A: HTTPS with Personal Access Token (Recommended)",
+     "Password: <paste the personal access token, NOT their GitHub password>",
+     "Cache in memory for 8 hours (28800 seconds) instead of saving to disk",
+     "Embed token in the remote URL (avoids credential prompts entirely)",
+     "Required for commits — set name and email",
+     "Option B: SSH Key Authentication",
+     "Display the public key for them to add to GitHub",
+     "Rewrite HTTPS GitHub URLs to SSH automatically",
+     "Method 2: gh CLI Authentication",
+     "Interactive Browser Login (Desktop)",
+     "Manual OAuth Device Flow (no TTY needed — PROVEN)",
+     "1. Request a device code (gh's official client_id)",
+     "Run this loop as a background process and show the user the code first.",
+     "Set up git credentials through gh",
+     "Using the GitHub API Without gh",
+     "Then use in curl calls:",
+     "Extracting the Token from Git Credentials",
+     "Read from git credential store",
+     "Try gh first, fall back to git + curl",
+     "Troubleshooting"
+    ],
+    "origen_movido_a": "_retirados/software-development__github-auth"
+   },
+   {
+    "origen": "software-development/github-code-review",
+    "receptor": "software-development/github",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "GitHub Code Review",
+     "Setup (for PR interactions)",
+     "Review Strategy",
+     "Debug statements, TODOs, console.logs left behind",
+     "Secrets or credential patterns",
+     "Merge conflict markers",
+     "Critical",
+     "Warnings",
+     "Suggestions",
+     "Looks Good",
+     "View PR Details",
+     "Get PR details",
+     "List changed files",
+     "View diff against the base branch",
+     "Leave Comments on a PR",
+     "Leave Inline Review Comments",
+     "Get the head commit SHA",
+     "Submit a Formal Review (Approve / Request Changes)",
+     "Correctness",
+     "Security",
+     "Code Quality",
+     "Testing",
+     "Performance",
+     "Documentation",
+     "4. Pre-Push Review Workflow",
+     "5. PR Review Workflow (End-to-End)",
+     "Step 1: Set up environment",
+     "Step 2: Gather PR context",
+     "PR details (title, author, description, branch)",
+     "Changed files with line counts",
+     "Step 3: Check out the PR locally",
+     "Then for each file:",
+     "Step 6: Apply the review checklist (Section 3)",
+     "Step 7: Post the review to GitHub",
+     "If no issues — approve",
+     "If issues found — request changes with inline comments",
+     "Build the review JSON — event is APPROVE, REQUEST_CHANGES, or COMMENT",
+     "Step 8: Also post a summary comment",
+     "✅ Looks Good",
+     "Decision: Approve vs Request Changes vs Comment"
+    ],
+    "origen_movido_a": "_retirados/software-development__github-code-review"
+   },
+   {
+    "origen": "software-development/github-issues",
+    "receptor": "software-development/github",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "GitHub Issues Management",
+     "Prerequisites",
+     "Setup",
+     "1. Viewing Issues",
+     "List open issues",
+     "Filter by label",
+     "View a specific issue",
+     "Search issues",
+     "2. Creating Issues",
+     "Steps to Reproduce",
+     "Expected Behavior",
+     "Add/Remove Labels",
+     "Add labels",
+     "Remove a label",
+     "List available labels in the repo",
+     "Assignment",
+     "Commenting",
+     "Closing and Reopening",
+     "Close",
+     "Reopen",
+     "Linking Issues to PRs",
+     "With curl",
+     "5. Bulk Operations",
+     "Close all issues with a specific label",
+     "List issue numbers with a label, then close each",
+     "Quick Reference Table"
+    ],
+    "origen_movido_a": "_retirados/software-development__github-issues"
+   },
+   {
+    "origen": "software-development/github-pr-workflow",
+    "receptor": "software-development/github",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "GitHub Pull Request Workflow",
+     "Determine which method to use throughout this workflow",
+     "Works for both HTTPS and SSH remote URLs",
+     "Create and switch to a new branch",
+     "2. Making Commits",
+     "Commit with a conventional commit message",
+     "Create the PR",
+     "Test Plan",
+     "Query the combined status",
+     "Also check GitHub Actions check runs (separate endpoint)",
+     "Simple polling loop — check every 30 seconds, up to 10 minutes",
+     "View failed logs",
+     "List workflow runs on this branch",
+     "Get failed job logs (download as zip, extract, read)",
+     "Step 2: Fix and Push",
+     "Auto-Fix Loop Pattern",
+     "Enable auto-merge (merges when all checks pass)",
+     "Merge the PR via API (squash)",
+     "Switch back to main locally",
+     "This uses the GraphQL API since REST doesn't support auto-merge.",
+     "4. Commit",
+     "Useful PR Commands Reference"
+    ],
+    "origen_movido_a": "_retirados/software-development__github-pr-workflow"
+   },
+   {
+    "origen": "software-development/github-repo-management",
+    "receptor": "software-development/github",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "GitHub Repository Management",
+     "Get your GitHub username (needed for several operations)",
+     "Clone via SSH (if SSH is configured)",
+     "Private, with description and license",
+     "From existing local directory",
+     "Create the remote repo via API",
+     "-- OR -- push an existing local directory to the new repo",
+     "From a Template",
+     "3. Forking Repositories",
+     "Create the fork via API",
+     "Pure git — works everywhere",
+     "4. Repository Information",
+     "View repo details",
+     "List your repos",
+     "Search repos",
+     "5. Repository Settings",
+     "Update topics",
+     "View current protection",
+     "Set up branch protection",
+     "7. Secrets Management (GitHub Actions)",
+     "Get the repo's public key for encrypting secrets",
+     "Encrypt and set (requires Python with PyNaCl)",
+     "Encrypt",
+     "Then PUT the encrypted secret",
+     "List secrets (names only, values hidden)",
+     "8. Releases",
+     "Create a release",
+     "List releases",
+     "Upload a release asset (binary file)",
+     "9. GitHub Actions Workflows",
+     "List workflows",
+     "List recent runs",
+     "Download failed run logs",
+     "Re-run a failed workflow",
+     "Re-run only failed jobs",
+     "Trigger a workflow manually (workflow_dispatch)",
+     "10. Gists",
+     "Create a gist",
+     "List your gists"
+    ],
+    "origen_movido_a": "_retirados/software-development__github-repo-management"
+   },
+   {
+    "origen": "specialists/marketing/googleads-automation",
+    "receptor": "productivity/rube-mcp-api-automation",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Google Ads Automation via Rube MCP",
+     "1. List Google Ads Links for a Property",
+     "2. Run a GA4 Performance Report",
+     "3. Check Dimension/Metric Compatibility",
+     "4. List GA4 Accounts",
+     "5. List GA4 Properties Under an Account",
+     "6. Get Available Dimensions and Metrics",
+     "Common Patterns",
+     "Known Pitfalls"
+    ],
+    "origen_movido_a": "_retirados/specialists__marketing__googleads-automation"
+   },
+   {
+    "origen": "software-development/googlebigquery-automation",
+    "receptor": "productivity/rube-mcp-api-automation",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Google BigQuery Automation via Rube MCP",
+     "1. Run a Native SQL Query",
+     "2. Run a Structured MBQL Query",
+     "3. Get Query Metadata",
+     "4. Convert Query to Native SQL",
+     "5. List Available Databases",
+     "6. Get Database Schema Metadata"
+    ],
+    "origen_movido_a": "_retirados/software-development__googlebigquery-automation"
+   },
+   {
+    "origen": "specialists/marketing/hermes-vps-home-bind",
+    "receptor": "software-development/hermes-desktop-ssh-backend",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Problema",
+     "Verificar",
+     "Notas"
+    ],
+    "origen_movido_a": "_retirados/specialists__marketing__hermes-vps-home-bind"
+   },
+   {
+    "origen": "productivity/informes-ventas-cliente",
+    "receptor": "productivity/informe-mensual-sheet-pdf",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Informes de Ventas de Cliente (Sheet + PDF)",
+     "Pipeline (instancia viva: /opt/data/workspace/ventas)",
+     "Reglas de datos (verificadas 16-sep-2026)",
+     "Sheet con formato real",
+     "PDF: layout de gráficas matplotlib",
+     "Gate de verificación y revisión",
+     "Skills relacionadas"
+    ],
+    "origen_movido_a": "_retirados/productivity__informes-ventas-cliente"
+   },
+   {
+    "origen": "creative/keyframe-script-qa",
+    "receptor": "specialists/media-video/scene-keyframe-qa-lipsync",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "QA guion × keyframes (pasada de Content sobre arte del producer)",
+     "Regla de oro: pasada propia, nunca eco",
+     "Qué mirar por imagen (checklist derivado del guion Seedance)",
+     "Formato de entrega (lo que validó el Admin)",
+     "Workaround cuando auxiliary.vision del perfil no acepta imágenes",
+     "Gate de gasto"
+    ],
+    "origen_movido_a": "_retirados/creative__keyframe-script-qa"
+   },
+   {
+    "origen": "creative/lucky-reel-voice-script",
+    "receptor": "creative/reel-voice-lipsync",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Guion de voz para reels con lip-sync pos-generado",
+     "Consecuencias para el guion de voz (mi lens, Content)",
+     "Plantilla de prompt motion (lo que le toca a Content refinar por escena)"
+    ],
+    "origen_movido_a": "_retirados/creative__lucky-reel-voice-script"
+   },
+   {
+    "origen": "productivity/notion-integration",
+    "receptor": "productivity/notion",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Notion Integration",
+     "Authentication",
+     "Searching All Accessible Content",
+     "Search everything the integration has access to",
+     "Reading Page Content (Blocks)",
+     "Get page blocks (children)",
+     "Important: Pagination",
+     "Creating a Page",
+     "Creating a Database",
+     "Key Gotchas",
+     "Related: Dual Knowledge System",
+     "Common Operations",
+     "Nexa Labs Notion Structure"
+    ],
+    "origen_movido_a": "_retirados/productivity__notion-integration"
+   },
+   {
+    "origen": "devops/oauth-connection-health-audit",
+    "receptor": "devops/activepieces-google-access",
+    "archivos_nuevos": [
+     "scripts/verify_ap_refresh_tokens.py"
+    ],
+    "secciones_absorbidas": [
+     "🔑 Regla #1: NO existe token local",
+     "Fuentes de credenciales (en orden)",
+     "Auditoría: probar refresh contra Google",
+     "Re-auth: reconnect en AP UI",
+     "Pitfall: SQL a AP DB",
+     "Scripts"
+    ],
+    "origen_movido_a": "_retirados/devops__oauth-connection-health-audit"
+   },
+   {
+    "origen": "specialists/devops-infra/pipelines-con-gate-humano",
+    "receptor": "productivity/flujos-con-gates-humanos",
+    "archivos_nuevos": [
+     "references/auditoria-de-genericidad.md"
+    ],
+    "secciones_absorbidas": [
+     "Flujos por etapas con gate humano (el freno vive en el código)",
+     "Reglas duras",
+     "La máquina debe ser genérica (segundo pedido del 12-sep)",
+     "Cómo cerrar cada etapa en el chat",
+     "Señales de que el flujo está mal construido"
+    ],
+    "origen_movido_a": "_retirados/specialists__devops-infra__pipelines-con-gate-humano"
+   },
+   {
+    "origen": "creative/poster-composition",
+    "receptor": "specialists/marketing/campaign-poster-compositing",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Composición de posters de campaña (keyart IA + tipografía por capas)",
+     "Flujo",
+     "Tipografía del sistema",
+     "Reglas de composición que sobrevivieron QA",
+     "Pitfalls",
+     "Verificación final"
+    ],
+    "origen_movido_a": "_retirados/creative__poster-composition"
+   },
+   {
+    "origen": "specialists/monitoring-security/pptx-author",
+    "receptor": "productivity/powerpoint",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "pptx-author",
+     "Output contract",
+     "One idea per slide",
+     "Every number traces to the model",
+     "Use the firm template when one is mounted",
+     "Charts: PNG-from-model beats native pptx charts",
+     "No external sends",
+     "Skeleton",
+     "Title slide",
+     "Valuation summary slide (title-only layout)",
+     "Add a table bound to model outputs",
+     "In a real deck, read these from the model workbook with openpyxl",
+     "Embed a chart rendered from the model",
+     "Binding deck numbers to the source workbook",
+     "Slide-type checklist for pitch decks",
+     "When NOT to use this skill",
+     "Attribution"
+    ],
+    "origen_movido_a": "_retirados/specialists__monitoring-security__pptx-author"
+   },
+   {
+    "origen": "specialists/marketing/revenue-operations",
+    "receptor": "specialists/marketing/revops",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Revenue Operations",
+     "Analyze pipeline health and coverage",
+     "Track forecast accuracy over multiple periods",
+     "Calculate GTM efficiency metrics",
+     "1. Pipeline Analyzer",
+     "2. Forecast Accuracy Tracker",
+     "3. GTM Efficiency Calculator",
+     "Weekly Pipeline Review",
+     "Forecast Accuracy Review",
+     "GTM Efficiency Audit",
+     "Quarterly Business Review",
+     "Reference Documentation",
+     "Templates"
+    ],
+    "origen_movido_a": "_retirados/specialists__marketing__revenue-operations"
+   },
+   {
+    "origen": "software-development/service-agent-code-handoff",
+    "receptor": "productivity/specification-handoff",
+    "archivos_nuevos": [
+     "templates/prompt-handoff.md"
+    ],
+    "secciones_absorbidas": [
+     "Service-Agent Code Handoff (SPEC + PROMPT → AGY/OpenCode)",
+     "Resultado (siempre dos entregables)",
+     "Plantillas"
+    ],
+    "origen_movido_a": "_retirados/software-development__service-agent-code-handoff"
+   },
+   {
+    "origen": "specialists/hermes-internal/skill-navigator",
+    "receptor": "research/graphify",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Skill Navigator: Graph & Pipeline Resolution",
+     "When to use me",
+     "1. Quick Category Lookup",
+     "2. Graph Navigation Commands (Graphify)",
+     "3. Standard Execution Pipelines"
+    ],
+    "origen_movido_a": "_retirados/specialists__hermes-internal__skill-navigator"
+   },
+   {
+    "origen": "productivity/telegram-channel-archaeology",
+    "receptor": "specialists/hermes-internal/locate-shared-resource",
+    "archivos_nuevos": [
+     "references/channel-resource-catalog.md"
+    ],
+    "secciones_absorbidas": [
+     "Telegram Channel Archaeology — Localizar recursos compartidos en canales",
+     "1. Obtener IDs de canales (fuente de verdad de chat)",
+     "2. Fuente primaria: SQLite del gateway (`/opt/data/state.db`)",
+     "3. Espejo de red: APIs Notion",
+     "4. Distinguir interno vs externo (pitfall del 19/08/2026)",
+     "5. Pitfalls técnicos"
+    ],
+    "origen_movido_a": "_retirados/productivity__telegram-channel-archaeology"
+   },
+   {
+    "origen": "specialists/hermes-internal/vscode-ai-extension-configuration",
+    "receptor": "specialists/hermes-internal/external-openai-client-config",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Trigger",
+     "Approach",
+     "Pitfalls & Notes",
+     "Verification"
+    ],
+    "origen_movido_a": "_retirados/specialists__hermes-internal__vscode-ai-extension-configuration"
+   },
+   {
+    "origen": "productivity/web-content-extraction",
+    "receptor": "productivity/embedded-payload-extraction",
+    "archivos_nuevos": [
+     "references/bitwarden-cli-case.md"
+    ],
+    "secciones_absorbidas": [
+     "Técnica principal: alternate markdown/plain-text endpoints (confirmado 08/2026)",
+     "UA header obligatorio",
+     "Script mínimo (urllib, sin curl)",
+     "Cadena de fallback completa",
+     "Referencias"
+    ],
+    "origen_movido_a": "_retirados/productivity__web-content-extraction"
+   },
+   {
+    "origen": "specialists/devops-infra/web-performance-core-vitals",
+    "receptor": "specialists/marketing/mobile-landing-optimization",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [
+     "Target Metrics",
+     "Optimization Checklist"
+    ],
+    "origen_movido_a": "_retirados/specialists__devops-infra__web-performance-core-vitals"
+   },
+   {
+    "origen": "media/youtube-content",
+    "receptor": "creative/youtube-full",
+    "archivos_nuevos": [
+     "scripts/fetch_transcript.py",
+     "references/output-formats.md"
+    ],
+    "secciones_absorbidas": [
+     "When to use",
+     "Setup",
+     "Helper Script",
+     "JSON output with metadata",
+     "Output Formats",
+     "Example — Chapters Output",
+     "Workflow"
+    ],
+    "origen_movido_a": "_retirados/media__youtube-content"
+   },
+   {
+    "origen": "devops/docker-container-optimization",
+    "receptor": null,
+    "razon": "Cinco bullets genericos (multi-stage, distroless/alpine, USER no-root, cache de capas, HEALTHCHECK) sin un solo comando, ruta o dato del stack de la agencia; es conocimiento que el modelo ya tiene y no aporta al retriever ni al canon.",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [],
+    "origen_movido_a": "_retirados/devops__docker-container-optimization"
+   },
+   {
+    "origen": "devops/google-oauth-reauth",
+    "receptor": null,
+    "razon": "La propia skill se declara obsoleta y revocada ('Esta skill está OBSOLETA. El token local `google_token.json` está revocado.') y delega todo en activepieces-google-access, ya existente en el catalogo. No hay procedimiento vivo que perder; solo el script scripts/reauth_google_token.py, atado a un token muerto.",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [],
+    "origen_movido_a": "_retirados/devops__google-oauth-reauth"
+   },
+   {
+    "origen": "creative/baoyu-post-to-x",
+    "receptor": null,
+    "razon": "El documento entero es selección de modos para runtimes ajenos (Codex Chrome plugin / Computer Use) y TODAS sus rutas de ejecución están rotas: no existe `scripts/` ni `references/` en la carpeta. Antes de retirar, portar el flujo de X Articles (Insert→Media, placeholders XIMGPH_) a la skill de publicación que se use.",
+    "archivos_nuevos": [],
+    "secciones_absorbidas": [],
+    "origen_movido_a": "_retirados/creative__baoyu-post-to-x"
+   }
+  ]
+ }
+]
