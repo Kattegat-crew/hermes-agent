@@ -1,6 +1,7 @@
 ---
 name: character-sheet-locking
-description: 'Lock canonical mascot model sheets: one figure per view.'
+description: "Use when locking canonical mascot model sheets for video."
+tags: [personaje, mascota, sheets, imagen, video, referencia, lock]
 metadata:
   hermes:
     tags: [imagen, personaje, mascot, referencia, video]

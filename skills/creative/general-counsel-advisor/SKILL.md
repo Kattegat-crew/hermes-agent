@@ -1,6 +1,7 @@
 ---
 name: "general-counsel-advisor"
-description: "General Counsel advisory for startups: contract review (MSA, SaaS, NDA, DPA, employment), IP strategy, term sheet decoding, and regulatory landscape mapping. Use when reviewing any contract or term sheet, deciding when to engage outside counsel, defining IP strategy, evaluating regulatory exposure (HIPAA, GDPR, FDA, fintech), or when user mentions general counsel, GC, legal review, contract risk, term sheet, IP assignment, or regulatory exposure. NOT a substitute for licensed counsel — surfaces questions to bring to qualified attorneys."
+description: "Use when reviewing contracts, term sheets or reg risk"
+tags: [legal, contratos, term-sheet, propiedad-intelectual, regulatorio, gdpr, startup, abogado]
 license: MIT
 metadata:
   version: 1.0.0

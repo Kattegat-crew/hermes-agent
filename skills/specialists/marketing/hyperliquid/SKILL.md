@@ -1,6 +1,7 @@
 ---
 name: hyperliquid
-description: Hyperliquid market data, account history, trade review.
+description: "Use when querying Hyperliquid markets or account data"
+tags: [hyperliquid, crypto, trading, perpetuals, funding, defi, market-data]
 version: 0.1.0
 author: Hugo Sequier (Hugo-SEQUIER), Hermes Agent
 license: MIT

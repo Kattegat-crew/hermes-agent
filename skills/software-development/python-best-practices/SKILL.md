@@ -1,6 +1,7 @@
 ---
 name: python-best-practices
-description: Idiomatic Python 3.12+, async/await concurrency, Pydantic data modeling, and clean architecture.
+description: "Use when writing idiomatic Python 3.12+ code"
+tags: [python, asyncio, pydantic, typing, tipado, ruff, uv, backend]
 license: MIT
 compatibility: opencode
 ---

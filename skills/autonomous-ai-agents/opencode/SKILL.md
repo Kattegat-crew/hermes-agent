@@ -1,6 +1,7 @@
 ---
 name: opencode
-description: "Delegate coding to OpenCode CLI (features, PR review)."
+description: "Use when delegating coding to the OpenCode CLI."
+tags: [opencode, coding-agent, cli, pty, refactoring, code-review, autonomous, delegacion]
 version: 1.2.0
 author: Hermes Agent
 license: MIT

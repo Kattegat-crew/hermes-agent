@@ -1,6 +1,7 @@
 ---
 name: campaign-publish-automation
-description: "Use when automating campaign publishing with human approval."
+description: "Use when automating campaign publishing with approval."
+tags: [campanas, publicacion, instagram, facebook, composio, cron, aprobacion]
 version: 1.0.0
 author: Ragnar (curator)
 license: MIT

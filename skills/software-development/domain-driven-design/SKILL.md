@@ -1,6 +1,7 @@
 ---
 name: domain-driven-design
-description: 'Domain-Driven Design (DDD) principles: Bounded Contexts, Aggregates,
+description: "Use when modeling complex domain logic with DDD"
+tags: [ddd, domain-driven-design, bounded-context, aggregates, value-objects, arquitectura, modelado]
   Value Objects, and Ubiquitous Language.'
 license: MIT
 compatibility: opencode

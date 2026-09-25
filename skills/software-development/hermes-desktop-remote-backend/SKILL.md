@@ -1,9 +1,9 @@
 ---
 name: hermes-desktop-remote-backend
-description: Use for Hermes Desktop remote serve and bot profiles.
+description: "Use when Hermes Desktop uses a remote hermes serve backend."
 version: 1.0.0
 author: Ragnar
-tags: [hermes, desktop, serve, remote-gateway, profiles, bots, tailscale, vps]
+tags: [desktop, serve, remote-gateway, perfiles, profiles, tailscale, vps]
 ---
 
 # Hermes Desktop ↔ Remote `hermes serve` Backend

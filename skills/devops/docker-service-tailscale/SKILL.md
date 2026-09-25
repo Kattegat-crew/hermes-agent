@@ -1,6 +1,7 @@
 ---
 name: docker-service-tailscale
-description: Access any service running inside Docker from outside via Tailscale — general purpose, not Hermes-specific
+description: "Use when reaching a Docker service via Tailscale IP."
+tags: [tailscale, docker, red, puerto, vps, bind]
 category: devops
 ---
 

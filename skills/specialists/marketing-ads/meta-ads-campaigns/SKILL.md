@@ -1,6 +1,7 @@
 ---
 name: meta-ads-campaigns
-description: "Use for Meta Ads clients: campaigns, adsets, ads, pixel."
+description: "Use when running Meta Ads campaigns, adsets or pixel."
+tags: [meta, ads, campanas, composio, pixel, capi, facebook, instagram]
 version: 1.0.0
 ---
 

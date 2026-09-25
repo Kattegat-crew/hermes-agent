@@ -1,6 +1,7 @@
 ---
 name: go-testing
-description: "Trigger: Go tests, go test coverage, Bubbletea teatest, golden files. Apply focused Go testing patterns."
+description: "Use when writing Go tests, teatest, or golden files"
+tags: [go, testing, table-driven, bubbletea, teatest, golden-files, cobertura]
 license: Apache-2.0
 metadata:
   author: gentleman-programming

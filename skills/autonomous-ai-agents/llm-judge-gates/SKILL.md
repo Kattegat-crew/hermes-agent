@@ -1,6 +1,7 @@
 ---
 name: llm-judge-gates
-description: Diseño de gates con juez LLM en pipelines de contenido
+description: "Use when adding an LLM-judge gate to a pipeline"
+tags: [llm, judge, juez, gate, moderacion, compliance, pipeline, shadow-mode]
 ---
 
 # Gates con juez LLM (compliance, moderación, scoring)

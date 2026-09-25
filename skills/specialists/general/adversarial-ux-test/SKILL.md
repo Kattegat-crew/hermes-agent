@@ -1,6 +1,7 @@
 ---
 name: adversarial-ux-test
-description: Roleplay a hostile user to find and triage UX pain points.
+description: "Use when stress-testing UX as a hostile persona."
+tags: [qa, ux, testing, adversarial, personas, dogfood, usabilidad]
 version: 1.0.0
 author: Omni @ Comelse
 license: MIT

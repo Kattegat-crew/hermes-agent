@@ -1,6 +1,7 @@
 ---
 name: blackbox
-description: Delegate coding tasks to the Blackbox AI multi-model CLI.
+description: "Use when delegating coding tasks to the Blackbox CLI"
+tags: [blackbox, coding-agent, cli, delegacion, multi-model, judge, pty, automatizacion]
 version: 1.0.1
 author: Hermes Agent (Nous Research)
 license: MIT

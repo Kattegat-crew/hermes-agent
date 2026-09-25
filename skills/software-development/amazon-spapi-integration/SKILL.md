@@ -1,6 +1,7 @@
 ---
 name: amazon-spapi-integration
-description: Use when setting up Amazon SP-API or seller API access.
+description: "Use when setting up Amazon SP-API or seller API access."
+tags: [amazon, sp-api, seller-central, listings, oauth, fba]
 ---
 
 # Amazon SP-API Integration

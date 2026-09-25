@@ -1,6 +1,7 @@
 ---
 name: rube-mcp-api-automation
-description: "Automate a third-party API via Rube MCP (Composio). Cubre Zoho, Slackbot, OneSignal y MetaAds; busca las herramientas antes de ejecutar."
+description: "Use when automating a third-party API via Rube MCP"
+tags: [rube, mcp, composio, api, automatizacion, zoho, slackbot, metaads]
 requires:
   mcp: [rube]
 ---

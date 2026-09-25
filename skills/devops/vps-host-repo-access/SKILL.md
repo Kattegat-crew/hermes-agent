@@ -1,6 +1,7 @@
 ---
 name: vps-host-repo-access
-description: "Acceder a repos del host VPS desde el contenedor."
+description: "Use when reading host VPS repos from the container."
+tags: [docker, socket, vps, host, git, nsenter, contenedor]
 ---
 
 # VPS Host Repo Access (docker socket)

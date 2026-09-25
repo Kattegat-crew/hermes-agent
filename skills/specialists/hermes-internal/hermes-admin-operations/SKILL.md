@@ -1,6 +1,7 @@
 ---
 name: hermes-admin-operations
-description: Operate/config/audit Hermes Agent (provider/gateway).
+description: "Use when operating/auditing Hermes config and gateway."
+tags: [hermes, ops, admin, config, provider, gateway, cron, administrador]
 version: 1.0.0
 author: Ragnar
 triggers:

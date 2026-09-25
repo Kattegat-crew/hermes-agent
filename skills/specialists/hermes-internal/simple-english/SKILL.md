@@ -1,6 +1,7 @@
 ---
 name: simple-english
-description: "Rewrite text to ASD-STE100 Simplified Technical English."
+description: "Use when rewriting docs in Simplified Technical English."
+tags: [ste, asd-ste100, documentacion, technical-writing, edicion, anti-slop]
 version: 1.2.0
 author: AminBlg (https://github.com/AminBlg/SimpleEnglish), ported by Hermes Agent
 license: MIT

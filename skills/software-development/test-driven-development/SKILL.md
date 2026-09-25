@@ -1,6 +1,7 @@
 ---
 name: test-driven-development
-description: "TDD: enforce RED-GREEN-REFACTOR, tests before code."
+description: "Use when writing code: write the failing test first (TDD)."
+tags: [tdd, testing, tests, calidad, quality, red-green-refactor]
 version: 1.1.0
 author: Hermes Agent (adapted from obra/superpowers)
 license: MIT

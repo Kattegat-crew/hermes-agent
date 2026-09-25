@@ -1,6 +1,7 @@
 ---
 name: brand-art-prompt-briefs
-description: "Use when: prompts de renders para producer multi-marca."
+description: "Use when writing image prompt briefs for multi-brand work."
+tags: [prompts, image-gen, brand, briefs, multi-marca, producer, vision]
 ---
 
 # Brand Art Prompt Briefs (multi-marca)

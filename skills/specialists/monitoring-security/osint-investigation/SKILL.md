@@ -1,6 +1,7 @@
 ---
 name: osint-investigation
-description: Follow the money via public records and sanctions data.
+description: "Use when investigating an entity via public records."
+tags: [osint, public-records, sanctions, due-diligence, sec, entity-resolution]
 version: 0.1.0
 platforms: [linux, macos, windows]
 author: Hermes Agent (adapted from ShinMegamiBoson/OpenPlanter, MIT)

@@ -1,6 +1,7 @@
 ---
 name: client-connection-flow
-description: Use when a new client needs Google accounts connected.
+description: "Use when a new client needs Google accounts connected."
+tags: [clientes, onboarding, oauth, activepieces, conexiones, google, mcp, secrets]
 version: "1.0"
 author: Ragnar
 created: 2026-08-28

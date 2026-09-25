@@ -1,6 +1,7 @@
 ---
 name: hermes-scheduled-jobs
-description: Use when creating or debugging Hermes cron jobs.
+description: "Use when creating or debugging Hermes cron jobs."
+tags: [cron, hermes, drift-skip, watchdog, multiplex, perfiles]
 version: 1.0.0
 author: Hermes Agent
 metadata:

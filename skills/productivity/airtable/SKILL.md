@@ -1,6 +1,7 @@
 ---
 name: airtable
-description: Airtable REST API via curl. Records CRUD, filters, upserts.
+description: "Use when reading or writing Airtable records via curl."
+tags: [airtable, api, curl, records, crud, pagination, formulas]
 version: 1.1.0
 author: community
 license: MIT

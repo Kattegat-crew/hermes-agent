@@ -1,6 +1,7 @@
 ---
 name: darwinian-evolver
-description: Evolve prompts/regex/SQL/code with Imbue's evolution loop.
+description: "Use when evolving a prompt, regex, SQL or code"
+tags: [evolution, evolucion, optimizacion, prompt-engineering, regex, sql, imbue]
 version: 0.1.0
 author: Bihruze (Asahi0x), Hermes Agent
 license: MIT

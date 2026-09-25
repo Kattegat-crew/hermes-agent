@@ -1,6 +1,7 @@
 ---
 name: cloudflare-email-auth-dns
-description: "Trigger: SPF, DMARC, DKIM, MX records, email deliverability, Gmail spam, Cloudflare DNS TXT. Verify and create email authentication DNS records (SPF/DMARC) for a domain via the Cloudflare API."
+description: "Use when setting SPF, DMARC or DKIM records in Cloudflare."
+tags: [cloudflare, dns, spf, dmarc, dkim, deliverability, correo, mx]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

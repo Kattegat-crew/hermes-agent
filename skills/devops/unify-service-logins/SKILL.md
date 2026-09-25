@@ -1,6 +1,7 @@
 ---
 name: unify-service-logins
-description: "Trigger: único usuario, unify logins, cambiar admin, reset password, captain@neuralcrewlabs.com, unico owner. Unify Docker app logins (Coolify, ActivePieces, Twenty) to a single admin via direct database edits with schema inspection and FK-safe changes."
+description: "Use when unifying Docker app logins to one admin."
+tags: [sql, postgres, bcrypt, admin, logins, docker]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

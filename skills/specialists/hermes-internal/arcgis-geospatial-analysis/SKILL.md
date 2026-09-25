@@ -1,6 +1,7 @@
 ---
 name: arcgis-geospatial-analysis
-description: "ArcGIS and geospatial analysis: Shapefiles (.shp), GeoJSON, KML, EPSG projections, spatial queries, and territory mapping."
+description: "Use when handling geospatial data, shapefiles or CRS."
+tags: [gis, geospatial, shapefile, geojson, epsg, geopandas, mapas]
 license: MIT
 compatibility: hermes, opencode
 ---

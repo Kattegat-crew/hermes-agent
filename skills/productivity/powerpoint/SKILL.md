@@ -1,6 +1,7 @@
 ---
 name: powerpoint
-description: Create, read, edit .pptx decks with python-pptx.
+description: "Use when creating, reading or editing .pptx slide decks."
+tags: [pptx, powerpoint, presentations, slides, python-pptx]
 version: 1.1.0
 author: Nous Research
 license: MIT

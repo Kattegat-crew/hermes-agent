@@ -1,6 +1,7 @@
 ---
 name: gws-shared-access
-description: "Google Workspace via root token+venv from sub-profiles."
+description: "Use when Google Workspace calls fail from a profile."
+tags: [google, drive, oauth, token, multi-profile, venv]
 version: 1.0.0
 author: Roshi (profile-local companion to bundled google-workspace)
 license: MIT

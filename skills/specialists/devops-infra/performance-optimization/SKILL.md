@@ -1,6 +1,7 @@
 ---
 name: performance-optimization
-description: Optimizes application performance. Use when performance requirements exist, when you suspect performance regressions, or when Core Web Vitals or load times need improvement. Use when profiling reveals bottlenecks that need fixing.
+description: "Use when profiling and fixing app or web perf bottlenecks"
+tags: [performance, profiling, core-web-vitals, lighthouse, n+1, caching, optimization, frontend]
 phase: verify
 domains:
   - performance

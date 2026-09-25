@@ -1,6 +1,7 @@
 ---
 name: mpp-agent
-description: Pay HTTP 402 APIs via Machine Payments Protocol (MPP).
+description: "Use when an API returns HTTP 402 and must be paid."
+tags: [payments, mpp, http-402, stripe, wallet, agent, api]
 version: 0.1.0
 author: Teknium (teknium1), Hermes Agent
 license: MIT

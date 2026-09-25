@@ -1,6 +1,7 @@
 ---
 name: audiocraft-audio-generation
-description: "AudioCraft: MusicGen text-to-music, AudioGen text-to-sound."
+description: "Use when generating music or sound with AudioCraft."
+tags: [audiocraft, musicgen, audiogen, audio, musica, generacion]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

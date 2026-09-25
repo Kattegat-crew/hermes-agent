@@ -1,6 +1,7 @@
 ---
 name: whisper
-description: Transcribe and translate speech in 99 languages.
+description: "Use when transcribing speech locally with OpenAI Whisper."
+tags: [whisper, asr, transcripcion, speech-to-text, audio]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

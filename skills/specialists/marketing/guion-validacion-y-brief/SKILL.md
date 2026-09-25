@@ -1,6 +1,7 @@
 ---
 name: guion-validacion-y-brief
-description: "Use when validating a campaign reel guion before production."
+description: "Use when validating a reel guion before production."
+tags: [guion, reel, lint, edge-tts, brief, marketing, gate]
 version: 1.0.0
 author: Ragnar
 metadata:

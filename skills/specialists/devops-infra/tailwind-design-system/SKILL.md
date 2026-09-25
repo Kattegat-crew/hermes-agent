@@ -1,6 +1,7 @@
 ---
 name: tailwind-design-system
-description: Scalable Tailwind CSS systems, design tokens, component architecture, and accessibility compliance.
+description: "Use when building Tailwind design systems/tokens."
+tags: [tailwind, design-system, css, design-tokens, frontend, accesibilidad, componentes]
 license: MIT
 compatibility: opencode
 ---

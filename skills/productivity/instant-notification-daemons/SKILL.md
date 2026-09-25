@@ -1,7 +1,8 @@
 ---
 name: instant-notification-daemons
 category: devops
-description: Use when building or fixing push-notification daemons.
+description: "Use when building or fixing push-notification daemons."
+tags: [daemon, notificaciones, imap, whatsapp, watchdog, delivery, timeouts]
 ---
 
 # Instant Notification Daemons (never miss an event)

@@ -1,6 +1,7 @@
 ---
 name: tiktok-ingestion
-description: "Trigger: el grupo TikToks recibe un enlace de video corto."
+description: "Use when a TikTok or reel link needs ingestion."
+tags: [tiktok, reels, ingesta, yt-dlp, vision, outline, brain]
 ---
 
 # Ingesta de videos cortos (TikTok / Facebook Reels / IG)

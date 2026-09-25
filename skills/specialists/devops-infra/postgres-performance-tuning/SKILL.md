@@ -1,6 +1,7 @@
 ---
 name: postgres-performance-tuning
-description: PostgreSQL query optimization, EXPLAIN ANALYZE, indexing strategies, connection pooling, and schema design.
+description: "Use when tuning PostgreSQL queries, indexes or pooling"
+tags: [postgresql, explain-analyze, indexing, gin, pgbouncer, query-tuning, database]
 license: MIT
 compatibility: opencode
 ---

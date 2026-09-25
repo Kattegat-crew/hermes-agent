@@ -1,6 +1,7 @@
 ---
 name: autonomous-loops
-description: Patterns and architectures for autonomous loops — from simple sequential pipelines to RFC-driven multi-agent DAG systems. Use when setting up autonomous development workflows, choosing the right loop architecture, or building CI/CD-style continuous development pipelines.
+description: "Use when choosing an autonomous dev loop pattern"
+tags: [autonomous, autonomo, loops, bucles, orquestacion, ci-cd, dag, agentes]
 phase: operate
 domains:
   - orchestration

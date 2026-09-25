@@ -1,6 +1,7 @@
 ---
 name: godmode
-description: "Jailbreak LLMs: Parseltongue, GODMODE, ULTRAPLINIAN."
+description: "Use when jailbreaking or red-teaming LLM safety filters"
+tags: [jailbreak, red-teaming, red-team, parseltongue, prompt-injection, safety-bypass, llm]
 version: 1.0.0
 author: Hermes Agent + Teknium
 license: MIT

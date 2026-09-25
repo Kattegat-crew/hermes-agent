@@ -1,6 +1,7 @@
 ---
 name: git-release
-description: Create consistent tagged releases, changelogs, and version bumps with gh release create.
+description: "Use when tagging a release with a changelog"
+tags: [git, release, changelog, semver, tags, gh-cli, versionado]
 license: MIT
 compatibility: opencode
 ---

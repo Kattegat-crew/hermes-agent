@@ -1,6 +1,7 @@
 ---
 name: notion-db-writes
-description: "Use when writing rows into Notion DBs from headless scripts."
+description: "Use when inserting rows into Notion DBs over raw HTTP"
+tags: [notion, api, escritura, writes, database, dedup, ingesta]
 ---
 
 # Notion DB Writes (headless scripts)

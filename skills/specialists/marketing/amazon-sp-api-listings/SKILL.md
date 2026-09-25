@@ -1,6 +1,7 @@
 ---
 name: amazon-sp-api-listings
-description: "Trigger: Amazon SP-API, seller central, listing Amazon AU, snuffle mat, FBA fee, create/update Amazon listing, seller partner API, populate Amazon product. Publica y optimiza listings de Amazon AU vía Listings Items API con payloads validados contra el schema real de PET_TOY."
+description: "Use when publishing Amazon AU listings via SP-API."
+tags: [amazon, sp-api, listings, fba, seller-central, ecommerce, api]
 license: Apache-2.0
 metadata:
   author: "digital-expressions"

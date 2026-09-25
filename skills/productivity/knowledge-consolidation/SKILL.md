@@ -1,6 +1,7 @@
 ---
 name: knowledge-consolidation
-description: Consolidate raw knowledge into searchable tables and docs.
+description: "Use when consolidating raw brain files into scored tables."
+tags: [brain, knowledge, tablas, docx, research, consolidacion, archivo]
 version: 1.0.0
 author: Ragnar
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: auditoria-skills-hermes
-description: "Use when auditando o contando skills de una flota Hermes."
+description: "Use when auditing or counting skills in a Hermes fleet."
+tags: [hermes, skills, auditoria, conteo, canon, symlinks, sync, flota]
 ---
 
 # Auditoría de skills en una flota Hermes

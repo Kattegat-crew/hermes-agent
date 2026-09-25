@@ -1,6 +1,7 @@
 ---
 name: orbstack-best-practices
-description: OrbStack fast container and Linux machine management, performance tuning, Rosetta 2 emulation, and direct IP networking on macOS.
+description: "Use when running OrbStack or Docker on macOS hosts"
+tags: [orbstack, docker, macos, contenedores, rosetta, virtualizacion, devops]
 license: MIT
 compatibility: hermes, opencode, bash
 metadata:

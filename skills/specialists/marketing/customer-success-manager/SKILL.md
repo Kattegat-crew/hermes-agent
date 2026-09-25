@@ -1,6 +1,7 @@
 ---
 name: "customer-success-manager"
-description: Monitors customer health, predicts churn risk, and identifies expansion opportunities using weighted scoring models for SaaS customer success. Use when analyzing customer accounts, reviewing retention metrics, scoring at-risk customers, or when the user mentions churn, customer health scores, upsell opportunities, expansion revenue, retention analysis, or customer analytics. Runs three Python CLI tools to produce deterministic health scores, churn risk tiers, and prioritized expansion recommendations across Enterprise, Mid-Market, and SMB segments.
+description: "Use when scoring customer health or churn risk."
+tags: [customer-success, churn, health-score, retencion, expansion, saas, qbr]
 license: MIT
 metadata:
   version: 1.0.0

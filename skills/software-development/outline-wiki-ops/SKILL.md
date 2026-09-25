@@ -1,6 +1,7 @@
 ---
 name: outline-wiki-ops
-description: Use when operating the Outline wiki API, docs, or backups.
+description: "Use when operating the Outline wiki API, docs, or backups."
+tags: [outline, wiki, api, devops, docs, diario, backup]
 version: 1.0.0
 author: Ragnar
 license: MIT

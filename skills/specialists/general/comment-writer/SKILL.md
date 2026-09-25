@@ -1,6 +1,7 @@
 ---
 name: comment-writer
-description: "Write warm, direct collaboration comments. Trigger: PR feedback, issue replies, reviews, Slack messages, or GitHub comments."
+description: "Use when writing PR, issue or review comments for humans."
+tags: [comentarios, pr, github, review, slack, tono, comunicacion]
 license: Apache-2.0
 metadata:
   author: gentleman-programming

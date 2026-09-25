@@ -1,6 +1,7 @@
 ---
 name: two-way-sync-state-integrity
-description: Use when a canonical store syncs an editable mirror.
+description: "Use when a canonical store syncs an editable mirror."
+tags: [sync, sincronizacion, state-integrity, estado, idempotencia, monotonico, data-integrity, git]
 version: 1.0.0
 author: Ragnar
 ---

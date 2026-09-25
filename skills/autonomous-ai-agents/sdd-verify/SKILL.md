@@ -1,6 +1,7 @@
 ---
 name: sdd-verify
-description: "Trigger: SDD verification phase, verify change. Execute tests and prove implementation matches specs, design, and tasks."
+description: "Use when verifying an SDD change against its specs."
+tags: [sdd, verificacion, tests, evidencia, quality-gate, openspec, subagente]
 disable-model-invocation: true
 user-invocable: false
 license: MIT

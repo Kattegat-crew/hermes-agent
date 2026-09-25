@@ -1,6 +1,7 @@
 ---
 name: sdd-init
-description: "Trigger: sdd init, iniciar sdd, openspec init. Initialize SDD context, testing capabilities, registry, and persistence."
+description: "Use when initializing SDD context, tests, and registry"
+tags: [sdd, init, inicializar, openspec, testing, registry, engram, contexto]
 disable-model-invocation: true
 user-invocable: false
 license: MIT

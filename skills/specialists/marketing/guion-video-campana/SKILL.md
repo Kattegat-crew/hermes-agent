@@ -1,6 +1,7 @@
 ---
 name: guion-video-campana
-description: "Use when producing campaign reels: production page, prompts."
+description: "Use when producing campaign reels and Seedance prompts."
+tags: [reels, video, seedance, guion, lip-sync, campana]
 ---
 
 # Producción de reels de campaña (página de producción + prompts Seedance)

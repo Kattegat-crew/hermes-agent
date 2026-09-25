@@ -1,6 +1,7 @@
 ---
 name: webhook-gateway-multiclient
-description: "Trigger: webhook gateway, widget chat, bridge Hermes, leads to postgres, ActivePieces notify, multi-casino. Build an Express gateway connecting client chat widgets to a multiplexed Hermes gateway, persisting leads and firing per-client automation."
+description: "Use when building a multi-client webhook chat gateway"
+tags: [webhook, gateway, express, multiclient, postgres, activepieces, leads, nginx]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

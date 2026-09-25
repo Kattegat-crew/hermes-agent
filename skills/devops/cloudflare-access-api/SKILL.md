@@ -1,6 +1,7 @@
 ---
 name: cloudflare-access-api
-description: "Trigger: Cloudflare Access, Zero Trust, protect subdomain, Access policy, one-time PIN login, team name, bypass por path, ruta publica, abrir ruta. Configure Cloudflare Access (Zero Trust) via API: enable org, email OTP IdP, one app per domain, allow-list email policies, and Bypass→Everyone for specific paths."
+description: "Use when protecting a subdomain with Cloudflare Access."
+tags: [cloudflare, zero-trust, access, subdominio, bypass, otp, seguridad, api]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

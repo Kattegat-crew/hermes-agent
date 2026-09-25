@@ -1,6 +1,7 @@
 ---
 name: cron-delivery-routing
-description: "Use when routing, silencing or debugging where cron output lands."
+description: "Use when routing or debugging where cron output lands."
+tags: [cron, entrega, routing, discord, whatsapp, devops]
 version: 1.0.0
 author: Ragnar
 metadata:

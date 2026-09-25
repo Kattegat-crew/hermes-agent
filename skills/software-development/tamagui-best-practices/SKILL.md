@@ -1,6 +1,7 @@
 ---
 name: tamagui-best-practices
-description: Tamagui UI framework best practices, compiler optimization, multiplatform design tokens, and theme configuration.
+description: "Use when building cross-platform UI with Tamagui"
+tags: [tamagui, ui, react-native, tokens, theming, multiplataforma, frontend]
 license: MIT
 compatibility: opencode
 ---

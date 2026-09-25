@@ -1,6 +1,7 @@
 ---
 name: cloudflare-dns-cutover
-description: "Trigger: Cloudflare DNS, A record, cutover, TTL 300, SSL mode full, zone DNS edit, origin IP. Point Cloudflare zones at a new origin and enable HTTPS: list zones, read/update/create DNS records, set low TTL, and configure SSL mode."
+description: "Use when pointing Cloudflare DNS at a new origin server."
+tags: [cloudflare, dns, cutover, a-record, ssl, ttl, origen, migracion]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

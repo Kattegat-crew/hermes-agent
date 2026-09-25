@@ -1,6 +1,7 @@
 ---
 name: funnel-deconstruction
-description: >-
+description: "Use when deconstructing a received marketing funnel."
+tags: [funnels, deconstruccion, email, webinar, copywriting, analisis, osint]
   Deconstruct a received marketing/email/webinar funnel.
 version: 1.0.0
 author: Ragnar

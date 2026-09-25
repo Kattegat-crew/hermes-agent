@@ -1,6 +1,7 @@
 ---
 name: elevenlabs-voice-narration
-description: Use when a reel needs ElevenLabs TTS/STTS voice.
+description: "Use when a reel needs ElevenLabs TTS/STTS voice."
+tags: [elevenlabs, tts, stts, voz, reels, narracion, audio, pronunciation]
 ---
 
 # ElevenLabs Voice Narration (TTS / STTS) para reels

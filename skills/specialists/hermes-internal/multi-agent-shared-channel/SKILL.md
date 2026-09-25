@@ -1,6 +1,7 @@
 ---
 name: multi-agent-shared-channel
-description: "Use when several agents share a channel with no @mentions."
+description: "Use when several agents share one free-response channel."
+tags: [discord, multiagente, canal-compartido, free-response, antibucle, gateway]
 version: 1.0.0
 author: Ragnar
 triggers:

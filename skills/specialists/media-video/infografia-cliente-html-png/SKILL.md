@@ -1,6 +1,7 @@
 ---
 name: infografia-cliente-html-png
-description: "Use when un cliente necesita una imagen explicativa."
+description: "Use when a client needs an explanatory infographic."
+tags: [infografia, html, png, chrome-headless, cliente, vision]
 version: 1.0.0
 author: ragnar
 triggers:

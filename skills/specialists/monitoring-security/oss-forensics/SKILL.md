@@ -1,6 +1,7 @@
 ---
 name: oss-forensics
-description: "GitHub supply-chain forensics: recovery, IOCs, reporting."
+description: "Use when investigating a repo for supply-chain compromise."
+tags: [forensics, github, supply-chain, ioc, security, evidence]
 version: 1.0.0
 author: Teknium (teknium1), Hermes Agent
 license: MIT

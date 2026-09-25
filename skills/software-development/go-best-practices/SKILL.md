@@ -1,6 +1,7 @@
 ---
 name: go-best-practices
-description: Idiomatic Go code, concurrency patterns with goroutines/channels, small interfaces, and robust error handling.
+description: "Use when writing or reviewing idiomatic Go code"
+tags: [go, golang, concurrencia, goroutines, errores, interfaces, idiomatico]
 license: MIT
 compatibility: opencode
 ---

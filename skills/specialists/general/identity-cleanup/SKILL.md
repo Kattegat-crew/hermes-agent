@@ -1,6 +1,7 @@
 ---
 name: identity-cleanup
-description: "Systematic cleanup and update of person identities across Brain Wiki — replacing old names, Discord IDs, roles, and cross-references when user identity changes or was incorrectly stored."
+description: "Use when fixing a person identity across the wiki."
+tags: [identidad, limpieza, wiki, memoria, brain, perfiles]
 version: 1.0.0
 author: Ragnar
 license: MIT

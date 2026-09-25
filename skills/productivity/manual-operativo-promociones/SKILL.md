@@ -1,6 +1,7 @@
 ---
 name: manual-operativo-promociones
-description: >
+description: "Use when writing casino staff operating manuals."
+tags: [manual, operativo, casino, cajeras, promociones, docx, redes]
   Manual operativo de casino para cajeras y personal.
 version: 1.0.0
 author: hermes

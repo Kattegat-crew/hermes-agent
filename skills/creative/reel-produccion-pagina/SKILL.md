@@ -1,6 +1,7 @@
 ---
 name: reel-produccion-pagina
-description: 'Use when producir reel de campaña y página en portal reels.'
+description: "Use when producing a campaign reel and its page."
+tags: [reels, campanas, produccion, pagina, portal, keyframes, cliente]
 ---
 
 Pipeline validado en Chiquinquirá (Lucky) y Goldie (Golden): guion → keyframes →

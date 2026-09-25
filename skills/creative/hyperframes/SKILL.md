@@ -1,6 +1,7 @@
 ---
 name: hyperframes
-description: Render MP4/WebM videos from HTML compositions.
+description: "Use when rendering HTML/GSAP compositions to MP4 video"
+tags: [video, html, gsap, animacion, render, ffmpeg, motion-graphics]
 version: 1.0.0
 author: heygen-com
 license: Apache-2.0

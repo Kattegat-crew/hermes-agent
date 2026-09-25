@@ -1,6 +1,7 @@
 ---
 name: vendor-pricing-research
-description: Use when comparing live API/model pricing across providers.
+description: "Use when comparing live API/model pricing across providers."
+tags: [pricing, precios, api, llm, proveedores, costos, research, brokers]
 ---
 
 # Vendor Pricing Research (APIs / modelos / brokers)

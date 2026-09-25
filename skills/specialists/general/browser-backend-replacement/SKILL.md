@@ -1,6 +1,7 @@
 ---
 name: browser-backend-replacement
-description: "Cadena de navegación web por defecto de Ragnar: Agent-Reach (primario) → Obscura (fallback) → web-exploration (último recurso). Camofox ELIMINADO (2026-07-31). Usar cuando se necesite navegar/leer/scrapear la web."
+description: "Use when navigating, reading or scraping any web page."
+tags: [web, browser, navegacion, scraping, agent-reach, obscura, fetch, fallback]
 ---
 
 # Browser Backend Replacement for Hermes

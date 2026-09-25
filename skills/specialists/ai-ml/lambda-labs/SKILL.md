@@ -1,6 +1,7 @@
 ---
 name: lambda-labs
-description: On-demand GPU cloud instances for ML training.
+description: "Use when renting GPU cloud for ML training."
+tags: [gpu, cloud, training, inference, lambda-labs, infra, ssh, cluster]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

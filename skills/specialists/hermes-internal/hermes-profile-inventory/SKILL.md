@@ -1,6 +1,7 @@
 ---
 name: hermes-profile-inventory
-description: Use when configuring Hermes profiles and their routing.
+description: "Use when auditing deployed Hermes profile inventory."
+tags: [hermes, perfiles, profiles, inventory, routing, auditoria, devops]
 version: 1.0.0
 author: Ragnar
 triggers:

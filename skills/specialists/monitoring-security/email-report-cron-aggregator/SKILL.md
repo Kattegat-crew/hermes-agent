@@ -1,6 +1,7 @@
 ---
 name: email-report-cron-aggregator
-description: "Use when agrego informes diarios y los envio por cron."
+description: "Use when aggregating daily email reports via cron to chat."
+tags: [gmail, cron, informe, agregacion, whatsapp, parser, oauth, kassiuss]
 version: "1.0.0"
 author: Ragnar
 license: MIT

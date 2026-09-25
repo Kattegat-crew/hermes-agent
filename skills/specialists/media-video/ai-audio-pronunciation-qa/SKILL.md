@@ -1,6 +1,7 @@
 ---
 name: ai-audio-pronunciation-qa
-description: Use when verifying AI voice pronunciation vs a script.
+description: "Use when verifying AI voice pronunciation vs a script."
+tags: [audio, tts, whisper, pronunciation, qa, reels, ffmpeg, espanol]
 ---
 
 # AI Audio Pronunciation QA

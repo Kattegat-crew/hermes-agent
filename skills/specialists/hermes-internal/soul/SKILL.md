@@ -1,6 +1,7 @@
 ---
 name: soul
-description: Encuesta /soul para perfilar al cliente y generar su SOUL.md sin desvíos conversacionales.
+description: "Use when onboarding a client via the /soul survey."
+tags: [soul, encuesta, survey, onboarding, cliente, perfilado, whatsapp, guardrails]
 version: 1.4.0
 author: NeuralCrew Labs
 trigger:

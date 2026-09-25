@@ -1,6 +1,7 @@
 ---
 name: sdd-propose
-description: "Create an SDD change proposal with intent, scope, and approach. Trigger: orchestrator launches proposal work for a change."
+description: "Use when writing an SDD change proposal."
+tags: [sdd, propuesta, alcance, prd, openspec, engram, subagente]
 disable-model-invocation: true
 user-invocable: false
 license: MIT

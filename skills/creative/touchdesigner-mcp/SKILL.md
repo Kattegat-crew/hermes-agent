@@ -1,6 +1,7 @@
 ---
 name: touchdesigner-mcp
-description: Control TouchDesigner via twozero MCP.
+description: "Use when building TouchDesigner visuals via MCP."
+tags: [touchdesigner, mcp, visuales, glsl, audio-reactivo, generativo, vj, realtime]
 version: 1.1.0
 author: kshitijk4poor
 license: MIT

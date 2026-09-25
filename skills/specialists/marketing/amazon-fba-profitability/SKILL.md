@@ -1,6 +1,7 @@
 ---
 name: amazon-fba-profitability
-description: >
+description: "Use when sizing Amazon FBA product profitability."
+tags: [amazon, fba, rentabilidad, ecommerce, pricing, fees, research]
   Complete workflow for evaluating Amazon FBA product profitability:
   cost analysis, fee calculation, competitor research, and pricing strategy.
   Supports multiple marketplaces (AU, US, UK, etc.).

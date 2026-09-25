@@ -1,6 +1,7 @@
 ---
 name: canvas
-description: Fetch Canvas LMS courses and assignments via API token.
+description: "Use when fetching Canvas LMS courses and assignments."
+tags: [canvas, lms, education, cursos, tareas, api]
 version: 1.0.0
 author: community
 license: MIT

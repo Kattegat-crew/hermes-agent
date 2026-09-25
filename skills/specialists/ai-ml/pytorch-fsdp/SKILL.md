@@ -1,6 +1,7 @@
 ---
 name: pytorch-fsdp
-description: Fully sharded data-parallel training for large models.
+description: "Use when training large models with PyTorch FSDP."
+tags: [pytorch, fsdp, entrenamiento-distribuido, sharding, gpu, llm]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

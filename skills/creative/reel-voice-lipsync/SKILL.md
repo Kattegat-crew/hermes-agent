@@ -1,6 +1,7 @@
 ---
 name: reel-voice-lipsync
-description: Use when a reel needs correct pronunciation and lip-sync.
+description: "Use when a reel needs correct pronunciation and lip-sync."
+tags: [reels, lipsync, voz, tts, elevenlabs, fal, pronunciacion, video]
 ---
 
 # Voz de marca + lip-sync para reels de personaje IA

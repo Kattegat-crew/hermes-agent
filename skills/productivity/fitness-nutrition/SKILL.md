@@ -1,6 +1,7 @@
 ---
 name: fitness-nutrition
-description: "Workout planning, macros, and body metrics via wger/USDA."
+description: "Use when planning workouts, macros or body metrics"
+tags: [fitness, nutricion, nutrition, workout, macros, wger, usda, salud]
 platforms: [linux, macos, windows]
 version: 1.0.0
 author: Hailey Marshall (haileymarshall), Hermes Agent

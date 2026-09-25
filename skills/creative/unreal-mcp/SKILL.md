@@ -1,11 +1,11 @@
 ---
 name: unreal-mcp
-description: Automate Unreal Engine editor scenes, actors, and renders.
+description: "Use when automating Unreal Engine scenes or renders."
 version: 1.0.0
 requires: Unreal Editor 5.8+ with the Unreal MCP plugin enabled and its server running
 author: Hermes Agent
 license: MIT
-tags: [unreal, unreal-engine, ue5, 3d, mcp, scenes, cinematics, lighting, gamedev]
+tags: [unreal, ue5, 3d, mcp, escenas, renders, gamedev]
 platforms: [linux, macos, windows]
 metadata:
   hermes:

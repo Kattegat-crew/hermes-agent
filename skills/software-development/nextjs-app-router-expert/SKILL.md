@@ -1,6 +1,7 @@
 ---
 name: nextjs-app-router-expert
-description: 'Next.js App Router mastery: Server Actions, Streaming, Parallel/Intercepting
+description: "Use when building Next.js App Router apps"
+tags: [nextjs, app-router, react, server-actions, streaming, caching, frontend]
   Routes, and caching strategies.'
 license: MIT
 compatibility: opencode

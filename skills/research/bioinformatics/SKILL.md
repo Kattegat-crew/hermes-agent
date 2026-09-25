@@ -1,6 +1,7 @@
 ---
 name: bioinformatics
-description: Gateway to 400+ genomics and computational biology skills.
+description: "Use when a task needs genomics or bioinformatics tools."
+tags: [bioinformatica, genomica, biologia, secuenciacion, variantes, rnaseq, ciencia]
 version: 1.0.0
 author: Teknium (teknium1), Hermes Agent
 license: MIT

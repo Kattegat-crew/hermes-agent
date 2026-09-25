@@ -1,6 +1,7 @@
 ---
 name: agentmail
-description: "Give the agent its own inbox: send and receive email."
+description: "Use when the agent needs its own email inbox to send/read."
+tags: [email, agentmail, mcp, comunicacion]
 version: 1.0.0
 author: teyrebaz33, Hermes Agent
 license: MIT

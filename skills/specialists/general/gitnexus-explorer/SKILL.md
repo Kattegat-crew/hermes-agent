@@ -1,6 +1,7 @@
 ---
 name: gitnexus-explorer
-description: Serve an interactive codebase knowledge graph web UI.
+description: "Use when serving an interactive codebase graph UI."
+tags: [gitnexus, grafo, codebase, visualizacion, cloudflare, tunnel, ui]
 version: 1.0.0
 author: Hermes Agent + Teknium
 license: MIT

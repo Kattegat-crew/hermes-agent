@@ -1,6 +1,7 @@
 ---
 name: merge-reconciler
-description: "Neutral third-party resolution of agent merge conflicts."
+description: "Use when resolving a merge conflict between two agents."
+tags: [git, merge-conflict, arbitration, multi-agent, kanban]
 version: 1.0.0
 author: Hermes Agent
 license: MIT

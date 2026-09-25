@@ -1,6 +1,7 @@
 ---
 name: evm
-description: "Read-only EVM client: wallets, tokens, gas across 8 chains."
+description: "Use when reading EVM wallets, tokens, gas on 8 chains"
+tags: [evm, ethereum, blockchain, wallet, tokens, gas, defi, web3]
 version: 1.0.0
 author: Mibayy (@Mibayy), youssefea (@youssefea), ethernet8023 (@ethernet8023), Hermes Agent
 license: MIT

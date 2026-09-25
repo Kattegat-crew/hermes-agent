@@ -1,6 +1,7 @@
 ---
 name: sesion-pieza-por-pieza
 description: "Use when producing a campaign video piece-by-piece."
+tags: [campanas, reels, gates, costo, produccion, sesion, orquestacion]
 version: 1.0.0
 author: Roshi
 license: MIT

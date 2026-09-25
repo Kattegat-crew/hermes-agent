@@ -1,6 +1,7 @@
 ---
 name: node-webhook-systemd-service
-description: Use when deploying Express webhook servers as systemd services on Linux, debugging webhook-to-DB-to-ActivePieces pipelines, or fixing CORS/proxy issues in production webhook endpoints.
+description: "Use when deploying an Express webhook as a systemd service."
+tags: [systemd, webhook, express, postgres, activepieces, deploy]
 ---
 
 # Node Webhook systemd Service

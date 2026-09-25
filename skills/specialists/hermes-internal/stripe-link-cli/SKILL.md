@@ -1,6 +1,7 @@
 ---
 name: stripe-link-cli
-description: Agent payments via Stripe Link — cards, SPT, approvals.
+description: "Use when paying online with Stripe Link cards/SPT."
+tags: [pagos, stripe, link, checkout, spt, agentic-payments, mpp]
 version: 0.1.0
 author: Teknium (teknium1), Hermes Agent
 license: MIT

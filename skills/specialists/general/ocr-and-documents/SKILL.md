@@ -1,6 +1,7 @@
 ---
 name: ocr-and-documents
-description: "Extract text from PDFs/scans (pymupdf, marker-pdf)."
+description: "Use when extracting text from PDFs or scanned documents."
+tags: [pdf, ocr, extraccion, pymupdf, marker, documentos, arxiv]
 version: 2.3.0
 author: Hermes Agent
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: graphify-codebase-graph
-description: Consultar codebases como grafos (sistema graphify) — dependencias, callers, callees, comunidades, búsqueda. Usar cuando se necesite entender relaciones entre archivos/módulos de hermes-agent, ai-platform o golden-game-landing.
+description: "Use when querying an existing codebase graph (graph_query)."
+tags: [graphify, grafo, codebase, dependencias, comunidades, graph-query]
 ---
 
 # Graphify Codebase Graph

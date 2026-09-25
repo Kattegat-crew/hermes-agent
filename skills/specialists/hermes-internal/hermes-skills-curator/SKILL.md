@@ -1,6 +1,7 @@
 ---
 name: hermes-skills-curator
-description: "Use when running/auditing the Hermes skills curator."
+description: "Use when running or auditing the skills curator."
+tags: [hermes, curator, skills, adopt, archivado, ciclo-de-vida]
 ---
 
 # Hermes Skills Curator — ciclo de vida de skills

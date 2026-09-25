@@ -1,6 +1,7 @@
 ---
 name: twenty-selfhost-auth
-description: "Trigger: Twenty CRM login, Twenty signup disabled, create Twenty user, twenty workspace role, Twenty AUTH_PASSWORD_ENABLED. Enable email+password auth and provision users for self-hosted Twenty CRM."
+description: "Use when Twenty CRM login fails or adding users."
+tags: [twenty, crm, auth, bcrypt, self-hosted, usuarios]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

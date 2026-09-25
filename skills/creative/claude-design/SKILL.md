@@ -1,6 +1,7 @@
 ---
 name: claude-design
-description: Design one-off HTML artifacts (landing, deck, prototype).
+description: "Use when designing a one-off HTML artifact."
+tags: [diseno, html, prototipo, anti-slop, ui, deck, taste, design]
 version: 1.1.0
 author: BadTechBandit
 license: MIT

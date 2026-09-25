@@ -1,6 +1,7 @@
 ---
 name: tilt
-description: Tilt multi-service local development, live updates, health checks, and Kubernetes/Docker Compose orchestration.
+description: "Use when running Tilt for multi-service local dev"
+tags: [tilt, tiltfile, kubernetes, docker-compose, live-update, local-dev, devops]
 license: MIT
 compatibility: hermes, opencode, bash
 metadata:

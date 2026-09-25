@@ -1,6 +1,7 @@
 ---
 name: owasp-secure-coding
-description: OWASP Top 10 prevention, secure coding guidelines, input validation, CSRF, XSS, and authorization checks.
+description: "Use when hardening code against OWASP Top 10"
+tags: [owasp, security, seguridad, secure-coding, xss, csrf, sql-injection, autorizacion]
 license: MIT
 compatibility: opencode
 ---

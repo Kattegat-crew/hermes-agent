@@ -1,6 +1,7 @@
 ---
 name: colombia-promociones-legales
-description: >-
+description: "Use when drafting Colombia promo legal packs."
+tags: [colombia, legal, terminos, datos-personales, coljuegos, juego-responsable]
   Colombian promo legal docs: T&C, datos, juego responsable.
 category: legal
 triggers:

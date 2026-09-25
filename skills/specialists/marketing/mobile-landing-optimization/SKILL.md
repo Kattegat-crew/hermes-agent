@@ -1,6 +1,7 @@
 ---
 name: mobile-landing-optimization
-description: "Trigger: mobile landing, landing performance, meta ads landing, slow mobile page, drop-off reduction, funnel speed, paid traffic landing. Architecture and optimization patterns for high-converting paid-traffic mobile landing pages."
+description: "Use when optimizing a paid-traffic mobile landing."
+tags: [landing-movil, meta-ads, core-web-vitals, conversiones, rendimiento, trafico-pagado, fcp]
 license: MIT
 metadata:
   author: gentleman-programming

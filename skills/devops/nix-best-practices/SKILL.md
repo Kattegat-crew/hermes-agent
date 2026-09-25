@@ -1,6 +1,7 @@
 ---
 name: nix-best-practices
-description: Nix Flakes, reproducible dev environments, direnv integration, and declarative package management.
+description: "Use when writing Nix flakes or reproducible dev shells"
+tags: [nix, flakes, direnv, devshell, reproducibilidad, devops, entornos]
 license: MIT
 compatibility: hermes, opencode, bash
 metadata:

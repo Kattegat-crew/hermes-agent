@@ -1,6 +1,7 @@
 ---
 name: hermes-skills-hub
-description: Complete reference of all 649 Hermes Agent skills across 4 registries (71 Built-in, 57 Optional, 521 Community). Covers 17 categories. Use when the user wants to install new skills, discover capabilities, or understand what tools are available.
+description: "Use when installing Hermes skills from the registry."
+tags: [hermes, skills, registro, instalacion, catalogo, hub]
 version: 1.0.0
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: stocks
-description: Stock quotes, history, search, compare, crypto via Yahoo.
+description: "Use when getting stock or crypto quotes and history."
+tags: [stocks, finanzas, market-data, yahoo, crypto, cotizaciones]
 version: 0.1.0
 author: Mibay (Mibayy), Hermes Agent
 license: MIT

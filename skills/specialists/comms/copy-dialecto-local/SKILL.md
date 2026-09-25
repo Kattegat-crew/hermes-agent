@@ -1,6 +1,7 @@
 ---
 name: copy-dialecto-local
-description: "Use when el copy debe sonar local (dialecto regional)."
+description: "Use when copy must sound local (regional dialect, ads)."
+tags: [copy, dialecto, regionalismo, colombia, perifoneo, guion, localizacion, humanizar]
 version: 1.0.0
 author: Ragnar (NeuralCrew Labs)
 license: MIT

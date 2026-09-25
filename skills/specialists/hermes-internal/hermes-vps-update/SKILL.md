@@ -1,6 +1,7 @@
 ---
 name: hermes-vps-update
-description: "Actualizar Hermes Agent en el VPS a upstream/main preservando la config. Triggers: update hermes, hermes update on the remote host, actualizar hermes, update hermes vps, alinear hermes a upstream."
+description: "Use when updating Hermes Agent on the VPS host."
+tags: [hermes, vps, update, actualizar, upstream, docker, backup, gateway]
 license: MIT
 metadata:
   author: opencode

@@ -1,6 +1,7 @@
 ---
 name: escalada-tecnica
-description: "Escala al agente tecnico tareas imposibles via buzon PROD."
+description: "Use when a task cannot be completed and must be escalated."
+tags: [escalada, tickets, buzon, evidencia, protocolo, handoff]
 ---
 
 # Protocolo de Escalada Tecnica (Regla Bob)

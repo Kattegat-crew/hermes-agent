@@ -1,6 +1,7 @@
 ---
 name: git-worktree-tidy
-description: "Listar, limpiar y podar git worktrees sin perder trabajo sin commitear ni dejar metadatos muertos."
+description: "Use when pruning or cleaning up git worktrees safely"
+tags: [git, worktree, limpieza, tidy, prune, poda, ramas]
 license: MIT
 ---
 

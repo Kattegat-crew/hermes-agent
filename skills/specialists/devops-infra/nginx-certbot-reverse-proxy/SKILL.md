@@ -1,6 +1,7 @@
 ---
 name: nginx-certbot-reverse-proxy
-description: Use when adding HTTPS domains to apps running behind a shared nginx proxy on Coolify, configuring reverse proxy rules for webhook endpoints, or managing Let's Encrypt certificates with certbot.
+description: "Use when adding HTTPS domains behind a shared nginx proxy"
+tags: [nginx, certbot, reverse-proxy, tls, letsencrypt, coolify, webhook-routing, devops]
 ---
 
 # Nginx + Certbot Reverse Proxy

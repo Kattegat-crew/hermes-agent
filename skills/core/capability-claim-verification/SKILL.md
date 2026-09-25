@@ -1,6 +1,6 @@
 ---
 name: capability-claim-verification
-description: "Use when a config/capability claim needs read-only proof."
+description: "Use when verifying a config or capability claim"
 version: 1.0.0
 author: curator-ragnar
 triggers:

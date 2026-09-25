@@ -1,6 +1,7 @@
 ---
 name: colombia-juegos-promocionales
-description: >
+description: "Use when drafting Colombia casino promotion compliance."
+tags: [colombia, legal, compliance, coljuegos, promociones, datos]
   Usar al redactar compliance de promociones en Colombia.
 version: 1.0.0
 author: hermes

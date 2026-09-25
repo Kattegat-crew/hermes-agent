@@ -1,6 +1,7 @@
 ---
 name: blocked-page-recovery
 description: "Use when a fetch fails: 403/429, paywall, WAF, bot wall."
+tags: [paywall, 403, waf, wayback, archive, fallback, scraping, procedencia]
 version: 1.0.0
 author: Hermes Agent
 license: MIT

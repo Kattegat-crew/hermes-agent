@@ -1,6 +1,7 @@
 ---
 name: x-tweet-scrape
-description: Extract tweet content from X/Twitter status URLs using fx(fixupx.com metadata extraction, Nitter fallback, and web search for X Article content.
+description: "Use when extracting tweet or X Article content by URL."
+tags: [twitter, x, scraping, scrape, fixupx, fxtwitter, articulo, metadata]
 ---
 
 # X/Twitter Tweet Scraping Skill

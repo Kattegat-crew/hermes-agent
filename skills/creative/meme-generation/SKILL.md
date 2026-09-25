@@ -1,6 +1,7 @@
 ---
 name: meme-generation
-description: Create meme PNGs from templates with Pillow text overlay.
+description: "Use when creating a meme image from a template."
+tags: [meme, memes, imagen, humor, plantilla, template, pillow]
 version: 2.0.0
 author: adanaleycio
 license: MIT

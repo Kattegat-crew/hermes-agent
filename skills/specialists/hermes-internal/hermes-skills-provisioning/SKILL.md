@@ -1,6 +1,7 @@
 ---
 name: hermes-skills-provisioning
-description: "Install skills into Hermes profiles from catalogs."
+description: "Use when installing skills into Hermes profiles."
+tags: [skills, provisioning, perfiles, symlinks, catalogo, hub, graphify, materializar]
 version: 1.0.0
 author: Ragnar
 triggers:

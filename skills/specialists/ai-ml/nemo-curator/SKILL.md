@@ -1,6 +1,7 @@
 ---
 name: nemo-curator
-description: "Curate LLM training data: dedupe, filter, PII redaction."
+description: "Use when curating LLM training data at scale."
+tags: [data-curation, deduplication, nemo-curator, nvidia, gpu, pii, filtering, llm]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

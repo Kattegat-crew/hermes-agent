@@ -1,6 +1,7 @@
 ---
 name: hermes-gateway-http-api
-description: "Use when exposing Hermes gateway HTTP API for remote login."
+description: "Use when exposing the Hermes gateway HTTP API for login."
+tags: [hermes, gateway, api-server, remote-login, sessions]
 category: devops
 ---
 

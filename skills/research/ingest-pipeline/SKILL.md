@@ -3,8 +3,8 @@ name: ingest-pipeline
 version: 1.0.0
 author: Ragnar
 license: MIT
-description: "Ingest X/TikTok/GitHub links into wiki + brain + graph."
-tags: [ingesta, brain, wiki, fxtwitter, graphify, knowledge-graph]
+description: "Use when ingesting an X/TikTok/GitHub link into brain."
+tags: [ingesta, brain, wiki, outline, fxtwitter, tiktok, graphify]
 related_skills: [knowledge-consolidation, brain-knowledge-base, outline-wiki-ops, twitter-telegram-ingestion, tiktok-ingestion, graphify]
 ---
 

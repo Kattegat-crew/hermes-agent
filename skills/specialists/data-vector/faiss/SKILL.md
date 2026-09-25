@@ -1,6 +1,7 @@
 ---
 name: faiss
-description: Fast vector similarity search at billion scale.
+description: "Use when doing billion-scale vector similarity search"
+tags: [faiss, vector-search, busqueda-vectorial, rag, knn, embeddings, similitud]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

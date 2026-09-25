@@ -1,6 +1,7 @@
 ---
 name: video-ai-generator
-description: End-to-end 9:16 vertical AI video generation pipeline (Reels, TikTok, Shorts) with ActivePieces, reel-worker (:8090), TTS, Image-to-Video, audio ducking, and automated rendering.
+description: "Use when running the 9:16 AI reel pipeline (reel-worker)."
+tags: [video, reels, pipeline, activepieces, tts, 9x16, vertical]
 license: MIT
 compatibility: hermes, opencode
 ---

@@ -1,6 +1,7 @@
 ---
 name: github-push-container
-description: >
+description: "Use when pushing to GitHub from the Hermes container."
+tags: [github, git, push, token, contenedor, container]
   Push a GitHub desde el contenedor: token y auditoría.
 version: 1.0.0
 author: Ragnar

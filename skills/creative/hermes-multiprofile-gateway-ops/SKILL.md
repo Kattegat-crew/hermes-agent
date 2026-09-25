@@ -1,6 +1,7 @@
 ---
 name: hermes-multiprofile-gateway-ops
-description: "Debug multi-profile Hermes gateway: routing, restart."
+description: "Use when debugging a multi-profile Hermes gateway."
+tags: [hermes, gateway, s6, perfiles, discord, whatsapp, multiplex, ops]
 ---
 
 # Hermes Multiprofile Gateway Ops

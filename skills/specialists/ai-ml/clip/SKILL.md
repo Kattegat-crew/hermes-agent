@@ -1,6 +1,7 @@
 ---
 name: clip
-description: Zero-shot image classification and image-text search.
+description: "Use when doing zero-shot image classification with CLIP."
+tags: [clip, vision, zero-shot, clasificacion-imagenes, multimodal, embeddings, openai]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

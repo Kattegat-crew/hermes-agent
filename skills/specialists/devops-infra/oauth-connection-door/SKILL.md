@@ -1,6 +1,7 @@
 ---
 name: oauth-connection-door
-description: Client OAuth connect pages and per-tenant agent credentials.
+description: "Use when connecting client accounts through the OAuth door."
+tags: [oauth, multi-tenant, activepieces, conexiones, credenciales]
 ---
 
 # OAuth Connection Door (persistent multi-tenant connections)

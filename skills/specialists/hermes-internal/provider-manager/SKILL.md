@@ -1,6 +1,7 @@
 ---
 name: provider-manager
-description: Manage AI LLM providers, models, context windows, and active defaults in Hermes Agent config.yaml. Use when the user asks to add a new provider, switch models, list providers, or test connectivity.
+description: "Use when adding, switching or testing an LLM provider."
+tags: [providers, config, modelos, hermes, llm, api-key]
 ---
 
 # Provider Manager Skill

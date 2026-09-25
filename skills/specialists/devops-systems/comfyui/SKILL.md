@@ -1,6 +1,7 @@
 ---
 name: comfyui
-description: Generate images, video, and audio via diffusion workflows.
+description: "Use when generating images/video/audio via ComfyUI."
+tags: [comfyui, image-generation, stable-diffusion, flux, video-generation, workflows, creativo, api]
 version: 5.1.0
 author: [kshitijk4poor, alt-glitch, purzbeats]
 license: MIT

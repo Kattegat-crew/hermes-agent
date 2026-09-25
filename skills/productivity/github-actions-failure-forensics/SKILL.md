@@ -1,6 +1,7 @@
 ---
 name: github-actions-failure-forensics
-description: Use when a GitHub Actions/CI workflow run fails or is red.
+description: "Use when a GitHub Actions workflow run fails or is red"
+tags: [github, actions, ci, workflow, diagnostico, logs, api]
 author: Ragnar
 version: "1.0"
 created: 2026-09-06

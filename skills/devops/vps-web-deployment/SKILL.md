@@ -1,7 +1,8 @@
 ---
 name: vps-web-deployment
 version: 1.1.0
-description: Deploy static sites to VPS with NPM and migration.
+description: "Use when deploying static sites to VPS via NPM."
+tags: [deploy, vps, nginx, npm, static, migracion]
 author: ragnar
 triggers:
   - deploy static site to VPS

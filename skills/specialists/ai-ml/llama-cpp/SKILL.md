@@ -1,6 +1,7 @@
 ---
 name: llama-cpp
-description: llama.cpp local GGUF inference + HF Hub model discovery.
+description: "Use when running local GGUF models or picking quants."
+tags: [llama-cpp, gguf, cuantizacion, huggingface-hub, inferencia, cpu, gpu, local]
 version: 2.1.2
 author: Orchestra Research
 license: MIT

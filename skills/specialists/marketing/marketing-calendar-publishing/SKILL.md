@@ -1,6 +1,7 @@
 ---
 name: marketing-calendar-publishing
-description: Use when publishing bingo-sep2026 pieces via Composio.
+description: "Use when publishing bingo-sep2026 calendar pieces."
+tags: [marketing, calendario, calendar, publicacion, composio, instagram, facebook, crons]
 version: 1.0.0
 author: Ragnar
 ---

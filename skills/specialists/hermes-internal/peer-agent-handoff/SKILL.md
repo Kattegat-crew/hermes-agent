@@ -1,6 +1,7 @@
 ---
 name: peer-agent-handoff
 description: "Use when handing work to or verifying a peer agent."
+tags: [multi-agente, handoff, bot-chat, verificacion, perfiles, hermes]
 version: 1.0.0
 category: autonomous-ai-agents
 author: Ragnar

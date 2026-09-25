@@ -1,6 +1,7 @@
 ---
 name: ai-image-provider-api
-description: "Use when: APIs de imagen (flux-2-klein, fal.ai)."
+description: "Use when generating campaign images via provider APIs."
+tags: [imagen, api, fal-ai, flux, nan-builders, key-art, proveedor]
 ---
 
 # APIs de generación de imagen — operación de proveedores

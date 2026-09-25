@@ -1,6 +1,7 @@
 ---
 name: composio-social-publishing
-description: "Publish to Instagram/Facebook via Composio CLI."
+description: "Use when publishing to Instagram/Facebook via Composio."
+tags: [instagram, facebook, composio, publicacion, social, api]
 version: 1.0.0
 author: Ragnar
 license: MIT

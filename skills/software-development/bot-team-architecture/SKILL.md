@@ -1,6 +1,7 @@
 ---
 name: bot-team-architecture
-description: Use when designing Hermes multi-agent bot teams/rosters.
+description: "Use when designing Hermes multi-agent bot teams/rosters."
+tags: [agentes, agents, multiagente, roster, perfiles, profiles, arquitectura]
 version: 1.0.0
 author: Ragnar
 triggers:

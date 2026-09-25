@@ -1,6 +1,7 @@
 ---
 name: xlsx
-description: Create, read, edit Excel .xlsx workbooks and CSVs.
+description: "Use when creating, reading or editing .xlsx and CSV"
+tags: [excel, xlsx, spreadsheet, openpyxl, csv, hojas-de-calculo, formulas, reportes]
 version: 1.1.0
 author: Nous Research
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: email-inbox-triage
-description: "Triage an inbox: prioritize threads, draft replies safely."
+description: "Use when triaging an inbox and drafting replies"
+tags: [email, correo, inbox, bandeja, triage, replies, respuestas, productividad]
 version: 0.1.0
 author: Ben Barclay (benbarclay), Hermes Agent
 license: MIT

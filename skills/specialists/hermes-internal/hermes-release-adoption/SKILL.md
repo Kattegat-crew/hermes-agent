@@ -1,6 +1,7 @@
 ---
 name: hermes-release-adoption
-description: Use when updating Hermes or reporting version/novedades.
+description: "Use when updating Hermes or reporting version/novelties."
+tags: [hermes, update, version, release, migracion, flota, novedades]
 ---
 
 # Hermes Release Adoption — versión viva y migración de features nativas

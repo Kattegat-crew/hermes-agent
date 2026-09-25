@@ -1,6 +1,7 @@
 ---
 name: slime
-description: RL post-training for LLMs with Megatron and SGLang.
+description: "Use when RL post-training LLMs with Megatron and SGLang."
+tags: [slime, rl, grpo, megatron, sglang, post-training]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

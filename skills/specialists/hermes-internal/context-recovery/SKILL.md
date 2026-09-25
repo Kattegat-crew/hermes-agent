@@ -1,6 +1,7 @@
 ---
 name: context-recovery
-description: Recuperar la conversación después de un error del provider (JSON corrupto, 400 errors, context loss). Lee archivos locales como fuente de verdad y reconstruye el contexto.
+description: "Use when recovering context after a provider error."
+tags: [contexto, recovery, provider-error, litellm, brain, sesiones, continuidad]
 ---
 
 # Context Recovery

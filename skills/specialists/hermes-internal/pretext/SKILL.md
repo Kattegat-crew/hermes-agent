@@ -1,6 +1,7 @@
 ---
 name: pretext
-description: Build creative browser demos with DOM-free text layout.
+description: "Use when building a creative text-layout browser demo."
+tags: [pretext, tipografia, canvas, creative-coding, text-layout, ascii]
 version: 1.0.0
 author: Hermes Agent
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: discord-reporter
-description: >
+description: "Use when sending a report or notice to Discord on request."
+tags: [discord, reportes, notificaciones, mensajeria]
   Send status reports, summaries, and notifications to Discord channels.
   Use when the user wants to send a report, update, or message to a Discord
   channel or specific user. Triggered on demand — not automatic.

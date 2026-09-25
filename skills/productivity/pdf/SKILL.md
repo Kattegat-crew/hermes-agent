@@ -1,6 +1,7 @@
 ---
 name: pdf
-description: "PDF files: create, read, merge, fill, OCR, edit text."
+description: "Use when creating, reading, merging or filling PDFs"
+tags: [pdf, documentos, formularios, ocr, pypdf, reportlab, pdfplumber, cifrado]
 version: 1.1.0
 author: Nous Research
 license: MIT

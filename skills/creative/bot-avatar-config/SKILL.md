@@ -1,6 +1,7 @@
 ---
 name: bot-avatar-config
-description: "Use when: instalar avatares bots crew + refresco Desktop."
+description: "Use when installing crew avatars or refreshing Desktop"
+tags: [avatares, bot-avatar, perfiles-hermes, hermes-desktop, pillow, qa-visual, discord]
 category: neuralcrew-ops
 version: 1.0.0
 ---

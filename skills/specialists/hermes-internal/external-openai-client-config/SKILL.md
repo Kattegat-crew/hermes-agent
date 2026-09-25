@@ -1,6 +1,7 @@
 ---
 name: external-openai-client-config
-description: Add OpenAI-compatible providers to Brave or AI clients.
+description: "Use when adding an OpenAI-compatible provider to a client."
+tags: [openai-compatible, brave, leo, byom, endpoint, provider, api]
 ---
 
 # Configurar provider OpenAI-compatible en clientes AI externos

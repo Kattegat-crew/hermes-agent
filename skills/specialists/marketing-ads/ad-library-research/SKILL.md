@@ -1,6 +1,7 @@
 ---
 name: ad-library-research
-description: 'Scrape Meta Ad Library and rank ads by longevity, no login.'
+description: "Use when researching Meta Ad Library competitor ads."
+tags: [ads, meta, ad-library, scraping, competencia, creativos, research]
 metadata:
   hermes:
     tags: [research, ads, meta, competencia, creativos]

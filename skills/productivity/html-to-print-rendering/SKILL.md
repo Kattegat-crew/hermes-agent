@@ -1,6 +1,7 @@
 ---
 name: html-to-print-rendering
-description: "Render HTML assets to PDF + hi-res PNG via headless browser."
+description: "Use when rendering HTML to print-ready PDF and hi-res PNG."
+tags: [pdf, png, render, headless, html, folleto, imprenta]
 version: 1.0.0
 author: Ragnar
 triggers:

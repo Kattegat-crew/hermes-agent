@@ -1,6 +1,7 @@
 ---
 name: drug-discovery
-description: "Drug discovery: ChEMBL search, drug-likeness, interactions."
+description: "Use when researching drugs, targets or drug-likeness."
+tags: [farmacos, chembl, pubchem, openfda, admet, quimica, farmacologia]
 platforms: [linux, macos, windows]
 version: 1.0.0
 author: bennytimz

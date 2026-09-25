@@ -1,6 +1,7 @@
 ---
 name: "gcp-cloud-architect"
-description: "Design GCP architectures for startups and enterprises. Use when asked to design Google Cloud infrastructure, deploy to GKE or Cloud Run, configure BigQuery pipelines, optimize GCP costs, or migrate to GCP. Covers Cloud Run, GKE, Cloud Functions, Cloud SQL, BigQuery, and cost optimization."
+description: "Use when designing GCP architecture or Terraform IaC."
+tags: [gcp, arquitectura, cloud-run, gke, bigquery, terraform, costos, diseno]
 ---
 
 # GCP Cloud Architect

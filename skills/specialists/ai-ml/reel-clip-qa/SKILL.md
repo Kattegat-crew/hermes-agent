@@ -1,11 +1,11 @@
 ---
 name: reel-clip-qa
-description: "Use when approving or debugging a Seedance/Monid reel clip."
+description: "Use when approving or debugging a Seedance reel clip."
 version: 1.0.0
 author: Ragnar (NeuralCrew Labs)
 license: MIT
 category: creative
-tags: [reels, seedance, monid, qa, stt, cloudflare-cache, prompts]
+tags: [reels, seedance, monid, qa, stt, cdn, prompts]
 ---
 
 # Reel Clip QA — Seedance/Monid clips: STT verification, CDN cache truth, and dialogue prompts

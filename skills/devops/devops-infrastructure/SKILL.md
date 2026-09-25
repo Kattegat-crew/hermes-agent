@@ -1,6 +1,7 @@
 ---
 name: devops-infrastructure
-description: Manage server services and containers.
+description: "Use when auditing servers, containers or health monitors."
+tags: [devops, infraestructura, monitoreo, contenedores, oom, salud, crons, conexiones]
 ---
 # DevOps & Infrastructure Monitoring
 

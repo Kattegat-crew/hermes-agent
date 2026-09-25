@@ -1,6 +1,7 @@
 ---
 name: qdrant
-description: Vector search engine for production RAG systems.
+description: "Use when doing vector search or RAG with Qdrant."
+tags: [qdrant, vectores, rag, vector-search, embeddings, hnsw]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

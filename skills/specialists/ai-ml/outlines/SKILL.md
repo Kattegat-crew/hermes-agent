@@ -1,6 +1,7 @@
 ---
 name: outlines
-description: "Outlines: structured JSON/regex/Pydantic LLM generation."
+description: "Use when forcing LLM output to valid JSON, regex or Pydantic"
+tags: [outlines, json, pydantic, grammar, structured, vllm, llamacpp, schemas]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: marketing-campaign
-description: "Generate complete monthly content marketing plans for any casino, bar, restaurant, or entertainment business — video scripts, event systems, graphic briefs, and publication calendars as .docx documents. Use when asked to create marketing campaigns, content calendars, video scripts, event plans, promotional graphics, or promotional strategies for any company."
+description: "Use when generating monthly casino marketing plans (.docx)."
+tags: [marketing, campana, docx, guiones, calendario, casino]
 ---
 
 # Marketing Campaign Skill

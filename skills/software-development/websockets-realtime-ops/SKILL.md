@@ -1,6 +1,7 @@
 ---
 name: websockets-realtime-ops
-description: Real-time WebSocket architectures, reconnection strategies, heartbeat mechanisms, and pub/sub scaling.
+description: "Use when building realtime WebSocket resilience"
+tags: [websockets, realtime, reconexion, heartbeat, pubsub, redis, escalado, tiempo-real]
 license: MIT
 compatibility: opencode
 ---

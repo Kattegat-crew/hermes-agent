@@ -1,6 +1,7 @@
 ---
 name: web-serving-diagnosis
-description: >-
+description: "Use when a VPS web page stops loading."
+tags: [web, nginx, https, vps, diagnostico, ssl]
   Diagnose VPS web page access issues.
 category: devops
 metadata:

@@ -1,6 +1,7 @@
 ---
 name: zig-best-practices
-description: Idiomatic Zig programming, explicit memory allocation, comptime metaprogramming, and error handling.
+description: "Use when writing Zig systems code"
+tags: [zig, sistemas, allocators, comptime, memoria, low-level]
 license: MIT
 compatibility: opencode
 ---

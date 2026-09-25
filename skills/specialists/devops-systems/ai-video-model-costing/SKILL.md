@@ -1,6 +1,7 @@
 ---
 name: ai-video-model-costing
-description: Use when comparing AI video model costs for reels.
+description: "Use when choosing or pricing an AI video model."
+tags: [video-ia, costos, precios, reels, hailuo, minimax, presupuesto, monid]
 ---
 
 # AI Video Model Costing & Selection

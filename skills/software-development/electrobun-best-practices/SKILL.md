@@ -1,6 +1,7 @@
 ---
 name: electrobun-best-practices
-description: Electrobun desktop app development, native webview configurations, CEF bundling, and IPC bridges.
+description: "Use when building Electrobun desktop apps"
+tags: [electrobun, desktop, bun, webview, cef, ipc, escritorio]
 license: MIT
 compatibility: opencode
 ---

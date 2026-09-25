@@ -1,6 +1,7 @@
 ---
 name: axolotl
-description: "Axolotl: YAML LLM fine-tuning (LoRA, DPO, GRPO)."
+description: "Use when fine-tuning LLMs with Axolotl YAML configs."
+tags: [axolotl, fine-tuning, lora, qlora, dpo, llm, yaml, deepspeed]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

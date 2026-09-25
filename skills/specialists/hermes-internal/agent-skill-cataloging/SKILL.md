@@ -1,6 +1,7 @@
 ---
 name: agent-skill-cataloging
-description: Catalog skills per agent/specialist bot (N per bot).
+description: "Use when building a per-agent skill catalog (N per bot)."
+tags: [skills, catalogo, catalog, agentes, bot, roster, importacion, docx]
 version: 1.0.0
 triggers:
   - catálogo: catálogo de skills / lista de skills por bot / skills por especialista / cuántas skills

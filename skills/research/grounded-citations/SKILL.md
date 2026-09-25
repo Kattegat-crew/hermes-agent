@@ -1,6 +1,7 @@
 ---
 name: grounded-citations
-description: "Ground answers and documents in cited, verifiable sources."
+description: "Use when a deliverable needs cited, verifiable sources."
+tags: [citas, citations, fuentes, grounding, verificacion, fact-check, research]
 version: 1.1.0
 author: Hermes Agent + Teknium
 license: MIT

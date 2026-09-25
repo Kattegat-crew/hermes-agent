@@ -1,6 +1,7 @@
 ---
 name: sdd-explore
-description: "Explore SDD ideas before committing to a change. Trigger: orchestrator launches exploration or requirement clarification."
+description: "Use when exploring an idea before committing to a change."
+tags: [sdd, exploracion, investigacion, opciones, analisis, openspec, subagente]
 disable-model-invocation: true
 user-invocable: false
 license: MIT

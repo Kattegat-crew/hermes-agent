@@ -1,6 +1,7 @@
 ---
 name: react-best-practices
-description: Modern React patterns, Server/Client components separation, hook architecture, and performance.
+description: "Use when building React 18/19 apps"
+tags: [react, componentes, hooks, frontend, ssr, state, performance]
 license: MIT
 compatibility: opencode
 ---

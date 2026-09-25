@@ -1,6 +1,7 @@
 ---
 name: oauth-connection-gateway
-description: Usar al construir puertas OAuth y conexiones multi-tenant.
+description: "Use when building multi-tenant OAuth connection gateways."
+tags: [oauth, conexiones, connections, multi-tenant, activepieces, google]
 version: "1.0"
 created: 2026-08-26
 category: devops

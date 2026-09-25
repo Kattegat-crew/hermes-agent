@@ -1,6 +1,7 @@
 ---
 name: python-debugpy
-description: "Debug Python: pdb REPL + debugpy remote (DAP)."
+description: "Use when debugging Python with pdb or debugpy"
+tags: [python, debugging, pdb, debugpy, breakpoints, dap, post-mortem, depuracion]
 version: 1.0.0
 author: Hermes Agent
 license: MIT

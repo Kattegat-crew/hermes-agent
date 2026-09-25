@@ -1,6 +1,7 @@
 ---
 name: branch-pr
-description: "Create Gentle AI pull requests with issue-first checks. Trigger: creating, opening, or preparing PRs for review."
+description: "Use when creating or preparing a pull request."
+tags: [github, pull-request, branch, commits, ci, shellcheck, pr]
 license: Apache-2.0
 metadata:
   author: gentleman-programming

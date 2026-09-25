@@ -1,6 +1,7 @@
 ---
 name: "migration-architect"
-description: "Zero-downtime migration planning, compatibility validation, and rollback strategy generation. Tools for system, database, and infrastructure migrations with minimal business impact. Use when planning a database migration, infrastructure cutover, system replacement, or any high-risk transition that needs explicit rollback paths."
+description: "Use when planning a zero-downtime migration or rollback."
+tags: [migracion, migration, rollback, zero-downtime, cutover, compatibilidad, bases-de-datos, riesgos]
 ---
 
 # Migration Architect

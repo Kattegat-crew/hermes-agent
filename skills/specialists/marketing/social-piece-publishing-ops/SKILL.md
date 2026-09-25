@@ -1,6 +1,7 @@
 ---
 name: social-piece-publishing-ops
-description: Use when publishing or verifying social posts via Composio.
+description: "Use when publishing or verifying social posts."
+tags: [composio, instagram, facebook, publicacion, verificacion, social]
 version: 1.0.0
 author: Ragnar
 ---

@@ -1,6 +1,7 @@
 ---
 name: reel-portal-protocol
-description: Use when producing campaign reel pieces for the NC portal.
+description: "Use when producing campaign reel pieces for NC portal."
+tags: [reels, portal, campanas, guiones, seedance, publicacion, qa, neuralcrew]
 ---
 
 # Protocolo de Reel — Portal NC Reels (ESTRICTO)

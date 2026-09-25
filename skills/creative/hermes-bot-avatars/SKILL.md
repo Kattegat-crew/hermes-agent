@@ -1,6 +1,7 @@
 ---
 name: hermes-bot-avatars
-description: Fix or set Hermes Desktop bot avatars; RPC, caps, cache.
+description: "Use when setting or fixing a Hermes bot avatar image."
+tags: [hermes, avatar, bots, desktop, perfiles, imagen, rpc]
 version: 1.0.0
 author: Ragnar
 triggers:

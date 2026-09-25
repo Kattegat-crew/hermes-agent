@@ -1,6 +1,7 @@
 ---
 name: google-drive-access
-description: >
+description: "Use when accessing or downloading Google Drive files."
+tags: [google, drive, api, oauth, download, search]
   Usar cuando pida acceder a archivos o links de Google Drive.
 version: 1.0.0
 author: hermes

@@ -1,6 +1,7 @@
 ---
 name: activepieces-google-access
-description: "Use when accessing Google services via ActivePieces."
+description: "Use when accessing Google (Gmail/Drive) via AP."
+tags: [google, gmail, drive, calendar, activepieces, oauth, mcp]
 version: 1.0.0
 author: Ragnar
 created: 2026-09-11

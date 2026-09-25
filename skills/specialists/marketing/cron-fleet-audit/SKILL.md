@@ -1,6 +1,7 @@
 ---
 name: cron-fleet-audit
-description: Use when auditing every Hermes cron job across profiles.
+description: "Use when auditing every Hermes cron job across profiles."
+tags: [cron, auditoria, flota, perfiles, devops, watchdog]
 version: "1.0"
 author: Ragnar
 created: 2026-09-10

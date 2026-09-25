@@ -1,6 +1,7 @@
 ---
 name: discord-server-admin
-description: Create Discord channels and map them to Hermes profiles.
+description: "Use when creating Discord channels for Hermes profiles."
+tags: [discord, canales, hermes, perfiles, routing, api, gateway]
 version: 1.0.0
 author: Ragnar
 triggers:

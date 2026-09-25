@@ -1,6 +1,7 @@
 ---
 name: data-driven-team-reports
-description: Team reports from verified data, delivered to Discord.
+description: "Use when building verified team-activity reports."
+tags: [informes, reports, discord, webhook, state-db, verificacion, cron]
 ---
 
 # Data-Driven Team Reports

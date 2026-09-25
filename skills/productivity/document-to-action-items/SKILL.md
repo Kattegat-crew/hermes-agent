@@ -1,6 +1,7 @@
 ---
 name: document-to-action-items
-description: "Extract cited obligations, deadlines, tasks from documents."
+description: "Use when turning documents into cited tasks and deadlines."
+tags: [documentos, ocr, action-items, deadlines, extraccion, citas, contratos]
 version: 0.1.0
 author: Ben Barclay (benbarclay), Hermes Agent
 license: MIT

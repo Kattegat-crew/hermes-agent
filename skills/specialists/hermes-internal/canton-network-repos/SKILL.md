@@ -1,6 +1,7 @@
 ---
 name: canton-network-repos
-description: Canton Network smart contract architecture, Daml integration, LocalNet development, and repo navigation.
+description: "Use when developing Daml apps on Canton Network."
+tags: [canton, daml, smart-contracts, blockchain, localnet, api, jwt]
 license: MIT
 compatibility: opencode
 ---

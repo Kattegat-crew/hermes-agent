@@ -1,6 +1,7 @@
 ---
 name: sdd-design
-description: "Create the SDD technical design and architecture approach. Trigger: orchestrator launches design for a change."
+description: "Use when designing the technical approach for an SDD change."
+tags: [sdd, diseno, arquitectura, threat-matrix, decisiones, openspec, subagente]
 disable-model-invocation: true
 user-invocable: false
 license: MIT

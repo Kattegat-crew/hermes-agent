@@ -1,6 +1,7 @@
 ---
 name: modal
-description: Serverless GPU cloud for ML jobs and model APIs.
+description: "Use when running ML jobs on serverless GPU cloud"
+tags: [modal, serverless, gpu, cloud, deployment, ml, inferencia]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

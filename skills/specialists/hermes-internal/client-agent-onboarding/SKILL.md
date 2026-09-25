@@ -1,6 +1,7 @@
 ---
 name: client-agent-onboarding
-description: Perfilar clientes y generar SOUL.md vía /soul por WhatsApp.
+description: "Use when onboarding a client agent and writing its SOUL."
+tags: [onboarding, soul, cliente, whatsapp, encuesta, agente, perfiles]
 version: 1.0.0
 author: Ragnar
 triggers:

@@ -1,6 +1,7 @@
 ---
 name: cloudflare-temporary-deploy
-description: Deploy a Worker live, no account, via wrangler --temporary.
+description: "Use when deploying a Worker without an account."
+tags: [cloudflare, workers, wrangler, deploy, serverless, temporal, devops]
 version: 1.0.0
 author: Hermes Agent
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: dcf-model
-description: Build discounted cash flow valuation workbooks in Excel.
+description: "Use when building DCF valuation Excel workbooks."
+tags: [finanzas, dcf, valuacion, excel, openpyxl, wacc]
 version: 1.0.0
 author: Anthropic (adapted by Nous Research)
 license: Apache-2.0

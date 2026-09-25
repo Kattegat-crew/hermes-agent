@@ -1,6 +1,7 @@
 ---
 name: peft
-description: Fine-tune large LLMs with LoRA on limited GPU memory.
+description: "Use when fine-tuning LLMs with LoRA or QLoRA"
+tags: [peft, lora, qlora, fine-tuning, afinado, adapters, gpu, memory]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

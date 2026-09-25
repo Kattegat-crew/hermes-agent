@@ -1,6 +1,7 @@
 ---
 name: siyuan
-description: Query and edit a SiYuan knowledge base via its API.
+description: "Use when querying or editing a SiYuan knowledge base"
+tags: [siyuan, notas, pkm, knowledge-base, api, curl, documentacion, sql]
 version: 1.0.0
 author: FEUAZUR
 license: MIT

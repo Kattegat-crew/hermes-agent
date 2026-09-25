@@ -1,11 +1,11 @@
 ---
 name: docx-render-verification
-description: "Use when un DOCX necesita QA visual y LibreOffice no existe."
+description: "Use when QA-ing a DOCX and LibreOffice isn't installed."
 version: 1.0.1
 author: Ragnar
 license: MIT
 platforms: [linux]
-tags: [docx, docker, libreoffice, qa, render]
+tags: [docx, docker, libreoffice, qa, render, vision]
 metadata:
   hermes:
     tags: [docx, docker, libreoffice, qa, render]

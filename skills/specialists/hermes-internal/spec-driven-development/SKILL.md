@@ -1,6 +1,7 @@
 ---
 name: spec-driven-development
-description: Use when doing SDD or designing multi-agent rosters.
+description: "Use when writing an OpenSpec spec before coding."
+tags: [sdd, openspec, spec, gates, multiagente, roster, gentle-ai]
 version: 1.0.0
 author: Ragnar
 triggers:

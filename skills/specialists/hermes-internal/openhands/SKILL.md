@@ -1,6 +1,7 @@
 ---
 name: openhands
-description: Delegate coding to OpenHands CLI (model-agnostic, LiteLLM).
+description: "Use when delegating coding to the OpenHands CLI"
+tags: [openhands, coding-agent, agente-codigo, litellm, cli, automation, delegation]
 version: 0.1.0
 author: Tim Koepsel (xzessmedia), Hermes Agent
 license: MIT

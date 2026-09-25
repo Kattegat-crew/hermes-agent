@@ -1,6 +1,7 @@
 ---
 name: product-price-monitor
-description: "Watch product, flight, or listing prices; alert on target."
+description: "Use when watching a price or stock for an alert."
+tags: [precios, monitoring, alertas, cron, ecommerce, vuelos]
 version: 0.1.0
 author: Ben Barclay (benbarclay), Hermes Agent
 license: MIT

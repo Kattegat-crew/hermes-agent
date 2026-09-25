@@ -1,6 +1,7 @@
 ---
 name: hermes-production-deployment
-description: >
+description: "Use when planning a multi-client Hermes deployment."
+tags: [hermes, deployment, multitenant, vps, perfiles, neural-brain]
   Production deployment of Hermes agents for multiple clients.
   Includes: full VPS setup plan with dependency mapping, Neural-Brain
   (Gentle AI + Engram + GGA), Tailscale network topology, DNS architecture,

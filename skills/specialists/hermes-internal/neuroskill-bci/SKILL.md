@@ -1,6 +1,7 @@
 ---
 name: neuroskill-bci
-description: "Use live BCI cognitive and mood state from NeuroSkill."
+description: "Use when reading live BCI cognitive state from NeuroSkill."
+tags: [bci, eeg, neurofeedback, health, focus, metrics]
 platforms: [linux, macos, windows]
 version: 1.0.0
 author: Hermes Agent + Nous Research

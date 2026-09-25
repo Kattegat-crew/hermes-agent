@@ -1,6 +1,7 @@
 ---
 name: paquetes-compliance-promociones
-description: >
+description: "Use when one campaign needs a legal pack per company."
+tags: [legal, compliance, docx, promociones, multiempresa, casinos, colombia]
   T&C multi-empresa: un documento legal por organizador.
 version: 1.0.0
 author: hermes

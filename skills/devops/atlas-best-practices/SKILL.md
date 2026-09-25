@@ -1,6 +1,7 @@
 ---
 name: atlas-best-practices
-description: Atlas database schema management, declarative migrations, schema diffing, and database CI/CD validation.
+description: "Use when diffing, linting or applying DB schema migrations."
+tags: [atlas, migraciones, esquema, postgres, mysql, ci-cd, declarativo, hcl]
 license: MIT
 compatibility: hermes, opencode, bash
 metadata:

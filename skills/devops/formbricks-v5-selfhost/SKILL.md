@@ -1,6 +1,7 @@
 ---
 name: formbricks-v5-selfhost
-description: "Trigger: Formbricks, formbricks v5, formbricks self-hosted, formbricks deploy/reset, error al cargar recursos, invalid cuid2. Deploy or repair the Formbricks v5 Docker stack (formbricks + hub + cube + migrate) on existing Postgres/Redis."
+description: "Use when deploying or fixing a self-hosted Formbricks v5."
+tags: [formbricks, self-hosted, docker, postgres, encuestas, deploy, cuid2, migracion]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

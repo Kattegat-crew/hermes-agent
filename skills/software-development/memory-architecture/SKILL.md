@@ -1,6 +1,7 @@
 ---
 name: memory-architecture
 description: "Use when routing a fact/procedure to the right memory layer."
+tags: [memoria, memory, enrutamiento, routing, persistencia, capas, knowledge]
 version: 1.0.0
 author: Ragnar
 license: MIT

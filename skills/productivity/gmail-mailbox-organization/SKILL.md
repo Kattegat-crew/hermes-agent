@@ -1,6 +1,7 @@
 ---
 name: gmail-mailbox-organization
-description: "Label, archive and filter Gmail mailboxes safely, verified."
+description: "Use when labeling, archiving or filtering Gmail."
+tags: [gmail, email, labels, filtros, oauth, inbox]
 version: 1.0.0
 author: Ragnar (NeuralCrew Labs)
 license: MIT

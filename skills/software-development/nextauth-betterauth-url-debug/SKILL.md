@@ -1,6 +1,7 @@
 ---
 name: nextauth-betterauth-url-debug
-description: "Trigger: invalid callback url, invalid callbackURL, callback URL localhost, login redirect loop, localhost:3000 redirect. Debug NextAuth/Better Auth 'invalid callback URL' errors from localhost defaults behind a reverse proxy."
+description: "Use when NextAuth or BetterAuth rejects callback URL"
+tags: [nextauth, better-auth, callback-url, reverse-proxy, docker, auth, variables-env]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

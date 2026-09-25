@@ -1,6 +1,7 @@
 ---
 name: dspy
-description: "DSPy: declarative LM programs, auto-optimize prompts, RAG."
+description: "Use when building DSPy LM programs or optimizers"
+tags: [dspy, prompt-optimization, optimizacion-prompts, rag, lm-programming, declarative, stanford]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

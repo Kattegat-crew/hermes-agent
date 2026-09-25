@@ -1,6 +1,7 @@
 ---
 name: external-model-review
-description: external-model-review — Run reproducible independent reviews of plans, architectures, major content, and release candidates through named external models; preserve provenance, verify findings against source, and amend artifacts safely.
+description: "Use when running an independent model critic review"
+tags: [review, revision, critic, critico, openrouter, provenance, verificacion, llm]
 version: 1.0.1
 license: MIT
 platforms:

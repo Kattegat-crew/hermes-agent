@@ -1,6 +1,7 @@
 ---
 name: twenty-crm-lead-ops
-description: "Trigger: twenty crm custom fields, twenty rest api, twenty crm leads, twenty view fields, twenty lead status, twenty crm automation. Operational guide for schema extension, view customization, and lead lifecycle management in self-hosted Twenty CRM."
+description: "Use when extending Twenty CRM schemas, views or leads."
+tags: [twenty, crm, rest-api, metadata, select, views, sql, leads]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

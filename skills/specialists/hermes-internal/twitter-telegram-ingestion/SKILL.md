@@ -1,6 +1,7 @@
 ---
 name: twitter-telegram-ingestion
-description: "X/Twitter link in Links de X: extract, enrich, save, reply."
+description: "Use when an X link lands in the Links de X group."
+tags: [x, twitter, telegram, ingesta, ingestion, outline, wiki, brain]
 ---
 
 # Twitter/Telegram Ingestion Workflow

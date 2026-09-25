@@ -1,6 +1,7 @@
 ---
 name: hermes-skill-resolution
 description: "Use when a job runs without its skills (name collision)."
+tags: [skills, resolucion, ambiguedad, colision, catalogo, cron, dedupe]
 version: "1.0"
 author: Ragnar (curator)
 created: 2026-09-11

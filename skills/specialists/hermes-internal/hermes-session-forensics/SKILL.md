@@ -1,6 +1,7 @@
 ---
 name: hermes-session-forensics
-description: Use when a Hermes session expired and context is missing.
+description: "Use when a Hermes session expired and context is missing."
+tags: [sesiones, forense, state-db, continuidad, expiracion, gateway, cron]
 version: "1.0"
 author: Ragnar (curator)
 created: 2026-09-10

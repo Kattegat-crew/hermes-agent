@@ -1,6 +1,7 @@
 ---
 name: ragnar-orchestration
-description: "Use when orquestando la flota: plan→subplan→worker."
+description: "Use when orchestrating the fleet: plan, subplan, worker."
+tags: [orquestacion, flota, delegacion, planner, workers]
 ---
 
 # Orquestación Planner → Subplanner → Worker (Nuestro Hermes)

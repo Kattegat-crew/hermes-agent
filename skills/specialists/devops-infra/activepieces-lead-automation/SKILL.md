@@ -1,6 +1,7 @@
 ---
 name: activepieces-lead-automation
-description: Use when automating lead capture flows in ActivePieces (webhook trigger, SMTP email, Google Sheets insert), debugging AP flow failures, or managing MCP OAuth JWT auth for AP tool integration.
+description: "Use when building/debugging ActivePieces lead flows."
+tags: [activepieces, leads, automation, webhook, smtp, sheets, jwt, mcp]
 ---
 
 # ActivePieces Lead Automation

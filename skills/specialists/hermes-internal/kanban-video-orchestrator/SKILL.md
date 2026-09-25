@@ -1,6 +1,7 @@
 ---
 name: kanban-video-orchestrator
-description: Plan and run multi-agent video production pipelines.
+description: "Use when planning a multi-agent video production."
+tags: [video, kanban, multi-agent, orchestration, pipeline, profiles]
 version: 1.0.0
 author: [SHL0MS, alt-glitch]
 license: MIT

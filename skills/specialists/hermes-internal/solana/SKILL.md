@@ -1,6 +1,7 @@
 ---
 name: solana
-description: Query Solana wallets, tokens, txs, and NFTs in USD.
+description: "Use when querying Solana wallets, tokens, txs or NFTs."
+tags: [solana, blockchain, crypto, rpc, spl, nft]
 version: 0.2.0
 author: Deniz Alagoz (gizdusum), enhanced by Hermes Agent
 license: MIT

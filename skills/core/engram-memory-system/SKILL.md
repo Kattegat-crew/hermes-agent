@@ -1,6 +1,7 @@
 ---
 name: engram-memory-system
-description: "Use when setting up Engram MCP memory with Hermes."
+description: "Use when saving, searching or setting up Engram memory"
+tags: [engram, memoria, mcp, persistencia, sqlite, fts, search, knowledge]
 version: 1.0.0
 author: Ragnar
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: ai-chat-share-extraction
 description: "Use when reading a public AI-chat share link's content."
+tags: [chatgpt, share-link, ssr, transcript, extraccion, imagenes, prompts]
 license: Apache-2.0
 metadata:
   author: "roshi"

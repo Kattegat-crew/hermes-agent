@@ -1,6 +1,7 @@
 ---
 name: reel-gallery-deploy
-description: Deploy public reel galleries under reels.neuralcrewlabs.com.
+description: "Use when deploying a public reel gallery to the VPS."
+tags: [reels, galeria, nginx, vps, deploy, static]
 ---
 
 # Galería pública de reels — reels.neuralcrewlabs.com

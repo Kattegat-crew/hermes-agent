@@ -1,7 +1,8 @@
 ---
 name: creative-ideation
 title: Creative Ideation — Routed Library of Creative Methods
-description: "Generate ideas via named methods from creative practice."
+description: "Use when generating ideas via named methods."
+tags: [creatividad, ideacion, metodos, brainstorming, innovacion]
 version: 2.1.0
 author: SHL0MS
 license: MIT

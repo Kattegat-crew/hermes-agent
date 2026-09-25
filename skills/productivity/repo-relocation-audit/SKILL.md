@@ -1,6 +1,7 @@
 ---
 name: repo-relocation-audit
-description: "Use when auditing a repo move, read-only."
+description: "Use when auditing a repo move or rename, read-only"
+tags: [auditoria, audit, repo, migracion, read-only, systemd, crons]
 category: devops
 metadata:
   author: Ragnar

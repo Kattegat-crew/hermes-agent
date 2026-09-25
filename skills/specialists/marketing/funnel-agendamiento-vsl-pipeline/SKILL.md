@@ -1,6 +1,7 @@
 ---
 name: funnel-agendamiento-vsl-pipeline
-description: "Use when montar un funnel de agendamiento (AP + Twenty)."
+description: "Use when building an appointment funnel (AP + Twenty)."
+tags: [funnel, agendamiento, activepieces, twenty, formbricks, leads, crm, vsl]
 author: Ragnar
 version: 1.0
 created: 2026-09-08

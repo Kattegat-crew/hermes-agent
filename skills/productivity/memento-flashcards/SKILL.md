@@ -1,6 +1,7 @@
 ---
 name: memento-flashcards
-description: "Spaced-repetition flashcards: create, review, quiz, export."
+description: "Use when saving facts as spaced-repetition flashcards"
+tags: [flashcards, spaced-repetition, repaso, memorizar, quiz, youtube, estudio, memento]
 version: 1.0.0
 author: Memento AI
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: lbo-model
-description: Build leveraged buyout workbooks with IRR/MOIC in Excel.
+description: "Use when building an LBO model with IRR/MOIC in Excel."
+tags: [lbo, finanzas, valoracion, private-equity, excel, irr, moic]
 version: 1.0.0
 author: Anthropic (adapted by Nous Research)
 license: Apache-2.0

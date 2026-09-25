@@ -1,6 +1,7 @@
 ---
 name: marketing-campaign-generator-ops
-description: Use when editing the marketing-campaign-generator repo.
+description: "Use when editing the marketing-campaign-generator repo."
+tags: [repo, marketing-campaign-generator, roshi, tests, ownership, ssh]
 ---
 
 # marketing-campaign-generator — operación del repo (Roshi)

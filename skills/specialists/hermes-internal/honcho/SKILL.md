@@ -1,6 +1,7 @@
 ---
 name: honcho
-description: Configure and troubleshoot Honcho memory for Hermes.
+description: "Use when configuring or debugging Honcho memory for Hermes"
+tags: [honcho, memoria, peers, dialectic, perfiles, contexto, recall, hermes]
 version: 2.0.0
 author: Hermes Agent
 license: MIT

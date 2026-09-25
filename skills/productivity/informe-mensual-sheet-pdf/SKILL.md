@@ -1,6 +1,7 @@
 ---
 name: informe-mensual-sheet-pdf
-description: Informe mensual vivo con Sheet acumulativo y PDF de cierre.
+description: "Use when building a live monthly Sheet + PDF report."
+tags: [informes, reports, google-sheet, cron, pdf, ventas]
 version: 1.0.0
 author: Ragnar
 license: MIT

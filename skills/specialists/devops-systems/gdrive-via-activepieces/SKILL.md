@@ -1,6 +1,7 @@
 ---
 name: gdrive-via-activepieces
-description: Use when accessing client Google Drive programmatically.
+description: "Use when accessing a client Google Drive by script."
+tags: [google-drive, activepieces, oauth, descargas, assets, scripts]
 ---
 
 # Google Drive programmatic access via ActivePieces credentials

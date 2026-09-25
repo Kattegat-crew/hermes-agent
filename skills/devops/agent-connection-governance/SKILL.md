@@ -1,6 +1,7 @@
 ---
 name: agent-connection-governance
-description: Per-agent OAuth connection enforcement (ActivePieces).
+description: "Use when isolating OAuth connections per agent."
+tags: [activepieces, oauth, multitenant, conexiones, agentes, enforcement]
 version: "1.0"
 author: Ragnar
 created: 2026-08-25

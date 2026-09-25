@@ -1,6 +1,7 @@
 ---
 name: har-derived-api-client
-description: Record a site's XHR into a HAR, derive an HTTP client.
+description: "Use when deriving a site's private JSON API from a HAR."
+tags: [har, api, playwright, reverse-engineering, http-client, browser]
 version: 0.1.0
 author: Hermes Agent
 license: MIT

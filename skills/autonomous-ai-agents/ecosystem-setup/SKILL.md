@@ -1,6 +1,7 @@
 ---
 name: ecosystem-setup
-description: Complete guide to setting up Ragnar's environment — pip bootstrap, GitHub CLI, Notion API, Document Reader skill, and system configuration.
+description: "Use when setting up Ragnar's environment and tooling."
+tags: [setup, entorno, pip, github-cli, notion, hermes-cli, ragnar, configuracion]
 ---
 
 # Nexa Labs — Ecosystem Setup

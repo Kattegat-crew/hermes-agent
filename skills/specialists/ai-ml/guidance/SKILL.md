@@ -1,6 +1,7 @@
 ---
 name: guidance
-description: Constrain LLM output with grammars; guarantee valid JSON.
+description: "Use when constraining LLM output to valid JSON or grammars."
+tags: [llm, gramaticas, json, structured-output, guidance]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

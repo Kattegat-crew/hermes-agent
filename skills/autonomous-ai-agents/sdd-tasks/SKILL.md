@@ -1,6 +1,7 @@
 ---
 name: sdd-tasks
-description: "Break an SDD change into implementation tasks. Trigger: orchestrator launches task planning for a change."
+description: "Use when breaking an SDD change into implementation tasks."
+tags: [sdd, tareas, planificacion, openspec, engram, pr-slices, subagente]
 disable-model-invocation: true
 user-invocable: false
 license: MIT

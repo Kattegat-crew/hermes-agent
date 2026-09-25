@@ -1,6 +1,7 @@
 ---
 name: scan-to-epub-pipeline
-description: 'Convert scanned PDFs to searchable PDF and EPUB via OCR.'
+description: "Use when converting a scanned PDF to EPUB or OCR PDF"
+tags: [ocr, pdf, epub, escaneo, scan, ocrmypdf, docker, pymupdf]
 ---
 
 # Scanned PDF → Searchable PDF + EPUB

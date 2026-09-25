@@ -1,6 +1,7 @@
 ---
 name: github-repo-ingestion
-description: >
+description: "Use when ingesting a GitHub repo into Brain/Outline wiki."
+tags: [github, repos, ingestion, wiki, outline, brain-wiki, research]
   Ingest GitHub repos into Brain Wiki and the Outline wiki.
 version: 1.1.0
 author: Ragnar (NeuralCrew Labs)

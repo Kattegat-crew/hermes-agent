@@ -1,6 +1,7 @@
 ---
 name: tldraw-offline
-description: Drive and script tldraw offline canvases with an agent.
+description: "Use when scripting tldraw offline canvases via local API"
+tags: [tldraw, canvas, whiteboard, diagramas, script, api-local, electron]
 version: 1.0.0
 author: Teknium + Hermes Agent
 license: MIT

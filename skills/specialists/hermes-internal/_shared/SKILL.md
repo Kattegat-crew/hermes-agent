@@ -1,6 +1,7 @@
 ---
 name: _shared
 description: "Shared SDD references for installed skills. Not invokable."
+tags: [shared, sdd, referencias, soporte, no-invocable]
 disable-model-invocation: true
 user-invocable: false
 license: MIT

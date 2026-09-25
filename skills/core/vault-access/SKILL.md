@@ -1,6 +1,6 @@
 ---
 name: vault-access
-description: "Access secrets from Vaultwarden. Use when you need an API key, token, password, or any secret. Do NOT search files or hardcode values."
+description: "Use when you need an API key, token or password"
 triggers:
   - need api key
   - need token

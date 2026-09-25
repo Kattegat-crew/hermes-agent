@@ -1,6 +1,7 @@
 ---
 name: meta-ads-operations
-description: "Run Meta Ads: campaigns, geo, insights, pixel via Composio."
+description: "Use when running Meta Ads campaigns, geo, pixel."
+tags: [meta-ads, facebook, composio, pixel, campanas, geomarketing]
 version: 1.0.0
 ---
 

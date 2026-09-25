@@ -1,6 +1,6 @@
 ---
 name: knowledge-absorption
-description: >
+description: "Use when absorbing external sources into the brain wiki."
   Absorber y transformar conocimiento desde fuentes externas (Notion, docs, web)
   hacia el Brain wiki. Incluye estrategias de priorización, deduplicación,
   y filtrado de ruido para absorber SOLO lo que importa.
@@ -117,7 +117,7 @@ El destino de cada página sigue la estructura del brain (entities/, concepts/, 
 ---
 title: Nombre
 type: person | company | agent | tool | team
-tags: [tag1, tag2]
+tags: [absorcion, wiki, brain, notion, filtrado, deduplicacion, priorizacion]
 created: YYYY-MM-DD
 source: fuente://pagina
 ---

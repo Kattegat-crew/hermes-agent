@@ -1,6 +1,7 @@
 ---
 name: hermes-desktop-remote-connection
-description: "Use when Hermes Desktop remote gateway connection fails."
+description: "Use when Hermes Desktop cannot reach the gateway."
+tags: [hermes, desktop, gateway, serve, tailscale, troubleshooting]
 ---
 
 # Hermes Desktop Remote Backend Connection

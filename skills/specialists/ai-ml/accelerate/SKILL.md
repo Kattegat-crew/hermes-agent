@@ -1,6 +1,7 @@
 ---
 name: accelerate
-description: Run PyTorch training across GPUs with minimal changes.
+description: "Use when running PyTorch training across GPUs or nodes"
+tags: [accelerate, pytorch, ddp, fsdp, deepspeed, distributed, gpu, training]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

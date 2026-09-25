@@ -1,6 +1,7 @@
 ---
 name: git-best-practices
-description: Git workflow best practices, conventional commits, atomic changes, branch management, interactive rebase, and clean history maintenance.
+description: "Use when committing, rebasing, or cleaning history"
+tags: [git, commits, rebase, conventional-commits, ramas, historial, flujo]
 license: MIT
 compatibility: hermes, opencode, bash
 metadata:

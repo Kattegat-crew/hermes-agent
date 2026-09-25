@@ -1,6 +1,7 @@
 ---
 name: pinecone-research
-description: Agent RAG and long-term memory with Pinecone.
+description: "Use when building agent RAG memory on Pinecone."
+tags: [pinecone, rag, memoria-largo-plazo, vector-db, embeddings, namespace, retrieval]
 version: 1.0.0
 author: immuhammadfurqan
 license: MIT

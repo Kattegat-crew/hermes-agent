@@ -1,6 +1,7 @@
 ---
 name: huggingface-tokenizers
-description: Fast BPE/WordPiece tokenization and custom vocab training.
+description: "Use when training or using fast HF tokenizers."
+tags: [tokenizers, huggingface, bpe, wordpiece, nlp, vocabulario]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

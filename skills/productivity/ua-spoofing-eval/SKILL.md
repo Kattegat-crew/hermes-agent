@@ -1,6 +1,7 @@
 ---
 name: ua-spoofing-eval
 description: "Use when a URL fetch is blocked (403/WAF/captcha)."
+tags: [user-agent, spoofing, scraping, waf, cloudflare, fetch, curl]
 ---
 
 # UA-Spoofing Eval & Robust Fetch

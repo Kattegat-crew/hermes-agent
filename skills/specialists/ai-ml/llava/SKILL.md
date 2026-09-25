@@ -1,6 +1,7 @@
 ---
 name: llava
-description: "Vision-language chat: VQA, captioning, image dialogue."
+description: "Use when running vision-language chat or VQA"
+tags: [llava, vision-language, multimodal, vqa, captioning, image-chat, vlm]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

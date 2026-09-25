@@ -1,6 +1,7 @@
 ---
 name: legal-docs-from-meeting-decisions
-description: "Use when legal docs must track mutating meeting decisions."
+description: "Use when legal docs track mutating meeting decisions."
+tags: [legal, docx, reuniones, transcripciones, versionado, drive, verificacion]
 version: 1.0.1
 author: hermes
 license: internal

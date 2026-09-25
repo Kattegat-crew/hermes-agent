@@ -1,6 +1,7 @@
 ---
 name: verification-loop
-description: Comprehensive multi-phase verification system. Use after completing a feature, before creating a PR, when ensuring quality gates pass, or after refactoring.
+description: "Use when running quality gates before opening a PR."
+tags: [verificacion, quality-gates, build, lint, tests, cobertura, pr]
 phase: verify
 domains:
   - testing

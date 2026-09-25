@@ -1,6 +1,7 @@
 ---
 name: gmail-smtp-app-password
-description: "Trigger: SMTP, smtp.gmail.com, app password, send from, DocuSeal mail, Google Workspace email. Configure Google Workspace SMTP with an app password in Docker apps (DocuSeal, Twenty, ActivePieces, Formbricks)."
+description: "Use when wiring Gmail SMTP app passwords into Docker apps."
+tags: [smtp, gmail, app-password, docuseal, twenty, email, docker]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

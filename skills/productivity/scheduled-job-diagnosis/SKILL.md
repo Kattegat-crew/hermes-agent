@@ -1,6 +1,7 @@
 ---
 name: scheduled-job-diagnosis
-description: Use when a scheduled job didn't do its expected action.
+description: "Use when a scheduled job did not run its expected action."
+tags: [cron, scheduler, diagnostico, jobs, hermes, timezone]
 version: 1.0.0
 author: Ragnar
 ---

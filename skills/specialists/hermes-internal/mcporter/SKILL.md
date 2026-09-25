@@ -1,6 +1,7 @@
 ---
 name: mcporter
-description: List, auth, and call MCP servers/tools from the terminal.
+description: "Use when discovering or calling MCP servers from terminal"
+tags: [mcp, mcporter, cli, tools, oauth, integraciones, terminal, npx]
 version: 1.0.0
 author: community
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: hermes-bot-fleet-ops
-description: "Audit and wire Hermes bot fleets: models, engram, crons."
+description: "Use when auditing or wiring a Hermes bot fleet."
+tags: [hermes, perfiles, flota, bots, engram, compresion, crons]
 version: 1.0.0
 author: Ragnar
 metadata:

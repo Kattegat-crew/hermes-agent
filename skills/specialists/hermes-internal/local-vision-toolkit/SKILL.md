@@ -1,6 +1,6 @@
 ---
 name: local-vision-toolkit
-description: >
+description: "Use when a model without vision must read an image or chart"
   Autonomous local computer vision toolkit — OCR, image analysis, chart detection,
   infographic extraction, screenshot interpretation, and diagram understanding.
   Runs 100% locally with Python (OpenCV, Tesseract, Pillow, scikit-image).
@@ -128,7 +128,7 @@ When absorbing visual content into the Brain Wiki:
 ---
 title: {description_summary}
 type: image_analysis
-tags: [image, {detected_type}, {category}]
+tags: [vision, ocr, imagenes, capturas, graficos, tesseract, opencv, local]
 created: YYYY-MM-DD
 source: file://{filepath}
 ---

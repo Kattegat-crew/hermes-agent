@@ -1,6 +1,7 @@
 ---
 name: hermes-specialist-agents-deploy
-description: Desplegar agentes especializados como perfiles Hermes.
+description: "Use when deploying specialist bots as Hermes profiles."
+tags: [hermes, perfiles, agentes, discord, skills, deploy]
 version: 1.0.0
 author: Ragnar
 triggers:

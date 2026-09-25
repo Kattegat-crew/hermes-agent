@@ -1,6 +1,7 @@
 ---
 name: activepieces-connection-api
-description: Use when creating ActivePieces connections via REST API.
+description: "Use when creating ActivePieces connections via REST."
+tags: [activepieces, api, oauth, jwt, conexiones, self-hosted]
 version: "1.0"
 author: Ragnar
 created: 2026-08-26

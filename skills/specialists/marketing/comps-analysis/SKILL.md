@@ -1,6 +1,7 @@
 ---
 name: comps-analysis
-description: Build comparable-company valuation workbooks in Excel.
+description: "Use when building a comparable-company workbook."
+tags: [valuacion, comps, excel, openpyxl, finanzas, multiplos]
 version: 1.0.0
 author: Anthropic (adapted by Nous Research)
 license: Apache-2.0

@@ -1,6 +1,7 @@
 ---
 name: playwright-best-practices
-description: Reliable E2E browser automation, Page Object Model, semantic locators, and resilient test fixtures.
+description: "Use when writing non-flaky Playwright E2E tests."
+tags: [playwright, e2e, testing, locators, pom, flaky, frontend]
 license: MIT
 compatibility: opencode
 ---

@@ -1,6 +1,7 @@
 ---
 name: qmd
-description: Hybrid local search over notes, docs, and transcripts.
+description: "Use when searching local notes/docs with qmd hybrid search"
+tags: [qmd, busqueda, semantica, notas, rag, mcp, conocimiento, bm25]
 version: 1.0.0
 author: Hermes Agent + Teknium
 license: MIT

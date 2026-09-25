@@ -1,6 +1,7 @@
 ---
 name: finishing-a-development-branch
-description: Use when implementation is complete, all tests pass, and you need to decide how to integrate the work
+description: "Use when done: merge, open PR, or keep the branch."
+tags: [git, branch, merge, pull-request, worktree, cleanup]
 ---
 
 # Finishing a Development Branch

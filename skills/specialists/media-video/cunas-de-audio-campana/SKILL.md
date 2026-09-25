@@ -1,6 +1,7 @@
 ---
 name: cunas-de-audio-campana
-description: "Use when a campaign needs a perifoneo/radio cue."
+description: "Use when writing a perifoneo or radio audio spot."
+tags: [perifoneo, radio, cuna-audio, campana, casino, guion, coljuegos]
 version: 1.0.0
 author: hermes
 license: MIT

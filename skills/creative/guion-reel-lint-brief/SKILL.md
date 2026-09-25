@@ -1,6 +1,7 @@
 ---
 name: guion-reel-lint-brief
-description: "Use when: escribir guiones que deben pasar lint y brief."
+description: "Use when writing reel scripts that must pass lint"
+tags: [guiones, reel, lint, brief, edge-tts, campana, video, qa]
 ---
 
 # Guiones de reel contra el pipeline lint → brief

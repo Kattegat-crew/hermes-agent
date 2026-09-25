@@ -1,6 +1,7 @@
 ---
 name: one-three-one-rule
-description: "1-3-1 decision briefs: problem, three options, one pick."
+description: "Use when presenting 3 options and one recommendation"
+tags: [decision, opciones, options, brief, propuesta, comunicacion, trade-offs]
 platforms: [linux, macos, windows]
 version: 1.0.0
 author: Willard Moore

@@ -1,6 +1,7 @@
 ---
 name: unsloth
-description: "Unsloth: 2-5x faster LoRA/QLoRA fine-tuning, less VRAM."
+description: "Use when fine-tuning LLMs fast with Unsloth LoRA/QLoRA."
+tags: [unsloth, fine-tuning, lora, qlora, entrenamiento, vram]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

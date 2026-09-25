@@ -1,6 +1,7 @@
 ---
 name: openclaw-migration
-description: Import an OpenClaw setup (memories, skills) into Hermes.
+description: "Use when migrating an OpenClaw setup into Hermes"
+tags: [migration, migracion, openclaw, hermes, memory, persona, import]
 version: 1.0.0
 author: Hermes Agent (Nous Research)
 license: MIT

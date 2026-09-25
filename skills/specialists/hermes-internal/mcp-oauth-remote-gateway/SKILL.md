@@ -1,6 +1,7 @@
 ---
 name: mcp-oauth-remote-gateway
-description: Manual OAuth for remote MCP servers on headless gateways.
+description: "Use when a remote gateway MCP needs manual OAuth."
+tags: [mcp, oauth, pkce, gateway, remoto, tokens, hermes]
 version: 1.0.0
 author: Ben Barclay (benbarclay), Hermes Agent
 license: MIT

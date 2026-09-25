@@ -1,6 +1,7 @@
 ---
 name: scene-consistency-qa
-description: QA de consistencia de personaje en stills de escenas IA.
+description: "Use when QAing character consistency in AI scene stills."
+tags: [qa, consistencia, personaje, reels, vision, seedance]
 version: 1.0.0
 author: Hermes Agent
 license: MIT

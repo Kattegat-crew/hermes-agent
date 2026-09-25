@@ -1,6 +1,7 @@
 ---
 name: neuralcrew-letterhead
-description: "Para DOCX de clientes NeuralCrew Labs con membrete."
+description: "Use when generating NeuralCrew letterhead DOCX files."
+tags: [docx, membrete, neuralcrew, marca, branding, plantillas]
 version: 1.0.0
 author: Ragnar
 platforms: [linux]

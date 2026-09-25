@@ -1,6 +1,7 @@
 ---
 name: service-availability-forensics
-description: Use when a service flakes or watchdog 'fix' looks false.
+description: "Use when a service flakes or a watchdog fix looks false."
+tags: [docker, watchdog, monitoring, false-green, deploy, forensics, logs]
 version: "1.0.0"
 author: ragnar
 metadata:

@@ -1,6 +1,7 @@
 ---
 name: github-ro-mount-workflow
-description: Use when repo mounts are read-only; push via token clone.
+description: "Use when a repo mount is read-only; push via clone."
+tags: [github, git, push, read-only, mounts, token]
 version: 1.0.0
 author: Hermes Agent (curator)
 license: MIT

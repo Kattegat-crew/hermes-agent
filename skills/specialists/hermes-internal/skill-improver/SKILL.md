@@ -1,6 +1,7 @@
 ---
 name: skill-improver
-description: "Trigger: improve skills, audit skills, refactor skills, skill quality. Audit and upgrade existing LLM-first skills."
+description: "Use when auditing or refactoring existing SKILL.md files."
+tags: [skills, auditoria, refactor, frontmatter, curator, estilo]
 license: Apache-2.0
 metadata:
   author: gentleman-programming

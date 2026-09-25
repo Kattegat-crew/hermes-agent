@@ -1,10 +1,10 @@
 ---
 name: pokemon-player
-description: "Play Pokemon via headless emulator + RAM reads."
+description: "Use when playing Pokemon via headless emulator"
 version: 1.0.0
 author: Teknium (teknium1), Hermes Agent
 license: MIT
-tags: [gaming, pokemon, emulator, pyboy, gameplay, gameboy]
+tags: [pokemon, emulador, emulator, pyboy, gameplay, vision, gaming]
 platforms: [linux, macos, windows]
 ---
 # Pokemon Player

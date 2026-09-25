@@ -1,6 +1,7 @@
 ---
 name: instructor
-description: Structured LLM outputs validated with Pydantic.
+description: "Use when extracting validated structured LLM output"
+tags: [instructor, structured-output, salida-estructurada, pydantic, validation, extraccion, llm]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

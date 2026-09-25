@@ -1,6 +1,7 @@
 ---
 name: anti-slop-copy
-description: Audita copy para quitar tells de IA antes de publicar.
+description: "Use when removing AI tells from copy before publishing."
+tags: [anti-slop, copy, marketing, edicion, humanizar, publicacion]
 category: creative
 metadata:
   author: Ragnar

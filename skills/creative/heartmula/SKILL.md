@@ -1,6 +1,7 @@
 ---
 name: heartmula
-description: "HeartMuLa: Suno-like song generation from lyrics + tags."
+description: "Use when generating songs from lyrics and tags."
+tags: [musica, music, heartmula, audio, canciones, generacion, suno]
 version: 1.0.0
 author: Teknium (teknium1), Hermes Agent
 license: MIT

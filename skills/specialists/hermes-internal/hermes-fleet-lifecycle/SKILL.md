@@ -1,6 +1,7 @@
 ---
 name: hermes-fleet-lifecycle
-description: Recover Hermes profile gateways after container recreates.
+description: "Use when profile gateways die after a container recreate."
+tags: [hermes, fleet, gateway, multiplex, standalone, recovery]
 version: 1.0.0
 author: Ragnar
 triggers:

@@ -1,6 +1,7 @@
 ---
 name: parallel-cli
-description: Agent-native web search, deep research, and enrichment.
+description: "Use when the user asks for Parallel research or enrichment."
+tags: [parallel, busqueda-web, deep-research, enrichment, findall, cli]
 version: 1.1.0
 author: Hermes Agent
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: reel-audio-mixing
-description: Use when mounting brand TTS voice onto a paid reel clip.
+description: "Use when mounting brand TTS voice onto a reel clip."
+tags: [reels, audio, mixing, atempo, voz, ffmpeg, elevenlabs]
 ---
 
 # Reel Audio Mixing — voz de marca sobre clip pagado (mix local $0)

@@ -1,6 +1,7 @@
 ---
 name: torchtitan
-description: Pretrain LLMs at scale with PyTorch 4D parallelism.
+description: "Use when pretraining LLMs with TorchTitan parallelism."
+tags: [torchtitan, pretraining, fsdp2, distribuido, float8, pytorch]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

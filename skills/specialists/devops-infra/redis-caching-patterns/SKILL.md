@@ -1,6 +1,7 @@
 ---
 name: redis-caching-patterns
-description: Redis caching patterns, distributed locking (Redlock), rate limiting, Pub/Sub, and TTL strategies.
+description: "Use when adding Redis caching, locks or rate limiting"
+tags: [redis, caching, cache-aside, redlock, rate-limiting, ttl, distributed-locks]
 license: MIT
 compatibility: opencode
 ---

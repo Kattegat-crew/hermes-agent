@@ -1,6 +1,7 @@
 ---
 name: application-security-review
-description: application-security-review — Review application repos for concrete security issues, especially trust-boundary failures, prompt-injection paths, auth/proxy mistakes, validation gaps, and risky dependencies.
+description: "Use when reviewing an app repo for security issues"
+tags: [security, appsec, code-review, prompt-injection, trust-boundary, dependency-audit, ssrf]
 version: 1.5.0
 license: MIT
 platforms:

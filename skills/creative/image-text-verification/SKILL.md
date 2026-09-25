@@ -1,6 +1,7 @@
 ---
 name: image-text-verification
 description: "Use when reading text from an image before acting on it."
+tags: [vision, ocr, captura, verificacion, qa, imagen, alucinacion]
 version: 1.0.0
 author: curator-ragnar
 category: vision

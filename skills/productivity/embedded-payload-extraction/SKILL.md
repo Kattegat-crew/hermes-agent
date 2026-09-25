@@ -1,6 +1,7 @@
 ---
 name: embedded-payload-extraction
-description: "Use when OG/meta truncate: extract hydration JSON."
+description: "Use when meta or OG is truncated; pull hydration JSON"
+tags: [hydration, payload, json, og, spa, extraccion, longform, x-twitter]
 ---
 
 # Embedded Payload Extraction

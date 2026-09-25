@@ -1,6 +1,7 @@
 ---
 name: skill-creator
-description: "Trigger: new skills, agent instructions, documenting AI usage patterns. Create LLM-first skills with valid frontmatter."
+description: "Use when creating or refactoring Hermes skills."
+tags: [skills, autoria, frontmatter, llm-first, hermes]
 license: Apache-2.0
 metadata:
   author: gentleman-programming

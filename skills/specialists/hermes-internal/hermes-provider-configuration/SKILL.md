@@ -1,6 +1,7 @@
 ---
 name: hermes-provider-configuration
-description: >-
+description: "Use when adding/updating API providers in Hermes."
+tags: [hermes, config, provider, providers, api, bai, yaml, modelos]
   Use when adding providers in Hermes config.yaml. B.AI ref.
 category: devops
 triggers:

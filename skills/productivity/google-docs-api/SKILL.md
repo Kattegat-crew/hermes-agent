@@ -1,6 +1,7 @@
 ---
 name: google-docs-api
-description: >
+description: "Use when creating Google Docs content via the Docs API."
+tags: [google, docs, api, workaround, oauth]
   Work around Google Docs API limitations when creating documents with content.
   Key issue: docs().create() produces an empty document with no paragraphs,
   and insertText requires an existing paragraph boundary (index must be < endIndex of a paragraph).

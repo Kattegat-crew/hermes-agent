@@ -1,6 +1,7 @@
 ---
 name: shop
-description: "Shop catalog search, checkout, order tracking, returns."
+description: "Use when shopping: search, checkout, orders, returns."
+tags: [shopping, ecommerce, checkout, orders, shop, compras]
 version: 1.0.1
 author: Joe Rinaldi Johnson (joerj123), Hermes Agent
 license: MIT

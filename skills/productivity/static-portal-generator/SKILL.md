@@ -1,10 +1,10 @@
 ---
 name: static-portal-generator
-description: "Build multi-client static portals from file inventories."
+description: "Use when building multi-client static portals from files."
 version: 1.0.0
 author: Ragnar (NeuralCrew Labs)
 license: MIT
-tags: [static-site, portal, multi-client, gallery, deployment]
+tags: [portal, static-site, nginx, multicliente, galeria, docker, cloudflare]
 ---
 
 # Static Portal Generator

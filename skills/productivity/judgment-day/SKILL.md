@@ -1,6 +1,7 @@
 ---
 name: judgment-day
-description: "Trigger: judgment day, dual review, adversarial review, juzgar. Run explicit blind dual review with at most two scoped fix/re-judgment rounds."
+description: "Use when the user asks for a dual blind review."
+tags: [review, adversarial, dual, verificacion, subagentes, juicio]
 license: Apache-2.0
 metadata:
   author: gentleman-programming

@@ -1,6 +1,7 @@
 ---
 name: openai-image-gen
-description: Generate visual assets, marketing graphics, and concept art using OpenAI image generation APIs (DALL-E 3) and compatible endpoints.
+description: "Use when generating images with DALL-E 3 / OpenAI."
+tags: [imagenes, dalle-3, openai, generacion, assets, marketing, image-generation, creative]
 license: MIT
 compatibility: hermes, opencode, python, bash
 metadata:

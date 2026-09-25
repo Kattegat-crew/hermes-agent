@@ -1,6 +1,7 @@
 ---
 name: segment-anything-model
-description: "SAM: zero-shot image segmentation via points, boxes, masks."
+description: "Use when segmenting images zero-shot with SAM prompts."
+tags: [computer-vision, segmentation, sam, zero-shot, prompts, pytorch, onnx, segmentacion]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

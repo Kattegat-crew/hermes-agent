@@ -1,6 +1,7 @@
 ---
 name: brand-asset-audit
-description: "Auditar identidad de marca desde Drive (personajes, reels)."
+description: "Use when extracting a brand kit from Drive assets."
+tags: [brand, drive, assets, vision, campana, identidad, marketing]
 version: 1.0.0
 author: hermes
 license: MIT

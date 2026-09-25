@@ -1,6 +1,7 @@
 ---
 name: guardado-doble-memoria
-description: Guarda en Engram + memoria al pedirlo o cerrar sesión.
+description: "Use when saving to Engram and Hermes memory on request"
+tags: [memoria, engram, guardado, persistencia, sesion, cron, hermes, dedup]
 author: Ragnar
 version: "1.0"
 created: 2026-08-21

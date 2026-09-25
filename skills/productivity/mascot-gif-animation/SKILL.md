@@ -1,6 +1,7 @@
 ---
 name: mascot-gif-animation
-description: Use when creating a mascot waving GIF from a photo still.
+description: "Use when making a mascot waving GIF from a photo still"
+tags: [gif, mascota, mascot, rembg, animacion, silueta, branding]
 ---
 
 # Mascot GIF Animation (transparent, from photo)

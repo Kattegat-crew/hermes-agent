@@ -1,6 +1,7 @@
 ---
 name: pinecone
-description: Managed vector DB for production RAG and search.
+description: "Use when building RAG on Pinecone vector DB."
+tags: [pinecone, vector-db, rag, embeddings, serverless]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

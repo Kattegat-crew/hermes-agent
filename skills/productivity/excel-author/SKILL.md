@@ -1,6 +1,7 @@
 ---
 name: excel-author
-description: Build auditable financial workbooks headless via openpyxl.
+description: "Use when authoring auditable Excel workbooks via openpyxl."
+tags: [excel, openpyxl, finanzas, spreadsheets, modelado]
 version: 1.0.0
 author: Anthropic (adapted by Nous Research)
 license: Apache-2.0

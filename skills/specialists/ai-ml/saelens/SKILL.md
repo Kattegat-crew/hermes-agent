@@ -1,6 +1,7 @@
 ---
 name: saelens
-description: Train sparse autoencoders to interpret model features.
+description: "Use when training sparse autoencoders to interpret models."
+tags: [interpretability, sparse-autoencoder, sae, mechanistic, features, torch, interpretabilidad]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

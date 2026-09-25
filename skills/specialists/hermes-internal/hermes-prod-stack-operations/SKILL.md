@@ -1,6 +1,7 @@
 ---
 name: hermes-prod-stack-operations
-description: Use when auditing Hermes prod agents before proposing sends.
+description: "Use when auditing Hermes prod agents before proposing sends."
+tags: [hermes, prod, vps, perfiles, whatsapp, auditoria]
 version: 1.0.0
 author: Ragnar
 metadata:

@@ -1,6 +1,7 @@
 ---
 name: 3-statement-model
-description: Build integrated IS/BS/CF financial workbooks in Excel.
+description: "Use when building IS/BS/CF Excel financial models."
+tags: [finanzas, excel, openpyxl, estados-financieros, balance, cash-flow]
 version: 1.0.0
 author: Anthropic (adapted by Nous Research)
 license: Apache-2.0

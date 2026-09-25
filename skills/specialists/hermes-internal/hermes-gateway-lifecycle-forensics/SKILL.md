@@ -1,6 +1,7 @@
 ---
 name: hermes-gateway-lifecycle-forensics
-description: "Triage de caídas del gateway Hermes (blip s6 vs crash)."
+description: "Use when the Hermes gateway appears to crash or restart."
+tags: [gateway, s6, incidente, oom, reinicios, forense, disponibilidad]
 version: "1.0.0"
 author: Ragnar
 metadata:

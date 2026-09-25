@@ -1,6 +1,7 @@
 ---
 name: git-history-secret-purge
-description: Use when secrets (API keys, passwords, .env files, tokens) have been accidentally committed to a git repository and need to be purged from the entire git history, or when rotating compromised credentials after a leak.
+description: "Use when purging committed secrets from git history"
+tags: [git, secrets, seguridad, filter-repo, historial, rotacion, leak]
 ---
 
 # Git History Secret Purge

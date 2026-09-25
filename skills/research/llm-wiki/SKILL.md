@@ -1,6 +1,7 @@
 ---
 name: llm-wiki
-description: "Karpathy's LLM Wiki: build/query interlinked markdown KB."
+description: "Use when building or querying an interlinked markdown wiki."
+tags: [wiki, knowledge-base, markdown, notas, obsidian, ingest, lint]
 version: 2.1.0
 author: Hermes Agent
 license: MIT

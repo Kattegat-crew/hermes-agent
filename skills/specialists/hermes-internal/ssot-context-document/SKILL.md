@@ -1,6 +1,7 @@
 ---
 name: ssot-context-document
-description: Crear un documento integral Single Source of Truth (.md) consolidando toda la información disponible sobre un proyecto/empresa desde múltiples fuentes (Drive, memoria persistente, Brain Graph, sesiones anteriores). Subir el resultado a Google Drive.
+description: "Use when consolidating project context into one doc."
+tags: [ssot, contexto, documentacion, drive, consolidacion, informe, empresa]
 version: 1.0.0
 author: Ragnar
 metadata:

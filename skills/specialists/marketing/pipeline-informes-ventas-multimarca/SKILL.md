@@ -1,6 +1,7 @@
 ---
 name: pipeline-informes-ventas-multimarca
-description: Runbook to onboard a new brand into the sales pipeline.
+description: "Use when onboarding a new brand into sales reports."
+tags: [ventas, informes, multimarca, runbook, kassiuss, sheet, pdf]
 version: 1.0.0
 author: Ragnar
 metadata:

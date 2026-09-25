@@ -1,6 +1,7 @@
 ---
 name: watchers
-description: Poll RSS, JSON APIs, and GitHub with watermark dedup.
+description: "Use when polling RSS/JSON/GitHub for new items."
+tags: [watcher, rss, polling, github, cron, dedup, monitoreo]
 version: 1.0.0
 author: Hermes Agent
 license: MIT

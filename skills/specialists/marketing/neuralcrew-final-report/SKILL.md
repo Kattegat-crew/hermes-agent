@@ -1,6 +1,7 @@
 ---
 name: neuralcrew-final-report
-description: "Use when: informe final de cliente en membrete NCL."
+description: "Use when producing a final client report on NCL letterhead."
+tags: [informe, cliente, membrete, docx, qa, ncl]
 version: 1.0.0
 author: Bragi
 platforms: [linux]

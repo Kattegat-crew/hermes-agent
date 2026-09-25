@@ -1,6 +1,7 @@
 ---
 name: hermes-gateway-ops
-description: "Trigger: perfiles multiplex, profile_routes, plugin install, hermes desktop ssh, ragnar, hermes gateway, restart gateway, allowlist whatsapp, cambiar modelo hermes, nan builders, /allowlist. Operar el gateway de Hermes (Ragnar): config de modelo, allowlists, restart y troubleshooting."
+description: "Use when changing the Hermes gateway model or allowlists."
+tags: [hermes, gateway, whatsapp, allowlist, modelo, docker]
 license: Apache-2.0
 metadata:
   author: "neuralcrew-ops"

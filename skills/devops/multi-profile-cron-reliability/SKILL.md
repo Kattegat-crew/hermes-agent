@@ -1,6 +1,7 @@
 ---
 name: multi-profile-cron-reliability
-description: Harden failing profile crons via pinning and skill links.
+description: "Use when a profile cron fails with drift_skip or symlinks."
+tags: [cron, hermes, perfiles, drift-skip, symlinks, fallback, watchdog, fiabilidad]
 version: 1.0.0
 author: Roshi
 license: MIT

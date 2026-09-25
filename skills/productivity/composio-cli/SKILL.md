@@ -1,6 +1,7 @@
 ---
 name: composio-cli
-description: Use when installing or automating with Composio CLI.
+description: "Use when installing or automating with the Composio CLI."
+tags: [composio, cli, integraciones, oauth, connectors, automatizacion]
 ---
 
 # Composio CLI (integration platform)

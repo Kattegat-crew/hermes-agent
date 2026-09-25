@@ -1,6 +1,7 @@
 ---
 name: flight-price-research
-description: Use when researching flight prices or VPN/geo fares.
+description: "Use when researching flight prices or VPN/geo fares."
+tags: [vuelos, precios, google-flights, vpn, geo, viajes, trm]
 ---
 
 # Flight Price Research (búsquedas de vuelos, comparación geo/VPN)

@@ -1,6 +1,7 @@
 ---
 name: jupyter-notebook
-description: "Iterative Python via live Jupyter kernel (hamelnb)."
+description: "Use when needing a stateful live Jupyter kernel."
+tags: [jupyter, notebook, repl, python, data-science, kernel]
 version: 1.0.0
 author: Hermes Agent
 license: MIT

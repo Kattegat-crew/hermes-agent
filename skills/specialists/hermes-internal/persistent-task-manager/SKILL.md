@@ -1,6 +1,6 @@
 ---
 name: persistent-task-manager
-description: >
+description: "Use when tracking tasks across sessions (Brain Wiki/Notion)."
   Manage persistent task tracking across sessions. Maintains Brain Wiki tasks file
   and syncs with Notion DB. Loads tasks at session start, updates on every task change.
 version: 1.0.0
@@ -85,7 +85,7 @@ with open('/opt/data/brain/tasks/pending.md', 'r') as f:
 title: "Tareas Pendientes — Nexa Labs / Ragnar"
 created: 2026-04-20
 updated: YYYY-MM-DD
-tags: [tasks, pending, tracking, nexa-labs]
+tags: [tareas, tracking, persistencia, notion, brain-wiki]
 ---
 
 # 📋 Tareas Pendientes — Nexa Labs / Ragnar

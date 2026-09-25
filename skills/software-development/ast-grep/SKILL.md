@@ -1,6 +1,7 @@
 ---
 name: ast-grep
-description: "AST-aware structural code search and rewrite via ast-grep."
+description: "Use when doing structural search or codemods"
+tags: [ast-grep, codemod, refactoring, structural-search, tree-sitter, rewrite, busqueda]
 version: 1.0.0
 author: Yeongyu Kim (code-yeongyu), adapted by Hermes Agent
 license: MIT

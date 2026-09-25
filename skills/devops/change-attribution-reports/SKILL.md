@@ -1,6 +1,7 @@
 ---
 name: change-attribution-reports
-description: Use when asked who changed what in a project recently.
+description: "Use when asked who changed what in a project or repo."
+tags: [atribucion, git, reportes, auditoria, commits, mtimes, autores, state-db]
 ---
 
 # Change-Attribution Reports (Hermes prod host)

@@ -1,6 +1,7 @@
 ---
 name: hermes-memory-maintenance
-description: "Reparar memoria: locks/permisos de MEMORY.md y USER.md."
+description: "Use when memory tool fails on locked MEMORY.md or USER.md"
+tags: [memoria, memory, permisos, locks, hermes, reparacion, memories, root]
 ---
 
 # Hermes Memory Maintenance

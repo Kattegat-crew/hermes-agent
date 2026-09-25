@@ -1,6 +1,7 @@
 ---
 name: reel-performance-analytics
-description: Score published reels vs platform metrics via Composio.
+description: "Use when scoring published reels against platform metrics."
+tags: [reels, analitica, metricas, instagram, composio, rendimiento, performance]
 version: 1.0.0
 author: Hermes Agent
 license: MIT

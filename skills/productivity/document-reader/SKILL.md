@@ -1,6 +1,7 @@
 ---
 name: document-reader
-description: >
+description: "Use when parsing any document file to extract its text."
+tags: [documentos, documents, pdf, word, excel, ocr, parsing]
   Universal document reader that parses .docx, .xlsx, .pdf, .pptx, .odt, .ods,
   .odp, .rtf, .txt, .csv, .md, .html, .epub, .eml, and image files (via OCR).
   Use when the user shares a document file, asks to read/extract content from

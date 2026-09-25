@@ -1,6 +1,7 @@
 ---
 name: agent-fleet-botmaker-learnings
-description: Use when building or auditing specialist Hermes bots.
+description: "Use when building or auditing specialist Hermes bots."
+tags: [hermes, bots, profiles, soul, skills, fleet, config, flota]
 version: 1.0.0
 author: Ragnar (NeuralCrew Labs)
 license: MIT

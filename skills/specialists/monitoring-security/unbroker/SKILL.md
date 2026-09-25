@@ -1,6 +1,7 @@
 ---
 name: unbroker
-description: Autonomously remove your info from data-broker sites.
+description: "Use when removing personal data from data brokers."
+tags: [privacidad, data-broker, opt-out, ccpa, osint, gdpr]
 version: 1.0.0
 author: SHL0MS (github.com/SHL0MS)
 license: MIT

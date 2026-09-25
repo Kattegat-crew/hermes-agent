@@ -1,6 +1,7 @@
 ---
 name: rag-architecture-expert
-description: Retrieval-Augmented Generation (RAG) architecture, hybrid search, reciprocal rank fusion, and context reranking.
+description: "Use when designing RAG pipelines, hybrid search or rerank"
+tags: [rag, retrieval, hybrid-search, bm25, rrf, reranking, chunking, vector-search]
 license: MIT
 compatibility: opencode
 ---

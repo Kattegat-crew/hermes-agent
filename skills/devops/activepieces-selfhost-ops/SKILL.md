@@ -1,6 +1,7 @@
 ---
 name: activepieces-selfhost-ops
-description: Operate self-hosted ActivePieces connections and MCP.
+description: "Use when fixing a down self-hosted ActivePieces stack."
+tags: [activepieces, docker, oom, compose, self-hosted, devops]
 author: Ragnar
 version: "1.0"
 created: 2026-08-21

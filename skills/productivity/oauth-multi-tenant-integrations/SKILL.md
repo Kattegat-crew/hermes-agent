@@ -1,6 +1,7 @@
 ---
 name: oauth-multi-tenant-integrations
-description: Manage multi-tenant OAuth connections and enforcement.
+description: "Use when wiring multi-tenant OAuth connections per client."
+tags: [oauth, multi-tenant, activepieces, jwt, conexiones, refresh-token]
 ---
 
 # OAuth & Multi-Tenant Integrations

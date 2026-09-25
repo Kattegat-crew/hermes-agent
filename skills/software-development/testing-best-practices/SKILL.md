@@ -1,6 +1,7 @@
 ---
 name: testing-best-practices
-description: Testing pyramid, unit and integration testing strategies, mocking, test coverage, and mutation testing.
+description: "Use when writing unit or integration tests"
+tags: [testing, tests, unit, integration, mocking, cobertura, tdd, calidad]
 license: MIT
 compatibility: opencode
 ---

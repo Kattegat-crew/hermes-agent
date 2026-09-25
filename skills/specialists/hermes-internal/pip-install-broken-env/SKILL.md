@@ -1,6 +1,7 @@
 ---
 name: pip-install-broken-env
-description: >
+description: "Use when pip is missing and PEP 668 blocks installs."
+tags: [pip, python, pep668, instalacion, paquetes, entorno]
   Install pip and Python packages in environments where pip is missing, sudo is
   unavailable, curl/wget are not installed, and PEP 668 blocks direct installs.
   Use when you need to install Python packages but the standard tools (pip, sudo,

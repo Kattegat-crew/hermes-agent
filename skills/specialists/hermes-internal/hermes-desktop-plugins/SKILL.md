@@ -1,6 +1,7 @@
 ---
 name: hermes-desktop-plugins
-description: Author, install, and verify Hermes Desktop plugins.
+description: "Use when authoring or verifying Hermes Desktop plugins."
+tags: [hermes, desktop, plugins, sdk, fastapi, verificacion]
 version: 1.0.0
 author: Ragnar (NeuralCrew Labs)
 license: MIT

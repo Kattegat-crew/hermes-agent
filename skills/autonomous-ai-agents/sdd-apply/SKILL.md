@@ -1,6 +1,7 @@
 ---
 name: sdd-apply
-description: "Implement SDD tasks from specs and design. Trigger: orchestrator launches apply for one or more change tasks."
+description: "Use when implementing SDD tasks from specs and design."
+tags: [sdd, implementacion, subagente, engram, openspec, tdd, tasks]
 disable-model-invocation: true
 user-invocable: false
 license: MIT

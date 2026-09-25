@@ -1,6 +1,7 @@
 ---
 name: hermes-workspace-setup
-description: Install and configure the Hermes Workspace web UI (outsourc-e/hermes-workspace) as the management interface for Hermes Agent — includes pnpm bootstrap, .env configuration (Gateway vs Portable mode), service management, and troubleshooting.
+description: "Use when installing the Hermes Workspace web UI."
+tags: [hermes, workspace, vite, dashboard, instalacion, ui]
 ---
 
 # Install & Integrate Hermes Workspace

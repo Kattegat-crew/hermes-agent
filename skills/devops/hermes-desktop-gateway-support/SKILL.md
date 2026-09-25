@@ -1,6 +1,7 @@
 ---
 name: hermes-desktop-gateway-support
-description: "Use when Hermes Desktop no conecta al gateway remoto."
+description: "Use when Hermes Desktop cannot reach the remote gateway."
+tags: [hermes-desktop, gateway, tailscale, websocket, diagnostico, dashboard, red, sesion]
 license: Apache-2.0
 metadata:
   author: "roshi"

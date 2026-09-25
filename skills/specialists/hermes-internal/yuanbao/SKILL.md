@@ -1,6 +1,7 @@
 ---
 name: yuanbao
-description: "Yuanbao (元宝) groups: @mention users, query info/members."
+description: "Use when @mentioning or DMing users in Yuanbao groups"
+tags: [yuanbao, 元宝, menciones, grupos, dm, chat, yb_send_dm, integracion]
 version: 1.0.0
 metadata:
   hermes:

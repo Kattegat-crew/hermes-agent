@@ -1,6 +1,7 @@
 ---
 name: audio-video-transcription
-description: "Transcribe audio/video to text via NaN-Builders whisper API."
+description: "Use when transcribing audio/video via whisper API."
+tags: [transcripcion, whisper, audio, video, ffmpeg, stt, subtitulos, transcription]
 ---
 
 # Audio/Video Transcription via NaN Builders Whisper API

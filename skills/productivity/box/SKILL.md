@@ -1,6 +1,7 @@
 ---
 name: box
-description: Box manages cloud files, sharing, search, and metadata.
+description: "Use when working with Box files, sharing, or Box AI"
+tags: [box, cloud-storage, archivos, sharing, metadata, box-ai, oauth, cli]
 version: 1.0.0
 author: Chris Kim (iskysun96), Hermes Agent
 license: MIT

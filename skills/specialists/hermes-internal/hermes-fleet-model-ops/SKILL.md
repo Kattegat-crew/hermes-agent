@@ -3,7 +3,8 @@ name: hermes-fleet-model-ops
 version: 1.0.0
 author: curator-ragnar
 license: Apache-2.0
-description: "Configurar modelos/compresión en flotas Hermes multiperfil."
+description: "Use when setting models/compression across a Hermes fleet."
+tags: [hermes, flota, modelos, compresion, multiperfil, perfiles, config]
 ---
 
 # Hermes Fleet Model Ops — configuración de flota multiperfil
@@ -48,4 +49,5 @@ Clase de tarea: asignar/migrar modelos, auxiliares, compresión y razonamiento a
 ## Referencias
 
 - `references/migracion-v2-20260902.md` — caso completo de la migración v2: cambios P0–P6, purga de rochi, verificación de visión en vivo.
+- `references/migracion-deepseek-a-glm-20260924.md` — migración deepseek→glm en 12 configs (24/09/26): rutas de selección vs catálogo, `supports_vision` obligatorio para el ruteo de imágenes, ruamel round-trip para no perder comentarios, verificación con `hermes config get` + telemetría de `session_model_usage`, y pins de `/model` que sobreviven a la config.
 - Hermana user-owned `devops/hermes-multiprofile-model-config` — matriz por bot y diagnóstico 401 (keys cruzadas).

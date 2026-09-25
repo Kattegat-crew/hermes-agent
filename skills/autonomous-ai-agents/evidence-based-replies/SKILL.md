@@ -1,6 +1,7 @@
 ---
 name: evidence-based-replies
-description: evidence-based-replies — Compare a person's claim to a cited paper or source, isolate what the evidence actually supports, and draft concise replies that correct overreach without sounding evasive.
+description: "Use when drafting a reply that corrects an overclaim."
+tags: [evidencia, respuestas, research, fact-checking, overclaim, reddit, citas]
 version: 1.0.0
 created_by: agent
 ---

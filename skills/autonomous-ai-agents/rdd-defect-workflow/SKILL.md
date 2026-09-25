@@ -1,6 +1,7 @@
 ---
 name: rdd-defect-workflow
-description: "Trigger: RDD, receipt-driven development, review authority, receipt/lineage, correction/recovery, delivery gate/kill switch, bounded review defects. Guide work."
+description: "Use when driving an RDD defect review workflow"
+tags: [rdd, recibos, receipts, defecto, review, lineage, gates, rollback]
 license: Apache-2.0
 metadata:
   author: gentleman-programming

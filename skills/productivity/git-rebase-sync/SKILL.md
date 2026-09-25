@@ -1,6 +1,7 @@
 ---
 name: git-rebase-sync
-description: "Sincronizar una rama de trabajo con upstream por rebase, resolviendo conflictos y publicando con force-with-lease."
+description: "Use when syncing a branch by rebase and force-with-lease"
+tags: [git, rebase, sincronizacion, sync, conflictos, force-with-lease, rama]
 license: MIT
 ---
 

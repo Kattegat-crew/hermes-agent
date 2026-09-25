@@ -1,10 +1,10 @@
 ---
 name: huggingface-hub
-description: "HuggingFace hf CLI: search/download/upload models, datasets."
+description: "Use when using hf CLI for models, datasets, Spaces."
 version: 1.0.1
 author: Hugging Face
 license: MIT
-tags: [huggingface, hf, models, datasets, hub, mlops]
+tags: [huggingface, hf-cli, modelos, datasets, mlops]
 platforms: [linux, macos, windows]
 ---
 

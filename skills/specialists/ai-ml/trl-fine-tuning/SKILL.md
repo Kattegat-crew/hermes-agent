@@ -1,6 +1,7 @@
 ---
 name: trl-fine-tuning
-description: "TRL: SFT, DPO, GRPO, RLOO reward modeling for LLM RLHF."
+description: "Use when fine-tuning LLMs with SFT, DPO, GRPO or RLOO"
+tags: [trl, fine-tuning, sft, dpo, grpo, rloo, rlhf, huggingface]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

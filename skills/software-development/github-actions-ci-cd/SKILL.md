@@ -1,6 +1,7 @@
 ---
 name: github-actions-ci-cd
-description: GitHub Actions pipelines, workflow optimization, matrix builds, automated testing, and secure secret deployments.
+description: "Use when authoring a GitHub Actions CI/CD pipeline."
+tags: [github-actions, ci-cd, workflows, matrix-builds, secrets]
 license: MIT
 compatibility: opencode
 ---

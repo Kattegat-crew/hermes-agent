@@ -1,6 +1,7 @@
 ---
 name: spanish-deliverable-proofreading
-description: "Check Spanish doc typos before delivering as PDF or DOCX."
+description: "Use when delivering Spanish docs: proofread first."
+tags: [proofreading, ortografia, espanol, docx, entrega, qa, documentos, pdf]
 ---
 
 # Spanish Deliverable Proofreading & Delivery

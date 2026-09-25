@@ -1,6 +1,7 @@
 ---
 name: here-now
-description: Publish sites to {slug}.here.now and store files in Drives.
+description: "Use when publishing sites or storing files on here.now"
+tags: [herenow, publish, publicar, hosting, static-site, drive, storage, deploy]
 version: 1.15.3
 author: here.now
 license: MIT

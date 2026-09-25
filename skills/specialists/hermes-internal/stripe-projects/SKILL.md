@@ -1,6 +1,7 @@
 ---
 name: stripe-projects
-description: Provision SaaS services + sync creds via Stripe Projects.
+description: "Use when provisioning SaaS services via Stripe."
+tags: [stripe, pagos, provisioning, credenciales, saas, cli]
 version: 0.1.0
 author: Teknium (teknium1), Hermes Agent
 license: MIT

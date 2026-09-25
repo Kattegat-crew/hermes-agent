@@ -1,6 +1,7 @@
 ---
 name: google-drive-sheets-ops
 description: "Use when creating Google Sheets or accessing Drive via API."
+tags: [google-drive, google-sheets, api, oauth, export, trash]
 version: 1.0.0
 author: hermes
 license: MIT

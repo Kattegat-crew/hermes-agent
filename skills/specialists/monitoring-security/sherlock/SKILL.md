@@ -1,6 +1,7 @@
 ---
 name: sherlock
-description: Find accounts for a username across 400+ platforms.
+description: "Use when finding accounts by username on 400+ sites."
+tags: [osint, username, social-media, recon, seguridad, sherlock]
 version: 1.0.0
 author: unmodeled-tyler
 license: MIT

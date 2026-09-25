@@ -1,6 +1,7 @@
 ---
 name: neuralcrew-campaign-content
-description: Copy and guiones for NeuralCrew casino campaigns (Colombia).
+description: "Use when writing NeuralCrew casino campaign copy."
+tags: [campanas, copy, guiones, casino, coljuegos, compliance, bingo, marcas]
 ---
 
 # NeuralCrew Casino Campaign Content (Colombia)

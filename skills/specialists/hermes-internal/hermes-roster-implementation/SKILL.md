@@ -1,6 +1,7 @@
 ---
 name: hermes-roster-implementation
-description: Use when building Hermes bot rosters (specialized agents).
+description: "Use when deploying a Hermes bot roster on the VPS."
+tags: [hermes, roster, bots, perfiles, skills, discord, deploy]
 version: 1.0.0
 author: Ragnar
 triggers:

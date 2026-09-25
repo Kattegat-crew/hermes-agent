@@ -1,6 +1,7 @@
 ---
 name: humanizer
-description: "Humanize text: strip AI-isms and add real voice."
+description: "Use when text must not sound AI-written."
+tags: [humanizar, writing, editing, anti-ai-slop, prosa, voice, redaccion, style]
 version: 2.5.1
 author: Siqi Chen (@blader, https://github.com/blader/humanizer), ported by Hermes Agent
 license: MIT

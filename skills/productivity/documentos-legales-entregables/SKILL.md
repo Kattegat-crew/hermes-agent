@@ -1,6 +1,7 @@
 ---
 name: documentos-legales-entregables
-description: >
+description: "Use when producing complete legal deliverables as .docx."
+tags: [legal, compliance, entregables, docx, verificacion]
   Entregables legales: verificar papeles, sin huecos, .docx.
 version: 1.0.0
 author: hermes

@@ -1,6 +1,7 @@
 ---
 name: skill-registry
-description: "Trigger: update skills, skill registry, actualizar skills, after skill changes. Index available skills by trigger and path."
+description: "Use when reindexing skills after installing or renaming them"
+tags: [skills, indice, registro, reindexar, frontmatter, symlinks, perfiles, engram]
 license: MIT
 metadata:
   author: gentleman-programming

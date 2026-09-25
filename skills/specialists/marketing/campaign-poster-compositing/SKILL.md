@@ -1,6 +1,7 @@
 ---
 name: campaign-poster-compositing
-description: "Use when: armar posters con cifras y texto variable."
+description: "Use when composing posters with exact figures and text."
+tags: [posters, pil, composicion, campanas, tipografia, keyart, variantes, qa]
 ---
 
 # Compositing paramétrico de posters de campaña

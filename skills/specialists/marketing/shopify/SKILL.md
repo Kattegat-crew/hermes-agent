@@ -1,6 +1,7 @@
 ---
 name: shopify
-description: Query Shopify Admin/Storefront GraphQL APIs via curl.
+description: "Use when calling Shopify Admin GraphQL API via curl."
+tags: [shopify, graphql, ecommerce, admin-api, productos, orders]
 version: 1.0.0
 author: community
 license: MIT

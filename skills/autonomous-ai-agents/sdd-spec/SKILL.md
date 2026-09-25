@@ -1,6 +1,7 @@
 ---
 name: sdd-spec
-description: "Write SDD delta specs with requirements and scenarios. Trigger: orchestrator launches spec work for a change."
+description: "Use when writing SDD delta specs with scenarios."
+tags: [sdd, specs, requisitos, escenarios, rfc2119, openspec, subagente]
 disable-model-invocation: true
 user-invocable: false
 license: MIT

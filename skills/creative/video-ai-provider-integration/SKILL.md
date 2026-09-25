@@ -1,6 +1,7 @@
 ---
 name: video-ai-provider-integration
-description: Use when wiring an AI video provider into the pipeline.
+description: "Use when wiring an AI video provider into the pipeline."
+tags: [video-ia, fal-ai, monid, proveedor, api, image-to-video, seedance]
 ---
 
 # Video AI Provider Integration (fal.ai / Monid / brokers)

@@ -1,6 +1,7 @@
 ---
 name: rest-graphql-debug
-description: "Debug REST/GraphQL APIs: status codes, auth, schemas, repro."
+description: "Use when debugging REST or GraphQL APIs"
+tags: [rest, graphql, api, debugging, http, auth, curl, integracion]
 version: 1.2.0
 author: eren-karakus0
 license: MIT

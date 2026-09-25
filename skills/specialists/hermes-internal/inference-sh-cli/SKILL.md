@@ -1,6 +1,7 @@
 ---
 name: inference-sh-cli
-description: Run 150+ AI apps (image, video, LLM) via inference.sh CLI.
+description: "Use when running AI apps (image, video, LLM) via infsh."
+tags: [inference-sh, infsh, image-generation, video, llm, cli]
 version: 1.0.0
 author: okaris
 license: MIT

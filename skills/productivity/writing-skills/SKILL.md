@@ -1,6 +1,7 @@
 ---
 name: writing-skills
-description: Use when creating new skills, editing existing skills, or verifying skills work before deployment
+description: "Use when creating, editing, or verifying a skill."
+tags: [skills, authoring, tdd, meta, documentacion, verificacion]
 ---
 
 # Writing Skills

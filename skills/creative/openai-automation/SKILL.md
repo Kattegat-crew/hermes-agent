@@ -1,6 +1,7 @@
 ---
 name: openai-automation
-description: "Automate OpenAI API operations -- generate responses with multimodal and structured output support, create embeddings, generate images, and list models via the Composio MCP integration."
+description: "Use when calling OpenAI API: text, embeddings, images"
+tags: [openai, api, embeddings, dall-e, composio, mcp, imagenes, automatizacion]
 requires:
   mcp:
     - rube

@@ -1,6 +1,7 @@
 ---
 name: composio-integrations
-description: "Use when connecting tools via Composio: install, execute."
+description: "Use when connecting tools via Composio CLI or MCP."
+tags: [composio, integrations, oauth, instagram, facebook, cli]
 version: 1.0.0
 ---
 

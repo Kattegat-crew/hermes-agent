@@ -1,6 +1,7 @@
 ---
 name: locate-shared-resource
-description: Find a repo/tweet shared via Telegram or Hermes Desktop.
+description: "Use when locating a repo or tweet shared to the team."
+tags: [session-search, sqlite, state-db, notion, telegram, retrieval]
 ---
 
 # Locate Shared Resource

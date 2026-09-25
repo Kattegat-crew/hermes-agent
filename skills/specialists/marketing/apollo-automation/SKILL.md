@@ -1,6 +1,7 @@
 ---
 name: apollo-automation
-description: "Automate Apollo.io lead generation -- search organizations, discover contacts, enrich prospect data, manage contact stages, and build targeted outreach lists -- using natural language through the Composio MCP integration."
+description: "Use when prospecting leads with Apollo.io via Composio."
+tags: [apollo, prospecting, lead-gen, enrichment, composio, mcp, ventas]
 category: sales-intelligence
 requires:
   mcp:

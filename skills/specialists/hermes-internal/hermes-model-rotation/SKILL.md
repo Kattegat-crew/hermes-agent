@@ -1,6 +1,7 @@
 ---
 name: hermes-model-rotation
-description: Rotate Hermes profile models on new provider models.
+description: "Use when rotating a Hermes profile model to a new one."
+tags: [hermes, modelos, rotacion, providers, config, perfiles, smoke-test]
 version: 1.0.0
 author: Ragnar
 triggers:

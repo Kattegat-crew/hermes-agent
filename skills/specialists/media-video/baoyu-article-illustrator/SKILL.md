@@ -1,6 +1,7 @@
 ---
 name: baoyu-article-illustrator
-description: "Article illustrations: type × style × palette consistency."
+description: "Use when illustrating an article with generated images."
+tags: [ilustracion, imagenes, articulos, image-generation, estilos, paletas, contenido]
 version: 1.57.0
 author: 宝玉 (JimLiu)
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: entregables-de-campana-versionado
-description: "Use when un dato del cliente llega tras el entregable."
+description: "Use when a client datum arrives after delivery."
+tags: [campanas, entregables, versionado, cliente, ledger, audio, docx]
 version: 1.0.0
 author: Ragnar (NeuralCrew Labs)
 metadata:

@@ -1,6 +1,7 @@
 ---
 name: sketch
-description: "Throwaway HTML mockups: 2-3 design variants to compare."
+description: "Use when comparing 2-3 throwaway UI mockups."
+tags: [mockups, variantes, ui, prototipo, html, sketch, wireframe, comparacion]
 version: 1.0.1
 author: Hermes Agent (adapted from gsd-build/get-shit-done)
 license: MIT

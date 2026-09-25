@@ -1,6 +1,7 @@
 ---
 name: code-wiki
-description: "Generate wiki docs + Mermaid diagrams for any codebase."
+description: "Use when documenting a codebase as a wiki with diagrams."
+tags: [documentacion, wiki, mermaid, arquitectura, diagramas, codebase]
 version: 0.1.0
 author: Teknium (teknium1), Hermes Agent
 license: MIT

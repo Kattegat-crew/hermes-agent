@@ -1,6 +1,7 @@
 ---
 name: scrapling
-description: Scrape sites with stealth browsing and Cloudflare bypass.
+description: "Use when scraping sites with anti-bot or Cloudflare."
+tags: [scraping, stealth, cloudflare, crawler, spider, antibot, browser]
 version: 1.0.0
 author: FEUAZUR
 license: MIT

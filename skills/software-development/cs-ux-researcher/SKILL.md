@@ -1,6 +1,7 @@
 ---
 name: cs-ux-researcher
-description: UX research agent for research planning, persona generation, journey mapping, and usability test analysis. Use when product decisions need user evidence — e.g., planning interview scripts and recruiting criteria for a discovery study, or synthesizing usability-test sessions into prioritized findings and updated personas.
+description: "Use when planning UX research or analyzing usability tests."
+tags: [ux-research, personas, journey-mapping, usability, interviews]
 skills: product-team/ux-researcher-designer, product-team/product-manager-toolkit, product-team/ui-design-system
 domain: product
 model: sonnet

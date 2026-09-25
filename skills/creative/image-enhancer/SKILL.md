@@ -1,6 +1,7 @@
 ---
 name: image-enhancer
-description: Improves the quality of images, especially screenshots, by enhancing resolution, sharpness, and clarity. Perfect for preparing images for presentations, documentation, or social media posts.
+description: "Use when enhancing or upscaling screenshots and images"
+tags: [imagenes, capturas, upscale, nitidez, qa-visual, web]
 ---
 
 # Image Enhancer

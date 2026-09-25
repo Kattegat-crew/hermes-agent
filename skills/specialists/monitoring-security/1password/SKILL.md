@@ -1,6 +1,7 @@
 ---
 name: 1password
-description: Set up op CLI, sign in, and read or inject secrets.
+description: "Use when reading or injecting secrets with the op CLI."
+tags: [seguridad, secretos, 1password, op, cli]
 version: 1.0.0
 author: arceus77-7, enhanced by Hermes Agent
 license: MIT

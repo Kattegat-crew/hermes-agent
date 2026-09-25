@@ -1,6 +1,7 @@
 ---
 name: spec-best-practices
-description: Technical specification design, RFC authoring, acceptance criteria definition, trade-off analysis, and system architecture proposals.
+description: "Use when writing RFC or technical specs"
+tags: [rfc, spec, especificacion, arquitectura, diseno, requirements, planning]
 license: MIT
 compatibility: hermes, opencode
 metadata:

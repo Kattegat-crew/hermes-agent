@@ -1,6 +1,7 @@
 ---
 name: computer-use
-description: "Drive the desktop background-first; escalate on signal."
+description: "Use when driving the desktop GUI in the background."
+tags: [computer-use, desktop, gui, automatizacion, cross-platform, accessibility, cua-driver]
 version: 2.0.0
 author: Francesco Bonacci (f-trycua), Hermes Agent
 license: MIT

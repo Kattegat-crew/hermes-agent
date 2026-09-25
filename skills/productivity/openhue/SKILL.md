@@ -1,6 +1,7 @@
 ---
 name: openhue
-description: "Control Philips Hue lights, scenes, rooms via OpenHue CLI."
+description: "Use when controlling Philips Hue lights, rooms, scenes"
+tags: [hue, smart-home, luces, iot, openhue, escenas, domotica, cli]
 version: 1.0.1
 author: community
 license: MIT

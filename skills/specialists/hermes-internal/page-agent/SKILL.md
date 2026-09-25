@@ -1,6 +1,7 @@
 ---
 name: page-agent
-description: Embed an in-page natural-language GUI copilot in web apps.
+description: "Use when embedding an in-page GUI copilot in web apps"
+tags: [page-agent, copilot, copiloto, gui-agent, javascript, embed, saas, dom]
 version: 1.0.0
 author: Hermes Agent
 license: MIT

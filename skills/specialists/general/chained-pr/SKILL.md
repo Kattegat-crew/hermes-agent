@@ -1,6 +1,7 @@
 ---
 name: chained-pr
-description: "Trigger: PRs over 400 lines, stacked PRs, review slices. Split oversized changes into chained PRs that protect review focus."
+description: "Use when a PR exceeds 400 lines and must be split."
+tags: [pull-request, pr, code-review, git, review, stacked-pr, sdd]
 license: Apache-2.0
 metadata:
   author: gentleman-programming

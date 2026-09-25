@@ -1,6 +1,7 @@
 ---
 name: hermes-team-ops
-description: Roster del equipo y handoff de crons entre perfiles.
+description: "Use when who-owns-what or cron handoff between profiles."
+tags: [roster, equipo, crons, handoff, perfiles, profiles, ownership, hermes]
 version: 1.0.0
 author: Ragnar
 metadata:

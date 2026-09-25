@@ -1,6 +1,7 @@
 ---
 name: hermes-profile-routing
-description: Use when routing Hermes profiles/bots across one channel.
+description: "Use when routing several Hermes profiles on one channel."
+tags: [perfiles, profiles, routing, gateway, whatsapp, telegram, bots, canal]
 version: 1.0.0
 author: Ragnar
 triggers:

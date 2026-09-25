@@ -1,6 +1,7 @@
 ---
 name: agent-worktree-orchestration
-description: "Use when varios agentes editan un repo en paralelo."
+description: "Use when parallel agents share one repo (worktrees)."
+tags: [worktrees, orca, agentes, paralelismo, git, aislamiento, orquestacion, ramas]
 version: 1.0.0
 author: curator-ragnar
 triggers:

@@ -1,6 +1,7 @@
 ---
 name: repo-rename
-description: "Use when renaming a production-wired GitHub repo."
+description: "Use when renaming a production-wired repo."
+tags: [git, github, rename, systemd, migracion, verificacion]
 category: devops
 metadata:
   author: Ragnar

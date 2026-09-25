@@ -1,6 +1,7 @@
 ---
 name: colombia-promociones-docs-multiempresa
-description: "Paquete legal separado por empresa en campañas multiempresa."
+description: "Use when one campaign needs legal docs per company."
+tags: [colombia, legal, promociones, multiempresa, docx, compliance, casinos]
 version: 1.0.0
 metadata:
   hermes:

@@ -1,6 +1,7 @@
 ---
 name: meta-ads-discord-reporter
-description: "Trigger: meta ads discord report, meta ads daily report, reporte meta ads discord, informe de anuncios discord. Pull Meta Marketing API campaign insights (spend, clicks, impressions, CPC, CTR, ad sets, top creatives) and deliver formatted executive embeds to any Discord webhook via deterministic Python CLI."
+description: "Use when reporting Meta Ads performance to Discord."
+tags: [meta-ads, discord, webhook, reportes, composio, insights]
 license: Apache-2.0
 metadata:
   author: Gentleman Programming & Antigravity

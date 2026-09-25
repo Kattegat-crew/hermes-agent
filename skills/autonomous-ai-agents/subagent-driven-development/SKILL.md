@@ -1,6 +1,7 @@
 ---
 name: subagent-driven-development
-description: Use when executing implementation plans with independent tasks in the current session
+description: "Use when running a plan via fresh subagents in-session."
+tags: [subagentes, implementacion, revision, ledger, worktree, orquestacion, tdd]
 ---
 
 # Subagent-Driven Development

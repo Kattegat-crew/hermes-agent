@@ -1,6 +1,7 @@
 ---
 name: work-unit-commits
-description: "Plan commits as reviewable work units. Trigger: implementation, commit splitting, chained PRs, or keeping tests and docs with code."
+description: "Use when splitting commits into reviewable work units"
+tags: [git, commits, pr, atomic, review, sdd, unidades-trabajo]
 license: Apache-2.0
 metadata:
   author: gentleman-programming

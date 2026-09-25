@@ -1,6 +1,7 @@
 ---
 name: video-tts-pronunciation-fix
-description: Fix Spanish TTS pronunciation in video reels via respelling.
+description: "Use when Spanish TTS mispronounces a reel's dialogue."
+tags: [tts, voz, espanol, pronunciacion, reels, seedance, monid]
 ---
 
 # Video TTS Pronunciation Fix (Seedance / Monid native voice)

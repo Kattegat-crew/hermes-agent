@@ -1,6 +1,7 @@
 ---
 name: searxng-search
-description: Free keyless meta-search aggregating 70+ engines.
+description: "Use when the web toolset is down and SearXNG is available."
+tags: [searxng, meta-search, busqueda, fallback, self-hosted, json]
 version: 1.0.1
 author: hermes-agent
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: local-headless-rendering
-description: "Use when un script renderiza HTML a frames headless."
+description: "Use when a script must render HTML frames headless."
+tags: [chromium, headless, frames, animatic, threejs, ffmpeg, render]
 version: 1.0.0
 author: curator-ragnar
 triggers:

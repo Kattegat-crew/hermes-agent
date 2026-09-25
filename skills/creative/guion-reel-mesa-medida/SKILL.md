@@ -1,6 +1,7 @@
 ---
 name: guion-reel-mesa-medida
-description: "Use when escribiendo o midiendo un guion de reel de campana."
+description: "Use when writing or measuring a campaign reel script."
+tags: [guiones, reels, campanas, casino, lint, edge-tts, medicion]
 version: 1.0.0
 metadata:
   hermes:

@@ -1,6 +1,7 @@
 ---
 name: client-deliverable-manuals
-description: >
+description: "Use when writing client operational manuals or guides."
+tags: [manuales, entregables, docx, pdf, clientes, neuralcrew, casino, operativo]
   Use when creating client operational manuals or guides.
 version: 1.0.0
 author: hermes

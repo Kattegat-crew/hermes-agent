@@ -1,6 +1,7 @@
 ---
 name: agent-roster-blueprint
-description: "When designing agent rosters: per-bot skills, naming, plan."
+description: "Use when designing an agent roster: names and skills."
+tags: [roster, agentes, bots, nomenclatura, skills, plan, hermes]
 version: 1.0.0
 author: Ragnar
 triggers:

@@ -1,6 +1,7 @@
 ---
 name: hermes-usage-cost-audit
-description: Audit where LLM tokens go across a Hermes fleet.
+description: "Use when auditing where LLM tokens go across a Hermes fleet."
+tags: [coste, tokens, uso, cuota, state-db, auditoria, flota]
 version: 1.0.0
 author: Ragnar (NeuralCrew Labs)
 license: MIT

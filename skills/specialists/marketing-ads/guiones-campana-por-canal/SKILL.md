@@ -1,6 +1,7 @@
 ---
 name: guiones-campana-por-canal
-description: "Use when writing or auditing campaign scripts by channel."
+description: "Use when writing or auditing casino ad scripts."
+tags: [guiones, campanas, casino, meta-ads, cumplimiento, coljuegos, reels]
 version: 1.0.0
 metadata:
   hermes:

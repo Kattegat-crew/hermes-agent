@@ -1,6 +1,7 @@
 ---
 name: vps-agent-deployer
-description: "Zero-friction, fully automated provisioning and deployment skill for multi-agent Docker architectures on clean Linux VPS servers. Sets up Docker, Hermes Agent, shared Engram memory, Gentle AI, OpenCode, NaN-Builders model routing, WhatsApp bridges, and Gmail MCP."
+description: "Use when provisioning a VPS with the Docker agent stack"
+tags: [vps, provisioning, docker, deployment, hermes-agent, engram, opencode, devops]
 ---
 
 # VPS Agent Deployer & Multi-Container Docker Skill

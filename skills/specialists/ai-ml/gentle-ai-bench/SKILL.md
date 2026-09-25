@@ -1,6 +1,7 @@
 ---
 name: gentle-ai-bench
-description: "Trigger: bench, journey, journeys, driven mode, gentle-ai-bench, journey corpus, j-numbers, bench axis. Author and verify gentle-ai bench journeys; go test ./bench never proves driven execution."
+description: "Use when authoring or verifying gentle-ai bench journeys"
+tags: [bench, journeys, gentle-ai, driven-mode, go-test, ci, harness]
 license: Apache-2.0
 metadata:
   author: "Gentleman-Programming"

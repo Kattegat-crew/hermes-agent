@@ -1,6 +1,7 @@
 ---
 name: monid-seedance-clips
-description: Use when generating image2video clips via Monid Seedance.
+description: "Use when generating image2video clips via Monid Seedance."
+tags: [monid, seedance, video, image2video, reels, clips, lipsync, api]
 ---
 
 # Monid Seedance — Generación de Clips Image2Video

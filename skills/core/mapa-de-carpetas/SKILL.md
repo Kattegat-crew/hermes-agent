@@ -1,6 +1,6 @@
 ---
 name: mapa-de-carpetas
-description: >
+description: "Use when choosing where a file or folder must live"
   Escanea carpetas y regula dónde va qué (VPS, repos, Drive).
 version: 1.0.0
 author: Ragnar

@@ -1,6 +1,7 @@
 ---
 name: hermes-gateway-s6-ops
-description: "Reinicio seguro del gateway de Hermes bajo s6 en el VPS."
+description: "Use when restarting the Hermes gateway safely under s6"
+tags: [gateway, s6, reinicio, supervisor, hermes, ops, cron, vps]
 ---
 
 # Hermes Gateway — operación bajo s6 supervisor

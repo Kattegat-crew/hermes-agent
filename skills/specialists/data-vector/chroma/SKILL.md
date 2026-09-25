@@ -1,6 +1,7 @@
 ---
 name: chroma
-description: Embedding database for RAG and semantic search.
+description: "Use when working with Chroma vector DB and RAG."
+tags: [chroma, vector-database, embeddings, rag, semantic-search, retrieval, python]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

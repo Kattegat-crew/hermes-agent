@@ -1,6 +1,7 @@
 ---
 name: web-fetch
-description: HTTP scraping, API requests, and web content extraction with rate-limiting, headers management, exponential backoff, and caching.
+description: "Use when a fetch needs headers, timeouts or retries."
+tags: [http, scraping, curl, httpx, fetch, backoff, research]
 license: MIT
 compatibility: hermes, opencode, python, bash
 metadata:

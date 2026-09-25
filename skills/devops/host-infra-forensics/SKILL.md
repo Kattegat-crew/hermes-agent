@@ -1,6 +1,7 @@
 ---
 name: host-infra-forensics
-description: "Use when a service is unreachable from a remote client."
+description: "Use when a self-hosted service is unreachable remotely"
+tags: [forensics, tailscale, systemd, reachability, netns, docker, diagnostico, self-hosted]
 license: Apache-2.0
 metadata:
   author: "roshi"

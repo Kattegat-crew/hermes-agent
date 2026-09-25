@@ -1,6 +1,7 @@
 ---
 name: hermes-bible
-description: >
+description: "Use when asked about community Hermes Agent workflows."
+tags: [hermes, comunidad, workflows, soul-md, delegacion, kanban, cron]
   Use when the user asks for community Hermes Agent knowledge: hidden features,
   real-world workflows, SOUL.md patterns, delegation/Kanban/cron patterns, or
   examples of how people use Hermes. Complements hermes-agent; official docs

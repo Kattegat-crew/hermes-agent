@@ -1,6 +1,7 @@
 ---
 name: hermes-provider-resilience
-description: Redundancia y fallback multi-proveedor LLM para Hermes.
+description: "Use when adding multi-provider LLM fallback and redundancy."
+tags: [providers, fallback, resiliencia, rate-limit, opencode-go, b.ai, flota]
 version: 1.0.0
 author: Ragnar
 metadata:

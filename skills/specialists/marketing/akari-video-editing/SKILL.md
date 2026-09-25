@@ -1,6 +1,7 @@
 ---
 name: akari-video-editing
-description: "Edit campaign videos with the Akari AI editor."
+description: "Use when editing campaign video with Akari editor."
+tags: [akari, video, edicion, reels, stories, captions, tailscale]
 version: 1.0.0
 author: Ragnar
 license: MIT

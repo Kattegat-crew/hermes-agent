@@ -1,6 +1,7 @@
 ---
 name: coolify-secure-secrets
-description: Use when deploying apps or databases in Coolify, managing encrypted secrets in Coolify's database, rotating database passwords, or troubleshooting "payload is invalid" errors from Coolify's Laravel encryption.
+description: "Use when deploying or rotating secrets in Coolify."
+tags: [coolify, deploy, secretos, laravel, cifrado, postgres, rotacion, docker]
 ---
 
 # Coolify Secure Secrets

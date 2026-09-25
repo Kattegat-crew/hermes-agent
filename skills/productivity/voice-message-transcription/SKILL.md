@@ -1,6 +1,7 @@
 ---
 name: voice-message-transcription
-description: Use for voice messages (ptt); transcribe and reply directly.
+description: "Use when a voice message (ptt) arrives and needs a reply."
+tags: [voz, audio, transcripcion, whisper, stt, whatsapp, telegram]
 ---
 
 # Voice Message Transcription

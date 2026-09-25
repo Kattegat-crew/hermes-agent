@@ -1,6 +1,7 @@
 ---
 name: notification-delivery-reliability
 description: "Use when a cron message or alert never reached the user."
+tags: [cron, delivery, entrega, notificaciones, alertas, whatsapp, telegram, verificacion]
 version: 1.0.0
 author: Ragnar
 metadata:

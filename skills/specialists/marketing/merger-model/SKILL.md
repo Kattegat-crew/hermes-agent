@@ -1,6 +1,7 @@
 ---
 name: merger-model
-description: Build M&A accretion/dilution workbooks in Excel.
+description: "Use when building M&A accretion/dilution models."
+tags: [finance, m-and-a, merger, accretion-dilution, excel, openpyxl, valuation, fusiones]
 version: 1.0.0
 author: Anthropic (adapted by Nous Research)
 license: Apache-2.0

@@ -1,6 +1,7 @@
 ---
 name: skill-auditor
-description: skill-auditor — Use when auditing, reviewing, or grading Hermes skills for quality. Checks trigger phrases, exact commands, pitfalls, verification steps, tool guidance, and shareability. Assigns A-F grade with specific fix suggestions. Run this before publishing a skill or when troubleshooting unreliable skills.
+description: "Use when grading or reviewing Hermes skills."
+tags: [skills, auditoria, calidad, grading, rubrica, hermes]
 version: 1.0.0
 author: Hermes Agent
 license: MIT

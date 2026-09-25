@@ -1,6 +1,7 @@
 ---
 name: casino-campaign-content
-description: Use when writing casino campaign scripts, posters or copy.
+description: "Use when writing casino campaign scripts or copy."
+tags: [casino, bingos, guiones, copy, reels, coljuegos, voz-de-marca, campanas]
 ---
 
 # Contenido para campañas de casinos Colombia (NeuralCrew)

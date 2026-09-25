@@ -1,6 +1,7 @@
 ---
 name: zmx
-description: Zellij and Tmux multiplexer session management, background task isolation, and multi-terminal orchestration for autonomous agents.
+description: "Use when managing tmux/zellij sessions headlessly."
+tags: [tmux, zellij, terminal, sesiones, background-tasks, orquestacion]
 license: MIT
 compatibility: hermes, opencode, bash
 metadata:

@@ -1,6 +1,7 @@
 ---
 name: ascii-art
-description: "ASCII art: pyfiglet, cowsay, boxes, image-to-ascii."
+description: "Use when making ASCII banners or image-to-ASCII."
+tags: [ascii, banners, pyfiglet, cowsay, terminal, arte, texto, figlet]
 version: 4.0.0
 author: 0xbyt4, Hermes Agent
 license: MIT

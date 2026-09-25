@@ -1,6 +1,7 @@
 ---
 name: pdf-deliverables
-description: "Use when user wants a PDF. Generate and send via MEDIA:."
+description: "Use when user wants a PDF to deliver as file."
+tags: [pdf, fpdf2, documentos, media, entregables]
 version: 1.0.0
 metadata:
   hermes:

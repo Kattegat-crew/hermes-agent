@@ -1,6 +1,7 @@
 ---
 name: monthly-campaign-calendar-playbook
-description: Use when setting up a monthly content campaign calendar.
+description: "Use when setting the monthly campaign calendar."
+tags: [calendario, campanas, cron, publicacion, aprobacion, drive, marketing]
 version: 1.0.0
 author: Ragnar
 ---

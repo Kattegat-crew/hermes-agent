@@ -1,6 +1,7 @@
 ---
 name: independent-infra-audit
-description: Use when auditing a deployed pipeline read-only.
+description: "Use when auditing a deployed pipeline read-only."
+tags: [auditoria, read-only, evidencia, cron, verificacion, infra]
 version: 1.0.0
 author: Ragnar
 ---

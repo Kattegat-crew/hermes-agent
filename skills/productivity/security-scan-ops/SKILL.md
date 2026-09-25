@@ -1,6 +1,7 @@
 ---
 name: security-scan-ops
-description: "Trigger: Strix scan or findings. Verify before fixing."
+description: "Use when running or triaging a Strix security scan"
+tags: [seguridad, security, strix, scan, pentest, triage, llm-backends]
 version: 1.0.0
 category: devops
 ---

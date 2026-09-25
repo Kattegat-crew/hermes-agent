@@ -1,6 +1,7 @@
 ---
 name: hermes-multiprofile-deploy
-description: Configura N perfiles multiplexados sin romper el gateway.
+description: "Use when deploying config changes to N Hermes profiles."
+tags: [hermes, perfiles, multiprofile, gateway, cron, fallback, despliegue, s6]
 version: 1.0.0
 author: Ragnar
 metadata:

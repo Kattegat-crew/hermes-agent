@@ -1,6 +1,7 @@
 ---
 name: activepieces-flow-editing
-description: Edit AP flows/templates via DB and verify the run used it.
+description: "Use when editing ActivePieces flows via Postgres."
+tags: [activepieces, flows, postgres, sql, email-template, run-verification, self-hosted, plantillas]
 author: Ragnar
 version: "1.0"
 created: 2026-08-25

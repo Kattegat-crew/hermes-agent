@@ -1,6 +1,7 @@
 ---
 name: elevenlabs-brand-voice
-description: "Use when: configurar voz de marca ElevenLabs en AKARI."
+description: "Use when configuring a brand voice in ElevenLabs/AKARI."
+tags: [elevenlabs, tts, voz-marca, akari, video, stt, sintesis]
 version: 1.0.0
 author: Sindri (Producer)
 metadata:

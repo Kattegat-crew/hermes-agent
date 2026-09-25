@@ -1,6 +1,7 @@
 ---
 name: colombia-contratos-empresa
-description: >-
+description: "Use when drafting or reviewing Colombia contracts."
+tags: [colombia, contratos, sas, honorarios, dian, camara-comercio, legal]
   Contratos y constitución de empresa en Colombia.
 category: legal
 triggers:

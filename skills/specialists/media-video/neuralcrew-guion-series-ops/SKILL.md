@@ -1,6 +1,7 @@
 ---
 name: neuralcrew-guion-series-ops
-description: "Use when: replicar o parafrasear guiones Bingo Millonario."
+description: "Use when replicar o parafrasear guiones de serie Bingo."
+tags: [guiones, series, bingo, reels, campanas, parafrasis, coljuegos, linter]
 category: guiones
 version: 1.0.0
 ---

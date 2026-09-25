@@ -1,6 +1,7 @@
 ---
 name: marketing-campaign-pipeline
-description: "Orquesta campañas con bots: contrato, fábrica, review."
+description: "Use when orchestrating a bot-run marketing campaign."
+tags: [campanas, campaigns, pipeline, campaign-yaml, review-gate, orquestacion, drive, marketing]
 version: 1.0.0
 author: Ragnar
 metadata:

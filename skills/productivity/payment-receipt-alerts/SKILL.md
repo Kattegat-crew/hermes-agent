@@ -1,6 +1,7 @@
 ---
 name: payment-receipt-alerts
-description: Use when un pago por QR (Bre-B) debe alertar al equipo.
+description: "Use when a QR payment receipt must alert the team"
+tags: [pagos, payments, qr, bre-b, alertas, gmail, webhook, idempotencia]
 version: "1.0"
 author: Ragnar
 created: 2026-09-10

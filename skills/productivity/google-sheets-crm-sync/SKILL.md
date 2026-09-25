@@ -1,6 +1,7 @@
 ---
 name: google-sheets-crm-sync
-description: "Trigger: google sheet crm sync, google form to crm, google drive sheet export, autonomous sheet sync, form redemptions sync. Autonomous background synchronization between Google Forms/Sheets and CRM backends via Google Drive Export API without Apps Script."
+description: "Use when syncing Google Forms/Sheets rows into a CRM."
+tags: [google-sheets, google-forms, drive-api, crm, sync, watermark, cron, twenty]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

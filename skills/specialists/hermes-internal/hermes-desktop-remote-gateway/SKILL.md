@@ -1,6 +1,7 @@
 ---
 name: hermes-desktop-remote-gateway
-description: "Desktop to remote gateway: sessions not loading or dropping."
+description: "Use when Desktop connects but sessions never load."
+tags: [hermes, desktop, gateway, tailscale, sesiones, troubleshooting, devops]
 category: devops
 ---
 

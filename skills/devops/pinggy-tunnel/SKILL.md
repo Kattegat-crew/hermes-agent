@@ -1,6 +1,7 @@
 ---
 name: pinggy-tunnel
-description: Zero-install localhost tunnels over SSH via Pinggy.
+description: "Use when exposing a localhost port via SSH tunnel."
+tags: [pinggy, tunnel, ssh, webhook, localhost, mcp]
 version: 0.1.0
 author: Teknium (teknium1), Hermes Agent
 license: MIT

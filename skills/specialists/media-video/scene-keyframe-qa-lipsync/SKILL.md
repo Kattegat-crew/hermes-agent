@@ -1,6 +1,7 @@
 ---
 name: scene-keyframe-qa-lipsync
-description: "Use when: QA keyframes 9:16 y prep de lip-sync Seedance."
+description: "Use when QAing reel keyframes and Seedance lip-sync."
+tags: [video, seedance, lip-sync, keyframes, qa, reels]
 version: 1.0.0
 author: Sindri
 license: MIT

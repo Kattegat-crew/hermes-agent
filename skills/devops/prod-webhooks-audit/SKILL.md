@@ -1,6 +1,7 @@
 ---
 name: prod-webhooks-audit
-description: Diagnose Golden/Paradise webhook reason codes in PROD.
+description: "Use when auditing Golden/Paradise webhooks in PROD"
+tags: [webhooks, prod, golden-game, paradise, diagnostico, reason-codes, vigilancia, devops]
 version: 1.0.0
 author: NeuralCrew Labs
 license: MIT

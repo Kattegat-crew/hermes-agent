@@ -1,6 +1,7 @@
 ---
 name: brand-logo-composites
-description: Combine multiple client logos into one brand image (PIL).
+description: "Use when compositing client logos into one brand image."
+tags: [logos, pil, composicion, marca, branding, imagen, neuralcrew, glow]
 ---
 
 # Brand Logo Composites (PIL, estático)

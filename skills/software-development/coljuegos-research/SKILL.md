@@ -1,6 +1,7 @@
 ---
 name: coljuegos-research
-description: "Busca en Coljuegos METs y fabricantes de tragamonedas."
+description: "Use when researching Coljuegos slot manufacturers and METs."
+tags: [coljuegos, colombia, casinos, tragamonedas, mets, datos-abiertos]
 ---
 
 # Coljuegos Research

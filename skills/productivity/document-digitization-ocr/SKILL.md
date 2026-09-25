@@ -1,6 +1,7 @@
 ---
 name: document-digitization-ocr
-description: "Use cuando hay que OCRear o digitalizar documentos."
+description: "Use when OCRing or digitizing scans or PDFs."
+tags: [ocr, digitalizacion, pdf, paperless, stirling, pymupdf]
 ---
 
 # Document Digitization & OCR (routing + servicios self-hosted)

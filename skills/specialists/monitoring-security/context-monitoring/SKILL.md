@@ -1,6 +1,7 @@
 ---
 name: context-monitoring
-description: Monitor Hermes context window usage, token consumption, and session health via CLI commands and SQLite database.
+description: "Use when tracking Hermes context and token usage."
+tags: [hermes, contexto, tokens, monitoreo, sesiones, costos]
 ---
 
 # Context Monitoring & Token Tracking

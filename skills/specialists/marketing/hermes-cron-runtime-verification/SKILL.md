@@ -1,6 +1,7 @@
 ---
 name: hermes-cron-runtime-verification
-description: Use when deploying or verifying Hermes cron jobs.
+description: "Use when verifying that Hermes cron jobs actually run."
+tags: [cron, verificacion, gateway, namespace, nsenter, hermes]
 version: 1.0.0
 author: Ragnar
 ---

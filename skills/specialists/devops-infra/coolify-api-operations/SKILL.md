@@ -1,6 +1,7 @@
 ---
 name: coolify-api-operations
-description: "Trigger: Coolify API, coolify deploy, API token, create admin, ports_mappings, private-deploy-key. Operate a self-hosted Coolify instance headlessly via its REST API and database (bootstrap admin, issue API token, create/update/deploy applications)."
+description: "Use when operating Coolify headlessly via its API."
+tags: [coolify, api, deploy, docker, self-hosted, devops, secrets]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

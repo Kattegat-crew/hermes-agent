@@ -1,6 +1,7 @@
 ---
 name: telephony
-description: Provision Twilio numbers, SMS/MMS, and AI outbound calls.
+description: "Use when provisioning Twilio numbers, calls or texts."
+tags: [telefonia, twilio, sms, llamadas, vapi, bland]
 version: 1.0.0
 author: Nous Research
 license: MIT

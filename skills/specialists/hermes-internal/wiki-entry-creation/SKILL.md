@@ -1,7 +1,7 @@
 ---
 name: wiki-entry-creation
-description: Create structured wiki entries from documentation, config files, and session knowledge when browser is unavailable.
-tags: [wiki, documentation, knowledge-base]
+description: "Use when documenting docs into the Brain Wiki."
+tags: [wiki, brain, documentacion, docusaurus, scraping, indice, notion]
 ---
 
 # Wiki Entry Creation

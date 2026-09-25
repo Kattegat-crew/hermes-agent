@@ -1,6 +1,7 @@
 ---
 name: open-design
-description: Use the Open Design workbench to create editable visual projects, prototypes, landing pages, dashboards, mobile screens, decks, and implementation handoffs.
+description: "Use when building visual projects in Open Design."
+tags: [open-design, ui-ux, prototipos, landing, dashboard, mcp, handoff, visual-design]
 compatibility: opencode
 metadata:
   surface: visual-design

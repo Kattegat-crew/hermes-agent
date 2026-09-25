@@ -1,6 +1,7 @@
 ---
 name: social-media-content-calendar
-description: "Plan multi-platform social campaigns: briefs to posting."
+description: "Use when planning a multi-platform social calendar."
+tags: [social-media, calendario, content-calendar, briefs, aprobaciones, publishing, campanas, multiplataforma]
 version: 0.1.0
 author: Ben Barclay (benbarclay), Hermes Agent
 license: MIT

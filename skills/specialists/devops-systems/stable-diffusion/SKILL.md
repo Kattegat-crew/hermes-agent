@@ -1,6 +1,7 @@
 ---
 name: stable-diffusion
-description: Text-to-image generation, inpainting, and img2img.
+description: "Use when generating images locally with Diffusers."
+tags: [stable-diffusion, diffusers, imagenes, inpainting, lora, text-to-image]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

@@ -1,6 +1,7 @@
 ---
 name: pytorch-lightning
-description: Clean training loops with built-in distributed support.
+description: "Use when training models with PyTorch Lightning."
+tags: [pytorch, lightning, entrenamiento, distributed, ddp, fsdp]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

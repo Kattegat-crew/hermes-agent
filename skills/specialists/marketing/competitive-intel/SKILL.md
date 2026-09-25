@@ -1,6 +1,7 @@
 ---
 name: "competitive-intel"
-description: "Systematic competitor tracking that feeds CMO positioning, CRO battlecards, and CPO roadmap decisions. Use when analyzing competitors, building sales battlecards, tracking market moves, positioning against alternatives, or when user mentions competitive intelligence, competitive analysis, competitor research, battlecards, win/loss, or market positioning."
+description: "Use when analyzing competitors or building battlecards."
+tags: [competencia, battlecards, win-loss, posicionamiento, mercado, inteligencia, swot]
 license: MIT
 metadata:
   version: 1.0.0

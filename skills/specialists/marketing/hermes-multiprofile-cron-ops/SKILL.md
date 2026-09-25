@@ -1,6 +1,7 @@
 ---
 name: hermes-multiprofile-cron-ops
-description: Use when running per-profile Hermes cron jobs on Docker VPS.
+description: "Use when creating per-profile Hermes cron jobs on a VPS."
+tags: [hermes, cron, perfiles, docker, gateway, devops]
 version: 1.0.0
 author: Ragnar
 license: MIT

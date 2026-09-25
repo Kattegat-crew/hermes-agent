@@ -1,6 +1,7 @@
 ---
 name: amazon-listing-optimization
-description: >-
+description: "Use when creating or optimizing an Amazon listing."
+tags: [amazon, listing, seo, cro, ecommerce, marketplace]
   Use when creating Amazon listings. Title, images, bullets.
 version: 1.0.0
 author: Ragnar

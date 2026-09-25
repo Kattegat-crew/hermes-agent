@@ -1,6 +1,7 @@
 ---
 name: cron-watchdog-scripts
-description: Use when creating/debugging Hermes no_agent cron watchdogs.
+description: "Use when writing or debugging no_agent cron watchdogs."
+tags: [cron, watchdog, no-agent, stdout, scripts, hermes]
 ---
 # Cron Watchdog Scripts (Hermes)
 

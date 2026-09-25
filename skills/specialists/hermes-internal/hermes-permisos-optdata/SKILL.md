@@ -1,6 +1,7 @@
 ---
 name: hermes-permisos-optdata
-description: "Use when un path de /opt/data no deja escribir al gateway."
+description: "Use when /opt/data paths break the gateway's write access."
+tags: [permisos, chown, gateway, contenedor, optdata, docker, troubleshooting]
 version: 1.0.0
 author: Ragnar (NeuralCrew Labs)
 license: MIT

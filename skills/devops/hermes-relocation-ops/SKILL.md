@@ -1,6 +1,7 @@
 ---
 name: hermes-relocation-ops
-description: "Use when asked to relocate an agent: guild, token, or host."
+description: "Use when asked to move an agent: guild, token or host."
+tags: [discord, guild, relocation, migracion, token, gateway, perfiles, allow-bots]
 version: 1.0.0
 author: Roshi
 license: MIT

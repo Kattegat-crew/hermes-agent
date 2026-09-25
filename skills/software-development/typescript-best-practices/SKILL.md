@@ -1,6 +1,7 @@
 ---
 name: typescript-best-practices
-description: TypeScript strict guidelines, advanced generics, utility types, and type-safe patterns.
+description: "Use when writing strict type-safe TypeScript"
+tags: [typescript, tipos, generics, strict, type-safety, frontend]
 license: MIT
 compatibility: opencode
 ---

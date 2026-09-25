@@ -1,6 +1,7 @@
 ---
 name: specification-handoff
-description: >
+description: "Use when handing a spec plus prompt to an external editor"
+tags: [spec, prompt, handoff, entrega, repo, agy, especificacion]
   Prepara SPEC/PROMPT para editor de código externo (AGY).
 version: 1.0.0
 author: hermes

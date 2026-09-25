@@ -1,6 +1,7 @@
 ---
 name: brain-knowledge-base
-description: "Implement and maintain a compounding knowledge base (wiki) for business/agency context. Covers seeding, naming, system-prompt boundaries, and business-specific structure."
+description: "Use when setting up or maintaining the brain wiki."
+tags: [wiki, brain, knowledge-base, notion, soul, memoria, empresa]
 version: 1.0.0
 author: Ragnar
 license: MIT

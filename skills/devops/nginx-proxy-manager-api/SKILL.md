@@ -1,6 +1,7 @@
 ---
 name: nginx-proxy-manager-api
-description: "Trigger: NPM, Nginx Proxy Manager, proxy host, Let's Encrypt DNS challenge, certificate API, forward_host. Configure NPM headlessly via its REST API: bootstrap admin, proxy hosts, and Let's Encrypt certs with a DNS challenge."
+description: "Use when configuring Nginx Proxy Manager via API."
+tags: [nginx-proxy-manager, npm, letsencrypt, proxy, dns, api]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

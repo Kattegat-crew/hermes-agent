@@ -1,6 +1,7 @@
 ---
 name: kassiuss-informe-parser
-description: KASSIUSS sales email HTML parser contract and compatibility
+description: "Use when parsing KASSIUSS daily sales emails."
+tags: [kassiuss, parser, ventas, email, multicliente, casino]
 version: 1.0.0
 author: Ragnar
 metadata:

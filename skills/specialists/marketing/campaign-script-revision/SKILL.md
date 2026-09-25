@@ -1,6 +1,7 @@
 ---
 name: campaign-script-revision
-description: "Use when: Revisar guiones con feedback del cliente."
+description: "Use when revising campaign scripts with client feedback."
+tags: [guiones, revision, revision, feedback, campanas, vetos, locucion, state.db]
 ---
 
 # Revision de guiones y copy de campaña (ciclo con feedback del cliente)

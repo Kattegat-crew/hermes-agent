@@ -1,6 +1,7 @@
 ---
 name: sdd-archive
-description: "Archive a completed SDD change by syncing delta specs. Trigger: orchestrator launches archive after implementation and verification."
+description: "Use when archiving a completed SDD change."
+tags: [sdd, archivo, specs, auditoria, openspec, engram, subagente]
 disable-model-invocation: true
 user-invocable: false
 license: MIT

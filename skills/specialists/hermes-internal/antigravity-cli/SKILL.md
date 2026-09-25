@@ -1,6 +1,7 @@
 ---
 name: antigravity-cli
-description: "Operate the Antigravity CLI (agy): plugins, auth, sandbox."
+description: "Use when running the Antigravity CLI (agy)."
+tags: [antigravity, agy, cli, coding-agent, plugins, auth, sandbox, terminal]
 version: 0.2.0
 author: Tony Simons (asimons81), Hermes Agent
 license: MIT

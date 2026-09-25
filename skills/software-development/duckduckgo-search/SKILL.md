@@ -1,6 +1,7 @@
 ---
 name: duckduckgo-search
-description: Free keyless web, news, and image search via ddgs.
+description: "Use when doing keyless web, news, or image search."
+tags: [search, duckduckgo, web-search, free, fallback]
 version: 1.3.0
 author: gamedevCloudy
 license: MIT

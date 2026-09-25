@@ -1,6 +1,7 @@
 ---
 name: flash-attention
-description: Speed up long-sequence transformer training and inference.
+description: "Use when speeding up long-sequence transformer attention."
+tags: [flash-attention, transformers, gpu, pytorch, optimizacion, long-context, cuda, fp8]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

@@ -1,9 +1,9 @@
 ---
 name: admin-reporting
-description: "Reportes al Admin: formato limpio, [SILENT], verificar VPS."
+description: "Use when reporting status to the Admin or in crons."
 version: 1.0.0
 author: Ragnar
-tags: [admin, report, cron, format, verification, jonathan]
+tags: [admin, reportes, cron, silent, whatsapp, verificacion]
 ---
 
 # Admin Reporting — Reportes y crons para el Administrador

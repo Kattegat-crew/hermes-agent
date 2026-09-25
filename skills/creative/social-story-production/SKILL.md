@@ -1,6 +1,7 @@
 ---
 name: social-story-production
-description: "Use when raw chat video must become an IG/FB story."
+description: "Use when turning a raw chat video into an IG/FB story."
+tags: [instagram, stories, video, ffmpeg, historias, publicacion]
 version: 1.0.0
 author: Ragnar
 license: MIT

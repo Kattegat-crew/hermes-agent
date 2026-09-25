@@ -1,6 +1,7 @@
 ---
 name: google-oauth-reauth-ops
-description: Reauth Google OAuth scopes; PKCE/PEP fallback; verify live.
+description: "Use when Google OAuth needs new scopes or re-consent."
+tags: [google, oauth, token, scopes, pkce, reauth, calendar, gmail]
 author: Ragnar
 version: "1.0"
 created: 2026-08-21

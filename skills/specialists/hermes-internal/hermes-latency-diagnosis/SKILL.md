@@ -1,6 +1,7 @@
 ---
 name: hermes-latency-diagnosis
-description: "Bot lento en tareas cortas: medir contexto, 429 y fallback."
+description: "Use when a bot is slow on short tasks (context, 429)."
+tags: [latencia, diagnostico, 429, rate-limit, contexto, bot, flota]
 version: 1.0.0
 author: Ragnar
 metadata:

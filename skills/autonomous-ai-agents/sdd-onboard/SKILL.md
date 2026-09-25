@@ -1,6 +1,7 @@
 ---
 name: sdd-onboard
-description: "Walk users through the SDD workflow on the real codebase. Trigger: orchestrator launches onboarding for the full SDD cycle."
+description: "Use when teaching the SDD cycle on a real codebase"
+tags: [sdd, onboarding, walkthrough, tutorial, ciclo, codebase, ensenanza]
 disable-model-invocation: true
 user-invocable: false
 license: MIT

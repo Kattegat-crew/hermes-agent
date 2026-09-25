@@ -1,6 +1,7 @@
 ---
 name: flujos-con-gates-humanos
-description: "Use when disenando flujos con gates humanos y firma."
+description: "Use when designing flows with human approval gates"
+tags: [gates, aprobaciones, firma-humana, human-in-the-loop, automatizacion, proceso, campanas]
 version: 1.0.0
 metadata:
   hermes:

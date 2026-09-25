@@ -1,6 +1,7 @@
 ---
 name: weights-and-biases
-description: "W&B: log ML experiments, sweeps, model registry, dashboards."
+description: "Use when tracking ML experiments with Weights & Biases."
+tags: [mlops, wandb, experiment-tracking, sweeps, artifacts, model-registry, tracking]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

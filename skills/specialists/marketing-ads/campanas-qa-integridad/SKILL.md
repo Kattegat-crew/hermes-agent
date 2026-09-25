@@ -1,6 +1,7 @@
 ---
 name: campanas-qa-integridad
-description: Docs de campaña + gate QA-INTEGRIDAD para el equipo de bots.
+description: "Use when building campaign docs and QA gate."
+tags: [campanas, qa, integridad, docx, gate, marketing, roshi]
 ---
 
 # Campañas: paquete documental + gate QA-INTEGRIDAD

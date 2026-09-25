@@ -1,6 +1,7 @@
 ---
 name: hermes-multiprofile-model-config
-description: Modelos por perfil Hermes y diagnóstico de 401 por keys.
+description: "Use when per-profile models or 401 keys break."
+tags: [hermes, modelos, perfiles, provider, gateway, discord]
 version: 1.0.0
 author: Ragnar
 triggers:

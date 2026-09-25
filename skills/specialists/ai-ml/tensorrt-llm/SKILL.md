@@ -1,6 +1,7 @@
 ---
 name: tensorrt-llm
-description: High-throughput LLM inference on NVIDIA GPUs.
+description: "Use when serving LLMs on NVIDIA GPUs with TensorRT-LLM."
+tags: [tensorrt-llm, inference, gpu, nvidia, fp8, serving]
 version: 1.0.1
 author: Orchestra Research
 license: MIT

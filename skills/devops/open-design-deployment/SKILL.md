@@ -1,6 +1,7 @@
 ---
 name: open-design-deployment
 description: "Use when deploying or operating OpenDesign (OD)."
+tags: [open-design, docker, byok, opencode, npm, deploy]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"

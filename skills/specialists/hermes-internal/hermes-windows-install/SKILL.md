@@ -1,6 +1,7 @@
 ---
 name: hermes-windows-install
-description: Hermes Desktop install fails on Windows (npm error).
+description: "Use when Hermes Desktop install fails on Windows (npm)."
+tags: [windows, instalacion, npm, node, desktop, error, bootstrap]
 version: 1.0.0
 license: MIT
 platforms: [windows]

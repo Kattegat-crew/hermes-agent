@@ -1,6 +1,7 @@
 ---
 name: grok
-description: "Delegate coding to xAI Grok Build CLI (features, PRs)."
+description: "Use when delegating coding to the Grok CLI"
+tags: [grok, xai, coding-agent, agente-codigo, cli, pr-review, refactoring, automation]
 version: 0.1.1
 author: Matt Maximo (MattMaximo), Hermes Agent
 license: MIT

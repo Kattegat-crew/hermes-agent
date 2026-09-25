@@ -1,6 +1,7 @@
 ---
 name: pil-ffmpeg-rendering
-description: >
+description: "Use when creating video clips with PIL + ffmpeg."
+tags: [video, ffmpeg, pil, animacion, rendering, mp4, motion]
   Use when creating video clips with PIL + ffmpeg.
 version: 1.0.0
 author: hermes

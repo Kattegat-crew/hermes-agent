@@ -1,6 +1,7 @@
 ---
 name: simpo
-description: Reference-free preference alignment, simpler than DPO.
+description: "Use when aligning LLMs with SimPO, no reference model."
+tags: [simpo, alignment, preference, dpo, post-training, llm]
 version: 1.0.0
 author: Orchestra Research
 license: MIT

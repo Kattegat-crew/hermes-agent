@@ -1,7 +1,7 @@
 ---
 name: reel-brand-voice-dubbing
-description: "Voz de marca en reels: Monid → STTS ElevenLabs → CapCut."
-tags: [video, reels, elevenlabs, monid, dubbing, bingo]
+description: "Use when dubbing a reel with ElevenLabs brand voice."
+tags: [reels, dubbing, elevenlabs, monid, stts, capcut, voz-marca]
 ---
 
 # Reel Brand-Voice Dubbing (Monid → ElevenLabs STTS → CapCut)

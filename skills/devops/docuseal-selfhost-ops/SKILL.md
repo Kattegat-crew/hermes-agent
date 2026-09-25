@@ -1,6 +1,7 @@
 ---
 name: docuseal-selfhost-ops
-description: "Trigger: docuseal, firma electronica, contrato roto, link de firma, firmante no puede firmar, reenviar firma, DocuSeal self-hosted. Operate a self-hosted DocuSeal behind Cloudflare Access: public signing paths/bypass, DOCUSEAL_URL, SMTP, and the /disk gotcha that breaks signing pages."
+description: "Use when a DocuSeal signing link or page breaks."
+tags: [docuseal, firma-electronica, cloudflare-access, smtp, bypass, self-hosted, contratos, rails]
 license: Apache-2.0
 metadata:
   author: "neuralcrew"
