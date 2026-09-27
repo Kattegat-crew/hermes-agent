@@ -36,6 +36,19 @@ Para YouTube usar `youtube-content`; para X/Twitter usar `twitter-telegram-inges
 - **Links `/share/r/<token>/` (formato móvil): yt-dlp puede no resolverlos directo.** Resolver en 2 pasos (verificado 23-sep-2026 con reel de Jaigaurcreates): (1) `curl -sL -A "facebookexternalhit/1.1" "<share-url>"` y extraer del HTML la URL canónica `/reel/<id>/`; (2) pasar esa URL canónica a yt-dlp. Sin login, el GET directo a `m.facebook.com/reel/<id>/` con UA de navegador da "Error", pero con UA facebookexternalhit trae og:title/og:description/og:image.
 - **Métricas: dos fuentes que DISCREPAN — citar la de yt-dlp.** El og:title del redirect del share link mostró números agregados inflados (755 mil repr. / 9,3 mil reacciones) mientras yt-dlp `-J` sobre el reel resuelto dio el `view_count` real del video (296.554) y `upload_date` exacto. Regla: las métricas del reporte salen del `-J` de yt-dlp; las del og:title solo como fallback y sin mezclar ambas en la misma línea.
 
+## Instagram — posts y reels (verificado 26-sep-2026, reel DcyWKVkgH0G)
+
+Los enlaces llegan como `instagram.com/p/<id>/` (IG los canoniza a `/reel/<id>/` si son video). Para el reporte básico NO hace falta yt-dlp ni login:
+
+- **Lo que SÍ funciona: UA `facebookexternalhit/1.1` contra instagram.com directo** (mismo truco que Facebook):
+  ```bash
+  curl -sL -A "facebookexternalhit/1.1" "https://www.instagram.com/p/<id>/" -o /tmp/ig.html
+  ```
+  Del bloque `<meta>` salen: `og:title` (creador + caption), `og:description` / `twitter:description` (likes, comentarios, fecha y caption completa), `og:image` (thumbnail CDN firmada, temporal), `al:ios:url` (`instagram://media?id=...`) y el `<link rel="canonical">` con el id real.
+- **Métricas visibles sin login: likes, comentarios, fecha y handle del creador.** `view_count`, username JSON y followers NO aparecen (el GraphQL completo solo viene con sesión). En el reporte: citar likes/comentarios y anotar vistas como "no visibles sin login".
+- **Callejones sin salida (no repetir):** `web_extract` → login wall; mirrors picuki (Cloudflare block) / imginn (stub); `/api/v1/oembed` → HTML sin caption; extraer GraphQL de la página anónima → no viene sin sesión; browser CDP puede no estar disponible.
+- Guardado: mismo `ingesta_externa.py` con `--tipo tiktok` (sirve para cualquier reel corto), `--autor` = handle IG.
+
 ## Guardado (NUEVO pipeline — ya NO usamos Notion)
 
 NOTION ABANDONADO. Todo va a **wiki (Outline) + brain/ingestas**. Usar el script central:
