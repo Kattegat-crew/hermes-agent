@@ -109,7 +109,7 @@ Write `/root/.config/opencode/opencode.jsonc`:
 ```
 
 ### Step 4: Configure Hermes Agent (Docker)
-Create `/root/hermes-agent/docker-compose.yml`:
+Create `/root/hermes-agent-legacy-docker/docker-compose.yml`:
 ```yaml
 services:
   hermes:

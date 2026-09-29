@@ -84,7 +84,7 @@ Reglas que quedaron:
 ## Otro pitfall: host y contenedor no ven el mismo `/opt/data`
 
 El compose monta `./data:/opt/data`, así que la ruta del host es
-`/root/hermes-agent/data/...`. Un script que opere `/opt/data` **en el host**
+`/root/hermes-agent-legacy-docker/data/...`. Un script que opere `/opt/data` **en el host**
 está tocando otro árbol (legado). Separar siempre *ruta host* de *ruta
 contenedor* en los scripts de migración.
 

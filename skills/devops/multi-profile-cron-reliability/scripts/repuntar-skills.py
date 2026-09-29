@@ -3,12 +3,12 @@
 
 The profile's `<home>/skills/` is frequently provisioned with symlinks pointing at
 `/opt/data/skills/<name>` — a path that does NOT exist on this host. The canonical
-catalog lives at `/root/hermes-agent/data/skills/` and
-`/root/hermes-agent/data/skills-especialistas/`. This script repoints only the broken
+catalog lives at `/root/hermes-agent-legacy-docker/data/skills/` and
+`/root/hermes-agent-legacy-docker/data/skills-especialistas/`. This script repoints only the broken
 links to the real catalog (with a nested-category fallback) and reports what remains.
 
 Usage:
-  repuntar-skills.py [--home /root/hermes-agent/data/profiles/<name>/skills]
+  repuntar-skills.py [--home /root/hermes-agent-legacy-docker/data/profiles/<name>/skills]
 
 Dry-run first with `--dry-run`; run without it to apply. Idempotent — re-running
 after a partial fix is safe.
@@ -21,8 +21,8 @@ import sys
 from pathlib import Path
 
 BASE_DIRS = [
-    Path("/root/hermes-agent/data/skills"),
-    Path("/root/hermes-agent/data/skills-especialistas"),
+    Path("/root/hermes-agent-legacy-docker/data/skills"),
+    Path("/root/hermes-agent-legacy-docker/data/skills-especialistas"),
 ]
 
 

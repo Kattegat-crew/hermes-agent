@@ -59,7 +59,7 @@ Return:
 - **Symlinks que solo resuelven en contenedor**: los symlinks de perfiles a vaults
   parecen rotos desde el HOST; solo se resuelven DENTRO del contenedor Hermes.
 - **Espejo muerto `/opt/data` en el host**: `/opt/data` EXISTE en el host como espejo
-  viejo que NADIE lee (no es el bind mount). El árbol vivo es `/root/hermes-agent/data`.
+  viejo que NADIE lee (no es el bind mount). El árbol vivo es `/root/hermes-agent-legacy-docker/data`.
   Scripts con rutas hardcodeadas `/opt/data` corriendo desde el host escriben al espejo
   muerto y pierden el trabajo. Siempre verificar con `read_file` tras escribir.
 - **Skills anidadas en categorías**: escanear recursivamente `<cat>/<skill>/SKILL.md`

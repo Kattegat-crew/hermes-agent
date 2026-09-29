@@ -19,18 +19,18 @@ In `no_agent=True` mode the scheduler delivers stdout VERBATIM:
 **Consequence:** any `print()` in the script IS a user-facing message. A transient technical failure that prints an error gets delivered as if it were a real result — the user sees garbage instead of silence.
 
 ## CRITICAL: script path must be container-relative
-Hermes (v0.20.4+) bloquea el job en el scheduler si el campo `script` resuelve fuera de `HERMES_HOME/scripts/` (en contenedor: `/opt/data/scripts`, NO `/root/hermes-agent/data/scripts` — ruta del HOST). Error típico:
+Hermes (v0.20.4+) bloquea el job en el scheduler si el campo `script` resuelve fuera de `HERMES_HOME/scripts/` (en contenedor: `/opt/data/scripts`, NO `/root/hermes-agent-legacy-docker/data/scripts` — ruta del HOST). Error típico:
 ```
-Blocked: script path resolves outside the scripts directory (/opt/data/scripts): '/root/hermes-agent/data/scripts/foo.py'
+Blocked: script path resolves outside the scripts directory (/opt/data/scripts): '/root/hermes-agent-legacy-docker/data/scripts/foo.py'
 ```
 Fix: `hermes cron edit <job_id> --script <solo-nombre>.py` (relativo al scripts dir). No usar rutas absolutas del host en el campo `script`. Los jobs por PROMPT no tienen este guard (el agente resuelve rutas él mismo), solo los que usan `script`/`--script`.
 
 ## CRITICAL: el script se EJECUTA en el host — nunca uses rutas del contenedor dentro del código
-Aunque el campo `script` deba ser relativo a `/opt/data/scripts`, el scheduler lanza el proceso desde el HOST (`/root/hermes-agent/data/scripts/`). Un `Path('/opt/data/config.yaml')` hardcodeado dentro del script lanza `FileNotFoundError` en cada corrida (caso real: `glm53_watchdog.py` falló ×2 el 27/08, ~14h sin chequeos). Fix probado: resolver rutas relativas al propio script:
+Aunque el campo `script` deba ser relativo a `/opt/data/scripts`, el scheduler lanza el proceso desde el HOST (`/root/hermes-agent-legacy-docker/data/scripts/`). Un `Path('/opt/data/config.yaml')` hardcodeado dentro del script lanza `FileNotFoundError` en cada corrida (caso real: `glm53_watchdog.py` falló ×2 el 27/08, ~14h sin chequeos). Fix probado: resolver rutas relativas al propio script:
 ```python
 from pathlib import Path
 SCRIPTS_DIR = Path(__file__).resolve().parent
-HERMES_HOME = SCRIPTS_DIR.parent          # host: /root/hermes-agent/data — contenedor: /opt/data
+HERMES_HOME = SCRIPTS_DIR.parent          # host: /root/hermes-agent-legacy-docker/data — contenedor: /opt/data
 cfg = (HERMES_HOME / 'config.yaml').read_text(encoding='utf-8', errors='replace')
 ```
 Así el mismo archivo funciona idéntico desde host y contenedor. Relacionado: los run outputs en `/opt/data/cron/output/<job_id>/` quedan root-owned; si el agente (usuario `hermes`) necesita leerlos, usar `docker exec hermes-agent cat <ruta>`.

@@ -38,7 +38,7 @@ for the Workspace web UI / OpenAI-compatible frontends — it is not the Desktop
 ```
 service: hermes-serve.service  (systemd, enabled)
 cmdline: /opt/hermes-venv/bin/python ... hermes serve --host 0.0.0.0 --port 9112 --skip-build
-env:     HERMES_HOME=/root/hermes-agent/data   (SAME home as gateway -> same state.db)
+env:     HERMES_HOME=/root/hermes-agent-legacy-docker/data   (SAME home as gateway -> same state.db)
          HERMES_DASHBOARD_BASIC_AUTH_USERNAME=desktop
          HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=<pass>
          HERMES_DASHBOARD_SESSION_TOKEN=<token>
@@ -72,7 +72,7 @@ in `journalctl -u hermes-serve --since <restart>`; `ps` showed a stable new PID.
 ## Cleared sequence
 
 1. Restarted `hermes-serve` alone (`systemctl restart hermes-serve`); new PID, active,
-   `HERMES_HOME=/root/hermes-agent/data`, listening `0.0.0.0:9112`.
+   `HERMES_HOME=/root/hermes-agent-legacy-docker/data`, listening `0.0.0.0:9112`.
 2. Confirmed both probes above returned the healthy signatures.
 3. Desktop "Sign out & sign in", re-entered `desktop`/`<pass>` against
    `http://100.86.8.81:9112`, waiting 10–15 s for the ~156 MB session list.

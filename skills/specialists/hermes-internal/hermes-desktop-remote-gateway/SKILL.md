@@ -27,7 +27,7 @@ separado, en el HOST del VPS:
   `HERMES_DASHBOARD_BASIC_AUTH_USERNAME` (normalmente `desktop`),
   `HERMES_DASHBOARD_BASIC_AUTH_PASSWORD`, `HERMES_DASHBOARD_SESSION_TOKEN`.
 - Comparte `HERMES_HOME` con el gateway (`state.db` WAL), p.ej.
-  `/root/hermes-agent/data` host ↔ `/opt/data` contenedor.
+  `/root/hermes-agent-legacy-docker/data` host ↔ `/opt/data` contenedor.
 
 ## URL del Desktop en modo "Remote gateway"
 

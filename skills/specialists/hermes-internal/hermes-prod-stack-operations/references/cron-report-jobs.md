@@ -7,14 +7,14 @@ Jobs `context-report-morning` (0 8 * * *) y `context-report-evening` (0 20 * * *
 ## Causa raíz
 
 Los prompts apuntaban a rutas del HOST que no existen dentro del contenedor:
-- `/root/hermes-agent/data/scripts/context-monitor.sh` → real: `/opt/data/scripts/context-monitor.sh`
-- `/root/hermes-agent/data/brain/tasks/pending.md` → real: `/opt/data/brain/tasks/pending.md`
+- `/root/hermes-agent-legacy-docker/data/scripts/context-monitor.sh` → real: `/opt/data/scripts/context-monitor.sh`
+- `/root/hermes-agent-legacy-docker/data/brain/tasks/pending.md` → real: `/opt/data/brain/tasks/pending.md`
 
 El agente del cron no podía leer las fuentes → rellenaba con lo que encontraba (datos viejos reciclados) → "no se actualizan".
 
 ## Regla para prompts de cron
 
-Usar SIEMPRE rutas reales del contenedor (`/opt/data/...`). Nunca rutas del host (`/root/hermes-agent/...`).
+Usar SIEMPRE rutas reales del contenedor (`/opt/data/...`). Nunca rutas del host (`/root/hermes-agent-legacy-docker/...`).
 
 ## Fuentes reales verificadas (comandos que funcionan)
 

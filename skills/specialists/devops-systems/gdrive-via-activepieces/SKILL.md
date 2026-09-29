@@ -10,7 +10,7 @@ tags: [google-drive, activepieces, oauth, descargas, assets, scripts]
 Tareas de clase «leer/bajar/mapear archivos del Drive de un cliente desde un script»: inventariar carpetas de campaña, espejar assets Drive→servidor, subir entregables. No para OAuth interactivo nuevo.
 
 ## Fuente de credenciales (en orden de intento)
-1. **Conexión ActivePieces materializada del usuario** (la vía viva): `/root/hermes-agent/data/secrets/<perfil>-drive.json` (ej. `jonathan-drive.json`) con `refresh_token`, `client_id`, `client_secret`, `scopes` (CSV). Ejemplos de uso: `/root/hermes-agent/data/scripts/descarga_drive_ap.py`, `upload_drive_ap.py`.
+1. **Conexión ActivePieces materializada del usuario** (la vía viva): `/root/hermes-agent-legacy-docker/data/secrets/<perfil>-drive.json` (ej. `jonathan-drive.json`) con `refresh_token`, `client_id`, `client_secret`, `scopes` (CSV). Ejemplos de uso: `/root/hermes-agent-legacy-docker/data/scripts/descarga_drive_ap.py`, `upload_drive_ap.py`.
 2. `google_token.json` del contenedor — puede estar REVOCADO (`invalid_grant: Token has been expired or revoked`); si falla, pasar a (1), no reintentar.
 
 ## Patrón de servicio (funciona)
@@ -40,7 +40,7 @@ svc = build("drive", "v3", credentials=creds, cache_discovery=False)
 - Run largo en background: redirigir a log (`> /tmp/x.log 2>&1`), NO `cmd | tail` (retiene salida hasta el final y parece colgado); monitorear con `ls` del destino.
 
 ## Referencia: sync de assets de reel
-`/root/hermes-agent/data/workspace/sync_drive_reels.py` espeja `03-piezas/Reels/<Reel N>/{Final,Scenes,Videos*,Voces*,Assets}` → `/opt/reels/<cliente>/campañas/<camp>/reels/<slug>/…` (clasificador por nombre de subcarpeta y de archivo; el portal canónico y su protocolo viven en skill `reel-portal-protocol`).
+`/root/hermes-agent-legacy-docker/data/workspace/sync_drive_reels.py` espeja `03-piezas/Reels/<Reel N>/{Final,Scenes,Videos*,Voces*,Assets}` → `/opt/reels/<cliente>/campañas/<camp>/reels/<slug>/…` (clasificador por nombre de subcarpeta y de archivo; el portal canónico y su protocolo viven en skill `reel-portal-protocol`).
 
 ## Pitfalls
 - El `md5Checksum` de Drive no siempre viene (multiparte/Apps Script): no depender de él para dedup, usar size.

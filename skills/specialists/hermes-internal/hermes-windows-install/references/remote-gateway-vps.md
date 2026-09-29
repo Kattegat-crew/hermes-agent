@@ -13,7 +13,7 @@ When the Desktop shows "Connect to existing Hermes" (Gateway URL + token or brow
 | Container | webhook platform on **8644** (`platforms.webhook.extra.secret: nc-webhook-2026-hmac`) |
 | Container | WhatsApp bridge on **3000** (node bridge.js) |
 | Container | dashboard (web_server) on **9119** |
-| docker-compose | `/root/hermes-agent/docker-compose.yml` (container mounts `/root:/root`, `/opt:/opt/host_opt`, docker.sock) — publishes ONLY `3000:3000` and `9119:9119` |
+| docker-compose | `/root/hermes-agent-legacy-docker/docker-compose.yml` (container mounts `/root:/root`, `/opt:/opt/host_opt`, docker.sock) — publishes ONLY `3000:3000` and `9119:9119` |
 
 Public DNS: `hermes.neuralcrewlabs.com` is the planned gateway domain but does NOT resolve yet (planned Nginx Proxy Manager/Coolify reverse proxy exists only on paper).
 
@@ -26,7 +26,7 @@ Public DNS: `hermes.neuralcrewlabs.com` is the planned gateway domain but does N
 ## Steps to expose (requires gateway restart — it cuts the live session briefly)
 
 1. Change the A2A/agent adapter bind from `127.0.0.1` to `0.0.0.0` (config `platforms.*` / plugin a2a adapter).
-2. Host side: add to `/root/hermes-agent/docker-compose.yml` (`ports:` at the hermes-agent service) then `docker compose up -d hermes` on the host:
+2. Host side: add to `/root/hermes-agent-legacy-docker/docker-compose.yml` (`ports:` at the hermes-agent service) then `docker compose up -d hermes` on the host:
    ```
    - "9900:9900"
    ```

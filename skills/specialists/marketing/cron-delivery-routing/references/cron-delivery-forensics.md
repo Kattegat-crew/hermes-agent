@@ -28,7 +28,7 @@ readlink /proc/<pid-de-executions>/ns/mnt
 ls /proc/<pid>/root/opt/data/scripts/      # lo que ESE proceso realmente ve
 ```
 
-Mismo id ⇒ corrió en mi vista. Distinto id + un `/opt/data` casi vacío bajo `/proc/<pid>/root/` ⇒ corrió en el ns host (backend root del Desktop), donde el `/opt/data` del host es OTRO árbol: los wrappers con ruta absoluta única fallan con `python3: can't open file '/opt/data/...': [Errno 2]` aunque el archivo exista para el gateway. Fix: probar ambos roots (`/opt/data/...` y `/root/hermes-agent/data/...`) como hacen los wrappers `calendario_*.sh`.
+Mismo id ⇒ corrió en mi vista. Distinto id + un `/opt/data` casi vacío bajo `/proc/<pid>/root/` ⇒ corrió en el ns host (backend root del Desktop), donde el `/opt/data` del host es OTRO árbol: los wrappers con ruta absoluta única fallan con `python3: can't open file '/opt/data/...': [Errno 2]` aunque el archivo exista para el gateway. Fix: probar ambos roots (`/opt/data/...` y `/root/hermes-agent-legacy-docker/data/...`) como hacen los wrappers `calendario_*.sh`.
 
 ## 3. Discord: id → nombre de canal y permisos
 

@@ -1,6 +1,6 @@
 # Resolución de rutas y montaje — anclas de código
 
-Verificado el 2026-09-11 en el repo vivo (`/root/hermes-agent`, versión 0.20.4)
+Verificado el 2026-09-11 en el repo vivo (`/root/hermes-agent-legacy-docker`, versión 0.20.4)
 con el Desktop del Admin (cliente Windows → backend SSH en el VPS).
 
 ## Mitad UI: dónde vive y cómo se resuelve

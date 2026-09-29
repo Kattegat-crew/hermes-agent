@@ -40,8 +40,8 @@ id                                            # confirma que el shell es uid 100
 
 ## El mapa de rutas (memorizarlo)
 
-- **`/opt/data` del contenedor == `/root/hermes-agent/data` del host** (misma copia física).
-- Los perfiles viven en `/opt/data/profiles/<perfil>/` (host: `/root/hermes-agent/data/profiles/...`).
+- **`/opt/data` del contenedor == `/root/hermes-agent-legacy-docker/data` del host** (misma copia física).
+- Los perfiles viven en `/opt/data/profiles/<perfil>/` (host: `/root/hermes-agent-legacy-docker/data/profiles/...`).
 - Por eso un `chown` hecho desde el host se refleja al instante dentro del contenedor.
 
 ## El fix (no hay sudo en el contenedor)
@@ -50,7 +50,7 @@ El shell del contenedor es `hermes` y **no tiene sudo**, así que el arreglo se 
 host DEV, que sí es root, apuntando a la ruta equivalente:
 
 ```bash
-ssh dev 'chown -R 10000:10000 /root/hermes-agent/data/audio_cache && chmod 755 /root/hermes-agent/data/audio_cache'
+ssh dev 'chown -R 10000:10000 /root/hermes-agent-legacy-docker/data/audio_cache && chmod 755 /root/hermes-agent-legacy-docker/data/audio_cache'
 ```
 
 Y se **verifica desde el contenedor** (no desde el host) con una escritura real:

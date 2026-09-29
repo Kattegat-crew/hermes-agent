@@ -48,7 +48,7 @@ git clone --depth 1 https://github.com/alirezarezvani/claude-skills.git      # 8
 ```python
 os.symlink(source_dir, os.path.join(profile_skills_dir, name), target_is_directory=True)
 ```
-- Los perfiles usan symlinks a un directorio fuente común (mismo patrón que `/opt/data/skills` → `/root/hermes-agent/data/skills`).
+- Los perfiles usan symlinks a un directorio fuente común (mismo patrón que `/opt/data/skills` → `/root/hermes-agent-legacy-docker/data/skills`).
 - Al copiar `config.yaml` de un perfil existente, limpiar el `skills.disabled` heredado (regex del bloque `skills:\n  disabled:\n(?:  - .*\n)*` → `disabled: []`) — el perfil ve solo sus symlinks.
 
 ### 5. Scan de seguridad liviano
@@ -63,12 +63,12 @@ Buscar en SKILL.md importados: `rm -rf /`, `curl .*|.*sh`, `wget .*|.*bash`, `ba
 
 Cada perfil con skills enlazadas puede tener su propio grafo graphify para encontrar skills por tema y sus relaciones (categoría, related, conceptos, perfiles que la usan).
 
-**RUTA CANÓNICA (trampa host/contenedor):** el árbol VIVO de skills en el host es `/root/hermes-agent/data/skills/` — **NO existe `/opt/data/skills` como ruta de host** (es un espejo viejo que nadie lee; en el host `/opt/data` es otro directorio, no el bind mount). Los scripts corriendo desde el HOST deben usar `/root/hermes-agent/data/...`; desde el CONTENEDOR, `/opt/data/...`. Enlazar con ruta equivocada = grafos de 1 nodo o 0 symlinks.
+**RUTA CANÓNICA (trampa host/contenedor):** el árbol VIVO de skills en el host es `/root/hermes-agent-legacy-docker/data/skills/` — **NO existe `/opt/data/skills` como ruta de host** (es un espejo viejo que nadie lee; en el host `/opt/data` es otro directorio, no el bind mount). Los scripts corriendo desde el HOST deben usar `/root/hermes-agent-legacy-docker/data/...`; desde el CONTENEDOR, `/opt/data/...`. Enlazar con ruta equivocada = grafos de 1 nodo o 0 symlinks.
 
 - Generador: `/opt/data/scripts/build_skills_graph.py` (auto-detecta host vs contenedor)
   - `--global` → `/opt/data/skills/graphify-out/graph.json` (catálogo completo core+especialistas+ext + nodos de perfiles con relation=used_by)
   - `--all-profiles` → `skills/graphify-out/graph.json` de cada especialista + roshi
-- **Bugs corregidos del generador (28/08, backup .bak-20260828):** (1) `profile_skills` solo miraba el 1er nivel del perfil → las skills anidadas en categorías (`<cat>/<skill>/SKILL.md`, convención del vault) eran invisibles; (2) las skills que viven SOLO en el perfil nunca se escaneaban. Ahora auto-detecta el árbol (host=/root/hermes-agent/data, contenedor=/opt/data) y escanea el dir completo del perfil.
+- **Bugs corregidos del generador (28/08, backup .bak-20260828):** (1) `profile_skills` solo miraba el 1er nivel del perfil → las skills anidadas en categorías (`<cat>/<skill>/SKILL.md`, convención del vault) eran invisibles; (2) las skills que viven SOLO en el perfil nunca se escaneaban. Ahora auto-detecta el árbol (host=/root/hermes-agent-legacy-docker/data, contenedor=/opt/data) y escanea el dir completo del perfil.
 - CLI de consulta: `/opt/data/.venv-graphify/bin/graphify query "<tema>" --graph <ruta>`
 - **Pitfall crítico del CLI:** `graphify query` matchea por substring contra `label` + `source_file` únicamente (NO lee `summary`). El generador lo resuelve escribiendo el summary normalizado (sin diacríticos) en `source_file` del nodo y creando **nodos concepto** (relation=concept) con los términos clave de la descripción. Nunca regenerar el grafo sin esa capa — una búsqueda por concepto ("guion", "dashboards") fallaría con "No matching nodes found".
 - Después de generar el grafo, dejar en el AGENTS.md del perfil la sección "Grafo de skills" (ruta del grafo + comando) — ver `profiles/<p>/AGENTS.md`.

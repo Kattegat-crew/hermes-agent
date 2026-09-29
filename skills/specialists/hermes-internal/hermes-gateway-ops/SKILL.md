@@ -45,7 +45,7 @@ Operación del gateway de Hermes que corre Ragnar (WhatsApp + Telegram) en Docke
 
 ## Execution Steps
 
-1. Rutas: config `data/config.yaml` (host `/root/hermes-agent/data/`), env `data/.env`, script reporte `data/scripts/allowlist_report.py`. En contenedor son `/opt/data/...`. VPS prod: /opt/hermes (host) = /opt/data (contenedor); SSH root@169.58.189.222; wrapper /usr/local/bin/hermes.
+1. Rutas: config `data/config.yaml` (host `/root/hermes-agent-legacy-docker/data/`), env `data/.env`, script reporte `data/scripts/allowlist_report.py`. En contenedor son `/opt/data/...`. VPS prod: /opt/hermes (host) = /opt/data (contenedor); SSH root@169.58.189.222; wrapper /usr/local/bin/hermes.
 2. Modelo: sección `model:` (primeras 6 líneas). NaN Builders: api_key `sk-JzB...ohYw`, base_url `https://api.nan.builders/v1`, default `deepseek-v4-flash`.
 3. Allowlist WhatsApp: `WHATSAPP_ALLOWED_USERS` en `.env` + `whatsapp.allowed_users` en `config.yaml` (ambos, iguales). Verificar LIDs 15 dígitos vía `lid-mapping-*.json` (pueden ser redundantes con números).
 4. Restart: `docker exec hermes-agent /package/admin/s6/command/s6-svc -r /run/service/gateway-default`. Esperar 30-60s; verificar PID del gateway cambió y se estabiliza, bridge respawneó, `curl -s http://127.0.0.1:3000/health` → connected, y en `bridge.log` aparece `Allowed users: <lista>`.

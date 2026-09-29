@@ -74,14 +74,14 @@ curl -sf -o /dev/null -w "%{http_code}" -r 0-1000 https://DOMAIN/client/clips/S1
 ## Critical Pitfalls
 
 ### 🔴 Docker volume mount resolves against HOST, not container
-When running `docker run -v /path/in/container:/dest` from INSIDE a container (e.g. hermes-agent), the path resolves against the **HOST** filesystem. Inside hermes-agent: `/opt/data/workspace` = `/root/hermes-agent/data/workspace` on host.
+When running `docker run -v /path/in/container:/dest` from INSIDE a container (e.g. hermes-agent), the path resolves against the **HOST** filesystem. Inside hermes-agent: `/opt/data/workspace` = `/root/hermes-agent-legacy-docker/data/workspace` on host.
 
 **Fix:** Always use the HOST path for `-v` mounts:
 ```bash
 # WRONG (mounts empty dir)
 docker run -v /opt/data/workspace/nc-portal-dev:/usr/share/nginx/html:ro nginx:alpine
 # RIGHT (host path)
-docker run -v /root/hermes-agent/data/workspace/nc-portal-dev:/usr/share/nginx/html:ro nginx:alpine
+docker run -v /root/hermes-agent-legacy-docker/data/workspace/nc-portal-dev:/usr/share/nginx/html:ro nginx:alpine
 ```
 
 **Verify mount:** `docker exec <container> ls /usr/share/nginx/html/` — if empty, mount path is wrong.
@@ -169,14 +169,14 @@ For previewing generated sites before pushing to production:
 # Create container with correct HOST path (see pitfall below)
 docker run -d --name portal-dev --restart unless-stopped \
   -p 8080:80 \
-  -v /root/hermes-agent/data/workspace/nc-portal-dev:/usr/share/nginx/html:ro \
+  -v /root/hermes-agent-legacy-docker/data/workspace/nc-portal-dev:/usr/share/nginx/html:ro \
   nginx:alpine
 
 # Verify
 curl -sf -o /dev/null -w "%{http_code}" http://<host-ip>:8080/
 ```
 
-**Host path resolution:** From inside hermes-agent container, `/opt/data/workspace` = `/root/hermes-agent/data/workspace` on host. Docker `-v` mounts always resolve against HOST.
+**Host path resolution:** From inside hermes-agent container, `/opt/data/workspace` = `/root/hermes-agent-legacy-docker/data/workspace` on host. Docker `-v` mounts always resolve against HOST.
 
 ### 🔴 VPS .250 provider port whitelist (hit 02/09/2026)
 The dev VPS (147.93.3.250) has a provider-level security group that exposes ONLY ports 3010, 3020, 6080. Every other port (8080, 9112, 3000, 9119, 80, 443...) times out from the Internet — even with `network: host` or `-p` publishing, and despite no ufw/iptables/nftables on the host. Do NOT burn time debugging host firewall rules; it's upstream.
@@ -195,5 +195,5 @@ Cross-contamination was fixed in ONE `src=` and shipped — the bug survived in 
 - **SPA v2 (current):** `https://reels.neuralcrewlabs.com/v2/` — prod docroot `/opt/reels/v2/`
 - SPA Generator: `/opt/data/workspace/gen-portal-spa.py` (v2: single-page sidebar, Campañas→Reels hierarchy; regenerate with `python3 gen-portal-spa.py` then `scp` to `/opt/reels/v2/`)
 - Legacy Generator: `/opt/data/workspace/gen-reels-portal.py` (multi-page, superseded)
-- Dev dir: `/opt/data/workspace/nc-portal-dev/` · dev server: `nc-portal-dev` container (network host, nginx:alpine, `/root/hermes-agent/data/workspace/nginx-portal.conf`) — .250 port 8080 is provider-blocked (see pitfall), treat dev server as local-only
+- Dev dir: `/opt/data/workspace/nc-portal-dev/` · dev server: `nc-portal-dev` container (network host, nginx:alpine, `/root/hermes-agent-legacy-docker/data/workspace/nginx-portal.conf`) — .250 port 8080 is provider-blocked (see pitfall), treat dev server as local-only
 - Content: `/opt/data/workspace/portal-content.json`

@@ -89,7 +89,7 @@ docker run --rm --privileged --pid=host alpine:latest nsenter -t 1 -m -u -i -n \
   bash -c "systemctl restart hermes-serve && sleep 5 && curl -sf http://127.0.0.1:9112/api/health"
 ```
 
-**Prevention:** Any script that modifies `/root/hermes-agent/` checkout (git rebase, pull, push) MUST also restart hermes-serve. Add this to sync-upstream.sh Step 8b:
+**Prevention:** Any script that modifies `/root/hermes-agent-legacy-docker/` checkout (git rebase, pull, push) MUST also restart hermes-serve. Add this to sync-upstream.sh Step 8b:
 
 ```bash
 # --- Step 8b: Restart host services on new code (dashboard 503 guard) ---
@@ -126,7 +126,7 @@ For media galleries with real file inventory:
 
 ## Pitfalls
 
-- **Docker volume mount resolves against HOST:** When running `docker run -v /path:/dest` from INSIDE a container (hermes-agent), the `-v` path resolves against the HOST filesystem. Inside hermes-agent: `/opt/data/workspace` = `/root/hermes-agent/data/workspace` on host. Use HOST paths for all `-v` mounts. Verify: `docker exec <container> ls /dest/` — empty = wrong path.
+- **Docker volume mount resolves against HOST:** When running `docker run -v /path:/dest` from INSIDE a container (hermes-agent), the `-v` path resolves against the HOST filesystem. Inside hermes-agent: `/opt/data/workspace` = `/root/hermes-agent-legacy-docker/data/workspace` on host. Use HOST paths for all `-v` mounts. Verify: `docker exec <container> ls /dest/` — empty = wrong path.
 - **docker run tar pipe timeout:** For >200MB transfers, foreground terminal may timeout at 60s. Use `timeout 300` or run in background with `notify=true`.
 - **NPM conf numbering:** Proxy host confs are numbered (1.conf, 20.conf...). Find the right one with `grep -l 'domain' /opt/docker/nginx-proxy-manager/data/nginx/proxy_host/*.conf`.
 - **server_proxy.conf is included in EVERY proxy host (15+), not just the apex:** a `location = /` there without a host guard replaced the home pages of wiki/docuseal/docs (incident 29/08). ANY custom location in `/data/nginx/custom/server_proxy.conf` must be scoped with `if ($host !~* ^(www\.)?neuralcrewlabs\.com$)` → rewrite to the apex static path.

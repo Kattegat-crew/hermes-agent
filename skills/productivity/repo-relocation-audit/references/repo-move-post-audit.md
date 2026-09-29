@@ -21,7 +21,7 @@ Todo lo de abajo se observó en vivo.
 ```bash
 # qué candidato elegiría cada wrapper (read-only, sin ejecutar)
 for t in planning/calendario-sep2026/cron_publish_due.py; do
-  for c in /host/root/<repo> /root/<repo> /opt/data/repos/<repo> /root/hermes-agent/data/repos/<repo>; do
+  for c in /host/root/<repo> /root/<repo> /opt/data/repos/<repo> /root/hermes-agent-legacy-docker/data/repos/<repo>; do
     [ -r "$c/$t" ] && echo "$t -> $c" && break; done; done
 
 # historial de cron con el stdout embebido (la ruta muerta aparece literal en el error)

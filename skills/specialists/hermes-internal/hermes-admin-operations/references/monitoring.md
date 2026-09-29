@@ -30,7 +30,7 @@ Salida del informe (cuando hay novedad): tabla por bot con score + 1 línea de e
 ## Rutas de logs
 
 - Gateway: `/opt/data/logs/gateways/default/current` (s6, rotado) + `@4000...u` antiguos.
-- Serve (host): `/root/hermes-agent/data/logs/{agent,errors,gui}.log` — leer via nsenter (skill `vps-host-access`).
+- Serve (host): `/root/hermes-agent-legacy-docker/data/logs/{agent,errors,gui}.log` — leer via nsenter (skill `vps-host-access`).
 - Sesiones: gateway write_sessions_json → revisar dir de sesiones si aplica.
 - Cron outputs: `/opt/data/cron/output/`.
 

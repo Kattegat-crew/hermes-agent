@@ -22,8 +22,8 @@ Esta skill opera como despacho unificado. El detalle procedural y gotchas espec√
 `references/`
 
 ## Casos de Uso Disponibles
-- **hermes-model-rotation**: Ver [references/hermes-model-rotation.md](file:///root/hermes-agent/skills/core/hermes-provider-ops/references/hermes-model-rotation.md)
-- **hermes-provider-configuration**: Ver [references/hermes-provider-configuration.md](file:///root/hermes-agent/skills/core/hermes-provider-ops/references/hermes-provider-configuration.md)
-- **hermes-provider-fallback**: Ver [references/hermes-provider-fallback.md](file:///root/hermes-agent/skills/core/hermes-provider-ops/references/hermes-provider-fallback.md)
-- **hermes-provider-resilience**: Ver [references/hermes-provider-resilience.md](file:///root/hermes-agent/skills/core/hermes-provider-ops/references/hermes-provider-resilience.md)
-- **hermes-release-adoption**: Ver [references/hermes-release-adoption.md](file:///root/hermes-agent/skills/core/hermes-provider-ops/references/hermes-release-adoption.md)
+- **hermes-model-rotation**: Ver [references/hermes-model-rotation.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-provider-ops/references/hermes-model-rotation.md)
+- **hermes-provider-configuration**: Ver [references/hermes-provider-configuration.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-provider-ops/references/hermes-provider-configuration.md)
+- **hermes-provider-fallback**: Ver [references/hermes-provider-fallback.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-provider-ops/references/hermes-provider-fallback.md)
+- **hermes-provider-resilience**: Ver [references/hermes-provider-resilience.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-provider-ops/references/hermes-provider-resilience.md)
+- **hermes-release-adoption**: Ver [references/hermes-release-adoption.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-provider-ops/references/hermes-release-adoption.md)

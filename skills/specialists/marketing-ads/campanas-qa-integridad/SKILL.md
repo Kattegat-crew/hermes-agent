@@ -19,13 +19,13 @@ Capa documental de Roshi dentro del pipeline de marketing multi-agente: a partir
 ## Prerequisites
 
 - `python-docx` y `pyyaml` instalados.
-- Esqueleto listo y probado: `/root/hermes-agent/data/profiles/roshi/workspace/campaigns/template/` (`campaign.yaml`, `build_campaign.py`, `generate_docs.py`). `demo/` = caso de prueba con empresa ficticia.
+- Esqueleto listo y probado: `/root/hermes-agent-legacy-docker/data/profiles/roshi/workspace/campaigns/template/` (`campaign.yaml`, `build_campaign.py`, `generate_docs.py`). `demo/` = caso de prueba con empresa ficticia.
 - Los 5 .docx los genera el módulo `generate_docs.py` (del skill global `marketing-campaign`); NO reimplementar ese generador.
 
 ## How to Run
 
 ```bash
-cd /root/hermes-agent/data/profiles/roshi/workspace/campaigns
+cd /root/hermes-agent-legacy-docker/data/profiles/roshi/workspace/campaigns
 python3 template/build_campaign.py <campaña>/campaign.yaml --output <campaña>/docs/
 ```
 

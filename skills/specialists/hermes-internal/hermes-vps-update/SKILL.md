@@ -24,10 +24,10 @@ pide este procedimiento cuando reporta "update hermes on the remote host".
 
 ```bash
 # 1. data/ completo (git-ignored, config real)
-rsync -aHA /root/hermes-agent/data/ /root/hermes-agent-backups/data-$(date +%Y%m%d-%H%M%S)/
+rsync -aHA /root/hermes-agent-legacy-docker/data/ /root/hermes-agent-legacy-docker-backups/data-$(date +%Y%m%d-%H%M%S)/
 # 2. .env del root
-cp /root/hermes-agent/.env /root/hermes-agent/.env.pre-update-$(date +%Y%m%d-%H%M%S)
-git -C /root/hermes-agent hash-object .env   # anotar hash para verificar post
+cp /root/hermes-agent-legacy-docker/.env /root/hermes-agent-legacy-docker/.env.pre-update-$(date +%Y%m%d-%H%M%S)
+git -C /root/hermes-agent-legacy-docker hash-object .env   # anotar hash para verificar post
 ```
 
 ## Procedimiento
@@ -35,7 +35,7 @@ git -C /root/hermes-agent hash-object .env   # anotar hash para verificar post
 ### 1. Alinear checkout a upstream/main
 
 ```bash
-cd /root/hermes-agent
+cd /root/hermes-agent-legacy-docker
 git fetch origin && git fetch upstream
 git checkout -B main upstream/main
 git reset --hard upstream/main
@@ -47,7 +47,7 @@ Peligro: `git checkout` a `upstream/main` SOBRESCRIBE el `docker-compose.yml`
 personalizado del VPS. Restaurarlo SIEMPRE desde la rama previa:
 
 ```bash
-git show release-v0.20.4:docker-compose.yml > /root/hermes-agent/docker-compose.yml
+git show release-v0.20.4:docker-compose.yml > /root/hermes-agent-legacy-docker/docker-compose.yml
 ```
 
 Luego apuntar `image:` a la imagen construida de la rama main (`hermes-agent`).
@@ -55,14 +55,14 @@ Luego apuntar `image:` a la imagen construida de la rama main (`hermes-agent`).
 ### 2. Reinstalar venv host + migrar config
 
 ```bash
-cd /root/hermes-agent
+cd /root/hermes-agent-legacy-docker
 VIRTUAL_ENV=/opt/hermes-venv uv pip install -e ".[all,dev]"
 /opt/hermes-venv/bin/hermes --version    # debe decir "Up to date"
 
 # migrar la config REAL (HERMES_HOME explícito — sin él apunta a ~/.hermes)
-VIRTUAL_ENV=/opt/hermes-venv HERMES_HOME=/root/hermes-agent/data \
+VIRTUAL_ENV=/opt/hermes-venv HERMES_HOME=/root/hermes-agent-legacy-docker/data \
   /opt/hermes-venv/bin/python3.11 -c "
-import os; os.environ['HERMES_HOME']='/root/hermes-agent/data'
+import os; os.environ['HERMES_HOME']='/root/hermes-agent-legacy-docker/data'
 from hermes_cli.config import migrate_config; print(migrate_config(interactive=False))
 "
 ```
@@ -70,7 +70,7 @@ from hermes_cli.config import migrate_config; print(migrate_config(interactive=F
 ### 3. Reconstruir el gateway Docker
 
 ```bash
-cd /root/hermes-agent
+cd /root/hermes-agent-legacy-docker
 docker compose build     # reintentar si falla con `denied` en ghcr (ver Pitfalls)
 docker compose up -d
 ```
@@ -79,9 +79,9 @@ docker compose up -d
 
 ```bash
 /opt/hermes-venv/bin/hermes --version
-VIRTUAL_ENV=/opt/hermes-venv HERMES_HOME=/root/hermes-agent/data \
-  /opt/hermes-venv/bin/python3.11 -c "import os;os.environ['HERMES_HOME']='/root/hermes-agent/data';from hermes_cli.config import check_config_version;print('config_version:',check_config_version()[0])"
-cat /root/hermes-agent/data/gateway_state.json | python3 -m json.tool | grep -A1 '"state"'
+VIRTUAL_ENV=/opt/hermes-venv HERMES_HOME=/root/hermes-agent-legacy-docker/data \
+  /opt/hermes-venv/bin/python3.11 -c "import os;os.environ['HERMES_HOME']='/root/hermes-agent-legacy-docker/data';from hermes_cli.config import check_config_version;print('config_version:',check_config_version()[0])"
+cat /root/hermes-agent-legacy-docker/data/gateway_state.json | python3 -m json.tool | grep -A1 '"state"'
 docker exec hermes-agent /opt/hermes/bin/hermes --version
 ```
 
@@ -98,7 +98,7 @@ docker exec hermes-agent /opt/hermes/bin/hermes --version
   (pull anónimo de imagen pública OK), reintentar el pull por reset de IPv6
   transitorio.
 - **HERMES_HOME explícito**: sin él, `hermes` del host apunta a `~/.hermes`
-  (default), NO a la data real del gateway (`/root/hermes-agent/data`).
+  (default), NO a la data real del gateway (`/root/hermes-agent-legacy-docker/data`).
 - **Migración sin pérdida**: esperar `env_added: []` y `config_added: []`.
 - **`shared:a2a fatal` (bind 9900)**: pre-existente, no es un retroceso del update.
 

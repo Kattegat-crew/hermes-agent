@@ -33,7 +33,7 @@ ENV_CANDIDATES = (
     "/root/marketing-campaign-generator/.env",
     "/host/root/marketing-campaign-generator/.env",
     "/opt/data/.env",
-    "/root/hermes-agent/.env",
+    "/root/hermes-agent-legacy-docker/.env",
 )
 
 

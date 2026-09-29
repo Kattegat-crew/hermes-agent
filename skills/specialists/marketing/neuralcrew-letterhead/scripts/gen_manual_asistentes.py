@@ -17,8 +17,8 @@ DGRAY = RGBColor(0x3A, 0x3A, 0x3A)
 MGRAY = RGBColor(0x70, 0x70, 0x70)
 FONT = "Calibri"
 
-ICON = "/root/hermes-agent/data/workspace/logo_icon.png"
-OUT = "/root/hermes-agent/data/workspace/Manual_Asistentes_Inteligentes_NeuralCrew_Labs.docx"
+ICON = "/root/hermes-agent-legacy-docker/data/workspace/logo_icon.png"
+OUT = "/root/hermes-agent-legacy-docker/data/workspace/Manual_Asistentes_Inteligentes_NeuralCrew_Labs.docx"
 
 doc = Document()
 sec = doc.sections[0]

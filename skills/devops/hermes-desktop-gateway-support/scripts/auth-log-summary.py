@@ -6,13 +6,13 @@ Uso:
   python3 auth-log-summary.py --ip 100.116.169.91   # una sola IP + ultimos eventos crudos
   python3 auth-log-summary.py --event native_       # eventos cuyo nombre empieza con el prefijo
 
-Sin dependencias. La log vive en el host: /host/root/hermes-agent/data/logs/dashboard-auth.log
+Sin dependencias. La log vive en el host: /host/root/hermes-agent-legacy-docker/data/logs/dashboard-auth.log
 """
 import argparse
 import collections
 import json
 
-DEFAULT_LOG = "/host/root/hermes-agent/data/logs/dashboard-auth.log"
+DEFAULT_LOG = "/host/root/hermes-agent-legacy-docker/data/logs/dashboard-auth.log"
 
 
 def load(path):

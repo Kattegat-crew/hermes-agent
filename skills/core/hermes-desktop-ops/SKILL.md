@@ -27,13 +27,13 @@ Esta skill opera como despacho unificado. El detalle procedural y gotchas espec√
 `references/`
 
 ## Casos de Uso Disponibles
-- **hermes-desktop-plugins**: Ver [references/hermes-desktop-plugins.md](file:///root/hermes-agent/skills/core/hermes-desktop-ops/references/hermes-desktop-plugins.md)
-- **hermes-desktop-remote-backend**: Ver [references/hermes-desktop-remote-backend.md](file:///root/hermes-agent/skills/core/hermes-desktop-ops/references/hermes-desktop-remote-backend.md)
-- **hermes-desktop-remote-connection**: Ver [references/hermes-desktop-remote-connection.md](file:///root/hermes-agent/skills/core/hermes-desktop-ops/references/hermes-desktop-remote-connection.md)
-- **hermes-desktop-remote-gateway**: Ver [references/hermes-desktop-remote-gateway.md](file:///root/hermes-agent/skills/core/hermes-desktop-ops/references/hermes-desktop-remote-gateway.md)
-- **hermes-desktop-remote-setup**: Ver [references/hermes-desktop-remote-setup.md](file:///root/hermes-agent/skills/core/hermes-desktop-ops/references/hermes-desktop-remote-setup.md)
-- **hermes-desktop-ssh-backend**: Ver [references/hermes-desktop-ssh-backend.md](file:///root/hermes-agent/skills/core/hermes-desktop-ops/references/hermes-desktop-ssh-backend.md)
-- **hermes-desktop-ssh-diagnostico**: Ver [references/hermes-desktop-ssh-diagnostico.md](file:///root/hermes-agent/skills/core/hermes-desktop-ops/references/hermes-desktop-ssh-diagnostico.md)
-- **hermes-desktop-windows-troubleshooting**: Ver [references/hermes-desktop-windows-troubleshooting.md](file:///root/hermes-agent/skills/core/hermes-desktop-ops/references/hermes-desktop-windows-troubleshooting.md)
-- **hermes-windows-install**: Ver [references/hermes-windows-install.md](file:///root/hermes-agent/skills/core/hermes-desktop-ops/references/hermes-windows-install.md)
-- **inspecting-hermes-desktop-dom**: Ver [references/inspecting-hermes-desktop-dom.md](file:///root/hermes-agent/skills/core/hermes-desktop-ops/references/inspecting-hermes-desktop-dom.md)
+- **hermes-desktop-plugins**: Ver [references/hermes-desktop-plugins.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-desktop-ops/references/hermes-desktop-plugins.md)
+- **hermes-desktop-remote-backend**: Ver [references/hermes-desktop-remote-backend.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-desktop-ops/references/hermes-desktop-remote-backend.md)
+- **hermes-desktop-remote-connection**: Ver [references/hermes-desktop-remote-connection.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-desktop-ops/references/hermes-desktop-remote-connection.md)
+- **hermes-desktop-remote-gateway**: Ver [references/hermes-desktop-remote-gateway.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-desktop-ops/references/hermes-desktop-remote-gateway.md)
+- **hermes-desktop-remote-setup**: Ver [references/hermes-desktop-remote-setup.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-desktop-ops/references/hermes-desktop-remote-setup.md)
+- **hermes-desktop-ssh-backend**: Ver [references/hermes-desktop-ssh-backend.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-desktop-ops/references/hermes-desktop-ssh-backend.md)
+- **hermes-desktop-ssh-diagnostico**: Ver [references/hermes-desktop-ssh-diagnostico.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-desktop-ops/references/hermes-desktop-ssh-diagnostico.md)
+- **hermes-desktop-windows-troubleshooting**: Ver [references/hermes-desktop-windows-troubleshooting.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-desktop-ops/references/hermes-desktop-windows-troubleshooting.md)
+- **hermes-windows-install**: Ver [references/hermes-windows-install.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-desktop-ops/references/hermes-windows-install.md)
+- **inspecting-hermes-desktop-dom**: Ver [references/inspecting-hermes-desktop-dom.md](file:///root/hermes-agent-legacy-docker/skills/core/hermes-desktop-ops/references/inspecting-hermes-desktop-dom.md)

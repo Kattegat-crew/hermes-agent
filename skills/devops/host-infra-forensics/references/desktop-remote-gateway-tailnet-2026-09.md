@@ -18,7 +18,7 @@ tras ~13 s. Variante cuando la sesión SÍ caducó (mensaje distinto, arreglo di
 - Desktop remoto = cliente Electron que habla con un **dashboard/serve del host** en una IP del tailnet
   (`http://100.86.8.81:9112`), no con un servicio público.
 - El boot hace: resolver backend → probe HTTP → **POST `/api/auth/ws-ticket`** (bootstrap del WebSocket, single-use, TTL 30 s) → WS. El fallo del ticket = síntoma de que no hay camino al gateway.
-- El gateway corría como unit systemd: `hermes dashboard --host 0.0.0.0 --port 9112 --skip-build` con `HERMES_HOME=/root/hermes-agent/data`.
+- El gateway corría como unit systemd: `hermes dashboard --host 0.0.0.0 --port 9112 --skip-build` con `HERMES_HOME=/root/hermes-agent-legacy-docker/data`.
 
 ## Diagnóstico que resolvió (orden)
 

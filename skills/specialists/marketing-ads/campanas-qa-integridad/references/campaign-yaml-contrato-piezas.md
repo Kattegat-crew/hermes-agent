@@ -50,7 +50,7 @@ genéricos (videos_per_month) y el QA emite warning de contrato vacío.
 ## Smoke test de referencia (demostrado 26/08/2026)
 
 ```bash
-cd /root/hermes-agent/data/profiles/roshi/workspace/campaigns
+cd /root/hermes-agent-legacy-docker/data/profiles/roshi/workspace/campaigns
 python3 template/build_campaign.py demo/campaign.yaml --output /tmp/smoke
 # → 5/5 documentos generados y verificados | Estado: OK | Issues: 0
 ```

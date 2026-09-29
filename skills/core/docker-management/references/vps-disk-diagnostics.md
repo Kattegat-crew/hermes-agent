@@ -15,7 +15,7 @@ Identifica qué directorio raíz pesa más.
 ```bash
 du -sh /opt/* 2>/dev/null | sort -rh | head -20
 du -sh /root/* 2>/dev/null | sort -rh | head -20
-du -sh /root/hermes-agent/* 2>/dev/null | sort -rh | head -20
+du -sh /root/hermes-agent-legacy-docker/* 2>/dev/null | sort -rh | head -20
 ```
 ### Paso 3: Big files and Docker
 ```bash
@@ -33,7 +33,7 @@ docker image ls --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}"  # image s
 | Docker rootfs | 6-30 GB | Overlay filesystem for containers |
 | /var/lib/docker/volumes | 0-800 MB | Named volume data |
 | Backups | 0-3+ GB | Manual snapshots, DB dumps, config backups |
-| /root/hermes-agent/data/ | 9+ GB | state.db, sessions, profiles, lazy-packages, node_modules, home/ |
+| /root/hermes-agent-legacy-docker/data/ | 9+ GB | state.db, sessions, profiles, lazy-packages, node_modules, home/ |
 | /home/ | 0-500 MB | User data (orca, cuenta2, jon) |
 | /tmp/ | 0-200 MB | Temp files, opencode cache, video caches |
 
@@ -85,7 +85,7 @@ ssh -o StrictHostKeyChecking=no root@169.58.189.222 "echo '= VPS STATUS =' && ho
 - 145 GB disk, 84% used (25 GB free) ⚠️
 - 30.2 GB Docker images (8.9 GB reclaimable)
 - 3.8 GB /opt/backups (3.3 GB is old v0.10 snapshot)
-- 9.5 GB /root/hermes-agent/data/ (3.9 GB home/, 1.1 GB node_modules, 567 MB archive)
+- 9.5 GB /root/hermes-agent-legacy-docker/data/ (3.9 GB home/, 1.1 GB node_modules, 567 MB archive)
 
 ### VPS .222 (Coolify Prod, 169.58.189.222)
 - 290 GB disk, 12% used (256 GB free) ✅

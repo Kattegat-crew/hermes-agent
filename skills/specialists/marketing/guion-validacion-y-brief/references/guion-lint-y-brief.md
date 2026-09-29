@@ -7,10 +7,10 @@ Levantado el 11-sep-2026 trabajando la serie Golden «Bingo Millonario» (Mes de
 | Qué | Ruta |
 |---|---|
 | Repo (fuente de verdad del guion) | `/root/marketing-campaign-generator` (contenedor: `/host/root/marketing-campaign-generator`) |
-| Maestros de la serie (HOST, no en el repo) | `/root/hermes-agent/data/plans/GUION-G1..G4*.md`, `GUION-L0*`, `GUION-L1-CHIQUINQUIRA.md`, `GUION-CHIQUINQUIRA-PERIFONEO.md`, `GUION-FUNZA-PERIFONEO-18SEP.md`, `SERIE-LUCKY-GRAN-BINGO-PARADISE.md` |
+| Maestros de la serie (HOST, no en el repo) | `/root/hermes-agent-legacy-docker/data/plans/GUION-G1..G4*.md`, `GUION-L0*`, `GUION-L1-CHIQUINQUIRA.md`, `GUION-CHIQUINQUIRA-PERIFONEO.md`, `GUION-FUNZA-PERIFONEO-18SEP.md`, `SERIE-LUCKY-GRAN-BINGO-PARADISE.md` |
 | Informes de guiones del cliente | Drive de Jonathan (los sube como .docx al Drive del cliente) |
 
-Trampa: en el runtime desktop `/opt/data/plans/` (root, 7 docs viejos de agosto) **NO** es el mismo directorio que `/root/hermes-agent/data/plans/`. Un `ls` en el primero hace concluir «los guiones no existen». Verificar con `find` sobre ambos antes de afirmar nada.
+Trampa: en el runtime desktop `/opt/data/plans/` (root, 7 docs viejos de agosto) **NO** es el mismo directorio que `/root/hermes-agent-legacy-docker/data/plans/`. Un `ls` en el primero hace concluir «los guiones no existen». Verificar con `find` sobre ambos antes de afirmar nada.
 
 ## 2. Bajar el guion fuente cuando viene en un link de Drive
 
@@ -21,7 +21,7 @@ Si el usuario pega `docs.google.com/document/d/<ID>?...`:
 3. Bajar el binario con `files().get_media(fileId=ID)` + `MediaIoBaseDownload` (secuencial, `googleapiclient` no es thread-safe) a `/tmp/<nombre>.docx`.
 4. Leerlo con `read_file` — auto-extrae .docx con tablas; no hace falta python-docx.
 
-Credenciales: el `google_token.json` del contenedor puede estar **revocado de forma terminal** (`RefreshError: invalid_grant: Token has been expired or revoked` — no es la expiración de 1h). La vía viva son las conexiones materializadas de ActivePieces: `/root/hermes-agent/data/secrets/<perfil>-drive.json` (`refresh_token` + `client_id` + `client_secret` + `scopes` CSV), construyendo `Credentials(token=None, ...)` y llamando `.refresh(Request())`. Iterar candidatos (`jonathan-drive.json`, `golden-drive.json`, `neuralcrew-drive.json`, `lucky-drive.json`) y quedarse con el primero cuya metadata resuelva.
+Credenciales: el `google_token.json` del contenedor puede estar **revocado de forma terminal** (`RefreshError: invalid_grant: Token has been expired or revoked` — no es la expiración de 1h). La vía viva son las conexiones materializadas de ActivePieces: `/root/hermes-agent-legacy-docker/data/secrets/<perfil>-drive.json` (`refresh_token` + `client_id` + `client_secret` + `scopes` CSV), construyendo `Credentials(token=None, ...)` y llamando `.refresh(Request())`. Iterar candidatos (`jonathan-drive.json`, `golden-drive.json`, `neuralcrew-drive.json`, `lucky-drive.json`) y quedarse con el primero cuya metadata resuelva.
 
 ## 3. Transcribir el guion recibido al formato de la plantilla
 

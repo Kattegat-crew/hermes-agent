@@ -57,13 +57,13 @@ Windows → VPS root, host `147.93.3.250`).
 ### Capa 1 — El binario remoto está mal apuntado
 Síntoma en `C:\Users\wwwko\AppData\Local\hermes\logs\desktop.log`:
 ```
-[ssh-lifecycle] located hermes at /root/hermes-agent
+[ssh-lifecycle] located hermes at /root/hermes-agent-legacy-docker
 Desktop boot failed: The remote Hermes install does not support
 --ssh-session-token-file and --ssh-owner-nonce.
 ```
-Si `located hermes at <ruta>` muestra un **directorio** (p.ej. `/root/hermes-agent`
-o `/root/hermes-agent/data`) en vez de un binario, Desktop ejecuta
-`/root/hermes-agent serve --help` → `Is a directory` → grep falla → error.
+Si `located hermes at <ruta>` muestra un **directorio** (p.ej. `/root/hermes-agent-legacy-docker`
+o `/root/hermes-agent-legacy-docker/data`) en vez de un binario, Desktop ejecuta
+`/root/hermes-agent-legacy-docker serve --help` → `Is a directory` → grep falla → error.
 
 **Fix:** en `connection.json` poner `remoteHermesPath` al binario real:
 ```json
@@ -83,7 +83,7 @@ lanzado está casi vacío.
 
 Causa raíz: el backend SSH hereda `HERMES_HOME=${HERMES_HOME:-$HOME/.hermes}` =
 `/root/.hermes`, que es un home **distinto** del real. En este VPS los datos viven
-en `/root/hermes-agent/data` (state.db ~160MB, perfiles `ragnarcho` y `shared`),
+en `/root/hermes-agent-legacy-docker/data` (state.db ~160MB, perfiles `ragnarcho` y `shared`),
 mientras `/root/.hermes/state.db` era ~229KB (vacío).
 
 **Fix — bindear HERMES_HOME en toda sesión SSH:**
@@ -93,7 +93,7 @@ printf 'PermitUserEnvironment yes\n' > /etc/ssh/sshd_config.d/99-hermes-env.conf
 
 # 2) definir HERMES_HOME para el usuario
 umask 077
-printf 'HERMES_HOME=/root/hermes-agent/data\n' > /root/.ssh/environment
+printf 'HERMES_HOME=/root/hermes-agent-legacy-docker/data\n' > /root/.ssh/environment
 chmod 600 /root/.ssh/environment
 
 # 3) validar y recargar
@@ -101,8 +101,8 @@ sshd -t && systemctl reload ssh   # o: service ssh reload
 ```
 **Verificar:**
 ```bash
-ssh root@<host> 'echo $HERMES_HOME'                      # -> /root/hermes-agent/data
-env HERMES_HOME=/root/hermes-agent/data hermes profile list   # debe listar perfiles
+ssh root@<host> 'echo $HERMES_HOME'                      # -> /root/hermes-agent-legacy-docker/data
+env HERMES_HOME=/root/hermes-agent-legacy-docker/data hermes profile list   # debe listar perfiles
 ```
 
 ### Capa 3 — Inferencia sin key / provider
@@ -166,7 +166,7 @@ backend nuevo con la config corregida.
 - Los perfiles de sesiones son **por perfil** (`ragnarcho` vs `shared`) y dependen
   del HERMES_HOME correcto; si no eliges el perfil, parece que "no hay nada".
 - `hermes serve` en 9112 (modo remote gateway) corre con su propio
-  `HERMES_HOME=/root/hermes-agent/data` y **no se recarga** solo al cambiar
+  `HERMES_HOME=/root/hermes-agent-legacy-docker/data` y **no se recarga** solo al cambiar
   `config.yaml`; necesita reinicio de ese proceso/servicio.
 
 ## Referencias
@@ -189,14 +189,14 @@ HERMES_HOME="${HERMES_HOME:-$HOME/.hermes}"
 ```
 Si `HERMES_HOME` no se exporta en la sesión SSH, usa `~/.hermes`, que puede ser un
 home **distinto y vacío** respecto a donde viven las sesiones, bots y perfiles reales
-(p. ej. `/root/hermes-agent/data`). Resultado: Desktop conecta bien pero no muestra
+(p. ej. `/root/hermes-agent-legacy-docker/data`). Resultado: Desktop conecta bien pero no muestra
 nada.
 
 Diagnóstico del home efectivo (comparar state.db/profiles):
 ```bash
 ssh root@<host> 'echo "HERMES_HOME=${HERMES_HOME:-$HOME/.hermes}"'
-ssh root@<host> 'ls -la ~/.hermes/state.db /root/hermes-agent/data/state.db 2>/dev/null'
-ssh root@<host> 'ls ~/.hermes/profiles /root/hermes-agent/data/profiles 2>/dev/null'
+ssh root@<host> 'ls -la ~/.hermes/state.db /root/hermes-agent-legacy-docker/data/state.db 2>/dev/null'
+ssh root@<host> 'ls ~/.hermes/profiles /root/hermes-agent-legacy-docker/data/profiles 2>/dev/null'
 ```
 El home que tenga el `state.db` grande y los perfiles (ragnarcho, shared) es el correcto.
 
@@ -204,8 +204,8 @@ El home que tenga el `state.db` grande y los perfiles (ragnarcho, shared) es el 
 
 
 ```bash
-ssh root@<host> 'echo $HERMES_HOME'                      # → /root/hermes-agent/data
-env HERMES_HOME=/root/hermes-agent/data hermes profile list   # perfiles correctos
+ssh root@<host> 'echo $HERMES_HOME'                      # → /root/hermes-agent-legacy-docker/data
+env HERMES_HOME=/root/hermes-agent-legacy-docker/data hermes profile list   # perfiles correctos
 ```
 
 Después: en Desktop, **Sign out → Sign in** (o cerrar y reabrir) para que el backend
@@ -217,6 +217,6 @@ SSH se lance con el home correcto.
 - `/root/.ssh/environment` requiere `PermitUserEnvironment yes` (default no).
 - No requiere cambiar nada en `connection.json` del Desktop; el home lo resuelve el
   entorno SSH, no la app.
-- Si hay varias homes (p. ej. `~/.hermes` vs `/root/hermes-agent/data`), decide cuál es
+- Si hay varias homes (p. ej. `~/.hermes` vs `/root/hermes-agent-legacy-docker/data`), decide cuál es
   el canónico (donde vive el gateway y los perfiles) antes de bindear.
 

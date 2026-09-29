@@ -96,7 +96,7 @@ permisos + cascada de providers + retry.
 - 5+ bots en el mismo modelo → 429 concurrente.
 - Los keys viven SOLO en config.yaml; nunca en scripts ni logs del wrapper.
 - Los perfiles corren en `/opt/data/profiles/` (bind mount real), no en
-  `/root/hermes-agent/data/profiles/` — verificar contra la ruta correcta.
+  `/root/hermes-agent-legacy-docker/data/profiles/` — verificar contra la ruta correcta.
 
 ## Verification
 

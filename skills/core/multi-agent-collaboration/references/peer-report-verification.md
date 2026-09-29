@@ -53,7 +53,7 @@ adjetivos («excelente informe») antes de la evidencia.
 
 - **Namespace ajeno al leer la evidencia del par.** Sus rutas son de **su** entorno: el workspace de un
   perfil no existe en el host bajo la misma ruta. Resuélvelo por su equivalente
-  (contenedor `/opt/data/...` = host `/root/hermes-agent/data/...`) o córrelo donde él lo ve. Un
+  (contenedor `/opt/data/...` = host `/root/hermes-agent-legacy-docker/data/...`) o córrelo donde él lo ve. Un
   `No such file or directory` al medir su artefacto suele ser esto, no un archivo faltante.
 - **Su `.venv` puede ser del host**: usarlo desde el contenedor da
   `Could not find platform independent libraries`. Corre por `ssh dev`.

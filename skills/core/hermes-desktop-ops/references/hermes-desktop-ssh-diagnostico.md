@@ -34,8 +34,8 @@ Español/Key:
 ## Diagnóstico en 4 capas (en este orden)
 
 ### Capa 1 — Binario remoto mal apuntado
-`[ssh-lifecycle] located hermes at /root/hermes-agent` (un **directorio**) → Desktop usa
-`/root/hermes-agent serve --help` → `Is a directory` → grep falla.
+`[ssh-lifecycle] located hermes at /root/hermes-agent-legacy-docker` (un **directorio**) → Desktop usa
+`/root/hermes-agent-legacy-docker serve --help` → `Is a directory` → grep falla.
 Fix: `connection.json` → `remoteHermesPath` al binario (`/usr/local/bin/hermes`).
 Verificación remota:
 ```bash
@@ -45,9 +45,9 @@ hermes serve --help 2>&1 | grep -cE "ssh-session-token-file|ssh-owner-nonce"   #
 ### Capa 2 — `HERMES_HOME` no apunta a los datos reales
 Síntoma: conecta (`Remote Hermes backend is ready`) pero sin sesiones/bots/perfiles.
 `HERMES_HOME=${HERMES_HOME:-$HOME/.hermes}` = `/root/.hermes` (débil);
-los datos viven en `/root/hermes-agent/data` (ragnarcho, compartidos; state.db de 164 MB).
+los datos viven en `/root/hermes-agent-legacy-docker/data` (ragnarcho, compartidos; state.db de 164 MB).
 Fix: `PermitUserEnvironment yes` + `/root/.ssh/environment`
-(`HERMES_HOME=/root/hermes-agent/data`).
+(`HERMES_HOME=/root/hermes-agent-legacy-docker/data`).
 
 ### Capa 3 — Sin key / provider
 "le falta inferencia": el `config.yaml` del home activo apunta a OpenRouter (`claude-opus-4.6`) sin key.

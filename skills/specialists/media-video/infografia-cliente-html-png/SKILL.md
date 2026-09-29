@@ -38,11 +38,11 @@ Paleta por FASES: idea/plan = azul `#1F3A5F`, produccion = oro `#B8860B`, contro
 ```bash
 /opt/chrome-for-testing/chrome-linux64/chrome --headless=new --no-sandbox --disable-gpu \
   --hide-scrollbars --force-device-scale-factor=2 --window-size=1400,1620 \
-  --screenshot=/root/hermes-agent/data/drafts/salida.png file:///root/hermes-agent/data/drafts/salida.html
-chown hermes:10000 /root/hermes-agent/data/drafts/salida.{html,png}
+  --screenshot=/root/hermes-agent-legacy-docker/data/drafts/salida.png file:///root/hermes-agent-legacy-docker/data/drafts/salida.html
+chown hermes:10000 /root/hermes-agent-legacy-docker/data/drafts/salida.{html,png}
 ```
 
-Escribe el HTML en `/opt/data/drafts/` (= `/root/hermes-agent/data/drafts/` en el host): el mismo archivo se ve desde los dos lados, y el PNG queda listo para `MEDIA:`.
+Escribe el HTML en `/opt/data/drafts/` (= `/root/hermes-agent-legacy-docker/data/drafts/` en el host): el mismo archivo se ve desde los dos lados, y el PNG queda listo para `MEDIA:`.
 
 ## Pitfalls verificados
 

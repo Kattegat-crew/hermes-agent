@@ -17,7 +17,7 @@ Uso:
   python3 audit_token_usage.py --days 10
   python3 audit_token_usage.py --since 2026-09-01
   python3 audit_token_usage.py --top 15 --json
-  python3 audit_token_usage.py --roots /root/hermes-agent/data
+  python3 audit_token_usage.py --roots /root/hermes-agent-legacy-docker/data
 
 Solo stdlib.
 """

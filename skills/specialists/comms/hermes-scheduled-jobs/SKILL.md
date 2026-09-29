@@ -33,9 +33,9 @@ hermodr, brokkr).
 - Para crons de un perfil SIEMPRE pasar HERMES_HOME dentro del contenedor:
   `HERMES_HOME=/opt/data/profiles/<p> hermes cron create ...`
 - Ruta real de jobs: `/opt/data/profiles/<p>/cron/jobs.json` (¡NO
-  `/root/hermes-agent/data/profiles/<p>/cron/` — en este VPS /opt/data es el home
+  `/root/hermes-agent-legacy-docker/data/profiles/<p>/cron/` — en este VPS /opt/data es el home
   real de perfiles; excepción: perfiles `--isolated` como roshi viven en
-  /root/hermes-agent/data/profiles/).
+  /root/hermes-agent-legacy-docker/data/profiles/).
 - Datos del cron: `python3 -c "import json; d=json.load(open('<jobs.json>')); ..."`
 
 ## How to Run

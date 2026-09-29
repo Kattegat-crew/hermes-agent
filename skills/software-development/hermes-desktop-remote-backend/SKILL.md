@@ -13,7 +13,7 @@ Operations territory: Hermes Desktop (native Electron) connected to a Hermes bac
 ## Mental model (this is the key)
 
 - **Hermes Desktop does NOT talk to the gateway's `api_server` (8642) for remote login.** It connects to the `hermes serve` process (headless backend) — in this stack a **host-native systemd service** `hermes-serve.service`, listening on `0.0.0.0:9112`. The gateway's `api_server`/webhook/A2A ports are a separate concern.
-- `hermes serve` uses `HERMES_HOME` (host path like `/root/hermes-agent/data`) as its data root — the SAME data (including `state.db`) as the container gateway, because the bind mount maps there. So the serve shows the same sessions/profiles the gateway creates.
+- `hermes serve` uses `HERMES_HOME` (host path like `/root/hermes-agent-legacy-docker/data`) as its data root — the SAME data (including `state.db`) as the container gateway, because the bind mount maps there. So the serve shows the same sessions/profiles the gateway creates.
 - Remote connection is over this IP:port via Tailscale (`http://100.86.8.81:9112` in this ops). The Desktop shows the gateway sign-in dialog when the serve requires auth (username/password).
 
 ## Setup sequence (Desktop → remote serve)

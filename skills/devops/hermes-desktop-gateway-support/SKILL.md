@@ -21,7 +21,7 @@ Soporte de la topología NeuralCrew: **Desktop Windows → Tailscale → `hermes
 
 ## Hard Rules (evidencia antes que hipótesis)
 
-1. **La única fuente de verdad del lado servidor es** `/host/root/hermes-agent/data/logs/dashboard-auth.log` (JSON por línea: `login_success`, `ws_ticket_minted`, `refresh_success`, `refresh_failure`, `session_verify_failure`, `native_*`, `ws_ticket_rejected`).
+1. **La única fuente de verdad del lado servidor es** `/host/root/hermes-agent-legacy-docker/data/logs/dashboard-auth.log` (JSON por línea: `login_success`, `ws_ticket_minted`, `refresh_success`, `refresh_failure`, `session_verify_failure`, `native_*`, `ws_ticket_rejected`).
 2. **Cero entradas server-side en el timestamp del fallo ⇒ las peticiones NUNCA llegaron** → es red (tailnet/firewall/otro VPN), no la app ni el gateway. Esta regla cerró el caso del 11-sep sin adivinar.
 3. **No le creas al log del Desktop**: `Connecting to remote Hermes backend …` / `Remote Hermes backend is ready` pueden venir de un descriptor cacheado/pooled sin haber tocado la red. Valida con un `ws_ticket_minted` del lado servidor.
 4. **Que el gateway responda a `curl` desde el host NO prueba que el cliente llegue**: loopback/host vs tailnet son rutas distintas. Prueba las dos.

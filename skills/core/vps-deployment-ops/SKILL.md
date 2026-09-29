@@ -21,7 +21,7 @@ Esta skill opera como despacho unificado. El detalle procedural y gotchas espec√
 `references/`
 
 ## Casos de Uso Disponibles
-- **static-portal-generator**: Ver [references/static-portal-generator.md](file:///root/hermes-agent/skills/core/vps-deployment-ops/references/static-portal-generator.md)
-- **vps-agent-deployer**: Ver [references/vps-agent-deployer.md](file:///root/hermes-agent/skills/core/vps-deployment-ops/references/vps-agent-deployer.md)
-- **vps-ops**: Ver [references/vps-ops.md](file:///root/hermes-agent/skills/core/vps-deployment-ops/references/vps-ops.md)
-- **vps-web-deployment**: Ver [references/vps-web-deployment.md](file:///root/hermes-agent/skills/core/vps-deployment-ops/references/vps-web-deployment.md)
+- **static-portal-generator**: Ver [references/static-portal-generator.md](file:///root/hermes-agent-legacy-docker/skills/core/vps-deployment-ops/references/static-portal-generator.md)
+- **vps-agent-deployer**: Ver [references/vps-agent-deployer.md](file:///root/hermes-agent-legacy-docker/skills/core/vps-deployment-ops/references/vps-agent-deployer.md)
+- **vps-ops**: Ver [references/vps-ops.md](file:///root/hermes-agent-legacy-docker/skills/core/vps-deployment-ops/references/vps-ops.md)
+- **vps-web-deployment**: Ver [references/vps-web-deployment.md](file:///root/hermes-agent-legacy-docker/skills/core/vps-deployment-ops/references/vps-web-deployment.md)

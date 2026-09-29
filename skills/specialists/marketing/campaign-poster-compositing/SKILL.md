@@ -42,7 +42,7 @@ Reemplazar un elemento (p.ej. chip de texto → logo real) dibujando un rectáng
 
 ## Entrega y ruteo
 - Nomenclatura y carpetas: consultar SIEMPRE el mapa `brain/folder-maps/<campaña>.md` antes de subir. Piezas → `03-piezas/`, overlays/logos → `03-piezas/assets/` (crearla si el mapa la prevé), aprobadas → `04-aprobadas/` con `_APROBADA-v<N>` y firma del aprobador. Registrar en el mapa los IDs de carpetas nuevas que se creen.
-- Subida Drive: `HERMES_HOME` = **raíz** (`/root/hermes-agent/data`), no perfil — con perfil de otro bot el token no está y falla.
+- Subida Drive: `HERMES_HOME` = **raíz** (`/root/hermes-agent-legacy-docker/data`), no perfil — con perfil de otro bot el token no está y falla.
 - `drive search` por folder ID puede dar 404 aunque exista; fallback: buscar por nombre de archivo.
 - Verificar post-upload listando la carpeta padre por API (no confiar solo en el status 'uploaded').
 - En el chat grupal: adjuntar con `MEDIA:<ruta>` para que el usuario vea el render.

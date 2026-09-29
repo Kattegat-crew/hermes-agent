@@ -61,10 +61,10 @@ No hay datos locales de campañas antiguas — **jalarlos de las plataformas**:
 - **IG insights el campo es `ig_media_id`, NO `media_id`** (`media_id` → error de validación "Unknown key media_id"). Ambos en el schema de `INSTAGRAM_GET_IG_MEDIA_INSIGHTS` son engañosos: usar `ig_media_id`.
 - **FB post insights es `post_id`** y `metrics` solo acepta `post_media_view` desde nov-2025 (impressions/engagements deprecados).
 - **IG insights funciona aún <1.000 followers** (Golden 69, Paradise 273): el límite de la doc es para fiabilidad estadística, NO un bloqueo duro de la API. Jala `views`/`reach`/`likes`/`comments`/`saved`/`shares` igual.
-- **STT necesita el modelo cacheado**: `/root/marketing-campaign-generator` no resuelve HuggingFace (DNS) si el modelo no está en disco. Modelos `Systran/faster-whisper-base` y `-tiny` ya están en `/root/hermes-agent/data/.cache/huggingface/hub`. Correr con `env HF_HOME=/root/hermes-agent/data/.cache/huggingface` + modelo `base` (no `small`, que intenta descargar y falla).
+- **STT necesita el modelo cacheado**: `/root/marketing-campaign-generator` no resuelve HuggingFace (DNS) si el modelo no está en disco. Modelos `Systran/faster-whisper-base` y `-tiny` ya están en `/root/hermes-agent-legacy-docker/data/.cache/huggingface/hub`. Correr con `env HF_HOME=/root/hermes-agent-legacy-docker/data/.cache/huggingface` + modelo `base` (no `small`, que intenta descargar y falla).
 - **faster_whisper vive en el venv de python3.11** `/opt/hermes-venv`, no en el venv del repo (python3.12, sin numpy/scipy/whisper). El stack de análisis del repo usa python3.12 + `numpy/scipy/requests` del **sistema**; whisper aparte.
 - **features.py con `NamedTemporaryFile` deja el wav a 0 bytes** (ffmpeg escribe concurrente sobre el archivo ya abierto). Fix: path fijo `os.path.join(tempfile.gettempdir(), f"ci_audio_{pid}_{hash(path)}")` + `-y` y check de size >0.
-- **Host vs contenedor**: el repo está en `.250:/root/marketing-campaign-generator` (host), accesible desde el contenedor vía `/host/root/marketing-campaign-generator`. Ejecutar en el host o con `docker run --rm --privileged -v /:/hostfs --pid=host alpine` + `chroot /hostfs /usr/bin/python3.12 <script>`. El dir de build del agente (`/opt/data/...`) = host `/root/hermes-agent/data/...`.
+- **Host vs contenedor**: el repo está en `.250:/root/marketing-campaign-generator` (host), accesible desde el contenedor vía `/host/root/marketing-campaign-generator`. Ejecutar en el host o con `docker run --rm --privileged -v /:/hostfs --pid=host alpine` + `chroot /hostfs /usr/bin/python3.12 <script>`. El dir de build del agente (`/opt/data/...`) = host `/root/hermes-agent-legacy-docker/data/...`.
 - **Benchmarks requieren n≥10 por formato** para ser fiables; con n=4 son orientativos. Este es un límite honesto a comunicar, no esconder.
 
 ## Almacenamiento / destino
@@ -88,7 +88,7 @@ de análisis (python3.12 + repo) solo corre en el host. La solución es el patr�
 
 ### Rutas clave del cron
 - Build dir (contenedor): `/opt/data/content-intel-build/`
-- Build dir (host): `/root/hermes-agent/data/content-intel-build/`
+- Build dir (host): `/root/hermes-agent-legacy-docker/data/content-intel-build/`
 - Metrics shared: `harvest_metrics/ig_metrics.json` + `fb_metrics.json`
 - Analysis output: `analysis_out/{brand}-analisis.md`
 - Script en hermes scripts dir: `/opt/data/scripts/content_intel_cron.sh`

@@ -46,7 +46,7 @@ El contenedor tiene `python3` pero **no `pytest`**; `.venv` y `.venv-fit` del re
 
 ```bash
 ssh dev 'cd /root/marketing-campaign-generator && .venv/bin/python -m pytest tests/ -q 2>&1 | tail -25'
-# (ruta del 11-sep-2026; antes del move: /root/hermes-agent/data/repos/<repo>)
+# (ruta del 11-sep-2026; antes del move: /root/hermes-agent-legacy-docker/data/repos/<repo>)
 ```
 
 Read-only: no carga `.env`, no dispara gates, no gasta. Reporta el conteo exacto (`533 passed, 1 skipped, 6 failed`) y separa fallos de entorno de los funcionales. Antes de correr, confirma que los gates están cerrados (TTL vencido): así cualquier test mal escrito que intentara una llamada real queda bloqueado por diseño y puedes afirmarlo en el informe.

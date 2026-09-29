@@ -65,7 +65,7 @@ Resolver de rutas de un wrapper, sin ejecutarlo (read-only, el chequeo más info
 
 ```bash
 for t in planning/<x>/cron_<job>.py; do
-  for c in /host/root/<repo> /root/<repo> /opt/data/repos/<repo> /root/hermes-agent/data/repos/<repo>; do
+  for c in /host/root/<repo> /root/<repo> /opt/data/repos/<repo> /root/hermes-agent-legacy-docker/data/repos/<repo>; do
     [ -r "$c/$t" ] && echo "$t -> $c" && break; done; done
 ```
 

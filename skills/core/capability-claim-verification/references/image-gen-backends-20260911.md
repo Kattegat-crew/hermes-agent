@@ -58,6 +58,6 @@ Obtenido con el catálogo público `GET https://fal.ai/api/models?keywords=gpt-i
 ## Fuentes de la key y trampas de procedencia (11-sep-2026)
 
 - Vaultwarden: item `FAL - API key` (campo `FAL_KEY`) = única fuente de la credencial. **No hay item de OpenAI.**
-- `/opt/data/.env` (idéntico a `/root/hermes-agent/data/.env` del host, mismo md5 `f0bb2e91…`): la línea `FAL_KEY` está **comentada** (`# FAL_KEY=`) y `OPENAI_API_KEY` también está comentada y vale `sk-JzBTUf…`, o sea la key de **NaN-Builders** (mismo prefijo que la del proxy). Conclusión: no existe key OpenAI real en el entorno.
+- `/opt/data/.env` (idéntico a `/root/hermes-agent-legacy-docker/data/.env` del host, mismo md5 `f0bb2e91…`): la línea `FAL_KEY` está **comentada** (`# FAL_KEY=`) y `OPENAI_API_KEY` también está comentada y vale `sk-JzBTUf…`, o sea la key de **NaN-Builders** (mismo prefijo que la del proxy). Conclusión: no existe key OpenAI real en el entorno.
 - `/root/marketing-campaign-generator/.env` **ya no existe** en DEV y `~/.config/akari-video/credentials.env` no trae `FAL_KEY` ⇒ la key de fal vive solo en el vault (inyectar al `.env` del perfil antes de activar `image_gen.provider: fal`).
 - Hueco de documentación: `/opt/vault/APIS-INTEGRACIONES.md` **no menciona fal.ai** (solo NaN-Builders, Telegram/WhatsApp/Discord, Google Workspace, Coolify, crons). «Mira en el vault» puede ser Vaultwarden o el vault de docs: revisa los dos.

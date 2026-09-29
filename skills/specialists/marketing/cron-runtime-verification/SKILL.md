@@ -28,7 +28,7 @@ Checklist reproducible con `scripts/audit_cron.sh` (esta skill).
 
 | Path en gateway (cron) | Equivalente host |
 |---|---|
-| `/opt/data` | `/root/hermes-agent/data` (volumen compartido — MISMO inodo) |
+| `/opt/data` | `/root/hermes-agent-legacy-docker/data` (volumen compartido — MISMO inodo) |
 | `/opt/data/repos`, `scripts`, `secrets`, `.ssh`, `cron/output` | `data/repos`, `data/scripts`, ... |
 | `/root` del contenedor | 700 root-only, NO es /root del host — nada del host es visible ahí |
 | host alcanzable | `ssh root@10.0.2.1` (clave del gateway en `data/.ssh`) |
@@ -36,7 +36,7 @@ Checklist reproducible con `scripts/audit_cron.sh` (esta skill).
 Implicaciones:
 - Repos independientes pueden vivir en el host `/root/<repo>` (accesible desde el contenedor vía `/host/root/<repo>` gracias al montaje `/host:rw,rslave`), o en `data/repos/<repo>` si son exclusivos de Hermes. Mover = `mv` del original + permisos adecuados (`chown -R hermes:10000`) + `git config --global --add safe.directory` en ambas vistas + actualizar rutas. NUNCA clonar segunda copia (causa histórica de "editas una copia vieja").
 - Scripts Python usan ruta auto-detectada relativa a `Path(__file__)` o resolución multi-entorno: `/host/root/x`, `/root/x`, `/opt/data/repos/x`.
-- **Los wrappers `.sh` en `data/scripts/` DEBEN auto-detectar el repo igual que el .py** (NO hardcodear una sola ruta). Resuelven con `for c in /host/root/x /root/x /opt/data/repos/x /root/hermes-agent/data/repos/x; do [ -r "$c/<target>" ] && REPO=$c && break; done`.
+- **Los wrappers `.sh` en `data/scripts/` DEBEN auto-detectar el repo igual que el .py** (NO hardcodear una sola ruta). Resuelven con `for c in /host/root/x /root/x /opt/data/repos/x /root/hermes-agent-legacy-docker/data/repos/x; do [ -r "$c/<target>" ] && REPO=$c && break; done`.
 - Credenciales/secrets bajo `data/` son legibles por uid 10000; si el repo vive en `/root` del host, debe tener permisos de grupo para uid 10000 o sus credenciales inyectadas en `data/.env`.
 
 ## Checks mínimos antes del "operativo" (todos bajo nsenter)
@@ -50,7 +50,7 @@ Implicaciones:
 
 ```bash
 # 1) host: descargar wheels cp313 (multi-platform opportunist)
-mkdir -p /root/hermes-agent/data/repos/wheels && cd $_
+mkdir -p /root/hermes-agent-legacy-docker/data/repos/wheels && cd $_
 pip download -q --python-version 313 --only-binary :all: \
   --platform manylinux_2_34_x86_64 --platform manylinux_2_17_x86_64 <paquetes>
 # 2) gateway, como uid del cron — HOME=/opt/data OBLIGATORIO (sin él escribe en /root → Errno 13):

@@ -26,7 +26,7 @@ def main():
         return
 
     # Locate DB (works from container or host path)
-    cands = [DB, "/root/hermes-agent/data/state.db"]
+    cands = [DB, "/root/hermes-agent-legacy-docker/data/state.db"]
     db = next((c for c in cands if glob.has_magic(c) or _exists(c)), None)
     if not db:
         print("state.db not found.")

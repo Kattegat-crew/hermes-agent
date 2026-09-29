@@ -21,13 +21,13 @@ Genera plantillas DOCX profesionales con la identidad de marca oficial de Neural
 
 ## Activos requeridos
 
-- `/root/hermes-agent/data/workspace/logo_icon.png` — icono circular recortado, fondo transparente (extraído de `logo neural.png`)
+- `/root/hermes-agent-legacy-docker/data/workspace/logo_icon.png` — icono circular recortado, fondo transparente (extraído de `logo neural.png`)
 
 ## Script principal
 
-`/root/hermes-agent/data/scripts/gen_letterhead_v5.py`
+`/root/hermes-agent-legacy-docker/data/scripts/gen_letterhead_v5.py`
 
-Genera `/root/hermes-agent/data/workspace/NeuralCrew_Labs_Membrete_Oficial.docx` con:
+Genera `/root/hermes-agent-legacy-docker/data/workspace/NeuralCrew_Labs_Membrete_Oficial.docx` con:
 - Línea dorada fina superior (border de párrafo, NO tabla sombreada)
 - Header 2 columnas: icono izquierda + wordmark derecha
 - Línea dorada fina bajo wordmark
@@ -56,7 +56,7 @@ Genera `/root/hermes-agent/data/workspace/NeuralCrew_Labs_Membrete_Oficial.docx`
 ## Verificación visual
 
 ```bash
-cd /root/hermes-agent/data/workspace
+cd /root/hermes-agent-legacy-docker/data/workspace
 libreoffice --headless --convert-to pdf NeuralCrew_Labs_Membrete_Oficial.docx --outdir preview
 pdftoppm -png -r 90 preview/NeuralCrew_Labs_Membrete_Oficial.pdf preview/page
 # abrir preview/page-1.png con vision_analyze para QA

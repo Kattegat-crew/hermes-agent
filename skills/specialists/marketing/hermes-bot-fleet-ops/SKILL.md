@@ -39,7 +39,7 @@ chocar rate-limit, y diseñar el handoff entre bots.
 Auditoría de un perfil:
 
 ```bash
-p=<perfil>; cfg=/root/hermes-agent/data/profiles/$p/config.yaml
+p=<perfil>; cfg=/root/hermes-agent-legacy-docker/data/profiles/$p/config.yaml
 grep -E "^(  )?(provider|default|base_url):" $cfg | head -4   # modelo activo
 grep -c engram $cfg                                          # 0 = sin MCP Engram
 grep -nE "^compression:|^  compression:" $cfg                # bloque raíz vs auxiliary

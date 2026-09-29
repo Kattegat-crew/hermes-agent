@@ -6,7 +6,7 @@ para **Golden Game** y **The Grand Paradise / Lucky Brothers**.
 ## Repo (corazón del pipeline)
 
 - `/host/root/marketing-campaign-generator/` — en el contenedor; es **el mismo árbol** que
-  `/root/marketing-campaign-generator/` (mismo inodo: `/opt/data` == `/host/root/hermes-agent/data`).
+  `/root/marketing-campaign-generator/` (mismo inodo: `/opt/data` == `/host/root/hermes-agent-legacy-docker/data`).
 - Git: `git@github.com:Kattegat-crew/marketing-campaign-generator.git`, rama `main`.
 - Flujo: guion → imagen → video vertical 9:16 → voz con lip-sync → análisis por plataforma. Tests en `tests/`.
 

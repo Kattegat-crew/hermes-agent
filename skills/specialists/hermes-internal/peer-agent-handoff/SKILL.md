@@ -102,7 +102,7 @@ Compara contra la **fuente vieja**, campo por campo, buscando cinco clases de p�
   real aparece en su salida (p.ej. `Profile … does not exist`). Lee la salida del proceso antes de
   reportar el envío al Admin.
 - **Namespace ajeno.** Las rutas del par son de *su* entorno (contenedor `/opt/data/…` = host
-  `/root/hermes-agent/data/…`). Un `No such file` al medir su artefacto suele ser esto.
+  `/root/hermes-agent-legacy-docker/data/…`). Un `No such file` al medir su artefacto suele ser esto.
 - **`.venv` del host usado desde el contenedor** → `Could not find platform independent libraries`.
   Corre por `ssh dev` y **como el usuario dueño**, no como root, para no dejar `__pycache__` ajeno:
   `ssh dev 'cd /root/<repo> && sudo -u hermes env PYTHONDONTWRITEBYTECODE=1 TMPDIR=/tmp HOME=/tmp

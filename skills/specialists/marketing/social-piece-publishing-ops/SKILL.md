@@ -138,7 +138,7 @@ El Admin encarga por frases cortas sin contexto y a veces en otro canal/día. Pr
    id pelado Meta responde `400 · code 200 · subcode 1504029 "Permissions error"` — engañoso, es
    resolución de objeto, no scopes, y la pieza queda con 0 vistas. Los insights de carrusel se
    consultan en el **padre** (los children no soportan insights).
-5. **Ruta de credenciales Drive:** `_first_existing()` con candidatos host (`/root/hermes-agent/data/secrets/…`)
+5. **Ruta de credenciales Drive:** `_first_existing()` con candidatos host (`/root/hermes-agent-legacy-docker/data/secrets/…`)
    y contenedor (`/opt/data/secrets/…`); `scopes` puede venir como string → envolver en lista
    antes de `Credentials(...)`. `Path.exists()` sobre rutas del contenedor desde el host puede
    LANZAR PermissionError en vez de devolver False.

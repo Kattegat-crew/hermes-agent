@@ -49,7 +49,7 @@ git clone --depth 1 https://github.com/alirezarezvani/claude-skills.git      # 8
 ```python
 os.symlink(source_dir, os.path.join(profile_skills_dir, name), target_is_directory=True)
 ```
-- Los perfiles usan symlinks a un directorio fuente común (mismo patrón que `/opt/data/skills` → `/root/hermes-agent/data/skills`).
+- Los perfiles usan symlinks a un directorio fuente común (mismo patrón que `/opt/data/skills` → `/root/hermes-agent-legacy-docker/data/skills`).
 - Al copiar `config.yaml` de un perfil existente, limpiar el `skills.disabled` heredado (regex del bloque `skills:\n  disabled:\n(?:  - .*\n)*` → `disabled: []`) — el perfil ve solo sus symlinks.
 
 ### 5. Scan de seguridad liviano
@@ -62,11 +62,11 @@ Buscar en SKILL.md importados: `rm -rf /`, `curl .*|.*sh`, `wget .*|.*bash`, `ba
 
 ## Instalador canónico `hermes skills install` (hub, validado 22-sep-2026)
 
-Alternativa al flujo manual clonar+symlink para skills sueltas: `hermes skills install` acepta slugs de skills.sh (`hermes skills install caveman`) y URLs raw de SKILL.md (`https://raw.githubusercontent.com/<org>/<repo>/main/skills/<x>/SKILL.md`). Instala en `/opt/data/skills/<nombre>/` (contenedor; host: `/root/hermes-agent/data/skills/`), marca enabled y registra la fuente (`skills.sh | url | community`) visible en `hermes skills list`.
+Alternativa al flujo manual clonar+symlink para skills sueltas: `hermes skills install` acepta slugs de skills.sh (`hermes skills install caveman`) y URLs raw de SKILL.md (`https://raw.githubusercontent.com/<org>/<repo>/main/skills/<x>/SKILL.md`). Instala en `/opt/data/skills/<nombre>/` (contenedor; host: `/root/hermes-agent-legacy-docker/data/skills/`), marca enabled y registra la fuente (`skills.sh | url | community`) visible en `hermes skills list`.
 
 - **Scanner de seguridad integrado:** analiza el SKILL.md antes de instalar y puede BLOQUEAR con hallazgos heurísticos. Falso positivo típico: skills de diseño que hablan de "tokens/config" del style-guide (lenguaje de dominio, no credenciales). Los intentos bloqueados quedan en `/opt/data/skills/.hub/quarantine/` (vacío = nada rechazado pendiente).
 - **Protocolo antes de forzar (`--force --yes`):** revisar CADA hallazgo: (1) sin unicode invisible → `grep -nP '[\x{200b}-\x{200f}\x{feff}]' SKILL.md`; (2) sin llamadas de red ejecutables (fetch/curl/wget ejecutables, no menciones documentales); (3) sin acceso a credenciales/env. Solo forzar si todo es lenguaje benigno de otro dominio, documentando la justificación.
-- **Pitfall crítico de permisos:** si el instalador falla sin razón aparente, `/opt/data/skills/.hub/` pudo quedar root-owned de una sesión previa (el hub corre como uid 10000 hermes). Fix desde el host DEV: `ssh dev "chown -R 10000:10000 /root/hermes-agent/data/skills/.hub"`.
+- **Pitfall crítico de permisos:** si el instalador falla sin razón aparente, `/opt/data/skills/.hub/` pudo quedar root-owned de una sesión previa (el hub corre como uid 10000 hermes). Fix desde el host DEV: `ssh dev "chown -R 10000:10000 /root/hermes-agent-legacy-docker/data/skills/.hub"`.
 - **Destilación > instalación para skills de solo-prompt:** si la skill comunitaria es solo un set de reglas de formato (p.ej. `i-have-adhd`), NO instalarla: destilar sus reglas dentro del skill de coordinación correspondiente (p.ej. sección "Output Style Rules" en `dispatching-parallel-agents`). Menos ruido de catálogo, mismo beneficio.
 - **Verificación:** `hermes skills list | grep <nombre>` → enabled; `ls /opt/data/skills/<nombre>/` con SKILL.md y referencias completas; confirmar que no quedaron quarantine pendientes.
 
@@ -74,12 +74,12 @@ Alternativa al flujo manual clonar+symlink para skills sueltas: `hermes skills i
 
 Cada perfil con skills enlazadas puede tener su propio grafo graphify para encontrar skills por tema y sus relaciones (categoría, related, conceptos, perfiles que la usan).
 
-**RUTA CANÓNICA (trampa host/contenedor):** el árbol VIVO de skills en el host es `/root/hermes-agent/data/skills/` — **NO existe `/opt/data/skills` como ruta de host** (es un espejo viejo que nadie lee; en el host `/opt/data` es otro directorio, no el bind mount). Los scripts corriendo desde el HOST deben usar `/root/hermes-agent/data/...`; desde el CONTENEDOR, `/opt/data/...`. Enlazar con ruta equivocada = grafos de 1 nodo o 0 symlinks.
+**RUTA CANÓNICA (trampa host/contenedor):** el árbol VIVO de skills en el host es `/root/hermes-agent-legacy-docker/data/skills/` — **NO existe `/opt/data/skills` como ruta de host** (es un espejo viejo que nadie lee; en el host `/opt/data` es otro directorio, no el bind mount). Los scripts corriendo desde el HOST deben usar `/root/hermes-agent-legacy-docker/data/...`; desde el CONTENEDOR, `/opt/data/...`. Enlazar con ruta equivocada = grafos de 1 nodo o 0 symlinks.
 
 - Generador: `/opt/data/scripts/build_skills_graph.py` (auto-detecta host vs contenedor)
   - `--global` → `/opt/data/skills/graphify-out/graph.json` (catálogo completo core+especialistas+ext + nodos de perfiles con relation=used_by)
   - `--all-profiles` → `skills/graphify-out/graph.json` de cada especialista + roshi
-- **Bugs corregidos del generador (28/08, backup .bak-20260828):** (1) `profile_skills` solo miraba el 1er nivel del perfil → las skills anidadas en categorías (`<cat>/<skill>/SKILL.md`, convención del vault) eran invisibles; (2) las skills que viven SOLO en el perfil nunca se escaneaban. Ahora auto-detecta el árbol (host=/root/hermes-agent/data, contenedor=/opt/data) y escanea el dir completo del perfil.
+- **Bugs corregidos del generador (28/08, backup .bak-20260828):** (1) `profile_skills` solo miraba el 1er nivel del perfil → las skills anidadas en categorías (`<cat>/<skill>/SKILL.md`, convención del vault) eran invisibles; (2) las skills que viven SOLO en el perfil nunca se escaneaban. Ahora auto-detecta el árbol (host=/root/hermes-agent-legacy-docker/data, contenedor=/opt/data) y escanea el dir completo del perfil.
 - CLI de consulta: `/opt/data/.venv-graphify/bin/graphify query "<tema>" --graph <ruta>`
 - **Pitfall crítico del CLI:** `graphify query` matchea por substring contra `label` + `source_file` únicamente (NO lee `summary`). El generador lo resuelve escribiendo el summary normalizado (sin diacríticos) en `source_file` del nodo y creando **nodos concepto** (relation=concept) con los términos clave de la descripción. Nunca regenerar el grafo sin esa capa — una búsqueda por concepto ("guion", "dashboards") fallaría con "No matching nodes found".
 - Después de generar el grafo, dejar en el AGENTS.md del perfil la sección "Grafo de skills" (ruta del grafo + comando) — ver `profiles/<p>/AGENTS.md`.

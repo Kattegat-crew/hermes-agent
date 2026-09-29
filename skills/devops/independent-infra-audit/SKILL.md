@@ -38,7 +38,7 @@ setpriv --reuid=10000 --regid=10000 --clear-groups env HOME=/opt/data bash <wrap
 docker exec -u 10000 -e HOME=/opt/data hermes-agent bash -lc 'bash /opt/data/scripts/<wrapper>'
 ```
 
-Why both: wrappers resolve paths bilingually (`/opt/data/repos/...` first, then `/root/hermes-agent/data/repos/...`). On the host `/opt/data/repos` does not exist, so the host run exercises the fallback branch and the container run the primary one. A pass in only one namespace is partial proof.
+Why both: wrappers resolve paths bilingually (`/opt/data/repos/...` first, then `/root/hermes-agent-legacy-docker/data/repos/...`). On the host `/opt/data/repos` does not exist, so the host run exercises the fallback branch and the container run the primary one. A pass in only one namespace is partial proof.
 
 Establish the volume map before trusting any path:
 
@@ -46,16 +46,16 @@ Establish the volume map before trusting any path:
 docker inspect hermes-agent --format '{{range .Mounts}}{{.Source}} -> {{.Destination}}{{"\n"}}{{end}}'
 ```
 
-Typical: host `/root/hermes-agent/data` == container `/opt/data` (one physical tree, `10000:10000`). Host `/opt/data` and container `/root` are **different, near-empty trees** — a path that exists in one may be missing in the other. **Audit the path that exists and report the discrepancy**: a checklist naming `/root/<repo>` or a bare `/opt/data/...` usually describes the wrong namespace; state the corrected path as its own (minor) finding instead of silently auditing elsewhere.
+Typical: host `/root/hermes-agent-legacy-docker/data` == container `/opt/data` (one physical tree, `10000:10000`). Host `/opt/data` and container `/root` are **different, near-empty trees** — a path that exists in one may be missing in the other. **Audit the path that exists and report the discrepancy**: a checklist naming `/root/<repo>` or a bare `/opt/data/...` usually describes the wrong namespace; state the corrected path as its own (minor) finding instead of silently auditing elsewhere.
 
 ## 3. Ticker forensics: who actually ran the job
 
-Two schedulers can claim the same `jobs.json`: the container gateway (uid 10000) and the root Hermes Desktop SSH backend (`hermes serve --isolated`, `HERMES_HOME=/root/hermes-agent/data`, `HERMES_DESKTOP=1`, host mount ns).
+Two schedulers can claim the same `jobs.json`: the container gateway (uid 10000) and the root Hermes Desktop SSH backend (`hermes serve --isolated`, `HERMES_HOME=/root/hermes-agent-legacy-docker/data`, `HERMES_DESKTOP=1`, host mount ns).
 
 Cheapest forensic — **ownership of the run artifact**: every run writes `cron/output/<job_id>/<timestamp>.md`. `root:root` ⇒ the root ticker claimed it; `10000:10000` ⇒ the gateway. `scripts/audit_ticker_ownership.sh` prints all of it; essentials:
 
 ```bash
-find /root/hermes-agent/data/cron/output -user root -newermt 'today 00:00' -printf '%TH:%TM %u:%g %s %p\n' | sort
+find /root/hermes-agent-legacy-docker/data/cron/output -user root -newermt 'today 00:00' -printf '%TH:%TM %u:%g %s %p\n' | sort
 find <repo> -user root -not -path '*/.git/*' | wc -l
 ```
 

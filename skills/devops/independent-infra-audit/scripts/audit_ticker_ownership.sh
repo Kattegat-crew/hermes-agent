@@ -5,7 +5,7 @@
 # No writes anywhere. Usage: bash audit_ticker_ownership.sh [repo_path]
 set -u
 REPO="${1:-/root/marketing-campaign-generator}"
-CRON="${HERMES_HOME:-/root/hermes-agent/data}/cron"
+CRON="${HERMES_HOME:-/root/hermes-agent-legacy-docker/data}/cron"
 
 echo "== volume map (host -> container) =="
 docker inspect hermes-agent --format '{{range .Mounts}}{{.Source}} -> {{.Destination}}{{"\n"}}{{end}}' 2>/dev/null \

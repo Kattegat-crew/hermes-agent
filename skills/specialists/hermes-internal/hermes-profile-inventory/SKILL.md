@@ -17,7 +17,7 @@ Procedimiento para responder con evidencia preguntas como "¿cuántos perfiles h
 
 ## Dónde vive cada cosa
 
-- **Perfiles ACTIVOS** → `/opt/data/profiles/<name>/` (en contenedor; host `/root/hermes-agent/data/profiles/`). Cada perfil tiene su propio `config.yaml` (model/provider/base_url), `profile.yaml` (description + ui_meta) y `SOUL.md`.
+- **Perfiles ACTIVOS** → `/opt/data/profiles/<name>/` (en contenedor; host `/root/hermes-agent-legacy-docker/data/profiles/`). Cada perfil tiene su propio `config.yaml` (model/provider/base_url), `profile.yaml` (description + ui_meta) y `SOUL.md`.
 - **Perfil PRINCIPAL (default/Ragnar)** → NO tiene directorio bajo `profiles/`; su config es `/opt/data/config.yaml`. El config principal NO tiene sección `profiles:` top-level — el ruteo vive en `gateway.profile_routes` + `gateway.multiplex_profiles: true`.
 - **Backups de perfiles borrados** → `/opt/data/backups/` (p. ej. `profiles-before-delete-20260822/{ragnarcho,shared}`).
 - **Plantillas de clientes SIN desplegar** → `/opt/data/hermes-casinos-repo/profiles/{golden-game,lucky-club}/` (AGENTS.md/MEMORY.md/SOUL.md/config.yaml listos, aún sin montar como perfiles activos).

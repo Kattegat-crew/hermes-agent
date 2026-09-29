@@ -32,7 +32,7 @@ usar dict (safe_load → mutate → safe_dump → validar → backup → write).
 - glm5.3-flash registrado en catálogo (ctx 131072) pero NO asignado (no habilitado).
 
 ## Estructura de PROD (quirk)
-- `/opt/data/` es el home de prod (NO /root/hermes-agent/data).
+- `/opt/data/` es el home de prod (NO /root/hermes-agent-legacy-docker/data).
 - `model` usa `provider: custom` + `base_url: http://hermes-llm-proxy:8742/v1` (nginx, no
   filtra modelos) + `fallback_providers` (mimo-v2.5 opencode zen + qwen3.6).
 - **NO existe `custom_providers`** en prod → un chequeo `custom=False` es esperado y correcto;

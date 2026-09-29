@@ -36,7 +36,7 @@ Skill(s) not found and skipped: engram-memory-system, guardado-doble-memoria
 Investigation:
 - `roshi/skills/engram-memory-system` was a symlink → `/opt/data/skills/engram-memory-system`.
 - `ls /opt/data/skills` → **No such file or directory**. The canonical catalog is
-  `/root/hermes-agent/data/skills/` (+ `skills-especialistas/`), NOT `/opt/data/skills`.
+  `/root/hermes-agent-legacy-docker/data/skills/` (+ `skills-especialistas/`), NOT `/opt/data/skills`.
 - Scan: **358 symlinks in roshi/skills, 356 broken** (all pointing at `/opt/data/skills/*`).
 - `guardado-doble-memoria` is nested under `engram-memory-system/`; the cron skill loader
   resolves by **flat name**, so even if the parent resolved, the nested skill needed its
@@ -53,5 +53,5 @@ both SKILL.md files resolvable.
 2. Pin every cron to provider/model at creation (`--provider/--model`); unpinned jobs
    silently skip when global config drifts.
 3. Profile `skills/` dirs may carry a full tree of `/opt/data/skills/*` symlinks that
-   are dead on this host. Canonical path is `/root/hermes-agent/data/skills/`
+   are dead on this host. Canonical path is `/root/hermes-agent-legacy-docker/data/skills/`
    (+ `skills-especialistas/`). Nested skills need top-level symlinks for the flat loader.

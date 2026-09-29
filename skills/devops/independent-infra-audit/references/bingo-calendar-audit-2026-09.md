@@ -6,7 +6,7 @@ Auditoría independiente read-only sobre el pipeline de publicación automática
 
 | Check | Evidencia usada |
 |---|---|
-| Crons existen/habilitados | `hermes cron list` (`[active]`) + `enabled: true`, `last_status`, `last_run_at`, `next_run_at` leídos de `/root/hermes-agent/data/cron/jobs.json` |
+| Crons existen/habilitados | `hermes cron list` (`[active]`) + `enabled: true`, `last_status`, `last_run_at`, `next_run_at` leídos de `/root/hermes-agent-legacy-docker/data/cron/jobs.json` |
 | `cron/output` de uid 10000 | `stat -c '%U:%G %A'` + `setpriv … bash -c '[ -w . ]'` (host **y** contenedor) |
 | Repo limpio y sincronizado | `git status --porcelain` vacío; `## main...origin/main`; `rev-parse HEAD origin/main` iguales (`55b226f`); `fetch` y `ls-remote` rc=0 como uid 10000 |
 | 64 filas JSON válidas | script Python que parsea y cuenta estados (64/64, 64 ids únicos) |
@@ -19,11 +19,11 @@ Auditoría independiente read-only sobre el pipeline de publicación automática
 
 ## Hallazgos
 
-**H1 (medio) · dual ticker.** El backend root del Desktop (`hermes serve --isolated`, `HERMES_HOME=/root/hermes-agent/data`, `HERMES_DESKTOP=1`) seguía tickeando el mismo `jobs.json` que el gateway (uid 10000). Prueba: artefactos `root:root` de hoy — `output/ff3e1c2b759f/…06-02-40.md` (métricas), `output/fee5dcf7691b/…07-31-11.md` (paquete 7:30), `output/794be6c2336b/…09-34-16.md` (publicación horaria) + los vigía cada 10 min. Si el ticker root gana un turno de publicación escribiría `calendario.jsonl`/XLSX/dashboards como `root:root` (ya había **58 ficheros root** en el repo).
+**H1 (medio) · dual ticker.** El backend root del Desktop (`hermes serve --isolated`, `HERMES_HOME=/root/hermes-agent-legacy-docker/data`, `HERMES_DESKTOP=1`) seguía tickeando el mismo `jobs.json` que el gateway (uid 10000). Prueba: artefactos `root:root` de hoy — `output/ff3e1c2b759f/…06-02-40.md` (métricas), `output/fee5dcf7691b/…07-31-11.md` (paquete 7:30), `output/794be6c2336b/…09-34-16.md` (publicación horaria) + los vigía cada 10 min. Si el ticker root gana un turno de publicación escribiría `calendario.jsonl`/XLSX/dashboards como `root:root` (ya había **58 ficheros root** en el repo).
 
 **H2 (medio) · drift de estado.** `golden-sep09-story-1` y `lucky-sep09-story-1` con `estado: aprobado` **y** `media_ids` presentes, ya registradas y cosechadas en `content-intel/data/posts.jsonl`. El XLSX de Drive también decía `aprobado` ⇒ el sync (`Estado` es campo EDITABLE) lo revierte cada tick. El auto-sanado (`cron_publish_due.py:79-83`) solo actúa dentro de la ventana `0 <= now - slot <= 2h`, así que un slot pasado nunca se corrige; los informes que leen el JSONL cuentan mal.
 
-**H3 (menor) · rutas del checklist inexactas.** El checklist nombraba `/root/marketing-campaign-generator` (no existe) y `/opt/data/...`: el repo real es `/root/hermes-agent/data/repos/marketing-campaign-generator` (host) = `/opt/data/repos/…` (contenedor); el `/opt/data` del host es un árbol obsoleto casi vacío.
+**H3 (menor) · rutas del checklist inexactas.** El checklist nombraba `/root/marketing-campaign-generator` (no existe) y `/opt/data/...`: el repo real es `/root/hermes-agent-legacy-docker/data/repos/marketing-campaign-generator` (host) = `/opt/data/repos/…` (contenedor); el `/opt/data` del host es un árbol obsoleto casi vacío.
 
 **H4 (menor) · esquema inconsistente.** `media_ids` como **lista** `["ig_id","fb_id"]` en las 2 filas del 08-sep vs **dict** `{"instagram":…,"facebook":…}` que escribe el código actual. Además `--dry-run` retorna antes del gate de aprobación (`publish.py:144-145`): un dry-run verde no prueba que la fila sea publicable.
 

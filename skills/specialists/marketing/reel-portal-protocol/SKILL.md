@@ -76,7 +76,7 @@ Cada reel de campaña (Golden Game / Lucky Brothers) se llena pieza por pieza en
 
 ## Publicación al portal (cada pieza / campaña / reel)
 ```bash
-cd /root/hermes-agent/data/workspace && python3 gen-portal-spa.py
+cd /root/hermes-agent-legacy-docker/data/workspace && python3 gen-portal-spa.py
 scp -q nc-portal-dev/index.html root@100.73.30.29:/opt/reels/v2/index.html
 ```
 Verificación antes de reportar "publicado": (1) todos los `go('…')` del html apuntan a un id existente (python); (2) HEAD 200 de los media URLs (si hay login SSO, verificar desde origen vía ssh); (3) navegador/móvil 390px sin overflow — si el browser público redirige a login, servir la build en localhost y verificar estructura; (4) videos con voz: descargar del CDN y transcribir (no confiar en hash local).
@@ -86,5 +86,5 @@ Verificación antes de reportar "publicado": (1) todos los `go('…')` del html 
 - **Monid/Seedance**: body `input.content` (text + image_url first_frame), respuesta `runId` camelCase, costo en `cost.value`, video en `output.content.video_url`. Recuperar runs COMPLETED por ID antes de re-submit.
 - **Sobrescritura de tomas**: nunca descargar dos runs al mismo nombre (S1 de Pacho: 3 generaciones pagadas, una muda recuperada del TOS). Nombre único por run.
 - **Guion maestro vs DOCX**: el DOCX aprobado (Informe Final de Guiones) es la única autoridad de locución.
-- **Rutas**: scripts corren en el HOST — rutas `/root/hermes-agent/data/...`, nunca `/opt/data/...` (espejo muerto). Prod vía `ssh root@100.73.30.29`.
+- **Rutas**: scripts corren en el HOST — rutas `/root/hermes-agent-legacy-docker/data/...`, nunca `/opt/data/...` (espejo muerto). Prod vía `ssh root@100.73.30.29`.
 - **SSO Pocket ID en reels**: instalado por otro agente (Gemini); NO quitar el login sin orden de Jonathan. El portal es el MISMO con o sin login.

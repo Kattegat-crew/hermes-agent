@@ -25,11 +25,11 @@ Esta skill opera como despacho unificado. El detalle procedural y gotchas espec√
 `references/`
 
 ## Casos de Uso Disponibles
-- **agent-worktree-orchestration**: Ver [references/agent-worktree-orchestration.md](file:///root/hermes-agent/skills/core/multi-agent-collaboration/references/agent-worktree-orchestration.md)
-- **dispatching-parallel-agents**: Ver [references/dispatching-parallel-agents.md](file:///root/hermes-agent/skills/core/multi-agent-collaboration/references/dispatching-parallel-agents.md)
-- **multi-agent-shared-channel**: Ver [references/multi-agent-shared-channel.md](file:///root/hermes-agent/skills/core/multi-agent-collaboration/references/multi-agent-shared-channel.md)
-- **peer-agent-collaboration**: Ver [references/peer-agent-collaboration.md](file:///root/hermes-agent/skills/core/multi-agent-collaboration/references/peer-agent-collaboration.md)
-- **peer-agent-handoff**: Ver [references/peer-agent-handoff.md](file:///root/hermes-agent/skills/core/multi-agent-collaboration/references/peer-agent-handoff.md)
-- **peer-report-verification**: Ver [references/peer-report-verification.md](file:///root/hermes-agent/skills/core/multi-agent-collaboration/references/peer-report-verification.md)
-- **ragnar-orchestration**: Ver [references/ragnar-orchestration.md](file:///root/hermes-agent/skills/core/multi-agent-collaboration/references/ragnar-orchestration.md)
-- **subagent-driven-development**: Ver [references/subagent-driven-development.md](file:///root/hermes-agent/skills/core/multi-agent-collaboration/references/subagent-driven-development.md)
+- **agent-worktree-orchestration**: Ver [references/agent-worktree-orchestration.md](file:///root/hermes-agent-legacy-docker/skills/core/multi-agent-collaboration/references/agent-worktree-orchestration.md)
+- **dispatching-parallel-agents**: Ver [references/dispatching-parallel-agents.md](file:///root/hermes-agent-legacy-docker/skills/core/multi-agent-collaboration/references/dispatching-parallel-agents.md)
+- **multi-agent-shared-channel**: Ver [references/multi-agent-shared-channel.md](file:///root/hermes-agent-legacy-docker/skills/core/multi-agent-collaboration/references/multi-agent-shared-channel.md)
+- **peer-agent-collaboration**: Ver [references/peer-agent-collaboration.md](file:///root/hermes-agent-legacy-docker/skills/core/multi-agent-collaboration/references/peer-agent-collaboration.md)
+- **peer-agent-handoff**: Ver [references/peer-agent-handoff.md](file:///root/hermes-agent-legacy-docker/skills/core/multi-agent-collaboration/references/peer-agent-handoff.md)
+- **peer-report-verification**: Ver [references/peer-report-verification.md](file:///root/hermes-agent-legacy-docker/skills/core/multi-agent-collaboration/references/peer-report-verification.md)
+- **ragnar-orchestration**: Ver [references/ragnar-orchestration.md](file:///root/hermes-agent-legacy-docker/skills/core/multi-agent-collaboration/references/ragnar-orchestration.md)
+- **subagent-driven-development**: Ver [references/subagent-driven-development.md](file:///root/hermes-agent-legacy-docker/skills/core/multi-agent-collaboration/references/subagent-driven-development.md)

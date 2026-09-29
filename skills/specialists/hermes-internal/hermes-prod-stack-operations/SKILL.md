@@ -41,7 +41,7 @@ Cadena SSH: contenedor → `root@10.0.7.1` (llave por defecto del host) → `roo
 
 ## Cron jobs de reporte diario (lección: rutas rotas → datos reciclados)
 
-Los jobs `context-report-morning` (8am) y `context-report-evening` (8pm) fallaban porque sus prompts apuntaban a `/root/hermes-agent/...` (ruta HOST, no existe en contenedor) → el agente rellenaba con datos viejos y el usuario los veía "no actualizados". Diseño corregido y plantilla en `references/cron-report-jobs.md`.
+Los jobs `context-report-morning` (8am) y `context-report-evening` (8pm) fallaban porque sus prompts apuntaban a `/root/hermes-agent-legacy-docker/...` (ruta HOST, no existe en contenedor) → el agente rellenaba con datos viejos y el usuario los veía "no actualizados". Diseño corregido y plantilla en `references/cron-report-jobs.md`.
 
 ## Pitfalls
 

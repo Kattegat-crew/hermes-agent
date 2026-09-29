@@ -27,13 +27,13 @@ Esta skill opera como despacho unificado. El detalle procedural y gotchas espec√
 `references/`
 
 ## Casos de Uso Disponibles
-- **agent-fork-adaptation**: Ver [references/agent-fork-adaptation.md](file:///root/hermes-agent/skills/core/agent-roster-ops/references/agent-fork-adaptation.md)
-- **agent-harness-engineering**: Ver [references/agent-harness-engineering.md](file:///root/hermes-agent/skills/core/agent-roster-ops/references/agent-harness-engineering.md)
-- **agent-roster-blueprint**: Ver [references/agent-roster-blueprint.md](file:///root/hermes-agent/skills/core/agent-roster-ops/references/agent-roster-blueprint.md)
-- **agent-roster-design**: Ver [references/agent-roster-design.md](file:///root/hermes-agent/skills/core/agent-roster-ops/references/agent-roster-design.md)
-- **bot-team-architecture**: Ver [references/bot-team-architecture.md](file:///root/hermes-agent/skills/core/agent-roster-ops/references/bot-team-architecture.md)
-- **client-agent-onboarding**: Ver [references/client-agent-onboarding.md](file:///root/hermes-agent/skills/core/agent-roster-ops/references/client-agent-onboarding.md)
-- **client-agent-soul-survey**: Ver [references/client-agent-soul-survey.md](file:///root/hermes-agent/skills/core/agent-roster-ops/references/client-agent-soul-survey.md)
-- **hermes-specialist-agents-deploy**: Ver [references/hermes-specialist-agents-deploy.md](file:///root/hermes-agent/skills/core/agent-roster-ops/references/hermes-specialist-agents-deploy.md)
-- **hermes-team-ops**: Ver [references/hermes-team-ops.md](file:///root/hermes-agent/skills/core/agent-roster-ops/references/hermes-team-ops.md)
-- **soul**: Ver [references/soul.md](file:///root/hermes-agent/skills/core/agent-roster-ops/references/soul.md)
+- **agent-fork-adaptation**: Ver [references/agent-fork-adaptation.md](file:///root/hermes-agent-legacy-docker/skills/core/agent-roster-ops/references/agent-fork-adaptation.md)
+- **agent-harness-engineering**: Ver [references/agent-harness-engineering.md](file:///root/hermes-agent-legacy-docker/skills/core/agent-roster-ops/references/agent-harness-engineering.md)
+- **agent-roster-blueprint**: Ver [references/agent-roster-blueprint.md](file:///root/hermes-agent-legacy-docker/skills/core/agent-roster-ops/references/agent-roster-blueprint.md)
+- **agent-roster-design**: Ver [references/agent-roster-design.md](file:///root/hermes-agent-legacy-docker/skills/core/agent-roster-ops/references/agent-roster-design.md)
+- **bot-team-architecture**: Ver [references/bot-team-architecture.md](file:///root/hermes-agent-legacy-docker/skills/core/agent-roster-ops/references/bot-team-architecture.md)
+- **client-agent-onboarding**: Ver [references/client-agent-onboarding.md](file:///root/hermes-agent-legacy-docker/skills/core/agent-roster-ops/references/client-agent-onboarding.md)
+- **client-agent-soul-survey**: Ver [references/client-agent-soul-survey.md](file:///root/hermes-agent-legacy-docker/skills/core/agent-roster-ops/references/client-agent-soul-survey.md)
+- **hermes-specialist-agents-deploy**: Ver [references/hermes-specialist-agents-deploy.md](file:///root/hermes-agent-legacy-docker/skills/core/agent-roster-ops/references/hermes-specialist-agents-deploy.md)
+- **hermes-team-ops**: Ver [references/hermes-team-ops.md](file:///root/hermes-agent-legacy-docker/skills/core/agent-roster-ops/references/hermes-team-ops.md)
+- **soul**: Ver [references/soul.md](file:///root/hermes-agent-legacy-docker/skills/core/agent-roster-ops/references/soul.md)

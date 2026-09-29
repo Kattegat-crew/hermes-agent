@@ -49,7 +49,7 @@ true` es REQUERIDO (el routing está gated en esa flag — gateway/run.py).
 ## Bind mount del contenedor — no confundir vistas
 
 `docker inspect hermes-agent` → Mounts muestra:
-`/root/hermes-agent/data -> /opt/data (bind)`.
+`/root/hermes-agent-legacy-docker/data -> /opt/data (bind)`.
 Dentro del contenedor `/opt/data` ES el home real (8.8G, 160MB state.db).
 Si un `ls` desde "host" y "contenedor" difieren en tamaño, es un false alarm
 de namespace — los hechos de verdad son `docker exec` / `docker inspect`.

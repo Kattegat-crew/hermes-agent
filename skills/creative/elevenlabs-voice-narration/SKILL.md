@@ -59,7 +59,7 @@ El resto del flujo (mix ducking → audit → concat) no cambia. Documentado en 
 
 ## Verificación post-generación
 1. `ffmpeg -y -v error -i clip.mp4 -vn -ac 1 -ar 16000 audio.wav`
-2. Transcribir con whisper (NaN Builders, STT key en `/root/hermes-agent/data/config.yaml` → `stt.openai.api_key`; UA de navegador obligatorio).
+2. Transcribir con whisper (NaN Builders, STT key en `/root/hermes-agent-legacy-docker/data/config.yaml` → `stt.openai.api_key`; UA de navegador obligatorio).
 3. Comparar vs guion palabra por palabra; aprobar solo si coincide.
 
 ## Referencias

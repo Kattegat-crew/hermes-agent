@@ -22,7 +22,7 @@ echo ""
 echo "== 2) HERMES_HOME efectivo + dónde viven los datos =="
 ssh "$HOST" '
   echo "HERMES_HOME_efectivo: ${HERMES_HOME:-$HOME/.hermes}"
-  for h in "$HOME/.hermes" /root/hermes-agent/data; do
+  for h in "$HOME/.hermes" /root/hermes-agent-legacy-docker/data; do
     if [ -f "$h/state.db" ]; then printf "%s state.db = %s bytes, profiles=%s\n" "$h" "$(stat -c %s "$h/state.db")" "$(ls "$h/profiles" 2>/dev/null | tr "\n" " ")"; else echo "$h: sin state.db"; fi
   done
 '

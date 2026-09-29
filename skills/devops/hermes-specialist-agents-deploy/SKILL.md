@@ -116,7 +116,7 @@ El flujo que cerró el hueco "¿por qué no tienen todas las skills del reporte?
 
 ## Pitfalls
 
-- **HERMES_HOME** es `/opt/data` (no `/opt/hermes`, no `/root/hermes-agent`). Los scripts del cron tool van en `/opt/data/scripts/` y se registran con nombre relativo.
+- **HERMES_HOME** es `/opt/data` (no `/opt/hermes`, no `/root/hermes-agent-legacy-docker`). Los scripts del cron tool van en `/opt/data/scripts/` y se registran con nombre relativo.
 - El CLI `hermes` puede no estar en PATH → `/opt/hermes/bin/hermes`.
 - `config.yaml` protegido contra patch/write_file → editar por Python/sed vía terminal con backup y validar YAML.
 - Reinicio del gateway mata la sesión si se hace en turno → SIEMPRE cron one-shot fuera de turno.

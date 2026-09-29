@@ -18,7 +18,7 @@ Task class: "dame el reporte de los cambios hechos por <persona> en <proyecto> e
 
 ## Host-specific facts (this machine)
 
-- `/opt/hermes` is a deploy tree with **no `.git`** — the real fork repo lives at `/root/hermes-agent`, which the sandbox user (`hermes`) **cannot read** (permission denied, no sudo). Don't burn turns trying; go straight to the sync log + upstream API.
+- `/opt/hermes` is a deploy tree with **no `.git`** — the real fork repo lives at `/root/hermes-agent-legacy-docker`, which the sandbox user (`hermes`) **cannot read** (permission denied, no sudo). Don't burn turns trying; go straight to the sync log + upstream API.
 - Contributor→email mapping (for alias disambiguation): `/opt/hermes/contributors/emails/<email>` files contain the login; grep them to verify whether a display name is a given person (e.g. near-miss nicknames are NOT the person until an email match proves it).
 - `docker ps` / `docker images` timestamps corroborate deploys: image creation time should match a "Docker image built successfully" log entry.
 - Cron job definitions churn is visible in `/opt/data/cron/jobs.json` + per-profile `cron/jobs.json` mtimes; the per-job `created_at` ISO fields give definitive creation dates (used to pin new crons to a specific agent session within the minute).

@@ -61,5 +61,5 @@ principal como en la auxiliar `title_generation` → config + auxiliares resuelt
 7. **Estado de sesión ≠ config**: los perfiles con sesiones de cron heredan `cron.model`; si el perfil
    no declara la llave, conviene añadirla para que no dependa de la raíz.
 8. **Escribir skills**: `/opt/hermes/skills` y `/opt/data/skills` son el MISMO directorio
-   (`/root/hermes-agent/skills`), pero `HERMES_WRITE_SAFE_ROOT=/opt/data:/host` bloquea la ruta
+   (`/root/hermes-agent-legacy-docker/skills`), pero `HERMES_WRITE_SAFE_ROOT=/opt/data:/host` bloquea la ruta
    `/opt/hermes/...`: crear/editar referencias por `/opt/data/skills/...`.

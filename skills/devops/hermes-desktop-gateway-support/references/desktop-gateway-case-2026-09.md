@@ -7,9 +7,9 @@ Resultado: **el gateway estaba sano; el portátil del dueño llevaba 15 días fu
 
 - Desktop (Windows) se conecta al **backend remoto** `http://100.86.8.81:9112` (IP tailnet del VPS dev, host `vmi3151337`).
 - Ese puerto lo sirve en el host: `hermes dashboard --host 0.0.0.0 --port 9112 --skip-build --no-open`
-  (unidad systemd `hermes-serve.service`, `HERMES_HOME=/root/hermes-agent/data`, venv `/opt/hermes-venv`, Hermes **v0.20.4**).
+  (unidad systemd `hermes-serve.service`, `HERMES_HOME=/root/hermes-agent-legacy-docker/data`, venv `/opt/hermes-venv`, Hermes **v0.20.4**).
 - Auth del gateway: provider `basic`, `user_id=desktop`, endpoints `/login` y `POST /api/auth/ws-ticket`.
-- Auditoría: `/host/root/hermes-agent/data/logs/dashboard-auth.log`.
+- Auditoría: `/host/root/hermes-agent-legacy-docker/data/logs/dashboard-auth.log`.
 - El contenedor de Roshi corre otra versión (v0.21.0) — irrelevante para el caso (otros clientes minteaban tickets).
 
 ## Evidencia que resolvió el caso
@@ -58,7 +58,7 @@ Muy distinto de `Your remote gateway session has expired … Sign in again` (que
 
 ## Rutas útiles en este host
 
-- Logs del host: `/host/root/hermes-agent/data/logs/` → `dashboard-auth.log`, `agent.log`, `errors.log`, `gateway.log`.
+- Logs del host: `/host/root/hermes-agent-legacy-docker/data/logs/` → `dashboard-auth.log`, `agent.log`, `errors.log`, `gateway.log`.
 - Procesos del host desde el contenedor: `/host/proc/<pid>/cmdline` (con `tr '\0' ' '`), carga en `/host/proc/loadavg`.
 - Docker del host accesible desde el contenedor (`docker ps`); `/host` es el root fs del host.
 - Tailscale del host: binario `/host/usr/bin/tailscale` + socket `/host/run/tailscale/tailscaled.sock` (el binario Go corre desde el contenedor sin problema).

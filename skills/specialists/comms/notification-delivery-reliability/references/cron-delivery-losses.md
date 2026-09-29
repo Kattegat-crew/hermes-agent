@@ -34,7 +34,7 @@ El `.md` de la corrida quedó `root:root` → ilegible como hermes; se lee con `
 - El canal: `/health` → `{"status":"connected","queueLength":0}`, bridge con ~44 h de uptime.
 - `bridge.log`: loops benignos `Connection closed (reason: 428/503). Reconnecting in 3s...` y **sin entrada** del envío fallido (reset a nivel TCP, antes del handler). El log incluso estuvo horas sin escribir con el bridge arriba → no sirve como única fuente.
 - El scheduler: la corrida y el claim quedaron completos en `executions.db`.
-- El proceso que ejecutó: PID 77739 = backend root del Desktop (`hermes serve --isolated`, root, `HERMES_HOME=/root/hermes-agent/data`), no el gateway s6 (uid 10000). Ambos tickers comparten `jobs.json`.
+- El proceso que ejecutó: PID 77739 = backend root del Desktop (`hermes serve --isolated`, root, `HERMES_HOME=/root/hermes-agent-legacy-docker/data`), no el gateway s6 (uid 10000). Ambos tickers comparten `jobs.json`.
 
 ## Comandos usados
 

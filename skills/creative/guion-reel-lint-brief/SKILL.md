@@ -30,7 +30,7 @@ La capa VOZ/COMPLIANCE/cliente de la misma campaña vive en skills user-owned
 
 - Repo: `/root/marketing-campaign-generator` (su `.venv`
   ya trae `edge-tts`; `ffprobe` está en PATH).
-- Maestros en `/root/hermes-agent/data/plans/GUION-*.md`; los briefs se dejan
+- Maestros en `/root/hermes-agent-legacy-docker/data/plans/GUION-*.md`; los briefs se dejan
   al lado del maestro. La versión anterior **no se borra** (es el control de calidad).
 - Si el pre-flight `git status` falla por *dubious ownership*:
   `git config --global --add safe.directory <ruta>`.

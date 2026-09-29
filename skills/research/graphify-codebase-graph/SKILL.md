@@ -54,9 +54,9 @@ cn = [n for n in nodes if n.get('source_file')=='gateway/platforms/telegram.py' 
 ```
 
 ## Pitfalls
-- **TRAMPA host/contenedor (crítica)**: `/opt/data` EXISTE en el host como espejo viejo que NADIE lee — NO es el bind mount. El árbol vivo en el host es `/root/hermes-agent/data`. So cualquiera de estos grafos u otro asset vive en `/opt/data/...` (contenedor) = `/root/hermes-agent/data/...` (host). Scripts con rutas hardcodeadas `/opt/data` corriendo desde el host escriben al espejo muerto y pierden el trabajo. Aplica a TODOS los grafos, no solo de codebase.
+- **TRAMPA host/contenedor (crítica)**: `/opt/data` EXISTE en el host como espejo viejo que NADIE lee — NO es el bind mount. El árbol vivo en el host es `/root/hermes-agent-legacy-docker/data`. So cualquiera de estos grafos u otro asset vive en `/opt/data/...` (contenedor) = `/root/hermes-agent-legacy-docker/data/...` (host). Scripts con rutas hardcodeadas `/opt/data` corriendo desde el host escriben al espejo muerto y pierden el trabajo. Aplica a TODOS los grafos, no solo de codebase.
 - Los symlinks de perfiles a vaults solo resuelven DENTRO del contenedor — desde el host parecen rotos.
-- El grafo se generó de `/root/hermes-agent` — las rutas son relativas al repo, NO a `/opt/data/`.
+- El grafo se generó de `/root/hermes-agent-legacy-docker` — las rutas son relativas al repo, NO a `/opt/data/`.
 - `graph.json` pesa ~43MB: no usar `read_file` sobre él, siempre Python.
 - No hay CLI `graphify` instalado; el script `graph_query.py` es el interfaz.
 - Para regenerar grafos de skills usar `python3 /opt/data/scripts/build_skills_graph.py --all-profiles` (global: `--global`); el binario graphify vive en `/opt/data/.venv-graphify/bin/graphify` (NO en PATH).

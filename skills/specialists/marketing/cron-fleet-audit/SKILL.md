@@ -75,7 +75,7 @@ Banderas: `STATUS=<x>` (error / blocked_config…), `streak=N`, `ATRASADO(Nm)`
   cual y falla. Comprueba con `ls <home>/scripts/<script>`.
 - **`can't open file '/opt/data/...'` aunque el archivo exista** → la corrida la hizo el
   ticker root del HOST, donde `/opt/data` es OTRO árbol. El script debe detectar entorno
-  (`[ -f /.dockerenv ]`) y usar `/root/hermes-agent/data/...` + `docker exec -u 10000`
+  (`[ -f /.dockerenv ]`) y usar `/root/hermes-agent-legacy-docker/data/...` + `docker exec -u 10000`
   cuando corre desde el host.
 - **"Skills no encontradas y omitidas"** en la cabecera del `.md` → el job corre degradado;
   las skills pueden existir en disco igual (revisar por qué no resolvieron).

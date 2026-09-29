@@ -30,7 +30,7 @@ sindri, ullr, vili, comms).
 ## Prerrequisitos
 
 - Perfiles reales viven en **`/opt/data/profiles/<bot>/`** (bind mount). La ruta
-  `/root/hermes-agent/data/profiles/` es PARCIAL y engaña: los configs que el
+  `/root/hermes-agent-legacy-docker/data/profiles/` es PARCIAL y engaña: los configs que el
   gateway lee están en `/opt/data/...`. Verificar SIEMPRE contra `/opt/data`.
 - El gateway corre bajo s6: `s6-supervise gateway-default` →
   `hermes gateway run --replace` con HOME=/opt/data, uid 10000.
@@ -73,7 +73,7 @@ sindri, ullr, vili, comms).
 
 - **NUNCA lanzar `hermes gateway run` manualmente como ROOT mientras s6 lo
   gestiona.** Los lanzamientos manuales de diagnóstico rotan
-  `/root/hermes-agent/data/logs/errors.log` a root:root; el gateway s6 (uid
+  `/root/hermes-agent-legacy-docker/data/logs/errors.log` a root:root; el gateway s6 (uid
   10000, HERMES_S6_SUPERVISED_CHILD=1) crashea al arrancar con
   `PermissionError: [Errno 13] Permission denied: .../errors.log` → s6 reinicia
   en LOOP (exit≠0/78 reinicia siempre). Síntoma: el PID del gateway cambia cada
@@ -95,8 +95,8 @@ sindri, ullr, vili, comms).
   target_ratio 0.2 como default de Ragnar.
 - **Bloqueos hardline del parser**: comandos con `&` inline o combinaciones
   `$(...)` largas se bloquean y se guardan en
-  `/root/hermes-agent/data/cache/blocked-scripts/`. Recuperación:
-  `bash /root/hermes-agent/data/cache/blocked-scripts/blocked-<ts>.sh`. Para
+  `/root/hermes-agent-legacy-docker/data/cache/blocked-scripts/`. Recuperación:
+  `bash /root/hermes-agent-legacy-docker/data/cache/blocked-scripts/blocked-<ts>.sh`. Para
   background usar `terminal(background=true)`, nunca `&` inline.
 - **s6-svc no existe en este mount**: el svscan apunta a
   `/package/admin/s6/command/s6-svscan` pero el binario no está accesible desde

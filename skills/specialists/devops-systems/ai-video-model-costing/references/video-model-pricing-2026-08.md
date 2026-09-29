@@ -62,4 +62,4 @@ Notas H3:
 
 ## Método de re-verificación
 - `curl -s "https://r.jina.ai/https://platform.minimax.io/docs/guides/pricing-paygo"` — fuente canónica, extraíble.
-- Exa directo (cuando mcporter no está): `curl -s https://api.exa.ai/search -H "x-api-key: $EXA_API_KEY" -H "Content-Type: application/json" -d '{"query":"...","numResults":5}'` — EXA_API_KEY en el .env (gateway: /opt/data/.env; desktop: /root/hermes-agent/data/.env).
+- Exa directo (cuando mcporter no está): `curl -s https://api.exa.ai/search -H "x-api-key: $EXA_API_KEY" -H "Content-Type: application/json" -d '{"query":"...","numResults":5}'` — EXA_API_KEY en el .env (gateway: /opt/data/.env; desktop: /root/hermes-agent-legacy-docker/data/.env).

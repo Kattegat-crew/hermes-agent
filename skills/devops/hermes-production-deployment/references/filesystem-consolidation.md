@@ -2,7 +2,7 @@
 
 ## Context
 
-Detected August 2026: After updating Hermes from v0.10.0 to v0.20.0 (code moved from `/root/hermes-agent/` to `/opt/hermes/`), the Docker container kept running with OLD volume mounts pointing to `/root/hermes-agent/data/` which NO LONGER EXISTS. This caused:
+Detected August 2026: After updating Hermes from v0.10.0 to v0.20.0 (code moved from `/root/hermes-agent-legacy-docker/` to `/opt/hermes/`), the Docker container kept running with OLD volume mounts pointing to `/root/hermes-agent-legacy-docker/data/` which NO LONGER EXISTS. This caused:
 
 - 5 config.yaml files with different content
 - 2 Engram databases diverging
@@ -115,8 +115,8 @@ done
 ## Root Cause
 
 The Hermes v0.10.0 → v0.20.0 upgrade moved:
-- Source code: `/root/hermes-agent/` → `/opt/hermes/` (inside Docker image)
-- Data: `/root/hermes-agent/data/` → should be `/opt/hermes/data/` but the volume mount still points to the old path
+- Source code: `/root/hermes-agent-legacy-docker/` → `/opt/hermes/` (inside Docker image)
+- Data: `/root/hermes-agent-legacy-docker/data/` → should be `/opt/hermes/data/` but the volume mount still points to the old path
 
 The running container has mounts from the OLD compose file. The NEW compose file at `/opt/hermes/docker-compose.yml` is correct, but was never used to recreate the container. This is a classic docker-compose drift.
 

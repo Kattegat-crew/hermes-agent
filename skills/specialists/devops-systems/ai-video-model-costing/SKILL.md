@@ -32,7 +32,7 @@ Detalle completo con fuentes: `references/video-model-pricing-2026-08.md`.
 - Monid: `https://monid.ai/tools/minimax` (SSR, extraíble con Jina). **app.monid.ai es SPA Nuxt — Jina solo devuelve "Loading"**, no pierdas tiempo ahí.
 - Búsqueda: Exa directo por curl (fallback cuando mcporter no está instalado):
   `curl -s https://api.exa.ai/search -H "x-api-key: $EXA_API_KEY" -H "Content-Type: application/json" -d '{"query":"...","numResults":5}'`
-  (`EXA_API_KEY` en el `.env` — ruta: /opt/data/.env en gateway, /root/hermes-agent/data/.env en desktop).
+  (`EXA_API_KEY` en el `.env` — ruta: /opt/data/.env en gateway, /root/hermes-agent-legacy-docker/data/.env en desktop).
 
 ## Pitfalls
 - **Token plan MiniMax ($20/$50/$120 mes): NO cubre video** — solo texto/imagen/voz/música. Nunca recomendarlo para video.

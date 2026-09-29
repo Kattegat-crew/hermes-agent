@@ -114,7 +114,7 @@ Hoy el watchdog (`gateway-fleet-health.sh` + cron vigia-fleet-gateways) asume un
 
 ### RC4: Timing de cron nocturno sync-upstream
 
-**Mecanismo**: `/etc/cron.d/hermes-sync: 0 2 * * * root /root/hermes-agent/scripts/sync-upstream.sh`. El script hace `git pull` + `docker compose up -d --build`. DESTRUYE y RECREA el contenedor cada noche. Si el usuario dice "se cayó a las 02:00-02:30", revisar `sync-upstream.log` primero.
+**Mecanismo**: `/etc/cron.d/hermes-sync: 0 2 * * * root /root/hermes-agent-legacy-docker/scripts/sync-upstream.sh`. El script hace `git pull` + `docker compose up -d --build`. DESTRUYE y RECREA el contenedor cada noche. Si el usuario dice "se cayó a las 02:00-02:30", revisar `sync-upstream.log` primero.
 
 **Impacto**: todos los gateways standalone mueren; watchdogs del contenedor mueren; watchdog del host (cron.d) sobrevive.
 
@@ -169,7 +169,7 @@ docker exec hermes-agent /command/s6-svstat /run/service/gateway-<name>
 docker exec hermes-agent ls -la /run/service/gateway-<name>/down
 
 # sync-upstream log (si el usuario dice 'cayó a las 02')
-tail -n 30 /root/hermes-agent/scripts/sync-upstream.log
+tail -n 30 /root/hermes-agent-legacy-docker/scripts/sync-upstream.log
 
 # Procesos host que pueden interferir
 docker run --rm --pid=host alpine ps aux | grep -E 'hermes|serve' | grep -v grep

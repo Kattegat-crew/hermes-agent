@@ -152,7 +152,7 @@ ssh $SSH_OPTS $SSH_HOST "ps aux | grep -E 'orca|hermes|opencode' | grep -v grep"
 |------|------|
 | golden-game-landing | /root/golden-game-landing |
 | marketing-campaign-generator | /root/marketing-campaign-generator |
-| hermes-agent | /root/hermes-agent |
+| hermes-agent | /root/hermes-agent-legacy-docker |
 | ai-platform | /opt/ai-platform |
 | activepieces | /root/activepieces |
 | neuralcrew-saas-platform | /root/Neuralwebsite/neuralcrew-saas-platform |

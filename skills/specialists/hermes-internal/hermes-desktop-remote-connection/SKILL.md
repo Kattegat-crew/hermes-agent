@@ -29,7 +29,7 @@ sessions", target 9112 first.
 ```
 Auth is env-scoped, readable from `/proc/<pid>/environ` (redact values before sharing):
 ```
-HERMES_HOME=<same-home-as-gateway>            # e.g. /root/hermes-agent/data
+HERMES_HOME=<same-home-as-gateway>            # e.g. /root/hermes-agent-legacy-docker/data
 HERMES_DASHBOARD_BASIC_AUTH_USERNAME=desktop
 HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=<pass>
 HERMES_DASHBOARD_SESSION_TOKEN=<token>

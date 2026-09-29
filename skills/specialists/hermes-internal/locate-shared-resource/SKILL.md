@@ -18,7 +18,7 @@ Workflow for tracking down a resource the team shared, before assuming it is a f
 
 ## Searching channel history via state.db
 
-The canonical Hermes session DB is `/opt/data/state.db` (same file as `/root/hermes-agent/data/state.db` on the host). Two tables matter:
+The canonical Hermes session DB is `/opt/data/state.db` (same file as `/root/hermes-agent-legacy-docker/data/state.db` on the host). Two tables matter:
 
 - `sessions(id, session_key, chat_id, chat_type, display_name, title, source, ...)`
 - `messages(id, session_id, role, content, tool_name, timestamp, ...)`

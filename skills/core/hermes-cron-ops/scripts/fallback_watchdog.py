@@ -30,7 +30,7 @@ from pathlib import Path
 
 PROFILES = ["comms", "bragi", "sindri", "freyja", "vili", "ullr", "heimdall",
             "hermodr", "brokkr", "roshi", "vigia", "default"]
-BASE_DIRS = [Path("/opt/data/profiles"), Path("/root/hermes-agent/data/profiles")]
+BASE_DIRS = [Path("/opt/data/profiles"), Path("/root/hermes-agent-legacy-docker/data/profiles")]
 WRAPPER = Path("/opt/data/scripts/hermes-fallback-opencode-api.py")
 THRESHOLD_STREAK = 2
 KEY = os.environ.get("OPENCODE_GO_API_KEY", "")

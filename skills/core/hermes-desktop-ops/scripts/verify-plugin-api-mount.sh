@@ -9,7 +9,7 @@
 # Nunca usar el puerto ni el token de los servicios en uso (9112 / gateway del
 # Desktop). Este script crea su propia instancia y la termina al salir.
 set -u
-export HERMES_HOME="${HERMES_HOME:-/root/hermes-agent/data}"
+export HERMES_HOME="${HERMES_HOME:-/root/hermes-agent-legacy-docker/data}"
 export HERMES_DASHBOARD=1                       # dashboard: no arranca el ticker de cron
 export HERMES_DASHBOARD_SESSION_TOKEN="verify-$$
 "

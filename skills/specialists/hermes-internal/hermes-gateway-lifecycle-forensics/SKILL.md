@@ -67,7 +67,7 @@ dos unidades systemd del host que ejecutan el MISMO comando y el MISMO puerto.
 Detección (todo read-only, desde el contenedor con `/host` montado):
 ```bash
 # 1) ritmo del bucle: contar arranques de la app por día
-awk '/Dashboard binding/{print substr($1,1,10)}' /host/root/hermes-agent/data/logs/gui.log | sort | uniq -c
+awk '/Dashboard binding/{print substr($1,1,10)}' /host/root/hermes-agent-legacy-docker/data/logs/gui.log | sort | uniq -c
 #    normal = 1-12/día; bucle = miles/día (~1 cada 12s)
 # 2) unit files del host que compiten por el puerto
 grep -hE 'ExecStart|Restart' /host/etc/systemd/system/*hermes*
@@ -81,7 +81,7 @@ segundo arranca después por el `After=`, no puede bindear, sale con error y sys
 reinicia cada ~12s para siempre: 1.798 (14-sep desde 17:38:04) + 7.121 (15-sep) +
 6.372 (16-sep) ≈ 15.300 arranques en 2 días, ~98% de 1 core quemado y re-init de MCPs
 en cada ciclo (`soul-survey` fallando por f-string en survey_engine.py:260, `canva`
-con OAuth parked). Ojo: `HERMES_HOME=/root/hermes-agent/data` en esas unidades es el
+con OAuth parked). Ojo: `HERMES_HOME=/root/hermes-agent-legacy-docker/data` en esas unidades es el
 MISMO directorio que `/opt/data` del contenedor (mismas inodes) → los logs se mezclan
 y el "gui.log del contenedor" en realidad lo escribe el host.
 

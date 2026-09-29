@@ -82,13 +82,13 @@ LANG="${LANG:-es}"
 echo ""
 echo -e "${CYAN}═══ Creando estructura... ═══${NC}"
 
-BASE="/root/hermes-agent/data/profiles/$CLIENTE"
+BASE="/root/hermes-agent-legacy-docker/data/profiles/$CLIENTE"
 mkdir -p "$BASE"/{cron,skills}
 mkdir -p "$BASE/../shared/skills"
 echo -e "${GREEN}✓ Directorios creados en $BASE${NC}"
 
 # === PASO 7: Generar config.yaml ===
-TPL="/root/hermes-agent/data/hermes-profiles/templates"
+TPL="/root/hermes-agent-legacy-docker/data/hermes-profiles/templates"
 cp "$TPL/config.yaml" "$BASE/config.yaml"
 sed -i "s|<CLIENTE>|$CLIENTE|g" "$BASE/config.yaml"
 echo -e "${GREEN}✓ config.yaml generado${NC}"
@@ -118,7 +118,7 @@ sed -i "s|\[Email\]|$USER_EMAIL|g" "$BASE/MEMORY.md"
 echo -e "${GREEN}✓ MEMORY.md generado${NC}"
 
 # === PASO 11: Configurar Engram ===
-ENG_DIR="/root/hermes-agent/data/.engram"
+ENG_DIR="/root/hermes-agent-legacy-docker/data/.engram"
 if [ -d "$ENG_DIR" ]; then
   echo "{\"project_name\": \"$CLIENTE\"}" > "$BASE/.engram-config.json"
   echo -e "${GREEN}✓ Engram configurado para proyecto: $CLIENTE${NC}"

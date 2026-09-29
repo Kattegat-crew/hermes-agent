@@ -28,10 +28,10 @@ Regla dura: **el log del cliente NO es evidencia suficiente.** Un timeout en el 
 
 ## Herramientas del contenedor contra el host
 
-`/host` = raíz del host (bind). **Identidad de árbol:** `/opt/data` del contenedor == `/host/root/hermes-agent/data` del host. Verificar SIEMPRE con inodo antes de editar/afirmar algo:
+`/host` = raíz del host (bind). **Identidad de árbol:** `/opt/data` del contenedor == `/host/root/hermes-agent-legacy-docker/data` del host. Verificar SIEMPRE con inodo antes de editar/afirmar algo:
 
 ```bash
-stat -c '%d:%i %n' /opt/data /host/root/hermes-agent/data
+stat -c '%d:%i %n' /opt/data /host/root/hermes-agent-legacy-docker/data
 ```
 
 **Procesos del host** (el /proc del contenedor no los ve):
@@ -69,7 +69,7 @@ $TS ping --c 1 --timeout 3s <ip>
 $TS netcheck           # DERP/UDP: confirma que la red Tailscale está sana
 ```
 
-**Logs del host:** `/host/root/hermes-agent/data/logs/` (`agent.log`, `errors.log`, `gateway.log`, `dashboard-auth.log` = audit JSONL de auth del dashboard).
+**Logs del host:** `/host/root/hermes-agent-legacy-docker/data/logs/` (`agent.log`, `errors.log`, `gateway.log`, `dashboard-auth.log` = audit JSONL de auth del dashboard).
 
 ## Caso: el browser del agente no arranca (`chrome-not-running`)
 

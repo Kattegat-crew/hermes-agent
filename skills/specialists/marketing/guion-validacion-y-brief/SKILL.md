@@ -81,7 +81,7 @@ Nunca entregar el análisis desde el texto sin haber corrido el linter: la difer
 
 - **Una celda con `|` sin escapar** descompone la fila: el linter avisa «se recomponen sus columnas» — revisar el pie legal cuando aparezca.
 - **Dos formatos de guion siguen vivos** y el linter normaliza ambos: tabla `Tiempo|Visual|Narración|En pantalla` (Golden) y secciones `### TOMA N` (Lucky); el campo `source_format` del JSON dice cuál detectó.
-- **Los maestros de la serie viven en el HOST**, no en el repo: `/root/hermes-agent/data/plans/GUION-*.md` y `SERIE-*.md`. En el runtime desktop `/opt/data/plans/` es OTRO directorio (7 docs viejos, root): verificar antes de decir «no existe».
+- **Los maestros de la serie viven en el HOST**, no en el repo: `/root/hermes-agent-legacy-docker/data/plans/GUION-*.md` y `SERIE-*.md`. En el runtime desktop `/opt/data/plans/` es OTRO directorio (7 docs viejos, root): verificar antes de decir «no existe».
 - **El guion y las escenas NO son de Roshi**: su skill lo declara así. Él aporta el gate documental/QA y su mesa pieza-por-pieza (12 etapas, las pagas exigen `candado` de presupuesto). Los dos esfuerzos son complementarios: el `guion_lint` del repo debería correr dentro de la etapa 2 (guion) de esa mesa, en vez de que cada lado tenga su linter.
 
 ## Referencias

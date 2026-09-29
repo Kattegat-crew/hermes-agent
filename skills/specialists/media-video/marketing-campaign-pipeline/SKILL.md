@@ -76,8 +76,8 @@ Si cambian los T&C/manual operativo DESPUÉS de que la fábrica generó docs/gui
 
 ## Pitfalls
 
-- **Subidas a Drive fallan con "Not authenticated" si la sesión corre bajo un perfil.** `google_api.py` deriva `TOKEN_PATH` de `HERMES_HOME` (`get_hermes_home()`); si el HERMES_HOME activo es `profiles/<bot>`, busca el token ahí y no lo encuentra. **Fix: `export HERMES_HOME=/root/hermes-agent/data` (raíz) antes de subir assets.** Verificado 26/08 con los posters.
-- **Ruta canónica del vault de skills es `/root/hermes-agent/data/skills/`, NO `/opt/data/skills`** (no existe). Los scripts de provisioning que la tengan hardcodeada enlazan 0 skills o grafos de 1 nodo. Ver `hermes-skills-provisioning`.
+- **Subidas a Drive fallan con "Not authenticated" si la sesión corre bajo un perfil.** `google_api.py` deriva `TOKEN_PATH` de `HERMES_HOME` (`get_hermes_home()`); si el HERMES_HOME activo es `profiles/<bot>`, busca el token ahí y no lo encuentra. **Fix: `export HERMES_HOME=/root/hermes-agent-legacy-docker/data` (raíz) antes de subir assets.** Verificado 26/08 con los posters.
+- **Ruta canónica del vault de skills es `/root/hermes-agent-legacy-docker/data/skills/`, NO `/opt/data/skills`** (no existe). Los scripts de provisioning que la tengan hardcodeada enlazan 0 skills o grafos de 1 nodo. Ver `hermes-skills-provisioning`.
 - **Model IDs en API de OpenCode-Go:** el provider `https://opencode.ai/zen/go/v1` acepta `mimo-v2.5` (sin prefijo); `opencode/mimo-v2.5` da 401 "not supported". El tag con prefijo es del CLI local, no de la API.
 - **Los docs "a mano" (T&C, manual de cajeras, guiones v1) NO son los 5 docs de la fábrica** — la fábrica regenera el mismo contenido versionado por contrato; los legales/operativos son insumo aparte. No duplicar, unificar.
 - **Carrusel/piezas y guiones son UN SISTEMA**: mismo lenguaje visual (cifra estrella, "VIERNES · DESDE 5PM", balota 53, contador de acumulado) en poster, reel, story y banner — nada de piezas sueltas.

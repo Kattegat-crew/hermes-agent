@@ -23,11 +23,11 @@ REPO_CANDIDATES = [
     "/root/marketing-campaign-generator",
     "/host/root/marketing-campaign-generator",
     "/opt/data/repos/marketing-campaign-generator",
-    "/root/hermes-agent/data/repos/marketing-campaign-generator",
+    "/root/hermes-agent-legacy-docker/data/repos/marketing-campaign-generator",
 ]
 CRED_CANDIDATES = [
     os.environ.get("GOOGLE_DRIVE_CREDENTIALS_PATH", ""),
-    "/root/hermes-agent/data/secrets/jonathan-drive.json",
+    "/root/hermes-agent-legacy-docker/data/secrets/jonathan-drive.json",
     "/opt/data/secrets/jonathan-drive.json",
 ]
 

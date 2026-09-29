@@ -35,7 +35,7 @@ import subprocess
 import sys
 import time
 
-HOME = os.environ.get("HERMES_HOME", "/root/hermes-agent/data")
+HOME = os.environ.get("HERMES_HOME", "/root/hermes-agent-legacy-docker/data")
 LOG = HOME + "/logs/desktop-backend-restart.log"
 GUI_LOG = HOME + "/logs/gui.log"
 

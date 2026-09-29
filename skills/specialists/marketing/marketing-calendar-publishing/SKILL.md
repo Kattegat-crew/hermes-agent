@@ -20,8 +20,8 @@ author: Ragnar
 | Publicar manualmente un ID | `python3 publish.py --id golden-sep09-story-d1` |
 | Dry-run de publicación | `python3 publish.py --id <ID> --dry-run` |
 | Reparar drift de estado (fila publicada que quedó en `aprobado`) | `cd .../planning/calendario-sep2026 && python3 repair_drift_publicado.py [--dry-run]` (idempotente: devuelve a `publicado` toda fila con `publicado_en`/`media_ids`, regenera XLSX, sube a ambos Drive, commit+push) |
-| Paquete del día (test local) | `bash /root/hermes-agent/data/scripts/calendario_daily_package.sh` |
-| Harvest métricas (test local) | `bash /root/hermes-agent/data/scripts/calendario_harvest.sh` |
+| Paquete del día (test local) | `bash /root/hermes-agent-legacy-docker/data/scripts/calendario_daily_package.sh` |
+| Harvest métricas (test local) | `bash /root/hermes-agent-legacy-docker/data/scripts/calendario_harvest.sh` |
 
 ## Aprobación (regla dura: nada se publica sin 'Aprobado')
 

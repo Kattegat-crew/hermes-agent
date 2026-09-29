@@ -44,7 +44,7 @@ El chat de grupo (Hermes Desktop) NO distingue autores → convención de firma:
 
 ## Pitfalls operativos
 
-- **Subidas a Drive SIEMPRE con `HERMES_HOME` raíz** (`export HERMES_HOME=/root/hermes-agent/data`),
+- **Subidas a Drive SIEMPRE con `HERMES_HOME` raíz** (`export HERMES_HOME=/root/hermes-agent-legacy-docker/data`),
   NO el del perfil: `google_api.py` busca el token OAuth en esa ruta. Con HERMES_HOME
   de perfil el upload falla silenciosamente ("no token").
 - Antes de crear la estructura, confirmar con el cliente/Admin la carpeta raíz real

@@ -2,11 +2,11 @@
 
 ## Snapshot: dev VPS (147.93.3.250)
 
-- Compose: `/root/hermes-agent/docker-compose.yml`
+- Compose: `/root/hermes-agent-legacy-docker/docker-compose.yml`
 - Image: `hermes-agent-hermes` (rebuilt by sync-upstream.sh)
-- Cron rebuild: `/etc/cron.d/hermes-sync` → `0 2 * * * root /root/hermes-agent/scripts/sync-upstream.sh`
+- Cron rebuild: `/etc/cron.d/hermes-sync` → `0 2 * * * root /root/hermes-agent-legacy-docker/scripts/sync-upstream.sh`
 - Container restart policy: `unless-stopped`
-- sync-upstream log: `/root/hermes-agent/scripts/sync-upstream.log`
+- sync-upstream log: `/root/hermes-agent-legacy-docker/scripts/sync-upstream.log`
 - Key config: `gateway.multiplex_profiles: true` in `/opt/data/config.yaml` (line 494)
 
 ## Timeline of events (Sep 2-3 2026)

@@ -25,7 +25,7 @@ motor de voz y mismo frame (re-run `image2video` = $0.45675).
 ## Verificación post-generación
 1. `ffmpeg -y -v error -i clip.mp4 -vn -ac 1 -ar 16000 audio.wav`
 2. `python3 <skill_dir>/scripts/transcribe_audio.py audio.wav es` (whisper, NaN Builders)
-   - Key STT en `/root/hermes-agent/data/config.yaml` → `stt.openai.api_key` (NO `/opt/data`).
+   - Key STT en `/root/hermes-agent-legacy-docker/data/config.yaml` → `stt.openai.api_key` (NO `/opt/data`).
    - Requiere User-Agent navegador o Cloudflare 403.
 3. Comparar vs guión; si nombre propio falla → simplificar texto.
 

@@ -25,7 +25,7 @@ El mismo job lo tickean el gateway del contenedor y el backend del Desktop, con 
 
 ```sh
 BASE=/opt/data
-[ -f /opt/data/config.yaml ] || BASE=/root/hermes-agent/data
+[ -f /opt/data/config.yaml ] || BASE=/root/hermes-agent-legacy-docker/data
 exec python3 "$BASE/<proyecto>/scripts/<script>.py" --dias 3
 ```
 

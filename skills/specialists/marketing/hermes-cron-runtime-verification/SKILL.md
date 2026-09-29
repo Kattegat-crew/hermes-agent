@@ -14,12 +14,12 @@ Crons created via `cronjob_manage` do NOT run in my shell's environment. They ru
 
 | Gateway container view | Host/agent shell view | Note |
 |---|---|---|
-| `/opt/data` | `/root/hermes-agent/data` (same inode) | THE shared volume cron can reach |
+| `/opt/data` | `/root/hermes-agent-legacy-docker/data` (same inode) | THE shared volume cron can reach |
 | `/root` | ≠ host `/root` (700, different dir) | host repos INVISIBLE to cron |
-| `/opt/data/home` | `/root/hermes-agent/data/home` | real HOME for Composio (`.composio/`) |
+| `/opt/data/home` | `/root/hermes-agent-legacy-docker/data/home` | real HOME for Composio (`.composio/`) |
 | `/usr/local/bin/composio` (host) | does not exist in container | use `/opt/data/home/.composio/composio` inside |
-| `/opt/data/cron/output/<jobid>` | `/root/hermes-agent/data/cron/output/<jobid>` | must be uid-10000-owned or Errno 13 |
-| `/opt/data/.ssh` | `/root/hermes-agent/data/.ssh` | ssh config/keys cron's git will use |
+| `/opt/data/cron/output/<jobid>` | `/root/hermes-agent-legacy-docker/data/cron/output/<jobid>` | must be uid-10000-owned or Errno 13 |
+| `/opt/data/.ssh` | `/root/hermes-agent-legacy-docker/data/.ssh` | ssh config/keys cron's git will use |
 
 **Consequence**: any repo or script a cron touches must live under `data/` (visible to the gateway as `/opt/data/...`). Anything under host `/root/...` is unreachable by cron even if MY shell can read it.
 
@@ -51,7 +51,7 @@ A job can be claimed by either of two schedulers, and they do NOT share a filesy
 | Ticker | User | `/opt/data` resolves to |
 |---|---|---|
 | gateway (`gateway-default`, s6) | uid 10000 (container ns) | the real shared tree (container `/opt/data`) |
-| root ticker = Hermes Desktop SSH backend (`hermes serve --isolated`, `HERMES_DESKTOP=1`) | root, **host mount ns** | a nearly EMPTY host dir; the real tree is `/root/hermes-agent/data` |
+| root ticker = Hermes Desktop SSH backend (`hermes serve --isolated`, `HERMES_DESKTOP=1`) | root, **host mount ns** | a nearly EMPTY host dir; the real tree is `/root/hermes-agent-legacy-docker/data` |
 
 Consequence: a wrapper that hardcodes `/opt/data/...` passes when the gateway claims it and dies with `ENOENT` when the root ticker claims it. Real case: `content-intel-daily` failed 2 days in a row with `python3: can't open file '/opt/data/content-intel-build/content_harvest.py': [Errno 2]` because `/opt/data/content-intel-build` on the host is an empty dir.
 

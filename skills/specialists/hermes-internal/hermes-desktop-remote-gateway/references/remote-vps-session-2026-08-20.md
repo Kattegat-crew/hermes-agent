@@ -27,7 +27,7 @@ docker run --rm --pid=host --privileged alpine sh -c \
 # Env del proceso serve
 docker run --rm --pid=host --privileged alpine sh -c \
   'nsenter -t 1 -m -u -n -i cat /proc/<pid>/environ | tr "\0" "\n" | grep -iE "HERMES|HOME=|PROFILE"'
-# → HOME=/root/hermes-agent/data, HERMES_HOME=/root/hermes-agent/data
+# → HOME=/root/hermes-agent-legacy-docker/data, HERMES_HOME=/root/hermes-agent-legacy-docker/data
 #   HERMES_DASHBOARD_SESSION_TOKEN, HERMES_DASHBOARD_BASIC_AUTH_USERNAME=desktop
 
 # Credenciales (NO compartir; solo confirmar presencia)
@@ -41,7 +41,7 @@ curl -s http://127.0.0.1:9112/api/status     # 200 JSON (versión 0.20.0)
 curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:9112/api/sessions  # 401 no_cookie
 
 # state.db (compartido, mode WAL)
-sqlite3 /root/hermes-agent/data/state.db "PRAGMA journal_mode;"   # → wal
+sqlite3 /root/hermes-agent-legacy-docker/data/state.db "PRAGMA journal_mode;"   # → wal
 ```
 
 ## Listener del gateway (contenedor) — para comparar

@@ -20,7 +20,7 @@ tags: [audio, tts, whisper, pronunciation, qa, reels, ffmpeg, espanol]
    - Endpoint: `POST https://api.nan.builders/v1/audio/transcriptions` — multipart: `file`, `model=whisper`, `language=es`.
    - Requiere User-Agent de navegador (sin él → Cloudflare 403 code 1010).
    - Leer la key con Python (`yaml.safe_load`) — nunca copiarla de salida enmascarada.
-   - Config real: `/root/hermes-agent/data/config.yaml` → `stt.openai.api_key`. **OJO:** scripts viejos apuntan a `/opt/data/config.yaml` y fallan con FileNotFoundError — verificar ruta antes de transcribir.
+   - Config real: `/root/hermes-agent-legacy-docker/data/config.yaml` → `stt.openai.api_key`. **OJO:** scripts viejos apuntan a `/opt/data/config.yaml` y fallan con FileNotFoundError — verificar ruta antes de transcribir.
 3. **Comparar** transcripción vs texto esperado, palabra por palabra, en tabla: escena | esperado | pronunciado | estado (✅/⚠️/❌).
 4. **Conclusión**: si los errores son sistemáticos en palabras largas o nombres propios y TODOS los clips usan el mismo TTS → es del modelo de voz, no del pipeline ni del audio del usuario.
 

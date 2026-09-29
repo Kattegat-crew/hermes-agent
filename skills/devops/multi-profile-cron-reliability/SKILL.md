@@ -56,8 +56,8 @@ crons at creation, not just on failure.
 ### Pitfall B — Broken skill-catalog symlinks
 Symptom: cron output: `Skill(s) not found and skipped: <names>`. Cause: the profile's
 `<home>/skills/` is full of symlinks pointing at `/opt/data/skills/<name>` — a path
-that **does not exist**. The canonical catalog is `/root/hermes-agent/data/skills/`
-(+ `/root/hermes-agent/data/skills-especialistas/`). Nested skills under a category dir
+that **does not exist**. The canonical catalog is `/root/hermes-agent-legacy-docker/data/skills/`
+(+ `/root/hermes-agent-legacy-docker/data/skills-especialistas/`). Nested skills under a category dir
 (e.g. `engram-memory-system/guardado-doble-memoria`) need their own **top-level**
 symlink, because the cron skill loader resolves by flat name.
 

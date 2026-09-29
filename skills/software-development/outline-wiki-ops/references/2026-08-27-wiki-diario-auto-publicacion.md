@@ -71,7 +71,7 @@
    (`publish_daily_wiki.py`, `daily_session_report.py`,
    `guardar_diario_wiki_step.py`). Los perfiles roshi/vigia usan **symlinks
    RELATIVOS** (`../../../scripts/x.py`) — los absolutos `/opt/data/...`
-   quedan MUERTOS en el host (allí el árbol es `/root/hermes-agent/data`).
+   quedan MUERTOS en el host (allí el árbol es `/root/hermes-agent-legacy-docker/data`).
    Los `.bak` viejos de perfiles se dejaron como respaldo histórico.
 2. **Resúmenes reales**: `sessions_summary_agent.py` (canónico) consulta la
    state.db, extrae los pedidos reales del usuario (sin wrappers de
@@ -102,7 +102,7 @@
   `reasoning_content`. Fallback en script: si content vacío, usar
   reasoning recortado; si no, lista mínima sin LLM.
 - **Namespace host vs contenedor**: LOS CRONS SCRIPT CORREN EN EL HOST.
-  `/opt/data` = `/root/hermes-agent/data`. `/opt/data` NO existe como ruta
+  `/opt/data` = `/root/hermes-agent-legacy-docker/data`. `/opt/data` NO existe como ruta
   en el host (solo el bind dentro del contenedor). Symlinks relativos OK en
   ambos; `docker exec` para tocar el bridge; config.yaml del host es
   espejo cifrado (api_key enmascarada) — el LLM-call debe hacerse desde el

@@ -25,11 +25,11 @@ Esta skill opera como despacho unificado. El detalle procedural y gotchas espec√
 `references/`
 
 ## Casos de Uso Disponibles
-- **anti-ai-slop-writing**: Ver [references/anti-ai-slop-writing.md](file:///root/hermes-agent/skills/core/copy-quality-es/references/anti-ai-slop-writing.md)
-- **anti-slop**: Ver [references/anti-slop.md](file:///root/hermes-agent/skills/core/copy-quality-es/references/anti-slop.md)
-- **anti-slop-copy**: Ver [references/anti-slop-copy.md](file:///root/hermes-agent/skills/core/copy-quality-es/references/anti-slop-copy.md)
-- **comment-writer**: Ver [references/comment-writer.md](file:///root/hermes-agent/skills/core/copy-quality-es/references/comment-writer.md)
-- **copy-dialecto-local**: Ver [references/copy-dialecto-local.md](file:///root/hermes-agent/skills/core/copy-quality-es/references/copy-dialecto-local.md)
-- **humanizer**: Ver [references/humanizer.md](file:///root/hermes-agent/skills/core/copy-quality-es/references/humanizer.md)
-- **no-ai-slop**: Ver [references/no-ai-slop.md](file:///root/hermes-agent/skills/core/copy-quality-es/references/no-ai-slop.md)
-- **simple-english**: Ver [references/simple-english.md](file:///root/hermes-agent/skills/core/copy-quality-es/references/simple-english.md)
+- **anti-ai-slop-writing**: Ver [references/anti-ai-slop-writing.md](file:///root/hermes-agent-legacy-docker/skills/core/copy-quality-es/references/anti-ai-slop-writing.md)
+- **anti-slop**: Ver [references/anti-slop.md](file:///root/hermes-agent-legacy-docker/skills/core/copy-quality-es/references/anti-slop.md)
+- **anti-slop-copy**: Ver [references/anti-slop-copy.md](file:///root/hermes-agent-legacy-docker/skills/core/copy-quality-es/references/anti-slop-copy.md)
+- **comment-writer**: Ver [references/comment-writer.md](file:///root/hermes-agent-legacy-docker/skills/core/copy-quality-es/references/comment-writer.md)
+- **copy-dialecto-local**: Ver [references/copy-dialecto-local.md](file:///root/hermes-agent-legacy-docker/skills/core/copy-quality-es/references/copy-dialecto-local.md)
+- **humanizer**: Ver [references/humanizer.md](file:///root/hermes-agent-legacy-docker/skills/core/copy-quality-es/references/humanizer.md)
+- **no-ai-slop**: Ver [references/no-ai-slop.md](file:///root/hermes-agent-legacy-docker/skills/core/copy-quality-es/references/no-ai-slop.md)
+- **simple-english**: Ver [references/simple-english.md](file:///root/hermes-agent-legacy-docker/skills/core/copy-quality-es/references/simple-english.md)

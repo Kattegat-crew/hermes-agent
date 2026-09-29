@@ -56,7 +56,7 @@ Probado en un `HERMES_HOME=/tmp/probe-home` con `config.yaml` mínimo (no tocar 
 
 ## Pitfalls verificados (2026-09-16)
 
-- **Symlinks con ruta del host**: un perfil puede enlazar a `/root/hermes-agent/data/skills/<x>`, inaccesible dentro del contenedor (`/root` es 0700 root) → `stat` da `PermissionError`, no `ENOENT`. Ese árbol es el mismo inodo que `/opt/data/skills`: se repara re-apuntando el prefijo, sin copiar.
+- **Symlinks con ruta del host**: un perfil puede enlazar a `/root/hermes-agent-legacy-docker/data/skills/<x>`, inaccesible dentro del contenedor (`/root` es 0700 root) → `stat` da `PermissionError`, no `ENOENT`. Ese árbol es el mismo inodo que `/opt/data/skills`: se repara re-apuntando el prefijo, sin copiar.
 - **Enlaces "sanos" con ruta incorrecta**: apuntan a la raíz del catálogo cuando la skill vive bajo categoría (`/opt/data/skills/grounded-citations` vs real `/opt/data/skills/research/grounded-citations`).
 - **Duplicados silenciosos**: misma skill en `<categoria>/<slug>` y en la raíz del perfil → first-wins decide sin avisar.
 - **Deriva de contenido**: comparar `md5(SKILL.md)` copia vs original; un perfil puede tener decenas de versiones divergentes sin que nadie lo sepa.
@@ -68,7 +68,7 @@ Probado en un `HERMES_HOME=/tmp/probe-home` con `config.yaml` mínimo (no tocar 
 
 1. Re-apuntar el prefijo de los symlinks del perfil (backup del listado antes: `ls -l > symlinks.bak`):
    `ln -sfn /opt/data/skills/<ruta real de la skill> <perfil>/skills/<nombre>` — el árbol host
-   `/root/hermes-agent/data/skills` y el canon `/opt/data/skills` son el MISMO inodo: no se copia nada.
+   `/root/hermes-agent-legacy-docker/data/skills` y el canon `/opt/data/skills` son el MISMO inodo: no se copia nada.
    Cuidado con las anidadas: el enlace debe apuntar a la ruta completa del `SKILL.md` (`<categoria>/<skill>`).
 2. Declarar `skills.external_dirs` en el `config.yaml` de CADA perfil (hoy sólo el default, cuya entrada
    `/opt/data/.omh/skills` no existe y se descarta en silencio): el acceso al catálogo deja de depender de symlinks frágiles.
@@ -166,7 +166,7 @@ Motor: `scripts/sync_skills_sync.py` (toda la lógica; el `.sh` solo parsea flag
 - **Gate de firma (bloqueo duro en código):** `--apply` exige `--firma TOKEN`, validado contra el `sha256` guardado en `/root/.sync-firma.sha256` (chmod 600). Ese archivo lo crea **solo el dueño** (`printf '%s' 'TOKEN' | sha256sum | awk '{print $1}' > /root/.sync-firma.sha256`). Sin archivo o con token inválido → **exit 1** y nada se toca. Un agente nunca crea, lee ni guarda ese token.
 - **Nada se destruye sin respaldo:** toda skill nueva o con drift se archiva en `data/archive/sync_<ts>/` **antes** del despliegue. Con `--adopt-drift`, el contenido del contenedor se promueve al canon y el canónico previo queda en `.../canon_previo/`.
 - **Verificación final por contenido** tras desplegar. Códigos de salida: `0` paridad, `2` diferencias detectadas en `--check`, `1` error o gate cerrado.
-- **Cron diario (solo lectura):** `20 5 * * * /root/hermes-agent/scripts/sync_container_skills.sh --check >> /var/log/skills-sync-check.log 2>&1`.
+- **Cron diario (solo lectura):** `20 5 * * * /root/hermes-agent-legacy-docker/scripts/sync_container_skills.sh --check >> /var/log/skills-sync-check.log 2>&1`.
 - **Pitfall esperado:** editar una skill *en el canon* deja `drift` hasta que se firme un `--apply`; el `--check` diario lo reporta. No es un fallo: es el gate haciendo su trabajo.
 
 ### Vigilancia diaria y frescura del grafo (2026-09-20)
