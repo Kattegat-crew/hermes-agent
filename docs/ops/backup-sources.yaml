@@ -16,37 +16,37 @@ dev:
   servidor: "147.93.3.250"
   repo_offsite: "rclone:onedrive:Backups/.250"
   repo_local: "/root/hermes-backups/restic-local"
-  llave: "/root/hermes-agent/data/backup-keys/master-backup.key"
+  llave: "/root/hermes-agent-legacy-docker/data/backup-keys/master-backup.key"
 
   # Lo que DEBE entrar (lista de Plon + credenciales que él excluye sin querer)
   fuentes:
-    - /root/hermes-agent/data/state.db
-    # - /root/hermes-agent/data/shared-state.db   # no existe hoy (23-sep): lo filtra el script
-    - /root/hermes-agent/data/projects.db
-    - /root/hermes-agent/data/kanban.db
-    - /root/hermes-agent/data/response_store.db
-    - /root/hermes-agent/data/runs_idempotency.db
-    - /root/hermes-agent/data/verification_evidence.db
-    - /root/hermes-agent/data/whatsapp
-    - /root/hermes-agent/data/profiles
-    - /root/hermes-agent/data/sessions
-    - /root/hermes-agent/skills
-    - /root/hermes-agent/data/config.yaml
-    - /root/hermes-agent/data/.env
-    - /root/hermes-agent/data/scripts
+    - /root/hermes-agent-legacy-docker/data/state.db
+    # - /root/hermes-agent-legacy-docker/data/shared-state.db   # no existe hoy (23-sep): lo filtra el script
+    - /root/hermes-agent-legacy-docker/data/projects.db
+    - /root/hermes-agent-legacy-docker/data/kanban.db
+    - /root/hermes-agent-legacy-docker/data/response_store.db
+    - /root/hermes-agent-legacy-docker/data/runs_idempotency.db
+    - /root/hermes-agent-legacy-docker/data/verification_evidence.db
+    - /root/hermes-agent-legacy-docker/data/whatsapp
+    - /root/hermes-agent-legacy-docker/data/profiles
+    - /root/hermes-agent-legacy-docker/data/sessions
+    - /root/hermes-agent-legacy-docker/skills
+    - /root/hermes-agent-legacy-docker/data/config.yaml
+    - /root/hermes-agent-legacy-docker/data/.env
+    - /root/hermes-agent-legacy-docker/data/scripts
     - /root/.engram
     - /opt/vault
     - /opt/vps-brain
     # --- lo que el off-site NO cubre (residuo 4 de la auditoría) ---
-    - /root/hermes-agent/data/secrets
-    - /root/hermes-agent/data/backup-keys
-    - /root/hermes-agent/data/home/.config/rclone/rclone.conf
+    - /root/hermes-agent-legacy-docker/data/secrets
+    - /root/hermes-agent-legacy-docker/data/backup-keys
+    - /root/hermes-agent-legacy-docker/data/home/.config/rclone/rclone.conf
 
   # Credenciales que el off-site excluye (data/home/** esta excluido). Se espejan a
   # `data/backups/staging/dumps/_creds/`, que SI esta en la lista de Plon, para que
   # lleguen al snapshot de OneDrive cuando su token vuelva a vivir.
   espejo_credenciales:
-    - origen: /root/hermes-agent/data/home/.config/rclone/rclone.conf
+    - origen: /root/hermes-agent-legacy-docker/data/home/.config/rclone/rclone.conf
       destino_nombre: rclone.conf
 
   exclusiones:
@@ -62,19 +62,19 @@ dev:
 
   # Fuera del respaldo diario a propósito (documentado, no olvidado)
   no_respaldado_a_proposito:
-    - ruta: /root/hermes-agent/data/archive
+    - ruta: /root/hermes-agent-legacy-docker/data/archive
       mb: 3048
       razon: "archivos de un solo uso (F52/F7); los de F6 ya están versionados en git"
-    - ruta: /root/hermes-agent/data/checkpoints
+    - ruta: /root/hermes-agent-legacy-docker/data/checkpoints
       mb: 430
       razon: "checkpoints de herramientas, regenerables"
-    - ruta: /root/hermes-agent/data/composio-linux-x64
+    - ruta: /root/hermes-agent-legacy-docker/data/composio-linux-x64
       mb: 345
       razon: "binario reinstalable"
-    - ruta: /root/hermes-agent/data/bin
+    - ruta: /root/hermes-agent-legacy-docker/data/bin
       mb: 126
       razon: "binarios reinstalables"
-    - ruta: /root/hermes-agent/data/state.db.malformed-backup-20260816_192333
+    - ruta: /root/hermes-agent-legacy-docker/data/state.db.malformed-backup-20260816_192333
       mb: 197
       razon: "residuo del incidente de agosto; candidato a borrar"
 

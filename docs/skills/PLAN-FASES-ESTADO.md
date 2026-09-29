@@ -52,7 +52,7 @@ verificación.
 
 ### 2.2 El `/opt/data` del **host**: capa de alias viva + payload legado
 
-Dentro del contenedor, `/opt/data` **es** el repo (`/root/hermes-agent/data → /opt/data`,
+Dentro del contenedor, `/opt/data` **es** el repo (`/root/hermes-agent-legacy-docker/data → /opt/data`,
 bind). Fuera del contenedor hay **otro** `/opt/data` físico, híbrido:
 
 - **Capa de alias (viva):** 6 symlinks al repo — `scripts`, `secrets`, `bin`, `.ssh`,

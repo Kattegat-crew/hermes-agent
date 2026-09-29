@@ -16,7 +16,7 @@
 # =============================================================================
 set -uo pipefail
 
-REPO="/root/hermes-agent"
+REPO="/root/hermes-agent-legacy-docker"
 LOG="/var/log/skills-sync-check.log"
 STATE="$REPO/data/state"
 CHECK_JSON="$STATE/skills_sync_last.json"

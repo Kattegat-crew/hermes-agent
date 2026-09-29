@@ -32,7 +32,7 @@ import sys
 import time
 from pathlib import Path
 
-REPO = Path('/root/hermes-agent')
+REPO = Path('/root/hermes-agent-legacy-docker')
 DATA = REPO / 'data'
 SKILLS = REPO / 'skills'
 CONT = 'hermes-agent'

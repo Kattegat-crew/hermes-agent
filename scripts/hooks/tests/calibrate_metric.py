@@ -6,7 +6,7 @@ import re
 import sys
 from collections import Counter
 from pathlib import Path
-sys.path.insert(0, '/root/hermes-agent/scripts/hooks')
+sys.path.insert(0, '/root/hermes-agent-legacy-docker/scripts/hooks')
 import guard_autoskill_create as g  # noqa: E402
 
 CORE = Path('/opt/hermes/skills/core')

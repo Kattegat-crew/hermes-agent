@@ -22,7 +22,7 @@ import subprocess
 import sys
 import time
 
-REPO = "/root/hermes-agent"
+REPO = "/root/hermes-agent-legacy-docker"
 DATA = os.path.join(REPO, "data")
 LEGACY = "/opt/data"
 FIRMA_FILE = "/root/.sync-firma.sha256"

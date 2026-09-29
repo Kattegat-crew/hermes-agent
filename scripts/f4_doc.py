@@ -6,7 +6,7 @@ import json
 import time
 from pathlib import Path
 
-R = Path('/root/hermes-agent')
+R = Path('/root/hermes-agent-legacy-docker')
 POL = R / 'docs' / 'skills' / 'POLITICA-ARBOL-CANONICO.md'
 PROT = R / 'docs' / 'skills' / 'protected-skills.json'
 

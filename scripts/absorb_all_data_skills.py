@@ -5,8 +5,8 @@ absorb_all_data_skills.py — Fase 8: Absorción Canónica y Eliminación de dat
 1. Backup completo de data/skills en data/archive/pre_absorption_data_skills_20260920.tar.gz.
 2. NUTRIR: Integra skills secundarias en los paraguas de skills/core/ (references/ y scripts/).
 3. GUARDAR / PROMOVER: Clasifica y mueve las 266 skills restantes a sus categorías canónicas
-   dentro de /root/hermes-agent/skills/ (software-development, devops, ai-ml, etc.).
-4. ELIMINACIÓN: Purga /root/hermes-agent/data/skills/ (cumpliendo 0 carpetas fuera del repo).
+   dentro de /root/hermes-agent-legacy-docker/skills/ (software-development, devops, ai-ml, etc.).
+4. ELIMINACIÓN: Purga /root/hermes-agent-legacy-docker/data/skills/ (cumpliendo 0 carpetas fuera del repo).
 5. SINCRONIZACIÓN: Despliega al contenedor /opt/hermes/skills/ con permisos hermes:hermes.
 6. VERIFICACIÓN: Comprueba que todas las skills cargan limpiamente y sin errores.
 """
@@ -19,7 +19,7 @@ import tarfile
 import subprocess
 from pathlib import Path
 
-REPO_ROOT = Path("/root/hermes-agent")
+REPO_ROOT = Path("/root/hermes-agent-legacy-docker")
 REPO_SKILLS = REPO_ROOT / "skills"
 DATA_SKILLS = REPO_ROOT / "data/skills"
 ARCHIVE_DIR = REPO_ROOT / "data/archive"
@@ -196,7 +196,7 @@ def purge_external_data_skills():
     print("\n--- 4. ELIMINACIÓN TOTAL DEL DIRECTORIO EXTERNO data/skills/ ---")
     if DATA_SKILLS.exists():
         shutil.rmtree(DATA_SKILLS)
-        print(" ✅ Directorio externo /root/hermes-agent/data/skills/ eliminado con éxito.")
+        print(" ✅ Directorio externo /root/hermes-agent-legacy-docker/data/skills/ eliminado con éxito.")
     else:
         print(" Directorio ya eliminado.")
 
@@ -205,7 +205,7 @@ def sync_to_container():
     # Limpiar y recrear destino
     subprocess.run("docker exec -i hermes-agent rm -rf /opt/hermes/skills && docker exec -i hermes-agent mkdir -p /opt/hermes/skills", shell=True, check=True)
     # Pipe tar para preservar estructura completa
-    cmd = "tar -C /root/hermes-agent/skills -cf - . | docker exec -i hermes-agent tar -C /opt/hermes/skills -xf -"
+    cmd = "tar -C /root/hermes-agent-legacy-docker/skills -cf - . | docker exec -i hermes-agent tar -C /opt/hermes/skills -xf -"
     subprocess.run(cmd, shell=True, check=True)
     # Permisos hermes:hermes
     subprocess.run("docker exec -i hermes-agent chown -R hermes:hermes /opt/hermes/skills && docker exec -i hermes-agent chmod -R 775 /opt/hermes/skills", shell=True, check=True)
@@ -213,7 +213,7 @@ def sync_to_container():
 
 def run_verifications():
     print("\n--- 6. VERIFICACIONES DE CALIDAD ---")
-    subprocess.run("python3 /root/hermes-agent/scripts/verify_skills.py", shell=True, check=True)
+    subprocess.run("python3 /root/hermes-agent-legacy-docker/scripts/verify_skills.py", shell=True, check=True)
 
 if __name__ == "__main__":
     backup_data_skills()

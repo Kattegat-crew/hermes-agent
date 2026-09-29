@@ -278,7 +278,7 @@ El inventario por grupo, con rutas, tamaños, entradas y sha256, queda publicado
 ### Qué era `/opt/data` en el host
 
 Un directorio físico **distinto** del árbol de datos del contenedor (inodos `305848` vs
-`543357`; el contenedor ve `/root/hermes-agent/data` montado en su `/opt/data`). Era
+`543357`; el contenedor ve `/root/hermes-agent-legacy-docker/data` montado en su `/opt/data`). Era
 híbrido, y esa mezcla es la que lo volvía peligroso:
 
 | Parte | Contenido | Rol |

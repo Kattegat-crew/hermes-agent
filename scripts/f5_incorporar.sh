@@ -2,7 +2,7 @@
 # F5 paso 1: incorporar las 4 skills huérfanas del host al canon versionado.
 # Destino elegido por familia (ads / paid-traffic / ops de herramientas SaaS).
 set -uo pipefail
-R=/root/hermes-agent
+R=/root/hermes-agent-legacy-docker
 ORIG=/opt/data/skills
 
 declara() {  # nombre destino

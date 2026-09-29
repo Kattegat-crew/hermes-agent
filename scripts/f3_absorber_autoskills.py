@@ -30,7 +30,7 @@ import sys
 import time
 from pathlib import Path
 
-REPO = Path('/root/hermes-agent')
+REPO = Path('/root/hermes-agent-legacy-docker')
 SKILLS = REPO / 'skills'
 CORE = SKILLS / 'core'
 MANIFIESTO = REPO / 'docs' / 'skills' / 'absorcion-manifiesto.json'
@@ -153,7 +153,7 @@ def aplicar(entrada, archive, ts):
             else sm_txt
     disparador = entrada.get('disparador') or entrada.get('nota') or '(sin descripcion)'
     linea_caso = ('- **%s**: %s — ver '
-                  '[references/%s.md](file:///root/hermes-agent/skills/core/%s/references/%s.md)'
+                  '[references/%s.md](file:///root/hermes-agent-legacy-docker/skills/core/%s/references/%s.md)'
                   % (nombre, disparador, nombre, entrada['paraguas'], nombre))
     if 'references/%s.md' % nombre not in sm_txt:
         if '## Casos de Uso Disponibles' in sm_txt:

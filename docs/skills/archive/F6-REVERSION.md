@@ -14,7 +14,7 @@ lotes de consolidación vivía solo en disco (`data/archive/`, gitignoreado).
 ## Reversión de un lote
 
 ```bash
-cd /root/hermes-agent
+cd /root/hermes-agent-legacy-docker
 tar xzf docs/skills/archive/F6-reversibilidad-20260923-181049.tar.gz
 mv data/archive/F6_loteN_<ts>/absorbidas/<ruta>/ skills/<ruta>/
 git revert <commit del lote>

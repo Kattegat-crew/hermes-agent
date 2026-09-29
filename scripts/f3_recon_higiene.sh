@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Reconocimiento para el job de higiene: consumidores de la alerta + state.db.
 set -uo pipefail
-R=/root/hermes-agent
+R=/root/hermes-agent-legacy-docker
 echo "=== consumidores de skills_sync_alert.json ==="
 grep -rl "skills_sync_alert" "$R/scripts" "$R/data/scripts" /root/.agents 2>/dev/null | head -5
 echo

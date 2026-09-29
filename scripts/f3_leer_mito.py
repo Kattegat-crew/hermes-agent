@@ -4,8 +4,8 @@
 from pathlib import Path
 
 objetivos = [
-    ('/root/hermes-agent/data/profiles/bragi/memories/MEMORY.md', [11]),
-    ('/root/hermes-agent/data/memories/MEMORY.md', [132, 154, 199, 213]),
+    ('/root/hermes-agent-legacy-docker/data/profiles/bragi/memories/MEMORY.md', [11]),
+    ('/root/hermes-agent-legacy-docker/data/memories/MEMORY.md', [132, 154, 199, 213]),
 ]
 for ruta, lineas in objetivos:
     p = Path(ruta)

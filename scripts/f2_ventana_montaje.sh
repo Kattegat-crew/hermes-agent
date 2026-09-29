@@ -3,7 +3,7 @@
 # F2 · Ventana de recreación del contenedor para aplicar el montaje del canon
 # ============================================================================
 # Objetivo: /opt/hermes/skills deja de ser una copia dentro de la imagen y pasa
-# a ser un bind mount de /root/hermes-agent/skills (el canon versionado).
+# a ser un bind mount de /root/hermes-agent-legacy-docker/skills (el canon versionado).
 #
 # GATE DE FIRMA (bloqueo duro en código): sin --firma TOKEN validado por sha256
 # contra /root/.sync-firma.sha256, el script sale con exit 1 y CERO cambios.
@@ -18,7 +18,7 @@
 # ============================================================================
 set -uo pipefail
 
-REPO="/root/hermes-agent"
+REPO="/root/hermes-agent-legacy-docker"
 CONT="hermes-agent"
 TS="$(date +%Y%m%d-%H%M%S)"
 LOG="$REPO/data/state/f2_ventana_${TS}.log"

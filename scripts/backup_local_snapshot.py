@@ -28,7 +28,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-RAIZ = Path("/root/hermes-agent")
+RAIZ = Path("/root/hermes-agent-legacy-docker")
 DECLARACION = RAIZ / "docs/ops/backup-sources.yaml"
 ESTADO = RAIZ / "data/state/backup-local.json"
 STAGING_CREDS = RAIZ / "data/backups/staging/dumps/_creds"

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Esquema de messages (para atribución) + canales de notificación disponibles.
 set -uo pipefail
-R=/root/hermes-agent
+R=/root/hermes-agent-legacy-docker
 echo "=== esquema de messages ==="
 python3 - "$R/data/state.db" <<'PY'
 import sqlite3, sys

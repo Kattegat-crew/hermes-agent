@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # F5 · salud tras los archivados + caza del censo de catálogos de producto.
 set -uo pipefail
-R=/root/hermes-agent
+R=/root/hermes-agent-legacy-docker
 
 echo "=== 1) referencias vivas a lo archivado ==="
 printf '  crons con .agents/skills : %s\n' "$(crontab -l 2>/dev/null | grep -c '\.agents/skills')"

@@ -22,7 +22,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-REPO = Path('/root/hermes-agent')
+REPO = Path('/root/hermes-agent-legacy-docker')
 DATA = REPO / 'data'
 CANON = REPO / 'skills'
 LOTES = range(5)

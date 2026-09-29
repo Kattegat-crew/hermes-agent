@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 master_skills_consolidation.py — Ejecución del Plan Maestro de Consolidación y Centralización de Skills.
-1. Fusión de 180 autoskills y canon en 19 paraguas en /root/hermes-agent/skills/core/.
-2. Integración de dotaciones de especialistas R2-bis en /root/hermes-agent/skills/specialists/.
+1. Fusión de 180 autoskills y canon en 19 paraguas en /root/hermes-agent-legacy-docker/skills/core/.
+2. Integración de dotaciones de especialistas R2-bis en /root/hermes-agent-legacy-docker/skills/specialists/.
 3. Empaquetado y archivo de vendor (skills-ext y skills-especialistas) en /opt/data/archive/.
 4. Eliminación de copias externas (.hermes/skills).
 5. Purga de symlinks rotos en todos los perfiles de la flota.
@@ -18,12 +18,12 @@ import tarfile
 import subprocess
 from pathlib import Path
 
-REPO_SKILLS = Path("/root/hermes-agent/skills")
+REPO_SKILLS = Path("/root/hermes-agent-legacy-docker/skills")
 CORE_SKILLS = REPO_SKILLS / "core"
 SPEC_SKILLS = REPO_SKILLS / "specialists"
-DATA_SKILLS = Path("/root/hermes-agent/data/skills")
-PROFILES_DIR = Path("/root/hermes-agent/data/profiles")
-ARCHIVE_DIR = Path("/root/hermes-agent/data/archive")
+DATA_SKILLS = Path("/root/hermes-agent-legacy-docker/data/skills")
+PROFILES_DIR = Path("/root/hermes-agent-legacy-docker/data/profiles")
+ARCHIVE_DIR = Path("/root/hermes-agent-legacy-docker/data/archive")
 
 def step1_create_umbrellas():
     print("\n--- PASO 1: Creando y fusionando los 19 paraguas en skills/core/ ---")
@@ -31,7 +31,7 @@ def step1_create_umbrellas():
     SPEC_SKILLS.mkdir(parents=True, exist_ok=True)
     ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
 
-    lotes_path = "/root/hermes-agent/data/profiles/roshi/workspace/plan/lotes_simplificacion_20260917.json"
+    lotes_path = "/root/hermes-agent-legacy-docker/data/profiles/roshi/workspace/plan/lotes_simplificacion_20260917.json"
     if not os.path.exists(lotes_path):
         print("ERROR: lotes_simplificacion no encontrado")
         return
@@ -120,10 +120,10 @@ def step2_copy_core_skills():
 
 def step3_transfer_specialists_r2bis():
     print("\n--- PASO 3: Incorporando dotaciones R2-bis a skills/specialists/ ---")
-    apply_path = "/root/hermes-agent/data/profiles/roshi/workspace/plan/r2bis_plan_apply.json"
+    apply_path = "/root/hermes-agent-legacy-docker/data/profiles/roshi/workspace/plan/r2bis_plan_apply.json"
     if not os.path.exists(apply_path):
         print("Aviso: r2bis_plan_apply no encontrado, usando r2bis_plan.json...")
-        apply_path = "/root/hermes-agent/data/profiles/roshi/workspace/plan/r2bis_plan.json"
+        apply_path = "/root/hermes-agent-legacy-docker/data/profiles/roshi/workspace/plan/r2bis_plan.json"
 
     with open(apply_path) as f:
         data = json.load(f)
@@ -182,7 +182,7 @@ def step3_transfer_specialists_r2bis():
 
 def step4_archive_vendors_and_clean_legacy():
     print("\n--- PASO 4: Archivando repositorios de terceros fuera de runtime ---")
-    ext_dir = Path("/root/hermes-agent/data/skills-ext")
+    ext_dir = Path("/root/hermes-agent-legacy-docker/data/skills-ext")
     if ext_dir.exists() and ext_dir.is_dir():
         archive_tar = ARCHIVE_DIR / "vendor_skills_ext_20260920.tar.gz"
         if not archive_tar.exists():
@@ -194,7 +194,7 @@ def step4_archive_vendors_and_clean_legacy():
         shutil.rmtree(ext_dir)
         print(" ✅ Directorio data/skills-ext removido de la ruta activa.")
 
-    esp_dir = Path("/root/hermes-agent/data/skills-especialistas")
+    esp_dir = Path("/root/hermes-agent-legacy-docker/data/skills-especialistas")
     if esp_dir.exists() and esp_dir.is_dir():
         shutil.rmtree(esp_dir)
         print(" ✅ Directorio data/skills-especialistas removido.")
@@ -222,10 +222,10 @@ def step5_purge_broken_symlinks_and_reconfig():
                         item.unlink()
                         broken_cleaned += 1
                     else:
-                        # Si apunta a /root/hermes-agent, remover también
+                        # Si apunta a /root/hermes-agent-legacy-docker, remover también
                         try:
                             targ = os.readlink(item)
-                            if "/root/hermes-agent" in targ or "/opt/data/skills" in targ:
+                            if "/root/hermes-agent-legacy-docker" in targ or "/opt/data/skills" in targ:
                                 item.unlink()
                                 broken_cleaned += 1
                         except Exception:
@@ -265,14 +265,14 @@ def step5_purge_broken_symlinks_and_reconfig():
                 print(f"Aviso al actualizar config de {p_name}: {e}")
 
     # Asegurar que ragnar tenga su dir sedimento
-    os.makedirs("/root/hermes-agent/data/sedimento/ragnar", exist_ok=True)
+    os.makedirs("/root/hermes-agent-legacy-docker/data/sedimento/ragnar", exist_ok=True)
     print(" ✅ Configs de los perfiles actualizados con /opt/hermes/skills y on_demand: true.")
 
 def step6_sync_to_container():
     print("\n--- PASO 6: Sincronizando canon al contenedor /opt/hermes/skills ---")
     cmd = "docker exec -i hermes-agent mkdir -p /opt/hermes/skills/core /opt/hermes/skills/specialists"
     subprocess.run(cmd, shell=True, check=True)
-    cmd2 = "docker cp /root/hermes-agent/skills/. hermes-agent:/opt/hermes/skills/"
+    cmd2 = "docker cp /root/hermes-agent-legacy-docker/skills/. hermes-agent:/opt/hermes/skills/"
     subprocess.run(cmd2, shell=True, check=True)
     cmd3 = "docker exec -i hermes-agent chown -R hermes:hermes /opt/hermes/skills 2>/dev/null || true"
     subprocess.run(cmd3, shell=True)

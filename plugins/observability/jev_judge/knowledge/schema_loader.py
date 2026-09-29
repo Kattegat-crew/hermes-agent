@@ -74,7 +74,7 @@ class GroundTruthManager:
         if profile_dir:
             candidates.append(Path(profile_dir))
         candidates.extend([
-            Path(f"/root/hermes-agent/data/profiles/{profile_name}"),
+            Path(f"/root/hermes-agent-legacy-docker/data/profiles/{profile_name}"),
             Path(f"/opt/hermes/data/profiles/{profile_name}"),
             Path(f"/opt/data/profiles/{profile_name}")
         ])

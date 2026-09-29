@@ -10,7 +10,7 @@ import shutil
 import time
 from pathlib import Path
 
-R = Path('/root/hermes-agent')
+R = Path('/root/hermes-agent-legacy-docker')
 BK = R / 'data' / 'backups' / ('memorias_mito_%s' % time.strftime('%Y%m%d-%H%M%S'))
 BK.mkdir(parents=True, exist_ok=True)
 
@@ -69,7 +69,7 @@ cabeza_199_nueva = (
 # ── 5. default, línea 213 (audit del 21-sep, superado) ──────────────────────
 nuevo_default_213 = (
     'Árbol de skills de la flota DEV — SUPERADO por F3 (23-sep-2026). ESTADO VIGENTE: el canon '
-    '(repo /root/hermes-agent/skills) ES el árbol del runtime — montado en /opt/hermes/skills y '
+    '(repo /root/hermes-agent-legacy-docker/skills) ES el árbol del runtime — montado en /opt/hermes/skills y '
     'en las 12 raíces de ESCRITURA (/opt/data/skills + profiles/<perfil>/skills), un solo inodo, '
     '718 SKILL.md alcanzables == versionados en git, write-probe del runtime en verde. '
     '`skills.external_dirs` eliminado de los 12 configs: era justamente lo que dejaba al curador '

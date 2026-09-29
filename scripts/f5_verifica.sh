@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # F5 · verificación previa a archivar: webhook borrado + referencias vivas.
 set -uo pipefail
-R=/root/hermes-agent
+R=/root/hermes-agent-legacy-docker
 
 echo "=== 1) el webhook temporal sigue existiendo? ==="
 docker exec -u 10000 hermes-agent python3 - <<'PY'
@@ -20,7 +20,7 @@ PY
 echo
 echo "=== 2) quien referencia todavía /root/.agents/skills ==="
 crontab -l 2>/dev/null | grep -c "\.agents/skills" | sed 's/^/  crons root: /'
-grep -rl "\.agents/skills" /etc/cron.d /root/hermes-agent/scripts 2>/dev/null | head -5 | sed 's/^/  script: /'
+grep -rl "\.agents/skills" /etc/cron.d /root/hermes-agent-legacy-docker/scripts 2>/dev/null | head -5 | sed 's/^/  script: /'
 echo "  (el propio árbol /root/.agents/rules/*.md se archiva con él)"
 
 echo

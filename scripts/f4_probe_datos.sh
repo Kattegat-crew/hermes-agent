@@ -28,5 +28,5 @@ echo "=== 3) curator run --help (¿hay dry-run?) ==="
 $H curator run --help 2>&1 | head -18
 echo
 echo "=== 4) ¿el curador automatico muta por defecto? ==="
-cd /root/hermes-agent 2>/dev/null || cd /opt/data
-grep -rn "dry_run\|archive_after_days\|def run_curator\|auto_apply" /root/hermes-agent/agent/curator.py 2>/dev/null | head -14
+cd /root/hermes-agent-legacy-docker 2>/dev/null || cd /opt/data
+grep -rn "dry_run\|archive_after_days\|def run_curator\|auto_apply" /root/hermes-agent-legacy-docker/agent/curator.py 2>/dev/null | head -14

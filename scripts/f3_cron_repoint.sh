@@ -2,7 +2,7 @@
 # Reapunta el cron diario de vigilancia de skills al job de higiene del árbol único.
 # Respalda la crontab ANTES de tocarla (R12/plan F5) y verifica el resultado.
 set -uo pipefail
-R=/root/hermes-agent
+R=/root/hermes-agent-legacy-docker
 TS=$(date +%Y%m%d-%H%M%S)
 BK="$R/data/backups/crontab_${TS}.txt"
 
@@ -16,7 +16,7 @@ fi
 NUEVA=$(mktemp)
 # retira la línea vieja del vigilante canon<->copia y añade el job nuevo
 grep -v "skills_sync_daily.sh" "$BK" > "$NUEVA"
-printf '20 5 * * * /root/hermes-agent/scripts/f3_higiene_diaria.py >> /var/log/skills-higiene.log 2>&1\n' >> "$NUEVA"
+printf '20 5 * * * /root/hermes-agent-legacy-docker/scripts/f3_higiene_diaria.py >> /var/log/skills-higiene.log 2>&1\n' >> "$NUEVA"
 crontab "$NUEVA" && echo "crontab actualizada"
 rm -f "$NUEVA"
 

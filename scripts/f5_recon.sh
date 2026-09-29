@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # F5 · censo de todo lo que vive fuera del canon.
 set -uo pipefail
-R=/root/hermes-agent
+R=/root/hermes-agent-legacy-docker
 
 echo "########## 1) ARBOLES FUERA DEL CANON ##########"
 for d in /root/.agents/skills /neuralcrew_agent /opt/data/skills "$R/data/skills"; do
@@ -38,7 +38,7 @@ grep -rl "/root/.agents/skills" /root/.agents 2>/dev/null | head -5
 echo "  --- crons root ---"
 crontab -l 2>/dev/null | grep -n "agents/skills" || echo "  (ninguno)"
 echo "  --- otros consumidores ---"
-grep -rl "\.agents/skills" /etc/cron.d /root/*.sh /root/hermes-agent/data 2>/dev/null | head -8
+grep -rl "\.agents/skills" /etc/cron.d /root/*.sh /root/hermes-agent-legacy-docker/data 2>/dev/null | head -8
 
 echo
 echo "########## 4) CONTENEDORES / SERVICIOS nca-* ##########"

@@ -5,7 +5,7 @@ import json
 import math
 import sys
 from collections import Counter
-sys.path.insert(0, '/root/hermes-agent/scripts/hooks')
+sys.path.insert(0, '/root/hermes-agent-legacy-docker/scripts/hooks')
 import guard_autoskill_create as g  # noqa: E402
 
 docs, _ = g.corpus_con_cache()

@@ -56,7 +56,7 @@ from pathlib import Path
 
 import yaml
 
-REPO = Path('/root/hermes-agent')
+REPO = Path('/root/hermes-agent-legacy-docker')
 DATA = REPO / 'data'
 CANON = REPO / 'skills'
 FIRMA_SHA = Path('/root/.sync-firma.sha256')
@@ -116,7 +116,7 @@ def rutas_raices():
 
     OJO — el host y el contenedor NO coinciden: dentro del contenedor esas
     rutas son /opt/data/..., pero en el host el mismo árbol vive bajo
-    /root/hermes-agent/data/... (el compose monta `./data:/opt/data`).
+    /root/hermes-agent-legacy-docker/data/... (el compose monta `./data:/opt/data`).
     Operar sobre `/opt/data` en el host tocaría un árbol LEGADO distinto.
     """
     out = [('default', DATA / 'skills', '/opt/data/skills')]
@@ -210,7 +210,7 @@ def main():
     informe = {'ts': ts, 'aplicado': bool(a.apply), 'hub': a.hub, 'pasos': []}
 
     # ── 1. respaldo ──────────────────────────────────────────────────────────
-    existentes = [p for p in CONFIGS + [COMPOSE, Path('/root/hermes-agent/.gitignore')] if p.is_file()]
+    existentes = [p for p in CONFIGS + [COMPOSE, Path('/root/hermes-agent-legacy-docker/.gitignore')] if p.is_file()]
     log('\n1) respaldo de %d ficheros → %s' % (len(existentes), bck))
     for p in existentes:
         log('   · %s' % p)

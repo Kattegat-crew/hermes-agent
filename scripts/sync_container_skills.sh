@@ -30,7 +30,7 @@
 # ==============================================================================
 set -euo pipefail
 
-REPO="/root/hermes-agent"
+REPO="/root/hermes-agent-legacy-docker"
 ENGINE="$REPO/scripts/sync_skills_sync.py"
 
 MODE="check"

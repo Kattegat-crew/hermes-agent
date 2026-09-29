@@ -46,7 +46,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-REPO = Path('/root/hermes-agent')
+REPO = Path('/root/hermes-agent-legacy-docker')
 DATA = REPO / 'data'
 CANON = REPO / 'skills'
 CONT = 'hermes-agent'
@@ -261,7 +261,7 @@ def v10_fuera_del_repo(informe):
             informe.setdefault('errores_vigilancia', []).append(
                 'catalogos-ajenos.json ilegible: %s' % e)
     salida = sh('find /opt /root /srv /home -maxdepth 7 -name SKILL.md 2>/dev/null '
-                '| grep -v "^/root/hermes-agent/" '
+                '| grep -v "^/root/hermes-agent-legacy-docker/" '
                 r'| grep -v "node_modules\|site-packages\|/.cache/\|.venv" '
                 '| head -80').stdout.split()
     no_declarados = sorted({p for p in salida

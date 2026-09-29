@@ -2,7 +2,7 @@
 # F5 · archivado de los árboles fuera del canon.
 # Regla: empaquetar → verificar el tar → recién entonces mover.
 set -uo pipefail
-R=/root/hermes-agent
+R=/root/hermes-agent-legacy-docker
 TS=$(date +%Y%m%d-%H%M%S)
 A="$R/data/archive/F5_$TS"
 mkdir -p "$A"

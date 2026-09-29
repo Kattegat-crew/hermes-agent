@@ -16,7 +16,7 @@
 # ============================================================================
 set -uo pipefail
 
-REPO="/root/hermes-agent"
+REPO="/root/hermes-agent-legacy-docker"
 CONT="hermes-agent"
 TS="$(date +%Y%m%d-%H%M%S)"
 LOG="$REPO/data/state/f3_ventana_${TS}.log"

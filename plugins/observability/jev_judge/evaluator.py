@@ -51,7 +51,7 @@ class JevJudge:
         # Fallback to secrets file if env var not set
         if not self.api_key:
             secret_paths = [
-                Path("/root/hermes-agent/data/secrets/typesafe.json"),
+                Path("/root/hermes-agent-legacy-docker/data/secrets/typesafe.json"),
                 Path("/opt/hermes/data/secrets/typesafe.json"),
                 Path("/opt/data/secrets/typesafe.json"),
             ]
@@ -155,7 +155,7 @@ class JevJudge:
         sk = secret_key or os.environ.get("HERMES_LANGFUSE_SECRET_KEY") or os.environ.get("LANGFUSE_SECRET_KEY") or ""
 
         if not pk or not sk or not base_url:
-            for env_path in [Path("/opt/hermes/.env"), Path("/root/hermes-agent/.env"), Path(".env")]:
+            for env_path in [Path("/opt/hermes/.env"), Path("/root/hermes-agent-legacy-docker/.env"), Path(".env")]:
                 if env_path.exists():
                     try:
                         with open(env_path, "r", encoding="utf-8") as ef:

@@ -24,7 +24,7 @@ import sys
 import time
 from pathlib import Path
 
-SKILLS = Path('/root/hermes-agent/skills')
+SKILLS = Path('/root/hermes-agent-legacy-docker/skills')
 VENTANA = 57
 
 
@@ -56,7 +56,7 @@ def normaliza(n):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--json-out', default='/root/hermes-agent/data/state/lint_catalog_last.json')
+    ap.add_argument('--json-out', default='/root/hermes-agent-legacy-docker/data/state/lint_catalog_last.json')
     a = ap.parse_args()
 
     skills = {}

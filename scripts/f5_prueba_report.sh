@@ -3,7 +3,7 @@
 # como lo hace el cron (root, host), entregando al webhook TEMPORAL de operaciones
 # para no publicar en el canal del cliente.
 set -uo pipefail
-R=/root/hermes-agent
+R=/root/hermes-agent-legacy-docker
 SKILL=$R/skills/specialists/marketing-ads/meta-ads-discord-reporter/scripts/report.py
 
 echo "=== entorno que necesita el script ==="

@@ -27,7 +27,7 @@ import sys
 import time
 from pathlib import Path
 
-REPO = Path('/root/hermes-agent')
+REPO = Path('/root/hermes-agent-legacy-docker')
 DATA = REPO / 'data'
 CANON = REPO / 'skills'
 ESTADO_CURADOR = DATA / 'state' / 'f4_curador_last.json'

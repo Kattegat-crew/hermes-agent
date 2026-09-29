@@ -23,10 +23,10 @@ import json
 import subprocess
 from pathlib import Path
 
-REPO_SKILLS = Path("/root/hermes-agent/skills")
+REPO_SKILLS = Path("/root/hermes-agent-legacy-docker/skills")
 SCRIPT_DIR = Path(__file__).resolve().parent
 LINT = SCRIPT_DIR / "lint_skills_catalog.py"
-BASELINE = Path("/root/hermes-agent/data/state/nombres_equivalentes_baseline.json")
+BASELINE = Path("/root/hermes-agent-legacy-docker/data/state/nombres_equivalentes_baseline.json")
 VENTANA_R5 = 57
 
 
@@ -87,7 +87,7 @@ def lint_catalogo():
 
 def check_skills():
     print("=" * 60)
-    print("🔍 ADUANA DE SKILLS: Verificando /root/hermes-agent/skills")
+    print("🔍 ADUANA DE SKILLS: Verificando /root/hermes-agent-legacy-docker/skills")
     print("=" * 60)
 
     errors = []

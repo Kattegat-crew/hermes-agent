@@ -26,7 +26,7 @@ if str(PLUGIN_DIR) not in sys.path:
 from evaluator import JevJudge
 
 # Load environment from .env if available
-for env_path in [Path("/opt/hermes/.env"), Path("/root/hermes-agent/.env"), Path(".env")]:
+for env_path in [Path("/opt/hermes/.env"), Path("/root/hermes-agent-legacy-docker/.env"), Path(".env")]:
     if env_path.exists():
         try:
             with open(env_path, "r", encoding="utf-8") as f:

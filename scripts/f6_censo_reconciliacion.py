@@ -23,7 +23,7 @@ import json
 import time
 from pathlib import Path
 
-REPO = Path('/root/hermes-agent')
+REPO = Path('/root/hermes-agent-legacy-docker')
 CENSO_DEF = (REPO / 'data' / 'profiles' / 'roshi' / 'workspace' / 'reports'
              / 'censo-skills-20260920')
 CANON = REPO / 'skills'

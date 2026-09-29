@@ -6,15 +6,15 @@ import json
 import os
 import subprocess
 
-REPO = '/root/hermes-agent'
+REPO = '/root/hermes-agent-legacy-docker'
 CONT = 'hermes-agent'
 
 PENDIENTES_ESPERADOS = [
-    ('/root/hermes-agent/skills', '/opt/hermes/skills', 'dir'),
-    ('/root/hermes-agent/tools/skills_tool.py', '/opt/hermes/tools/skills_tool.py', 'file'),
-    ('/root/hermes-agent/tools/delegate_tool.py', '/opt/hermes/tools/delegate_tool.py', 'file'),
-    ('/root/hermes-agent/gateway/activity_labels.py', '/opt/hermes/gateway/activity_labels.py', 'file'),
-    ('/root/hermes-agent/locales', '/opt/hermes/locales', 'dir'),
+    ('/root/hermes-agent-legacy-docker/skills', '/opt/hermes/skills', 'dir'),
+    ('/root/hermes-agent-legacy-docker/tools/skills_tool.py', '/opt/hermes/tools/skills_tool.py', 'file'),
+    ('/root/hermes-agent-legacy-docker/tools/delegate_tool.py', '/opt/hermes/tools/delegate_tool.py', 'file'),
+    ('/root/hermes-agent-legacy-docker/gateway/activity_labels.py', '/opt/hermes/gateway/activity_labels.py', 'file'),
+    ('/root/hermes-agent-legacy-docker/locales', '/opt/hermes/locales', 'dir'),
 ]
 
 

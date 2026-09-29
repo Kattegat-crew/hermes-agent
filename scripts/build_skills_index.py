@@ -9,7 +9,7 @@ import yaml
 from datetime import datetime
 from pathlib import Path
 
-REPO_ROOT = Path("/root/hermes-agent")
+REPO_ROOT = Path("/root/hermes-agent-legacy-docker")
 SKILLS_DIR = REPO_ROOT / "skills"
 
 def generate_index():

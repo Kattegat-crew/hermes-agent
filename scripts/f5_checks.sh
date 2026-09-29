@@ -2,7 +2,7 @@
 # F5 · comprobaciones antes de archivar: webhook, equivalencia de data/skills
 # con el canon, y relevancia de graphify-out.
 set -uo pipefail
-R=/root/hermes-agent
+R=/root/hermes-agent-legacy-docker
 
 echo "=== 1) webhook temporal borrado? ==="
 docker exec -u 10000 hermes-agent python3 -c "
@@ -42,7 +42,7 @@ echo
 echo "=== 3) graphify-out del host: quién lo usa? ==="
 ls -la /opt/data/skills/graphify-out/ 2>/dev/null
 stat -c '  tamaño=%s fecha=%y' /opt/data/skills/graphify-out/graph.json 2>/dev/null
-grep -rl "opt/data/skills/graphify-out" /root/hermes-agent/scripts /etc/cron.d /root/*.sh 2>/dev/null | head -3
+grep -rl "opt/data/skills/graphify-out" /root/hermes-agent-legacy-docker/scripts /etc/cron.d /root/*.sh 2>/dev/null | head -3
 echo "  --- grafo que sí usa la flota ---"
 ls -la /opt/data/brain/graphify-out/graph.json 2>/dev/null || docker exec hermes-agent ls -la /opt/data/brain/graphify-out/graph.json 2>/dev/null
 

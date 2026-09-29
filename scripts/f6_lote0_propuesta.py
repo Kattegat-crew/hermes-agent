@@ -26,7 +26,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-REPO = Path('/root/hermes-agent')
+REPO = Path('/root/hermes-agent-legacy-docker')
 CANON = REPO / 'skills'
 SALIDA = REPO / 'data' / 'state' / 'f6_lote0.json'
 DOC = REPO / 'docs' / 'skills' / 'F6-LOTE0-PROPUESTA.md'

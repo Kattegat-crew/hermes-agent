@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Prueba de punta a punta del gate de autoskills (F3).
 # Se ejecuta DENTRO del contenedor, con el mismo entorno que usa el gateway.
-HOOK=/host/root/hermes-agent/scripts/hooks/guard_autoskill_create.py
+HOOK=/host/root/hermes-agent-legacy-docker/scripts/hooks/guard_autoskill_create.py
 prueba () {
   local titulo="$1"; local json="$2"; local esperado="$3"
   printf '%s' "$json" | python3 "$HOOK" > /tmp/out.txt 2>/tmp/err.txt

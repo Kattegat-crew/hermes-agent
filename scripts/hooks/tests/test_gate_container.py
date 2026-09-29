@@ -5,7 +5,7 @@ import json
 import subprocess
 import sys
 
-HOOK = '/host/root/hermes-agent/scripts/hooks/guard_autoskill_create.py'
+HOOK = '/host/root/hermes-agent-legacy-docker/scripts/hooks/guard_autoskill_create.py'
 PY = '/opt/hermes/.venv/bin/python3'
 
 

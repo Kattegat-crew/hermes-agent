@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # F4 · ¿el manifiesto cubre también NUESTRAS skills, y quién lo regenera?
 set -uo pipefail
-R=/root/hermes-agent
+R=/root/hermes-agent-legacy-docker
 M=$R/skills/.bundled_manifest
 echo "=== lineas del manifiesto ==="
 wc -l "$M"
@@ -23,7 +23,7 @@ echo "=== config relacionada ==="
 python3 - <<'PY'
 import yaml
 from pathlib import Path
-d = yaml.safe_load(Path('/root/hermes-agent/data/config.yaml').read_text(encoding='utf-8'))
+d = yaml.safe_load(Path('/root/hermes-agent-legacy-docker/data/config.yaml').read_text(encoding='utf-8'))
 print('skills:', yaml.safe_dump(d.get('skills'), allow_unicode=True).strip()[:400])
 for k in ('curator', 'skills_sync'):
     if k in d:

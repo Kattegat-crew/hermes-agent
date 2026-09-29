@@ -660,7 +660,7 @@ def _resolve_profile_name() -> str:
                 return base
     except Exception:
         pass
-    if os.path.exists("/root/hermes-agent/data"):
+    if os.path.exists("/root/hermes-agent-legacy-docker/data"):
         return "ragnar"
     return "default"
 

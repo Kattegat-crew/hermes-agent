@@ -5,16 +5,16 @@ FUSION: absorbe solo contenido novedoso del origen hacia el receptor:
   - secciones del SKILL.md origen que no existen (por heading) en el receptor
   - referencias/ y scripts/ cuyo contenido (por sha1) no exista ya en el receptor
 RETIRA: mueve la carpeta a skills/_retirados/<nombre> (nada se borra).
-GATE DURO: exige /root/hermes-agent/scripts/consolidacion_estado.json con
+GATE DURO: exige /root/hermes-agent-legacy-docker/scripts/consolidacion_estado.json con
   {"aprobada_por": "Jesus", "aprobado": true, ...} creado/actualizado HOY.
 RESPALDO: tar de todo lo tocado en scripts/respaldo_consolidacion_<fecha>.tar.gz
 LEDGER: scripts/consolidacion_ledger.json append-only.
 """
 import json,os,re,sys,shutil,hashlib,tarfile,datetime,subprocess
 
-ROOT="/root/hermes-agent/skills"
-REPO="/root/hermes-agent"
-ESTADO="/root/hermes-agent/scripts/consolidacion_estado.json"
+ROOT="/root/hermes-agent-legacy-docker/skills"
+REPO="/root/hermes-agent-legacy-docker"
+ESTADO="/root/hermes-agent-legacy-docker/scripts/consolidacion_estado.json"
 CENSO="/root/archive_tmp_dev/censo_editorial.json"
 
 def gate():
@@ -124,7 +124,7 @@ def main():
     byname={v["nombre"]:v["_dir"] for v in d["veredictos"]}
     ledger=[]
     ts=datetime.datetime.now().isoformat()
-    respaldo="/root/hermes-agent/scripts/respaldo_consolidacion_%s.tar.gz"%datetime.date.today().isoformat()
+    respaldo="/root/hermes-agent-legacy-docker/scripts/respaldo_consolidacion_%s.tar.gz"%datetime.date.today().isoformat()
     if not dry:
         dirs=[v["_dir"] for v in fusion+retiros]+[v["recomendacion"].split(":",1)[1] for v in fusion]
         with tarfile.open(respaldo,"w:gz") as t:
@@ -141,7 +141,7 @@ def main():
     for v in retiros:
         retirar(v["_dir"],ledger,v.get("justificacion","censo: valor nulo"),dry)
     if not dry:
-        lp="/root/hermes-agent/scripts/consolidacion_ledger.json"
+        lp="/root/hermes-agent-legacy-docker/scripts/consolidacion_ledger.json"
         old=json.load(open(lp)) if os.path.exists(lp) else []
         old.append({"ts":ts,"operaciones":ledger})
         json.dump(old,open(lp,"w"),ensure_ascii=False,indent=1)

@@ -11,7 +11,7 @@
 # =============================================================================
 set -euo pipefail
 
-REPO="/root/hermes-agent"
+REPO="/root/hermes-agent-legacy-docker"
 ORIGEN="$REPO/graphify-out/graph.json"
 CONSUMIDORES=(
     "$REPO/data/brain/graphify-out/graph.json"

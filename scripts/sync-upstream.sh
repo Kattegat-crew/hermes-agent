@@ -8,7 +8,7 @@
 #
 set -euo pipefail
 
-REPO_DIR="/root/hermes-agent"
+REPO_DIR="/root/hermes-agent-legacy-docker"
 LOG_FILE="${REPO_DIR}/scripts/sync-upstream.log"
 LOCK_FILE="/tmp/hermes-sync.lock"
 WATERMARK_FILE="${REPO_DIR}/scripts/.last_notified_tag"
@@ -56,7 +56,7 @@ payload = {
         "description": f"Hola Jesús, se detectó una nueva versión oficial de **NousResearch/hermes-agent**.\n\n**Compatibilidad:** {status_text}\n\nCuando desees actualizar el entorno, recuerda coordinar la ventana de mantenimiento externa con Toallín.",
         "color": color,
         "fields": [
-            {"name": "Comando de Aplicación", "value": f"`/root/hermes-agent/scripts/sync-upstream.sh --apply {tag}`", "inline": False},
+            {"name": "Comando de Aplicación", "value": f"`/root/hermes-agent-legacy-docker/scripts/sync-upstream.sh --apply {tag}`", "inline": False},
             {"name": "Garantías de Seguridad", "value": "• Snapshot preventivo de WhatsApp\n• Validación de guardrails en sandbox antes de tocar main\n• Cero downtime intempestivo", "inline": False}
         ],
         "footer": {"text": "NeuralCrew Labs • Hermes Fleet Watcher"}
@@ -151,14 +151,14 @@ if [ "$MODE" = "--apply" ]; then
     fi
 
     # 2. Snapshot preventivo de WhatsApp y BBDD
-    BACKUP_DIR="/root/hermes-agent/data/whatsapp/backups"
+    BACKUP_DIR="/root/hermes-agent-legacy-docker/data/whatsapp/backups"
     mkdir -p "$BACKUP_DIR"
     TIMESTAMP=$(date +%Y%m%d_%H%M%S)
     WA_BACKUP="${BACKUP_DIR}/session_backup_${TIMESTAMP}.tar.gz"
     
-    if [ -d "/root/hermes-agent/data/whatsapp/session" ]; then
+    if [ -d "/root/hermes-agent-legacy-docker/data/whatsapp/session" ]; then
         log "Generando snapshot preventivo de sesión WhatsApp en $WA_BACKUP..."
-        tar -czf "$WA_BACKUP" -C "/root/hermes-agent/data/whatsapp" session
+        tar -czf "$WA_BACKUP" -C "/root/hermes-agent-legacy-docker/data/whatsapp" session
         log "Snapshot WhatsApp generado con éxito."
     fi
 

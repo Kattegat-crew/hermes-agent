@@ -5,7 +5,7 @@ import json
 import os
 import subprocess
 
-REPO = '/root/hermes-agent'
+REPO = '/root/hermes-agent-legacy-docker'
 CONT = 'hermes-agent'
 
 
@@ -65,8 +65,8 @@ for src, dst, ro in extra:
 
 print('')
 print('--- SLOTS s6 que el recreate reinicia ---')
-slots = sorted(os.listdir('/root/hermes-agent/data/logs/gateways')) \
-    if os.path.isdir('/root/hermes-agent/data/logs/gateways') else []
+slots = sorted(os.listdir('/root/hermes-agent-legacy-docker/data/logs/gateways')) \
+    if os.path.isdir('/root/hermes-agent-legacy-docker/data/logs/gateways') else []
 print('   %d: %s' % (len(slots), ', '.join(slots)))
 
 print('')
@@ -76,6 +76,6 @@ par = json.load(open(os.path.join(REPO, 'data/state/skills_sync_alert.json')))
 print('    paridad canon/espejo: %s (canon %s / espejo %s)' % (par.get('parity'), par.get('canon_count'), par.get('container_count')))
 
 json.dump({'pendientes': pendientes, 'extra': extra, 'slots': slots},
-          open('/root/hermes-agent/data/state/f2_preflight.json', 'w'), indent=1, ensure_ascii=False)
+          open('/root/hermes-agent-legacy-docker/data/state/f2_preflight.json', 'w'), indent=1, ensure_ascii=False)
 print('')
 print('   Detalle: data/state/f2_preflight.json')

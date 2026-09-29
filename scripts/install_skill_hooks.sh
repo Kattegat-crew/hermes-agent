@@ -10,11 +10,11 @@
 # ============================================================================
 set -uo pipefail
 
-REPO="/root/hermes-agent"
+REPO="/root/hermes-agent-legacy-docker"
 # El hook lo ejecuta el gateway DENTRO del contenedor: la ruta debe ser la que
-# ve el contenedor. /root/hermes-agent no existe ahí; /host/root/hermes-agent sí
+# ve el contenedor. /root/hermes-agent-legacy-docker no existe ahí; /host/root/hermes-agent-legacy-docker sí
 # (el compose monta / del host en /host, y uid 10000 puede leerlo — verificado).
-HOOK="/host/root/hermes-agent/scripts/hooks/guard_autoskill_create.py"
+HOOK="/host/root/hermes-agent-legacy-docker/scripts/hooks/guard_autoskill_create.py"
 SHA_FILE="/root/.sync-firma.sha256"
 APPLY=0
 FIRMA=""

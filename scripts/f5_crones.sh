@@ -2,7 +2,7 @@
 # F5 paso 3: repuntar los 2 crons de Meta Ads a la ruta del canon, verificar
 # que quedaron bien y limpiar el webhook temporal de la prueba.
 set -uo pipefail
-R=/root/hermes-agent
+R=/root/hermes-agent-legacy-docker
 VIEJO="/root/.agents/skills/meta-ads-discord-reporter/scripts/report.py"
 NUEVO="$R/skills/specialists/marketing-ads/meta-ads-discord-reporter/scripts/report.py"
 TS=$(date +%Y%m%d-%H%M%S)

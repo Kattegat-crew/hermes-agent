@@ -33,7 +33,7 @@ import sys
 import time
 from pathlib import Path
 
-REPO = Path('/root/hermes-agent')
+REPO = Path('/root/hermes-agent-legacy-docker')
 sys.path.insert(0, str(REPO / 'scripts'))
 import sync_skills_sync as motor  # noqa: E402  (reutiliza el código probado del motor)
 

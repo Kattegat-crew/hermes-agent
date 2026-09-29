@@ -28,18 +28,18 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-RAIZ = Path("/root/hermes-agent")
+RAIZ = Path("/root/hermes-agent-legacy-docker")
 DECLARACION = RAIZ / "docs/ops/backup-sources.yaml"
 ESTADO = RAIZ / "data/state/backup-restore-test.json"
 
 # Muestra: un config, un secreto, un código, memorias y dos bases SQLite
 MUESTRA = [
-    "/root/hermes-agent/data/config.yaml",
-    "/root/hermes-agent/data/.env",
-    "/root/hermes-agent/data/kanban.db",
-    "/root/hermes-agent/data/verification_evidence.db",
-    "/root/hermes-agent/data/profiles/roshi/memories/MEMORY.md",
-    "/root/hermes-agent/data/scripts/vps_master_backup.py",
+    "/root/hermes-agent-legacy-docker/data/config.yaml",
+    "/root/hermes-agent-legacy-docker/data/.env",
+    "/root/hermes-agent-legacy-docker/data/kanban.db",
+    "/root/hermes-agent-legacy-docker/data/verification_evidence.db",
+    "/root/hermes-agent-legacy-docker/data/profiles/roshi/memories/MEMORY.md",
+    "/root/hermes-agent-legacy-docker/data/scripts/vps_master_backup.py",
 ]
 
 

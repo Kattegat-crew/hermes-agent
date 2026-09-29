@@ -207,8 +207,8 @@ def check_firma(firma: str, sha_file: Path) -> bool:
 def parse_args() -> argparse.Namespace:
     ap = argparse.ArgumentParser(add_help=True)
     ap.add_argument("--mode", choices=["check", "apply"], default="check")
-    ap.add_argument("--host", default="/root/hermes-agent/skills")
-    ap.add_argument("--repo", default="/root/hermes-agent")
+    ap.add_argument("--host", default="/root/hermes-agent-legacy-docker/skills")
+    ap.add_argument("--repo", default="/root/hermes-agent-legacy-docker")
     ap.add_argument("--container", default="hermes-agent")
     ap.add_argument("--container-skills", default="/opt/hermes/skills")
     ap.add_argument("--firma", default="")

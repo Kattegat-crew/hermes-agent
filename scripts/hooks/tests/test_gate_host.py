@@ -5,12 +5,12 @@ import json
 import subprocess
 import sys
 
-HOOK = '/root/hermes-agent/scripts/hooks/guard_autoskill_create.py'
+HOOK = '/root/hermes-agent-legacy-docker/scripts/hooks/guard_autoskill_create.py'
 
 
 def caso(titulo, tool, ops, esperado):
     payload = {"hook_event_name": "pre_tool_call", "tool_name": tool,
-               "tool_input": {"operations": ops}, "session_id": "test", "cwd": "/root/hermes-agent"}
+               "tool_input": {"operations": ops}, "session_id": "test", "cwd": "/root/hermes-agent-legacy-docker"}
     out = subprocess.run([sys.executable, HOOK], input=json.dumps(payload),
                          capture_output=True, text=True, timeout=180)
     if out.returncode == 2:

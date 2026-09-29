@@ -12,7 +12,7 @@ import subprocess
 import time
 from pathlib import Path
 
-R = Path('/root/hermes-agent')
+R = Path('/root/hermes-agent-legacy-docker')
 ARCH = R / 'data' / 'archive'
 DOC = R / 'docs' / 'skills' / 'INVENTARIO-ARCHIVO.md'
 POL = R / 'docs' / 'skills' / 'POLITICA-ARBOL-CANONICO.md'

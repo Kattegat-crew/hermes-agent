@@ -30,7 +30,7 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-RAIZ = Path("/root/hermes-agent")
+RAIZ = Path("/root/hermes-agent-legacy-docker")
 DECLARACION = RAIZ / "docs/ops/backup-sources.yaml"
 ESTADO = RAIZ / "data/state/backup-audit.json"
 MAESTRO = RAIZ / "data/scripts/vps_master_backup.py"

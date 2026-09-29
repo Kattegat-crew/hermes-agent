@@ -3,7 +3,7 @@
 """Anexa a la política la nota del borde D1/D2 del gate y la integración del lint."""
 from pathlib import Path
 
-P = Path('/root/hermes-agent/docs/skills/POLITICA-ARBOL-CANONICO.md')
+P = Path('/root/hermes-agent-legacy-docker/docs/skills/POLITICA-ARBOL-CANONICO.md')
 NOTA = '''
 ## Notas de borde verificadas (23-sep-2026)
 

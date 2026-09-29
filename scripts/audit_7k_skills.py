@@ -2,7 +2,7 @@
 """
 audit_7k_skills.py — Censo exhaustivo y auditoría determinista de todas las skills del VPS.
 Escanea ~7.000 carpetas, calcula hashes md5, detecta cascarones, duplicados y dependencias.
-Emite /root/hermes-agent/data/reports/censo_exhaustivo_7k.json.
+Emite /root/hermes-agent-legacy-docker/data/reports/censo_exhaustivo_7k.json.
 """
 
 import os
@@ -15,11 +15,11 @@ from pathlib import Path
 from collections import defaultdict, Counter
 
 ROOT_DIRS = {
-    "repo_builtin": "/root/hermes-agent/skills",
-    "repo_optional": "/root/hermes-agent/optional-skills",
-    "data_canon": "/root/hermes-agent/data/skills",
-    "data_ext": "/root/hermes-agent/data/skills-ext",
-    "data_especialistas": "/root/hermes-agent/data/skills-especialistas",
+    "repo_builtin": "/root/hermes-agent-legacy-docker/skills",
+    "repo_optional": "/root/hermes-agent-legacy-docker/optional-skills",
+    "data_canon": "/root/hermes-agent-legacy-docker/data/skills",
+    "data_ext": "/root/hermes-agent-legacy-docker/data/skills-ext",
+    "data_especialistas": "/root/hermes-agent-legacy-docker/data/skills-especialistas",
     "host_legacy": "/root/.hermes/skills"
 }
 
@@ -111,7 +111,7 @@ def audit_corpus():
                 })
 
     # 2. Recorrer perfiles
-    profiles_root = "/root/hermes-agent/data/profiles"
+    profiles_root = "/root/hermes-agent-legacy-docker/data/profiles"
     if os.path.exists(profiles_root):
         print(f"Indexando perfiles en {profiles_root}...")
         for prof in os.listdir(profiles_root):
@@ -250,7 +250,7 @@ def audit_corpus():
         "clasificacion_4_vias": clasificacion
     }
 
-    out_dir = "/root/hermes-agent/data/reports"
+    out_dir = "/root/hermes-agent-legacy-docker/data/reports"
     os.makedirs(out_dir, exist_ok=True)
     out_file = os.path.join(out_dir, "censo_exhaustivo_7k.json")
     

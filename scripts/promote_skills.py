@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 promote_skills.py — Promueve determinísticamente skills valiosas desde el backup
-(pre_purge_profiles_skills_20260920.tar.gz) y el ático (/root/hermes-agent/data/home/.hermes/skills)
-al catálogo canónico de /root/hermes-agent/skills.
+(pre_purge_profiles_skills_20260920.tar.gz) y el ático (/root/hermes-agent-legacy-docker/data/home/.hermes/skills)
+al catálogo canónico de /root/hermes-agent-legacy-docker/skills.
 """
 import os
 import shutil
@@ -11,9 +11,9 @@ import re
 import yaml
 from pathlib import Path
 
-CANON_ROOT = Path("/root/hermes-agent/skills")
-ARCHIVE_PATH = Path("/root/hermes-agent/data/archive/pre_purge_profiles_skills_20260920.tar.gz")
-ATTIC_PATH = Path("/root/hermes-agent/data/home/.hermes/skills")
+CANON_ROOT = Path("/root/hermes-agent-legacy-docker/skills")
+ARCHIVE_PATH = Path("/root/hermes-agent-legacy-docker/data/archive/pre_purge_profiles_skills_20260920.tar.gz")
+ATTIC_PATH = Path("/root/hermes-agent-legacy-docker/data/home/.hermes/skills")
 
 def categorize(name: str, desc: str) -> str:
     txt = (name + " " + desc).lower()
@@ -118,7 +118,7 @@ def main():
                 promoted_count += 1
                 print(f"  [Backup] Promovida -> {target_cat}/{s_name}")
 
-    # 3. Promover desde el ático (/root/hermes-agent/data/home/.hermes/skills)
+    # 3. Promover desde el ático (/root/hermes-agent-legacy-docker/data/home/.hermes/skills)
     if ATTIC_PATH.exists():
         print(f"📂 Inspeccionando ático: {ATTIC_PATH}")
         for root, dirs, files in os.walk(ATTIC_PATH):

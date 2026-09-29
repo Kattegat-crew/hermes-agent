@@ -8,7 +8,7 @@
 # para no cambiar la línea base de la flota) y deja la evidencia en un log.
 # ============================================================================
 set -uo pipefail
-LOG=/root/hermes-agent/data/state/f3_restart.log
+LOG=/root/hermes-agent-legacy-docker/data/state/f3_restart.log
 S6=/package/admin/s6/command/s6-svc
 S6STAT=/package/admin/s6/command/s6-svstat
 

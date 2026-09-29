@@ -4,7 +4,7 @@
 |---|---|
 | Documento | `docs/skills/METRICA-CONSOLIDACION.md` |
 | Fecha de medición | 2026-09-23 16:11:15-0500 |
-| Comando | `python3 scripts/f6_metrica_oficial.py --canon /root/hermes-agent/skills --umbral 0.45` |
+| Comando | `python3 scripts/f6_metrica_oficial.py --canon /root/hermes-agent-legacy-docker/skills --umbral 0.45` |
 | Umbral | **0.45** |
 | Método | TF-IDF (sublinear_tf, min_df=1) sobre nombre + descripción + cuerpo; similitud coseno; grupos = componentes conexas |
 | Catálogo medido | 707 `SKILL.md` |

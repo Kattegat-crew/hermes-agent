@@ -19,8 +19,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-REPO = Path('/root/hermes-agent')
-COMANDO = '/host/root/hermes-agent/scripts/hooks/guard_autoskill_create.py'
+REPO = Path('/root/hermes-agent-legacy-docker')
+COMANDO = '/host/root/hermes-agent-legacy-docker/scripts/hooks/guard_autoskill_create.py'
 PY = '/opt/hermes/.venv/bin/python3'
 
 # Rutas VISTAS DESDE EL CONTENEDOR (el mismo directorio del host, otro montaje):
