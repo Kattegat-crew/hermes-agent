@@ -2268,6 +2268,14 @@ class DiscordAdapter(BasePlatformAdapter):
         # discord.py's reconnect loop can ignore the closed flag while a
         # WebSocket handshake is in flight.  Explicitly cancelling the task here
         # ensures the zombie client cannot receive or dispatch any further events.
+        # Cancel all background typing loops
+        typing_tasks = list(self._typing_tasks.values())
+        for task in typing_tasks:
+            task.cancel()
+        if typing_tasks:
+            await asyncio.gather(*typing_tasks, return_exceptions=True)
+        self._typing_tasks.clear()
+
         await self._cancel_bot_task()
 
         if self._client:
@@ -5723,6 +5731,9 @@ class DiscordAdapter(BasePlatformAdapter):
         """
         if not self._client:
             return
+        chat_id = str(chat_id)
+        if chat_id in getattr(self, "_typing_paused", ()):
+            return
         # Don't start a duplicate loop
         if chat_id in self._typing_tasks:
             return
@@ -5730,6 +5741,8 @@ class DiscordAdapter(BasePlatformAdapter):
         async def _typing_loop() -> None:
             try:
                 while True:
+                    if chat_id in getattr(self, "_typing_paused", ()):
+                        return
                     try:
                         route = discord.http.Route(
                             "POST", "/channels/{channel_id}/typing",
@@ -5762,8 +5775,11 @@ class DiscordAdapter(BasePlatformAdapter):
 
         self._typing_tasks[chat_id] = asyncio.create_task(_typing_loop())
 
-    async def stop_typing(self, chat_id: str) -> None:
+    async def stop_typing(self, chat_id: str, metadata=None) -> None:
         """Stop the persistent typing indicator for a channel."""
+        chat_id = str(chat_id)
+        if hasattr(self, "pause_typing_for_chat"):
+            self.pause_typing_for_chat(chat_id)
         task = self._typing_tasks.pop(chat_id, None)
         if task:
             task.cancel()
@@ -8480,6 +8496,8 @@ class DiscordAdapter(BasePlatformAdapter):
 
         # When auto-threading kicked in, route responses to the new thread
         effective_channel = auto_threaded_channel or message.channel
+        if hasattr(self, "resume_typing_for_chat"):
+            self.resume_typing_for_chat(str(effective_channel.id))
 
         # Determine chat type
         if isinstance(message.channel, discord.DMChannel):
