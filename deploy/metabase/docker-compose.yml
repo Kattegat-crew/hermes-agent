@@ -1,0 +1,34 @@
+services:
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase
+    restart: unless-stopped
+    ports:
+      - "100.73.30.29:3060:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase_app
+      MB_DB_PORT: 5432
+      MB_DB_USER: metabase
+      MB_DB_PASS: dIrel1_d5g55arG7ErT6JA3Mm3AeMp9I
+      MB_DB_HOST: infra-postgres
+      MB_SITE_URL: https://auditoria.neuralcrewlabs.com
+      JAVA_OPTS: "-Xmx1024m -Xms512m -XX:+UseG1GC"
+    mem_limit: 1536m
+    volumes:
+      - ./plugins:/plugins
+    networks:
+      - infra_infra
+      - nginx-proxy-manager_proxy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 45s
+
+networks:
+  infra_infra:
+    external: true
+  nginx-proxy-manager_proxy:
+    external: true

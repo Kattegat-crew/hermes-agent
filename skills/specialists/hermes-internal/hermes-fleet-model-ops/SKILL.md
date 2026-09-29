@@ -20,6 +20,7 @@ Clase de tarea: asignar/migrar modelos, auxiliares, compresión y razonamiento a
 - **`web_extract` ya NO es tarea auxiliar** (v0.21 no usa LLM ahí): borrar el bloque de las configs, no poblarlo.
 - **Auxiliares v0.21**: vision, compression, skills_hub, approval, mcp, title_generation, curator.
 - **Fallback**: llave raíz `fallback_model:` lista `[{provider, model}]` (ej. cadena NaN → OpenCode-Go/mimo-v2.5; B.AI puede quedar en `providers:` sin uso como reserva).
+- **Inventario real ≠ config:** el catálogo vivo se lista con `GET {base_url}/models` (Bearer real de `/opt/data/.env` — la key de config.yaml viene ENMASCARADA y da 403/401). Ollama-Local (PC Admin) NUNCA en camino crítico: solo último fallback y con `/api/tags` verificado antes. Snapshot y política: `references/catalogo-proveedores-20260926.md`.
 - **Duplicado en dropdown**: `model.provider: custom:nan-builders` (alias deprecado desde v0.20.4) + provider real `NaN-Builders` en `providers:` = dos entradas para la misma API. Reescribir al nombre canónico.
 - **Visión**: NO confiar en catálogos — verificar EN VIVO: POST imagen base64 a chat/completions con UA de NAVEGADOR (urllib sin UA → 403 Cloudflare, no es fallo de key). A la fecha en NaN: qwen3.6 SÍ ve; qwen3.8-flash → HTTP 400 con imagen.
 
