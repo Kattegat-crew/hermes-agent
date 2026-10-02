@@ -85,6 +85,55 @@ def http_get(url, token, timeout=30, retries=5):
     raise RuntimeError("Petición HTTP fallida tras reintentos")
 
 
+def load_discord_config():
+    token = os.environ.get("DISCORD_BOT_TOKEN")
+    thread_id = os.environ.get("DISCORD_BREB_THREAD_ID", "1555440735262740501")
+    env_path = "/opt/data/.env"
+    if os.path.exists(env_path):
+        try:
+            with open(env_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith("DISCORD_BOT_TOKEN=") and not token:
+                        token = line.split("=", 1)[1].strip()
+                    elif line.startswith("DISCORD_BREB_THREAD_ID=") and (not thread_id or thread_id == "1555440735262740501"):
+                        thread_id = line.split("=", 1)[1].strip()
+        except Exception:
+            pass
+    return token, thread_id
+
+
+def send_discord_thread_alert(thread_id, bot_token, embed_data):
+    if not thread_id or not bot_token:
+        return False
+    url = f"https://discord.com/api/v10/channels/{thread_id}/messages"
+    payload = json.dumps({"embeds": [embed_data]}).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=payload,
+        headers={
+            "Authorization": f"Bot {bot_token}",
+            "Content-Type": "application/json",
+            "User-Agent": "BreBReconciler/1.0"
+        },
+        method="POST"
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            return r.status in (200, 201)
+    except Exception as e:
+        print(f"Error enviando alerta a Discord: {e}", file=sys.stderr)
+        return False
+
+
+def parse_cop(val_str):
+    try:
+        clean = str(val_str).replace("$", "").replace(".", "").replace(",", ".").strip()
+        return float(clean)
+    except Exception:
+        return 0.0
+
+
 def list_gmail_messages(token, query):
     msg_ids = []
     page = None
@@ -189,7 +238,7 @@ def patch_sheet_csv(token, spreadsheet_id, csv_text):
         return r.read()
 
 
-def reconcile_tenant(tenant_key, cfg, query, cache_dir, apply_changes=False):
+def reconcile_tenant(tenant_key, cfg, query, cache_dir, apply_changes=False, discord_thread_id=None, notify_always=False):
     print(f"\n==================================================")
     print(f"Conciliando: {cfg['name']} ({tenant_key.upper()})")
     print(f"==================================================")
@@ -285,9 +334,21 @@ def reconcile_tenant(tenant_key, cfg, query, cache_dir, apply_changes=False):
             print(f"  ... y {len(missing_payments) - 10} pagos adicionales.")
 
     # 4. Aplicar cambios si se solicitó
+    discord_token, default_thread_id = load_discord_config()
+    target_thread_id = discord_thread_id or default_thread_id
+
     if apply_changes:
         if not missing_payments and corrupt_rows == 0:
             print(f"\n[{tenant_key}] ✅ Hoja 100% al día y limpia. Nada que aplicar.")
+            if notify_always and discord_token and target_thread_id:
+                embed = {
+                    "title": f"✅ [{cfg['name']}] Hoja Cuadrada (Auditoría OK)",
+                    "description": f"Auditoría completada sin novedades. Todas las filas coinciden con Gmail ({len(clean_rows)} pagos verificados).",
+                    "color": 0x3498DB,
+                    "footer": {"text": "Ragnar Systems • Conciliación Bre-B"},
+                    "timestamp": datetime.now(timezone.utc).isoformat()
+                }
+                send_discord_thread_alert(target_thread_id, discord_token, embed)
             return
 
         merged_rows = clean_rows + missing_payments
@@ -301,11 +362,62 @@ def reconcile_tenant(tenant_key, cfg, query, cache_dir, apply_changes=False):
         patch_sheet_csv(drive_token, cfg["spreadsheet_id"], out.getvalue())
         print(f"\n[{tenant_key}] 🚀 APLICADO CON ÉXITO: {len(missing_payments)} pagos inyectados, {corrupt_rows} filas corruptas purgadas.")
         print(f"[{tenant_key}] Total de filas actualizadas en Google Sheet: {len(merged_rows)}")
+
+        if discord_token and target_thread_id:
+            total_cop = sum(parse_cop(p[1]) for p in missing_payments if len(p) > 1 and p[1])
+            sample_lines = "\n".join(
+                f"• `{p[0]}` **{p[1]}** · {p[2][:22]} (Cod: `{p[4]}`)"
+                for p in missing_payments[:5]
+            )
+            if len(missing_payments) > 5:
+                sample_lines += f"\n*... y {len(missing_payments) - 5} pagos más.*"
+
+            embed = {
+                "title": f"🛡️ [{cfg['name']}] {len(missing_payments)} Pagos Rescatados",
+                "description": "El conciliador autónomo detectó pagos ausentes en la hoja y los inyectó exitosamente.",
+                "color": 0x2ECC71,
+                "fields": [
+                    {"name": "Monto Total Recuperado", "value": f"**$ {total_cop:,.0f} COP**".replace(",", "."), "inline": True},
+                    {"name": "Pagos Inyectados", "value": str(len(missing_payments)), "inline": True},
+                    {"name": "Total Filas en Hoja", "value": str(len(merged_rows)), "inline": True},
+                ],
+                "footer": {"text": "Ragnar Systems • Conciliación Bre-B"},
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            }
+            if corrupt_rows > 0:
+                embed["fields"].append({"name": "Saneamiento", "value": f"{corrupt_rows} filas corruptas depuradas", "inline": False})
+            if sample_lines:
+                embed["fields"].append({"name": "Muestra de pagos inyectados", "value": sample_lines, "inline": False})
+
+            send_discord_thread_alert(target_thread_id, discord_token, embed)
     else:
         if missing_payments or corrupt_rows > 0:
             print(f"\n[{tenant_key}] ℹ️ Modo DRY-RUN. Ejecutá con --apply para escribir estos {len(missing_payments)} pagos y sanear la tabla.")
+            if notify_always and discord_token and target_thread_id:
+                total_cop = sum(parse_cop(p[1]) for p in missing_payments if len(p) > 1 and p[1])
+                embed = {
+                    "title": f"⚠️ [{cfg['name']}] {len(missing_payments)} Pagos Faltantes (Dry-Run)",
+                    "description": "Simulación de conciliación detectó pagos ausentes en la hoja de cálculo.",
+                    "color": 0xF39C12,
+                    "fields": [
+                        {"name": "Monto Estimado", "value": f"**$ {total_cop:,.0f} COP**".replace(",", "."), "inline": True},
+                        {"name": "Pagos Detectados", "value": str(len(missing_payments)), "inline": True},
+                    ],
+                    "footer": {"text": "Ragnar Systems • Conciliación Bre-B"},
+                    "timestamp": datetime.now(timezone.utc).isoformat()
+                }
+                send_discord_thread_alert(target_thread_id, discord_token, embed)
         else:
             print(f"\n[{tenant_key}] ✅ Hoja 100% cuadrada. No requiere cambios.")
+            if notify_always and discord_token and target_thread_id:
+                embed = {
+                    "title": f"✅ [{cfg['name']}] Hoja Cuadrada (Auditoría OK)",
+                    "description": f"Auditoría completada sin novedades. Todas las filas coinciden con Gmail ({len(clean_rows)} pagos verificados).",
+                    "color": 0x3498DB,
+                    "footer": {"text": "Ragnar Systems • Conciliación Bre-B"},
+                    "timestamp": datetime.now(timezone.utc).isoformat()
+                }
+                send_discord_thread_alert(target_thread_id, discord_token, embed)
 
 
 def main():
@@ -315,6 +427,9 @@ def main():
     parser.add_argument("--month", help="Mes específico YYYY-MM (ej: 2026-10)")
     parser.add_argument("--cache-dir", default="/root/breb-reports", help="Directorio para almacenamiento de caché")
     parser.add_argument("--apply", action="store_true", help="Aplica la inyección y saneamiento en Google Sheets")
+    parser.add_argument("--notify-always", action="store_true", help="Fuerza envío de notificación a Discord incluso si está cuadrada")
+    parser.add_argument("--thread-id", help="Sobrescribe el ID de hilo de Discord")
+    parser.add_argument("--no-discord", action="store_true", help="Desactiva notificaciones a Discord")
     args = parser.parse_args()
 
     now = datetime.now(COL)
@@ -333,16 +448,38 @@ def main():
     elif args.since:
         query = f"from:notificacionesBreB@bbva.com after:{args.since}"
     else:
-        # Por defecto, desde el 1 del mes anterior para cubrir cierre y mes en curso
         first_current = now.replace(day=1)
         prev_month = (first_current - timedelta(days=1)).replace(day=1)
         since_str = prev_month.strftime("%Y/%m/%d")
         query = f"from:notificacionesBreB@bbva.com after:{since_str}"
 
     targets = [args.tenant] if args.tenant != "all" else ["golden", "lucky"]
-    for t in targets:
-        reconcile_tenant(t, TENANTS[t], query, args.cache_dir, apply_changes=args.apply)
-
+    try:
+        for t in targets:
+            reconcile_tenant(
+                t,
+                TENANTS[t],
+                query,
+                args.cache_dir,
+                apply_changes=args.apply,
+                discord_thread_id=None if args.no_discord else args.thread_id,
+                notify_always=args.notify_always
+            )
+    except Exception as exc:
+        print(f"Error crítico en reconciliación: {exc}", file=sys.stderr)
+        if not args.no_discord:
+            dtok, dth = load_discord_config()
+            tid = args.thread_id or dth
+            if dtok and tid:
+                err_embed = {
+                    "title": "🚨 [Bre-B Reconciler] Excepción Crítica en Ragnar",
+                    "description": f"El script de conciliación falló inesperadamente durante su ejecución:\n```\n{str(exc)[:500]}\n```",
+                    "color": 0xE74C3C,
+                    "footer": {"text": "Ragnar Systems • Conciliación Bre-B"},
+                    "timestamp": datetime.now(timezone.utc).isoformat()
+                }
+                send_discord_thread_alert(tid, dtok, err_embed)
+        raise
 
 if __name__ == "__main__":
     main()
