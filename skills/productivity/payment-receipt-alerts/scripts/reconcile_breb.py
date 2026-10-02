@@ -18,6 +18,7 @@ import io
 import json
 import os
 import re
+import subprocess
 import sys
 import time
 import urllib.error
@@ -30,12 +31,14 @@ COL = timezone(timedelta(hours=-5))
 TENANTS = {
     "lucky": {
         "name": "Lucky Brothers",
+        "tab_name": "Bre-B Lucky — Pagos",
         "gmail_secret": "/opt/data/secrets/lucky-gmail.json",
         "drive_secret": "/opt/data/secrets/lucky-drive.json",
         "spreadsheet_id": "1bAcrcBjddAAqxo8V3xnwmOElk_9bAay5G-w1ZREUfGo",
     },
     "golden": {
         "name": "Golden Game",
+        "tab_name": "Bre-B Golden — Pagos",
         "gmail_secret": "/opt/data/secrets/golden-gmail.json",
         "drive_secret": "/opt/data/secrets/golden-drive.json",
         "spreadsheet_id": "1j0vsPs4R4owvm_gisidizO0j0xckeZpK4z-Mev2xYu0",
@@ -218,24 +221,78 @@ def parse_gmail_message(full_msg):
     }
 
 
+def get_sheets_token(tenant_key):
+    helper_paths = [
+        os.path.join(os.path.dirname(__file__), "get_sheets_token.js"),
+        "/root/breb-reports/get_sheets_token.js"
+    ]
+    for p in helper_paths:
+        if os.path.exists(p):
+            try:
+                out = subprocess.check_output(["node", p, tenant_key], stderr=subprocess.PIPE).decode("utf-8").strip()
+                if out.startswith("ya29."):
+                    return out
+            except Exception:
+                pass
+    return None
+
+
+def read_sheet_tab_values(token, spreadsheet_id, tab_name):
+    range_name = f"'{tab_name}'!A1:E"
+    url = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{urllib.parse.quote(range_name)}?valueRenderOption=FORMATTED_VALUE"
+    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}"}, method="GET")
+    with urllib.request.urlopen(req, timeout=60) as r:
+        data = json.loads(r.read().decode("utf-8"))
+        return data.get("values", [])
+
+
+def clear_sheet_tab_values(token, spreadsheet_id, tab_name):
+    range_name = f"'{tab_name}'!A:E"
+    url = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{urllib.parse.quote(range_name)}:clear"
+    req = urllib.request.Request(
+        url,
+        data=b"{}",
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json"
+        },
+        method="POST"
+    )
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+
+def update_sheet_tab_values(token, spreadsheet_id, tab_name, rows):
+    range_name = f"'{tab_name}'!A1"
+    url = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{urllib.parse.quote(range_name)}?valueInputOption=USER_ENTERED"
+    payload = json.dumps({
+        "range": range_name,
+        "majorDimension": "ROWS",
+        "values": rows
+    }).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json"
+        },
+        method="PUT"
+    )
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+
 def export_sheet_csv(token, spreadsheet_id):
     url = f"https://www.googleapis.com/drive/v3/files/{spreadsheet_id}/export?mimeType=text%2Fcsv"
     return http_get(url, token, timeout=60).decode("utf-8")
 
 
 def patch_sheet_csv(token, spreadsheet_id, csv_text):
-    url = f"https://www.googleapis.com/upload/drive/v3/files/{spreadsheet_id}?uploadType=media"
-    req = urllib.request.Request(
-        url,
-        data=csv_text.encode("utf-8"),
-        headers={
-            "Authorization": f"Bearer {token}",
-            "Content-Type": "text/csv; charset=utf-8",
-        },
-        method="PATCH",
+    raise RuntimeError(
+        "CRITICAL ERROR: patch_sheet_csv (Google Drive file overwrite) is permanently deprecated. "
+        "Overwriting spreadsheet files destroys multi-tab reports and worksheets. Use update_sheet_tab_values via Google Sheets API."
     )
-    with urllib.request.urlopen(req, timeout=120) as r:
-        return r.read()
 
 
 def reconcile_tenant(tenant_key, cfg, query, cache_dir, apply_changes=False, discord_thread_id=None, notify_always=False):
@@ -244,13 +301,19 @@ def reconcile_tenant(tenant_key, cfg, query, cache_dir, apply_changes=False, dis
     print(f"==================================================")
 
     gmail_token = get_access_token(cfg["gmail_secret"])
-    drive_token = get_access_token(cfg["drive_secret"])
+    sheets_token = get_sheets_token(tenant_key)
+    tab_name = cfg.get("tab_name", f"Bre-B {cfg['name'].split()[0]} — Pagos")
 
     # 1. Obtener y parsear estado actual del Sheet
-    raw_csv = export_sheet_csv(drive_token, cfg["spreadsheet_id"])
-    reader = list(csv.reader(io.StringIO(raw_csv)))
+    if sheets_token:
+        reader = read_sheet_tab_values(sheets_token, cfg["spreadsheet_id"], tab_name)
+    else:
+        drive_token = get_access_token(cfg["drive_secret"])
+        raw_csv = export_sheet_csv(drive_token, cfg["spreadsheet_id"])
+        reader = list(csv.reader(io.StringIO(raw_csv)))
+
     if not reader:
-        print(f"[{tenant_key}] ERROR: La hoja de cálculo está vacía.")
+        print(f"[{tenant_key}] ERROR: La hoja de cálculo o pestaña '{tab_name}' está vacía.")
         return
 
     header = reader[0]
@@ -354,12 +417,19 @@ def reconcile_tenant(tenant_key, cfg, query, cache_dir, apply_changes=False, dis
         merged_rows = clean_rows + missing_payments
         merged_rows.sort(key=lambda x: x[0])
 
-        out = io.StringIO()
-        writer = csv.writer(out)
-        writer.writerow(header)
-        writer.writerows(merged_rows)
+        all_rows = [header] + merged_rows
+        if sheets_token:
+            if corrupt_rows > 0:
+                print(f"[{tenant_key}] 🧹 Depurando filas corruptas en pestaña '{tab_name}'...")
+                clear_sheet_tab_values(sheets_token, cfg["spreadsheet_id"], tab_name)
+            print(f"[{tenant_key}] 📝 Escribiendo {len(all_rows)} filas en pestaña '{tab_name}' vía Google Sheets API...")
+            update_sheet_tab_values(sheets_token, cfg["spreadsheet_id"], tab_name, all_rows)
+        else:
+            raise RuntimeError(
+                f"[{tenant_key}] ERROR CRÍTICO: Token de Google Sheets API no disponible. "
+                f"Escritura cancelada para proteger las demás pestañas del libro."
+            )
 
-        patch_sheet_csv(drive_token, cfg["spreadsheet_id"], out.getvalue())
         print(f"\n[{tenant_key}] 🚀 APLICADO CON ÉXITO: {len(missing_payments)} pagos inyectados, {corrupt_rows} filas corruptas purgadas.")
         print(f"[{tenant_key}] Total de filas actualizadas en Google Sheet: {len(merged_rows)}")
 
